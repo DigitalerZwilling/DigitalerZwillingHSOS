@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-10-08" view-index="0" gantt-divider-location="534" resource-divider-location="300" version="2.8.1" locale="de_DE">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-12-19" view-index="0" gantt-divider-location="534" resource-divider-location="300" version="2.8.1" locale="de_DE">
     <description/>
-    <view zooming-state="default:2" id="gantt-chart">
+    <view zooming-state="default:6" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="325" order="0"/>
         <field id="tpd4" name="Anfang" width="98" order="1"/>
         <field id="tpd5" name="Ende" width="107" order="2"/>
@@ -36,11 +36,11 @@
         </taskproperties>
         <task id="6" name="Datenerfassung" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
             <task id="13" name="Anforderungserfassung" color="#8cb6ce" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-            <task id="9" name="Cache" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
+            <task id="9" name="Cache" meeting="false" start="2016-10-12" duration="1" complete="0" expand="false">
                 <task id="15" name="Klassendiagramm erstellen" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                 <task id="16" name="Klassen implementieren" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
             </task>
-            <task id="8" name="Datenbank" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
+            <task id="8" name="Datenbank" meeting="false" start="2016-10-12" duration="1" complete="0" expand="false">
                 <task id="11" name="ER-Diagramm erstellen" color="#8cb6ce" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                 <task id="19" name="SQL-Statements erstellen" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                 <task id="30" name="Datenbank aufsetzen" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
@@ -49,10 +49,10 @@
         <task id="25" name="GUI" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
             <task id="26" name="Anforderungserfassung" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
             <task id="27" name="Mockups erstellen" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-            <task id="28" name="Weboberfläche erstellen" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
+            <task id="28" name="Weboberfläche erstellen" meeting="false" start="2016-10-12" duration="1" complete="0" expand="false">
                 <task id="43" name="Menuefuehrung" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                 <task id="32" name="Übersicht" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-                <task id="33" name="Einzelansichten" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
+                <task id="33" name="Einzelansichten" meeting="false" start="2016-10-12" duration="1" complete="0" expand="false">
                     <task id="34" name="Roboter" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
                         <task id="44" name="Bewegungsvisualisierung" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                     </task>
@@ -61,7 +61,7 @@
                     </task>
                     <task id="36" name="Sektor" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                 </task>
-                <task id="37" name="Listen" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
+                <task id="37" name="Listen" meeting="false" start="2016-10-12" duration="1" complete="0" expand="false">
                     <task id="38" name="Störung" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                     <task id="39" name="Artikel" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                     <task id="40" name="Warentraeger" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
@@ -69,21 +69,21 @@
                 </task>
             </task>
         </task>
-        <task id="45" name="Projektbericht/Dokumentation" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
-            <task id="48" name="Loesung" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-            <task id="54" name="Beschreibung" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-            <task id="55" name="Manual" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-            <task id="49" name="Tools" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
-                <task id="53" name="Anforderungsdokumentsation" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-                <task id="51" name="Implementierung" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-                <task id="52" name="Testen" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
+        <task id="45" name="Projektbericht/Dokumentation" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true">
+            <task id="48" name="Loesung" color="#8cb6ce" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true"/>
+            <task id="54" name="Beschreibung" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true"/>
+            <task id="55" name="Manual" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true"/>
+            <task id="49" name="Tools" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true">
+                <task id="53" name="Anforderungsdokumentsation" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true"/>
+                <task id="51" name="Implementierung" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true"/>
+                <task id="52" name="Testen" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true"/>
             </task>
-            <task id="46" name="Probleme" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-            <task id="47" name="Verworfene Loesungsansaetze" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-            <task id="56" name="SQL-Skripte" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
-                <task id="57" name="Tabellen erweitern" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-                <task id="58" name="Zeilen erweitern" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-                <task id="59" name="Spalten erweitern" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
+            <task id="46" name="Probleme" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true"/>
+            <task id="47" name="Verworfene Loesungsansaetze" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true"/>
+            <task id="56" name="SQL-Skripte" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true">
+                <task id="57" name="Tabellen erweitern" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true"/>
+                <task id="58" name="Zeilen erweitern" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true"/>
+                <task id="59" name="Spalten erweitern" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true"/>
             </task>
         </task>
     </tasks>
