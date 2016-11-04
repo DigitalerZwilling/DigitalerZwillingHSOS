@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>186</y>
+      <w>60</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singelton&gt;&gt;
+SektorCache
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>816</x>
+      <y>186</y>
+      <w>150</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Warentraeger
+--
+- stoerung : int
+- abstand_mm : int
+- montagezustand : String
+- RFID_inhalt : String
+- artikelIDs : Collection&lt;Long&gt;
+- transportbandIDs : Collection&lt;Long&gt;
+- sektorID : Long
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>972</x>
+      <y>186</y>
+      <w>174</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>Sektor
+--
+- stoerung : int
+- posX : int
+- posY : int
+- posZ : int
+- ausrichtung : int
+- warentraegerIDs : Collection&lt;Long&gt;
+- HubpodestIDs : Collection&lt;Long&gt;
+- HubquerpodestIDs : Collection&lt;Long&gt;
+- RoboterIDs : Collection&lt;Long&gt;
+- SensorIDs : Collection&lt;Long&gt;
+- VorTransportbandIDs : Collection&lt;Long&gt;
+- NachTransportbandIDs : Collection&lt;Long&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>186</y>
+      <w>84</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singelton&gt;&gt;
+WarentraegerCache
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>156</x>
+      <y>186</y>
+      <w>60</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singelton&gt;&gt;
+ArtikelCache
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1500</x>
+      <y>6</y>
+      <w>162</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>Element
+--
+- id : Long
+- bezeichnung : String
+- user_parameter : String
+- zeitstempel: LocalTime
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>318</x>
+      <y>0</y>
+      <w>126</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Abstract Class&gt;&gt;
+Cache
+--
+state : static boolean
+--
++ update()
++ updateAll()
++ parseResult(ResultSet)
++ getById(id : Long) : Element
++ getAll(): List&lt;Element&gt;
++ toogleState()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>222</x>
+      <y>186</y>
+      <w>84</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singelton&gt;&gt;
+TransportbandCache
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1308</x>
+      <y>186</y>
+      <w>144</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Transportband
+--
+- stoerung : int
+- laenge : int
+- geschwindigkeit : int
+- warentraegerIDs : Collection&lt;Long&gt;
+- VorSensorID : Long
+- NachSensorID : Long
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>438</x>
+      <y>0</y>
+      <w>1074</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+elements0</panel_attributes>
+    <additional_attributes>10.0;20.0;1770.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>312</x>
+      <y>186</y>
+      <w>66</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singelton&gt;&gt;
+SensorCache
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1458</x>
+      <y>186</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Sensor
+--
+- stoerung : int
+- phy_addresse :
+- zustand : boolean
+- SektorID : Long
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>384</x>
+      <y>186</y>
+      <w>72</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singelton&gt;&gt;
+WerkzeugCache
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1584</x>
+      <y>186</y>
+      <w>132</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Werkzeug
+--
+- user_parameter : String
+- zustand : boolean
+- zeitstempel : LocalTime
+- roboterID : Collection&lt;Long&gt;
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>462</x>
+      <y>186</y>
+      <w>66</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singelton&gt;&gt;
+RoboterCache
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1722</x>
+      <y>186</y>
+      <w>132</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Roboter
+--
+- stoerung : int
+- user_parameter : String
+- posX : int
+- posY : int
+- posZ : int
+- ausrichtung : int
+- zeitstempel : LocalTime
+- sektorID : Collection&lt;Long&gt;
+- gelenkIDs : Collection&lt;Long&gt;
+- werkzeugID : Collection&lt;Long&gt;
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>534</x>
+      <y>186</y>
+      <w>66</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singelton&gt;&gt;
+GelenkCache
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1860</x>
+      <y>186</y>
+      <w>120</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Gelenk
+--
+- typ : String
+- nummer : int
+- gelenkstellung : int
+- user_parameter : String
+- zeitstempel : LocalTime
+- roboterID : Long
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>606</x>
+      <y>186</y>
+      <w>90</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singelton&gt;&gt;
+HubquerPodestCache
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1986</x>
+      <y>186</y>
+      <w>120</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>HubquerPodest
+--
+- motor : boolean
+- oben : boolean
+- mittig : boolean
+- unten : boolean
+- user_parameter : String
+- zeitstempel : LocalTime
+- sektorID : Long
+- groupIDs : Collection&lt;Long&gt;
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>702</x>
+      <y>186</y>
+      <w>84</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singelton&gt;&gt;
+HubPodestCache
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2112</x>
+      <y>186</y>
+      <w>120</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>HubPodest
+--
+- oben : boolean
+- unten : boolean
+- user_parameter : String
+- zeitstempel : LocalTime
+- sektorID : Long
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>438</x>
+      <y>18</y>
+      <w>1074</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+elements1</panel_attributes>
+    <additional_attributes>10.0;20.0;1770.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>66</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Runable&gt;&gt;
+UpdaterThread
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2106</x>
+      <y>0</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singelton&gt;&gt;
+Datenbankschnittstelle
+--
+--
++ requestDB(Cache, String)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1152</x>
+      <y>186</y>
+      <w>150</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>Artikel
+--
+- warentraegerIDs : Collection&lt;Long&gt;
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>342</x>
+      <y>90</y>
+      <w>42</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;140.0;50.0;140.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>90</y>
+      <w>48</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;160.0;60.0;140.0;10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>396</x>
+      <y>90</y>
+      <w>108</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>160.0;160.0;160.0;120.0;10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>408</x>
+      <y>90</y>
+      <w>174</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>270.0;160.0;270.0;100.0;10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>90</y>
+      <w>240</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>380.0;160.0;380.0;80.0;10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>90</y>
+      <w>324</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>520.0;160.0;520.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>258</x>
+      <y>90</y>
+      <w>114</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;120.0;170.0;120.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>90</y>
+      <w>180</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;100.0;280.0;100.0;280.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>90</y>
+      <w>228</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;80.0;360.0;80.0;360.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>36</x>
+      <y>90</y>
+      <w>300</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;60.0;480.0;60.0;480.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1512</x>
+      <y>66</y>
+      <w>72</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;180.0;100.0;180.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1584</x>
+      <y>66</y>
+      <w>78</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>110.0;200.0;110.0;180.0;10.0;180.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1602</x>
+      <y>66</y>
+      <w>198</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>310.0;200.0;310.0;160.0;10.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1620</x>
+      <y>66</y>
+      <w>312</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>500.0;200.0;500.0;140.0;10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1638</x>
+      <y>66</y>
+      <w>420</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>680.0;200.0;680.0;120.0;10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1656</x>
+      <y>66</y>
+      <w>534</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>870.0;200.0;870.0;100.0;10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1380</x>
+      <y>66</y>
+      <w>186</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;160.0;290.0;160.0;290.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1218</x>
+      <y>66</y>
+      <w>330</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;140.0;530.0;140.0;530.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1050</x>
+      <y>66</y>
+      <w>480</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;120.0;780.0;120.0;780.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>888</x>
+      <y>66</y>
+      <w>624</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;100.0;1020.0;100.0;1020.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>126</x>
+      <y>0</y>
+      <w>96</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singelton&gt;&gt;
+Updater
+--
+--
++ update()
++ registerCache(Cache)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>216</x>
+      <y>6</y>
+      <w>114</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;10.0</additional_attributes>
+  </element>
+</diagram>
