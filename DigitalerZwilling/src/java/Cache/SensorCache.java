@@ -25,7 +25,7 @@ public class SensorCache extends Cache{
     }
 
     @Override
-    public void parseResultSet(ResultSet rs) {
+    public void parseResultSet(ResultSet rs,int identifier) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -65,5 +65,5 @@ public abstract class Cache {
     
     abstract public void update();
     abstract public void updateAll();
-    abstract public void parseResultSet(ResultSet rs);
+    abstract public void parseResultSet(ResultSet rs, int identifier);
 }

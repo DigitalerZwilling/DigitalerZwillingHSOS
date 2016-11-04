@@ -5,6 +5,7 @@
  */
 package DatenbankSchnittestelle;
 
+import Cache.Cache;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -67,11 +68,11 @@ public class Datenbankschnittstelle {
      * @param goal          Cache Klasse die die Anfrage sendet
      * @param sqlStatement  sql-Anfrage an die Datenbank
      */
-    public void datenbankAnfrage(Cache goal, String sqlStatement){
+    public void datenbankAnfrage(Cache goal, String sqlStatement, int identifier){
         try {
             Statement stmt=this.data.createStatement();
             ResultSet rs=stmt.executeQuery(sqlStatement);
-            goal.parseResult(rs);
+            goal.parseResultSet(rs,identifier);
             rs.close();
             stmt.close();
         } catch (SQLException ex) {

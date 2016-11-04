@@ -13,10 +13,12 @@ import java.util.List;
  * @author User
  */
 public class ArtikelCache extends Cache{
+    
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -25,8 +27,22 @@ public class ArtikelCache extends Cache{
     }
 
     @Override
-    public void parseResultSet(ResultSet rs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void parseResultSet(ResultSet rs,int identifier) {
+        switch (identifier){
+            case 0:    ;//fuer update all
+                break;
+            case 1:    ;//fuer update erste sql-Anfrage
+                break;
+            case 2: ;//fuer 2. update sql Abfrage
+                break;
+            default:    ;//fuer Fehlerfaelle
+                break;
+        }
+    
+            
+            
+        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
