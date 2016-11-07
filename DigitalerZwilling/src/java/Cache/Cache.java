@@ -5,6 +5,7 @@
  */
 package Cache;
 
+import DatenKlassen.Element;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
