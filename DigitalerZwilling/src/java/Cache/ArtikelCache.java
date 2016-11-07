@@ -58,26 +58,11 @@ public class ArtikelCache extends Cache{
         this.setElements(m);
     }
 
-    @Override
-    public void parseResultSet(ResultSet rs,int identifier) {
-        
-        switch (identifier){
-            
-            case 0:    ;//fuer update all
-                break;
-            case 1:    ;//fuer update erste sql-Anfrage
-                break;
-            case 2: ;//fuer 2. update sql Abfrage
-                break;
-            default:    ;//fuer Fehlerfaelle
-                break;
-        }
     
             
             
         
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     
     private List<Long> readWarentraeger(Long id){
         Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT warentraeger_id from Artikel_Warentraeger where id_artikel="+id+" and id_warentraeger=id_warentraeger");

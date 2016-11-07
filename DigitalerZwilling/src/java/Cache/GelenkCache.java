@@ -14,8 +14,10 @@ import java.util.Map;
 
 /**
  *
- * @author User
+ * @author chr
  */
+
+//in bearbeitung
 public class GelenkCache extends Cache{
 
     @Override
@@ -47,11 +49,9 @@ public class GelenkCache extends Cache{
             //gelenk.setId_Warentraeger(this.readWarentraeger(gelenk.getId()));
         }
     }
-    }
 
-    @Override
-    public void parseResultSet(ResultSet rs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+ 
+
+    
     
 }
