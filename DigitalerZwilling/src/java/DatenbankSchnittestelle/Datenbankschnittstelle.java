@@ -5,11 +5,17 @@
  */
 package DatenbankSchnittestelle;
 
+import Cache.Cache;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -64,19 +70,32 @@ public class Datenbankschnittstelle {
      * eine im Parameter "goal" angegeben Funktion parseResult auf in der das ResultSet
      * uebergeben wurde. Anschließend werden ResultSet und Statement geschlossen.
      *
-     * @param goal          Cache Klasse die die Anfrage sendet
      * @param sqlStatement  sql-Anfrage an die Datenbank
+     * @return Map die das Result set darstellt
      */
-    public void datenbankAnfrage(Cache goal, String sqlStatement){
+    public Map<String,List<String>> datenbankAnfrage(String sqlStatement){
+        Map<String,List<String>> rsMap = new HashMap<>();
         try {
             Statement stmt=this.data.createStatement();
             ResultSet rs=stmt.executeQuery(sqlStatement);
-            goal.parseResult(rs);
+            //----------------------------------------------------
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            for(int i = 1;i<=columnCount;i++){
+                rsMap.put(rsmd.getColumnName(i),new ArrayList<>());
+            }
+            while(rs.next()){
+                for(int i = 1;i<=columnCount;i++){   
+                    rsMap.get(rsmd.getColumnName(i)).add(rs.getString(i));
+                }
+            }
+            //------------------------------------------------------
             rs.close();
             stmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return rsMap;
     }
     
 }

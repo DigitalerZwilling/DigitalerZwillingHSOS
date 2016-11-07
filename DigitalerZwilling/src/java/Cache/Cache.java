@@ -5,6 +5,7 @@
  */
 package Cache;
 
+import DatenKlassen.Element;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,5 +66,5 @@ public abstract class Cache {
     
     abstract public void update();
     abstract public void updateAll();
-    abstract public void parseResultSet(ResultSet rs);
+    abstract public void parseResultSet(ResultSet rs, int identifier);
 }

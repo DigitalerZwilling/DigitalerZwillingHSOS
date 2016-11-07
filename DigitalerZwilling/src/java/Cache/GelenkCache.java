@@ -5,8 +5,12 @@
  */
 package Cache;
 
+import DatenKlassen.Gelenk;
+import DatenbankSchnittestelle.Datenbankschnittstelle;
 import java.sql.ResultSet;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -16,12 +20,33 @@ public class GelenkCache extends Cache{
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_gelenk,gelenkstellung,zeitstempel,user_parameter from Gelenk");
+        List<String> ids = rsMap.get("id_artikel");
+        List<String> zeitstempel = rsMap.get("zeitstempel");
+        List<String> user_parameter = rsMap.get("user_parameter");
+        Gelenk gelenk;
+        for (int i=0;i<ids.size();i++){
+            gelenk=Gelenk.class.cast(this.getById(Long.getLong(ids.get(i))));
+            gelenk.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
+            gelenk.setUser_Parameter(user_parameter.get(i));
+            //gelenk.setId_Warentraeger(this.readWarentraeger(gelenk.getId()));
+        }
     }
 
     @Override
     public void updateAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_gelenk,typ,nummer,gelenkstellung,zeitstempel,user_parameter from Artikel");
+        List<String> ids = rsMap.get("id_artikel");
+        List<String> zeitstempel = rsMap.get("zeitstempel");
+        List<String> user_parameter = rsMap.get("user_parameter");
+        Gelenk gelenk;
+        for (int i=0;i<ids.size();i++){
+            gelenk=Gelenk.class.cast(this.getById(Long.getLong(ids.get(i))));
+            gelenk.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
+            gelenk.setUser_Parameter(user_parameter.get(i));
+            //gelenk.setId_Warentraeger(this.readWarentraeger(gelenk.getId()));
+        }
+    }
     }
 
     @Override
