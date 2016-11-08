@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2">
-  <zoom_level>6</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>90</x>
-      <y>186</y>
-      <w>60</w>
-      <h>36</h>
+      <x>128</x>
+      <y>432</y>
+      <w>80</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singelton&gt;&gt;
 SektorCache
@@ -18,10 +18,10 @@ SektorCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>816</x>
-      <y>186</y>
-      <w>150</w>
-      <h>90</h>
+      <x>1096</x>
+      <y>432</y>
+      <w>200</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>Warentraeger
 --
@@ -38,10 +38,10 @@ SektorCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>972</x>
-      <y>186</y>
-      <w>174</w>
-      <h>138</h>
+      <x>1304</x>
+      <y>432</y>
+      <w>232</w>
+      <h>184</h>
     </coordinates>
     <panel_attributes>Sektor
 --
@@ -64,10 +64,10 @@ SektorCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>186</y>
-      <w>84</w>
-      <h>36</h>
+      <x>8</x>
+      <y>432</y>
+      <w>112</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singelton&gt;&gt;
 WarentraegerCache
@@ -77,10 +77,10 @@ WarentraegerCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>156</x>
-      <y>186</y>
-      <w>60</w>
-      <h>36</h>
+      <x>216</x>
+      <y>432</y>
+      <w>80</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singelton&gt;&gt;
 ArtikelCache
@@ -91,10 +91,10 @@ ArtikelCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1500</x>
-      <y>6</y>
-      <w>162</w>
-      <h>66</h>
+      <x>2008</x>
+      <y>192</y>
+      <w>216</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>Element
 --
@@ -108,10 +108,10 @@ ArtikelCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>318</x>
-      <y>0</y>
-      <w>126</w>
-      <h>96</h>
+      <x>432</x>
+      <y>184</y>
+      <w>168</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Abstract Class&gt;&gt;
 Cache
@@ -129,10 +129,10 @@ state : static boolean
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>222</x>
-      <y>186</y>
-      <w>84</w>
-      <h>36</h>
+      <x>304</x>
+      <y>432</y>
+      <w>112</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singelton&gt;&gt;
 TransportbandCache
@@ -142,10 +142,10 @@ TransportbandCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1308</x>
-      <y>186</y>
-      <w>144</w>
-      <h>84</h>
+      <x>1752</x>
+      <y>432</y>
+      <w>192</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>Transportband
 --
@@ -161,10 +161,10 @@ TransportbandCache
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>438</x>
-      <y>0</y>
-      <w>1074</w>
-      <h>24</h>
+      <x>592</x>
+      <y>184</y>
+      <w>1432</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 elements0</panel_attributes>
@@ -173,10 +173,10 @@ elements0</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>312</x>
-      <y>186</y>
-      <w>66</w>
-      <h>36</h>
+      <x>424</x>
+      <y>432</y>
+      <w>88</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singelton&gt;&gt;
 SensorCache
@@ -186,10 +186,10 @@ SensorCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1458</x>
-      <y>186</y>
-      <w>120</w>
-      <h>60</h>
+      <x>1952</x>
+      <y>432</y>
+      <w>160</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>Sensor
 --
@@ -203,10 +203,10 @@ SensorCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>384</x>
-      <y>186</y>
-      <w>72</w>
-      <h>36</h>
+      <x>520</x>
+      <y>432</y>
+      <w>96</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singelton&gt;&gt;
 WerkzeugCache
@@ -216,10 +216,10 @@ WerkzeugCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1584</x>
-      <y>186</y>
-      <w>132</w>
-      <h>60</h>
+      <x>2120</x>
+      <y>432</y>
+      <w>176</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>Werkzeug
 --
@@ -233,10 +233,10 @@ WerkzeugCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>462</x>
-      <y>186</y>
-      <w>66</w>
-      <h>36</h>
+      <x>624</x>
+      <y>432</y>
+      <w>88</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singelton&gt;&gt;
 RoboterCache
@@ -246,10 +246,10 @@ RoboterCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1722</x>
-      <y>186</y>
-      <w>132</w>
-      <h>120</h>
+      <x>2304</x>
+      <y>432</y>
+      <w>176</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>Roboter
 --
@@ -269,10 +269,10 @@ RoboterCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>534</x>
-      <y>186</y>
-      <w>66</w>
-      <h>36</h>
+      <x>720</x>
+      <y>432</y>
+      <w>88</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singelton&gt;&gt;
 GelenkCache
@@ -282,10 +282,10 @@ GelenkCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1860</x>
-      <y>186</y>
-      <w>120</w>
-      <h>84</h>
+      <x>2488</x>
+      <y>432</y>
+      <w>160</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>Gelenk
 --
@@ -301,10 +301,10 @@ GelenkCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>606</x>
-      <y>186</y>
-      <w>90</w>
-      <h>36</h>
+      <x>816</x>
+      <y>432</y>
+      <w>120</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singelton&gt;&gt;
 HubquerPodestCache
@@ -314,10 +314,10 @@ HubquerPodestCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1986</x>
-      <y>186</y>
-      <w>120</w>
-      <h>102</h>
+      <x>2656</x>
+      <y>432</y>
+      <w>160</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>HubquerPodest
 --
@@ -335,10 +335,10 @@ HubquerPodestCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>702</x>
-      <y>186</y>
-      <w>84</w>
-      <h>36</h>
+      <x>944</x>
+      <y>432</y>
+      <w>112</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singelton&gt;&gt;
 HubPodestCache
@@ -348,10 +348,10 @@ HubPodestCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2112</x>
-      <y>186</y>
-      <w>120</w>
-      <h>72</h>
+      <x>2824</x>
+      <y>432</y>
+      <w>160</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>HubPodest
 --
@@ -366,10 +366,10 @@ HubPodestCache
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>438</x>
-      <y>18</y>
-      <w>1074</w>
-      <h>24</h>
+      <x>592</x>
+      <y>208</y>
+      <w>1432</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 elements1</panel_attributes>
@@ -378,10 +378,10 @@ elements1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>0</y>
-      <w>66</w>
-      <h>30</h>
+      <x>8</x>
+      <y>184</y>
+      <w>88</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Runable&gt;&gt;
 UpdaterThread
@@ -391,10 +391,10 @@ UpdaterThread
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2106</x>
-      <y>0</y>
-      <w>126</w>
-      <h>42</h>
+      <x>688</x>
+      <y>248</y>
+      <w>168</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singelton&gt;&gt;
 Datenbankschnittstelle
@@ -407,10 +407,10 @@ Datenbankschnittstelle
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1152</x>
-      <y>186</y>
-      <w>150</w>
-      <h>36</h>
+      <x>1544</x>
+      <y>432</y>
+      <w>200</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>Artikel
 --
@@ -421,10 +421,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>342</x>
-      <y>90</y>
-      <w>42</w>
-      <h>108</h>
+      <x>464</x>
+      <y>304</y>
+      <w>56</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;160.0;10.0;140.0;50.0;140.0;50.0;10.0</additional_attributes>
@@ -432,10 +432,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>384</x>
-      <y>90</y>
-      <w>48</w>
-      <h>108</h>
+      <x>520</x>
+      <y>304</y>
+      <w>64</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>60.0;160.0;60.0;140.0;10.0;140.0;10.0;10.0</additional_attributes>
@@ -443,10 +443,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>396</x>
-      <y>90</y>
-      <w>108</w>
-      <h>108</h>
+      <x>536</x>
+      <y>304</y>
+      <w>144</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>160.0;160.0;160.0;120.0;10.0;120.0;10.0;10.0</additional_attributes>
@@ -454,10 +454,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>408</x>
-      <y>90</y>
-      <w>174</w>
-      <h>108</h>
+      <x>552</x>
+      <y>304</y>
+      <w>232</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>270.0;160.0;270.0;100.0;10.0;100.0;10.0;10.0</additional_attributes>
@@ -465,10 +465,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>420</x>
-      <y>90</y>
-      <w>240</w>
-      <h>108</h>
+      <x>568</x>
+      <y>304</y>
+      <w>320</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>380.0;160.0;380.0;80.0;10.0;80.0;10.0;10.0</additional_attributes>
@@ -476,10 +476,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>432</x>
-      <y>90</y>
-      <w>324</w>
-      <h>108</h>
+      <x>584</x>
+      <y>304</y>
+      <w>432</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>520.0;160.0;520.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
@@ -487,10 +487,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>258</x>
-      <y>90</y>
-      <w>114</w>
-      <h>108</h>
+      <x>352</x>
+      <y>304</y>
+      <w>152</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;160.0;10.0;120.0;170.0;120.0;170.0;10.0</additional_attributes>
@@ -498,10 +498,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
-      <y>90</y>
-      <w>180</w>
-      <h>108</h>
+      <x>248</x>
+      <y>304</y>
+      <w>240</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;160.0;10.0;100.0;280.0;100.0;280.0;10.0</additional_attributes>
@@ -509,10 +509,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>90</y>
-      <w>228</w>
-      <h>108</h>
+      <x>168</x>
+      <y>304</y>
+      <w>304</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;160.0;10.0;80.0;360.0;80.0;360.0;10.0</additional_attributes>
@@ -520,10 +520,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>36</x>
-      <y>90</y>
-      <w>300</w>
-      <h>108</h>
+      <x>56</x>
+      <y>304</y>
+      <w>400</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;160.0;10.0;60.0;480.0;60.0;480.0;10.0</additional_attributes>
@@ -531,10 +531,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1512</x>
-      <y>66</y>
-      <w>72</w>
-      <h>132</h>
+      <x>2024</x>
+      <y>272</y>
+      <w>96</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;200.0;10.0;180.0;100.0;180.0;100.0;10.0</additional_attributes>
@@ -542,10 +542,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1584</x>
-      <y>66</y>
-      <w>78</w>
-      <h>132</h>
+      <x>2120</x>
+      <y>272</y>
+      <w>104</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>110.0;200.0;110.0;180.0;10.0;180.0;10.0;10.0</additional_attributes>
@@ -553,10 +553,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1602</x>
-      <y>66</y>
-      <w>198</w>
-      <h>132</h>
+      <x>2144</x>
+      <y>272</y>
+      <w>264</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>310.0;200.0;310.0;160.0;10.0;160.0;10.0;10.0</additional_attributes>
@@ -564,10 +564,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1620</x>
-      <y>66</y>
-      <w>312</w>
-      <h>132</h>
+      <x>2168</x>
+      <y>272</y>
+      <w>416</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>500.0;200.0;500.0;140.0;10.0;140.0;10.0;10.0</additional_attributes>
@@ -575,10 +575,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1638</x>
-      <y>66</y>
-      <w>420</w>
-      <h>132</h>
+      <x>2192</x>
+      <y>272</y>
+      <w>560</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>680.0;200.0;680.0;120.0;10.0;120.0;10.0;10.0</additional_attributes>
@@ -586,10 +586,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1656</x>
-      <y>66</y>
-      <w>534</w>
-      <h>132</h>
+      <x>2216</x>
+      <y>272</y>
+      <w>712</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>870.0;200.0;870.0;100.0;10.0;100.0;10.0;10.0</additional_attributes>
@@ -597,10 +597,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1380</x>
-      <y>66</y>
-      <w>186</w>
-      <h>132</h>
+      <x>1848</x>
+      <y>272</y>
+      <w>248</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;200.0;10.0;160.0;290.0;160.0;290.0;10.0</additional_attributes>
@@ -608,10 +608,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1218</x>
-      <y>66</y>
-      <w>330</w>
-      <h>132</h>
+      <x>1632</x>
+      <y>272</y>
+      <w>440</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;200.0;10.0;140.0;530.0;140.0;530.0;10.0</additional_attributes>
@@ -619,10 +619,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1050</x>
-      <y>66</y>
-      <w>480</w>
-      <h>132</h>
+      <x>1408</x>
+      <y>272</y>
+      <w>640</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;200.0;10.0;120.0;780.0;120.0;780.0;10.0</additional_attributes>
@@ -630,10 +630,10 @@ Datenbankschnittstelle
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>888</x>
-      <y>66</y>
-      <w>624</w>
-      <h>132</h>
+      <x>1192</x>
+      <y>272</y>
+      <w>832</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;200.0;10.0;100.0;1020.0;100.0;1020.0;10.0</additional_attributes>
@@ -641,10 +641,10 @@ Datenbankschnittstelle
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>126</x>
-      <y>0</y>
-      <w>96</w>
-      <h>54</h>
+      <x>176</x>
+      <y>184</y>
+      <w>128</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singelton&gt;&gt;
 Updater
@@ -657,10 +657,10 @@ Updater
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>216</x>
-      <y>6</y>
-      <w>114</w>
-      <h>18</h>
+      <x>296</x>
+      <y>192</y>
+      <w>152</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;170.0;10.0</additional_attributes>
