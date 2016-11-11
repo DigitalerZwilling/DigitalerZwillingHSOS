@@ -16,25 +16,25 @@ DROP TABLE Sektor;
 CREATE TABLE Sektor (
 	id_serktor BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	bezeichnung VARCHAR(100),
+	zeitstempel TIMESTAMP,
+	user_parameter CLOB,
 	stoerung INT,
 	position_x INT,
 	position_y INT,
 	position_z INT,
 	position_ausrichtung INT,
-	user_parameter CLOB,
-	zeitstempel TIMESTAMP,
-	PRIMARY KEY (id_transportband)
+	PRIMARY KEY (id_serktor)
 	)
 
 CREATE TABLE Warentraeger (
 	id_warentraeger BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	bezeichnung VARCHAR(100),
+	zeitstempel TIMESTAMP,
+	user_parameter CLOB,
 	stoerung INT,
 	montagezustand INT,
 	RFID_inhalt CHAR(128),
 	abstand_mm INT,
-	user_parameter CLOB,
-	zeitstempel TIMESTAMP,
 	PRIMARY KEY (id_warentraeger)
 	)
 
@@ -49,11 +49,11 @@ CREATE TABLE Artikel (
 CREATE TABLE Transportband (
 	id_transportband BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	bezeichnung VARCHAR(100),
+	zeitstempel TIMESTAMP,
+	user_parameter CLOB,
 	stoerung INT,
 	laenge INT,
 	geschwindigkeit INT,
-	user_parameter CLOB,
-	zeitstempel TIMESTAMP,
 	id_sektor_vor BIGINT,
 	id_sektor_nach BIGINT,
 	PRIMARY KEY (id_transportband),
@@ -64,11 +64,11 @@ CREATE TABLE Transportband (
 CREATE TABLE Sensor (
 	id_sensor BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	bezeichnung VARCHAR(100),
+	zeitstempel TIMESTAMP,
+	user_parameter CLOB,
 	stoerung INT,
 	zustand INT,
 	phy_adresse CHAR(10),
-	user_parameter CLOB,
-	zeitstempel TIMESTAMP,
 	id_sektor BIGINT,
 	PRIMARY KEY (id_sensor),
 	FOREIGN KEY (id_sektor) REFERENCES Sektor(id_sektor)
@@ -77,24 +77,24 @@ CREATE TABLE Sensor (
 CREATE TABLE Roboter (
 	id_roboter BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	bezeichnung VARCHAR(100),
+	zeitstempel TIMESTAMP,
+	user_parameter CLOB,
 	stoerung INT,
 	position_x INT,
 	position_y INT,
 	position_z INT,
 	position_ausrichtung INT,
-	user_parameter CLOB,
-	zeitstempel TIMESTAMP,
 	PRIMARY KEY (id_roboter)
 	)
 	
 CREATE TABLE Gelenk (
-	id_gelenk BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	id_gelenk BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),	
 	bezeichnung VARCHAR(100),
+	zeitstempel TIMESTAMP,
+	user_parameter CLOB,
 	typ VARCHAR(100),
 	nummer INT,
 	gelenkstellung INT,
-	user_parameter CLOB,
-	zeitstempel TIMESTAMP,
 	id_roboter BIGINT,
 	PRIMARY KEY (id_gelenk),
 	FOREIGN KEY (id_roboter) REFERENCES Roboter(id_roboter)
@@ -103,6 +103,7 @@ CREATE TABLE Gelenk (
 CREATE TABLE Werkzeug (
 	id_werkzeug BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	bezeichnung VARCHAR(100),
+	zeitstempel TIMESTAMP,
 	user_parameter CLOB,
 	zustand INT,
 	id_roboter BIGINT,
@@ -113,10 +114,10 @@ CREATE TABLE Werkzeug (
 CREATE TABLE Hubpodest (
 	id_hubpodest BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	bezeichnung VARCHAR(100),
+	zeitstempel TIMESTAMP,
+	user_parameter CLOB,
 	oben INT,
 	unten INT,
-	user_parameter CLOB,
-	zeitstempel TIMESTAMP,
 	id_sektor BIGINT,
 	PRIMARY KEY (id_hubpodest),
 	FOREIGN KEY (id_sektor) REFERENCES Sektor(id_sektor)
@@ -125,12 +126,12 @@ CREATE TABLE Hubpodest (
 CREATE TABLE Hubquerpodest (
 	id_hubquerpodest BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	bezeichnung VARCHAR(100),
+	zeitstempel TIMESTAMP,
+	user_parameter CLOB,
 	motor INT,
 	oben INT,
 	mittig INT,
 	unten INT,
-	user_parameter CLOB,
-	zeitstempel TIMESTAMP,
 	id_sektor BIGINT,
 	PRIMARY KEY (id_hubquerpodest),
 	FOREIGN KEY (id_sektor) REFERENCES Sektor(id_sektor)
@@ -167,3 +168,4 @@ CREATE TABLE Roboter_Sektor (
 	FOREIGN KEY (id_roboter) REFERENCES Roboter(id_roboter),
 	FOREIGN KEY (id_sektor) REFERENCES Sektor(id_sektor)
 	)
+	
