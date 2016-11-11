@@ -4,6 +4,7 @@ DROP TABLE Sektor_Warentraeger;
 DROP TABLE Artikel_Warentraeger;
 DROP TABLE Hubquerpodest;
 DROP TABLE Hubpodest;
+DROP TABLE Werkzeug;
 DROP TABLE Gelenk;
 DROP TABLE Roboter;
 DROP TABLE Sensor;
@@ -96,6 +97,16 @@ CREATE TABLE Gelenk (
 	zeitstempel TIMESTAMP,
 	id_roboter BIGINT,
 	PRIMARY KEY (id_gelenk),
+	FOREIGN KEY (id_roboter) REFERENCES Roboter(id_roboter)
+	)
+	
+CREATE TABLE Werkzeug (
+	id_werkzeug BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	bezeichnung VARCHAR(100),
+	user_parameter CLOB,
+	zustand INT,
+	id_roboter BIGINT,
+	PRIMARY KEY (id_werkzeug),
 	FOREIGN KEY (id_roboter) REFERENCES Roboter(id_roboter)
 	)
 	
