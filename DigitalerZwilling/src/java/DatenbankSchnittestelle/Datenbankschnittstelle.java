@@ -30,6 +30,8 @@ public class Datenbankschnittstelle {
     //Datenbank verbindungs daten
     
     private final String _DbURL="jdbc:derby://localhost:1527/db_DigitalerZwilling";   //URL
+    //MySQL
+    //private final String _DbURL="jdbc:mysql://localhost:1527/db_DigitalerZwilling";   //URL
     private final String _DbUser="db_user";                                            //User
     private final String _DbPw="SB0222";                                              //Passswort
     //---------------------------------------------------------------------------
@@ -51,6 +53,24 @@ public class Datenbankschnittstelle {
         }
     }
     //--------------------------------------------------------------------------------------------
+    
+    /*-----------------------------------------------------------------------------
+    //MySQL
+    private Datenbankschnittstelle(){ 
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            this.data = DriverManager.getConnection(this._DbURL,this._DbUser,this._DbPw);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
+            //throw new Exception("Fehler: Datenbankverbindung auf "+ this._DbURL+" nicht möglich");
+        }
+    }
+    //--------------------------------------------------------------------------------------------*/
     
     /**
      * Gibt die vorhandene Instance zurueck bzw. erstellt wenn nötig die erste Instanz dieses Singeltons
