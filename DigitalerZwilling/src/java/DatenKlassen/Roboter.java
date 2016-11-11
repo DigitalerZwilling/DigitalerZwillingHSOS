@@ -8,7 +8,6 @@ package DatenKlassen;
 
 import java.time.LocalTime;
 import java.util.List;
-
 /**
  *
  * @author user
@@ -24,16 +23,14 @@ public class Roboter extends Element{
     private List<Long> gelenkeIDs;
     private List<Long> werkzeugID;
 
-    public Roboter(int stoerung, int x, int y, int z, int ausrichtung, List<Long> id_Sektor, List<Long> id_Gelenke, List<Long> id_Werkzeug, Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
+    public Roboter(int stoerung, int x, int y, int z, int ausrichtung, Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.stoerung = stoerung;
         this.x = x;
         this.y = y;
         this.z = z;
         this.ausrichtung = ausrichtung;
-        this.sektorID = id_Sektor;
-        this.gelenkeIDs = id_Gelenke;
-        this.werkzeugID = id_Werkzeug;
+
     }
 
     
