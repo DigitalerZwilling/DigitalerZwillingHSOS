@@ -24,5 +24,13 @@ public class TransportbandCache extends Cache{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    private static TransportbandCache instance;
+
+    public static synchronized Cache getInstance(){
+        if(TransportbandCache.instance == null) {
+            TransportbandCache.instance = new TransportbandCache();
+        }
+        return instance;
+    }
  
 }

@@ -24,5 +24,13 @@ public class WarentraegerCache extends Cache{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    private static WarentraegerCache instance;
+
+    public static synchronized Cache getInstance(){
+        if(WarentraegerCache.instance == null) {
+            WarentraegerCache.instance = new WarentraegerCache();
+        }
+        return instance;
+    }
   
 }

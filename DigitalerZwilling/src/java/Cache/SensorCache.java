@@ -24,6 +24,13 @@ public class SensorCache extends Cache{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-   
+    private static SensorCache instance;
+
+    public static synchronized Cache getInstance(){
+        if(SensorCache.instance == null) {
+            SensorCache.instance = new SensorCache();
+        }
+        return instance;
+    }
     
 }

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cache;
+package Cache.Updater;
 
+import Cache.Cache;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class Updater {
         }
     }
     
-    static void registerCache(Cache cache){
+    public static void registerCache(Cache cache){
         caches.add(cache);
     }
 }

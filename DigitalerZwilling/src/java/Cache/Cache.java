@@ -5,8 +5,8 @@
  */
 package Cache;
 
+import Cache.Updater.Updater;
 import DatenKlassen.Element;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -8,7 +8,6 @@ package Cache;
 import DatenKlassen.Artikel;
 import DatenKlassen.Element;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.sql.ResultSet;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,16 +53,10 @@ public class ArtikelCache extends Cache{
         }
         Map<Long,Element>[] m = new Map[2];
         m[1]=allArtikel;
-        m[2]=allArtikel;
+        m[2]= allArtikel;
         this.setElements(m);
     }
 
-    
-            
-            
-        
-    
-    
     private List<Long> readWarentraeger(Long id){
         Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT warentraeger_id from Artikel_Warentraeger where id_artikel="+id+" and id_warentraeger=id_warentraeger");
         List<String> ids = rsMap.get("id_warentraeger");
@@ -72,6 +65,15 @@ public class ArtikelCache extends Cache{
             w_ids.add(Long.getLong(s));
         }
         return w_ids;
+    }
+
+    private static ArtikelCache instance;
+
+    public static synchronized Cache getInstance(){
+        if(ArtikelCache.instance == null) {
+            ArtikelCache.instance = new ArtikelCache();
+        }
+        return instance;
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package Cache;
 
+import DatenKlassen.HubPodest;
 import java.sql.ResultSet;
 import java.util.List;
 
@@ -24,6 +25,13 @@ public class HubPodestCache extends Cache{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-  
+    private static HubPodestCache instance;
+
+    public static synchronized Cache getInstance(){
+        if(HubPodestCache.instance == null) {
+            HubPodestCache.instance = new HubPodestCache();
+        }
+        return instance;
+    }
     
 }

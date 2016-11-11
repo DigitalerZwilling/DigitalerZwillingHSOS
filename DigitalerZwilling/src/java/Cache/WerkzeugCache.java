@@ -24,5 +24,12 @@ public class WerkzeugCache extends Cache{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-  
+    private static WerkzeugCache instance;
+
+    public static synchronized Cache getInstance(){
+        if(WerkzeugCache.instance == null) {
+            WerkzeugCache.instance = new WerkzeugCache();
+        }
+        return instance;
+    }
 }

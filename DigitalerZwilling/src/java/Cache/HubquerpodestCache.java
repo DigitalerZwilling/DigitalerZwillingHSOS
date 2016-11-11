@@ -5,6 +5,7 @@
  */
 package Cache;
 
+import DatenKlassen.HubQuerPodest;
 import java.sql.ResultSet;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author User
  */
-public class HubquerpodestCache extends Cache{
+public class HubQuerPodestCache extends Cache{
 
     @Override
     public void update() {
@@ -24,6 +25,14 @@ public class HubquerpodestCache extends Cache{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    private static HubQuerPodestCache instance;
+
+    public static synchronized Cache getInstance(){
+        if(HubQuerPodestCache.instance == null) {
+            HubQuerPodestCache.instance = new HubQuerPodestCache();
+        }
+        return instance;
+    }
    
     
 }

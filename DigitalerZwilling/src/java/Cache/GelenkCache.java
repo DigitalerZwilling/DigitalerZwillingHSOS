@@ -50,7 +50,14 @@ public class GelenkCache extends Cache{
         }
     }
 
- 
+    private static GelenkCache instance;
+
+    public static synchronized Cache getInstance(){
+        if(GelenkCache.instance == null) {
+            GelenkCache.instance = new GelenkCache();
+        }
+        return instance;
+    }
 
     
     

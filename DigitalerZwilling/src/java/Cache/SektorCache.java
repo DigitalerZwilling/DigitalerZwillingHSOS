@@ -24,6 +24,13 @@ public class SektorCache extends Cache{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-  
+    private static SektorCache instance;
+
+    public static synchronized Cache getInstance(){
+        if(SektorCache.instance == null) {
+            SektorCache.instance = new SektorCache();
+        }
+        return instance;
+    }
     
 }
