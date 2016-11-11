@@ -19,7 +19,7 @@ public class Gelenk extends Element{
     int gelenkstellung;
     Long roboterID;
 
-    public Gelenk(String typ, int nummer, int gelenkstellung, Long roboterID, Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
+    public Gelenk(String typ, int nummer, int gelenkstellung, Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.typ = typ;
         this.nummer = nummer;
