@@ -68,7 +68,7 @@ public class ArtikelCache extends Cache{
 
 
     private List<Long> readWarentraeger(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT warentraeger_id from Artikel_Warentraeger where id_artikel="+id+" and id_warentraeger=id_warentraeger");
+        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT warentraeger_id from Artikel_Warentraeger where id_artikel="+id);
         List<String> ids = rsMap.get("id_warentraeger");
         List<Long> w_ids= new ArrayList<>();
         for (String s : ids){
