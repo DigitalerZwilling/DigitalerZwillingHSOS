@@ -128,12 +128,12 @@ public class Sektor extends Element{
         this.vorTransportbandIDs = vorTransportbandIDs;
     }
 
-    public List<Long> getNacgTransportbandIDs() {
+    public List<Long> getNachTransportbandIDs() {
         return nachTransportbandIDs;
     }
 
-    public void setNacgTransportbandIDs(List<Long> nacgTransportbandIDs) {
-        this.nachTransportbandIDs = nacgTransportbandIDs;
+    public void setNachTransportbandIDs(List<Long> nachTransportbandIDs) {
+        this.nachTransportbandIDs = nachTransportbandIDs;
     }
     
     

@@ -28,9 +28,8 @@ public class Transportband extends Element{
         this.stoerung = stoerung;
         this.laenge = laenge;
         this.geschwindigkeit = geschwindigkeit;
-        this.warentraegerIDs = warentraegerIDs;
-        this.vorSektorID = this.vorSektorID;
-        this.nachSektorID = this.nachSektorID;
+        this.vorSektorID = vorSektorID;
+        this.nachSektorID = nachSektorID;
     }
 
     public int getStoerung() {

@@ -24,7 +24,6 @@ public class Gelenk extends Element{
         this.typ = typ;
         this.nummer = nummer;
         this.gelenkstellung = gelenkstellung;
-        this.roboterID = roboterID;
     }
 
     public String getTyp() {

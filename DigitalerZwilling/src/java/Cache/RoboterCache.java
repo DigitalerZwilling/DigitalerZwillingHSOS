@@ -22,14 +22,41 @@ public class RoboterCache extends Cache{
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_roboter,stoerung,position_x,position_y,position_z,position_ausrichtung,zeitstempel,user_parameter from Roboter");
+        List<String> ids = rsMap.get("id_roboter");
+        List<String> zeitstempel = rsMap.get("zeitstempel");
+        List<String> user_parameter = rsMap.get("user_parameter");
+        List<String> stoerung = rsMap.get("stoerung");  //int
+        
+        List<String> x = rsMap.get("position_x");   //int
+        List<String> y = rsMap.get("position_y");   //int
+        List<String> z = rsMap.get("position_z");   //int
+        List<String> ausrichtung = rsMap.get("position_ausrichtung");   //int
+        
+        Roboter roboter;
+        for (int i=0;i<ids.size();i++){
+            roboter=(Roboter)(state==true?elements[0].get(Long.getLong(ids.get(i))):elements[1].get(Long.getLong(ids.get(i))));
+            roboter.setStoerung(Integer.getInteger(stoerung.get(i)));
+            roboter.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
+            roboter.setUser_Parameter(user_parameter.get(i));
+            
+            roboter.setAusrichtung(Integer.getInteger(ausrichtung.get(i)));
+            roboter.setX(Integer.getInteger(x.get(i)));
+            roboter.setY(Integer.getInteger(y.get(i)));
+            roboter.setZ(Integer.getInteger(z.get(i)));
+            
+            roboter.setId_Gelenke(this.readGelenke(roboter.getId()));
+            roboter.setId_Sektor(this.readSektor(roboter.getId()));
+            roboter.setId_Werkzeug(this.readWerkzeug(roboter.getId()));
+            
+        }
     }
 
     @Override
     public void updateAll() {
         Map<Long,Element> allRoboter1=new HashMap<>();
         Map<Long,Element> allRoboter2=new HashMap<>();
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_roboter,bezeichnung,stoerung,position_x,position_y,position_z,position_ausrichtung,zeitstempel,user_parameter from hubpodest");
+        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_roboter,bezeichnung,stoerung,position_x,position_y,position_z,position_ausrichtung,zeitstempel,user_parameter from Roboter");
         List<String> ids = rsMap.get("id_roboter");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         List<String> zeitstempel = rsMap.get("zeitstempel");
@@ -46,6 +73,15 @@ public class RoboterCache extends Cache{
         for (int i=0;i<ids.size();i++){
             roboter1=new Roboter(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
             roboter2=new Roboter(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            
+            roboter1.setId_Gelenke(this.readGelenke(roboter1.getId()));
+            roboter2.setId_Gelenke(this.readGelenke(roboter2.getId()));
+            
+            roboter1.setId_Sektor(this.readSektor(roboter1.getId()));
+            roboter2.setId_Sektor(this.readSektor(roboter2.getId()));
+            
+            roboter1.setId_Werkzeug(this.readWerkzeug(roboter1.getId()));
+            roboter2.setId_Werkzeug(this.readWerkzeug(roboter2.getId()));
             
             allRoboter1.put(roboter1.getId(),(roboter1));
             allRoboter2.put(roboter2.getId(),(roboter2));

@@ -30,7 +30,6 @@ public class HubQuerPodest extends Element{
         this.oben = oben;
         this.mittig = mittig;
         this.unten = unten;
-        this.gruppenIDs = gruppenIDs;
         this.sektorID = id_Sektor;
     }
 

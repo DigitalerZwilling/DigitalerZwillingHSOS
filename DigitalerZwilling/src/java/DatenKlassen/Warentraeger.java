@@ -29,9 +29,6 @@ public class Warentraeger extends Element{
         this.abstand_mm = abstand_mm;
         this.montagezustand = montagezustand;
         this.rFID_inhalt = rFID_inhalt;
-        this.artikelIDs = artikelIDs;
-        this.transportbandIDs = transportbandIDs;
-        this.sektorIDs = sektorIDs;
     }
 
     public int getStoerung() {
