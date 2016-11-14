@@ -5,6 +5,7 @@
  */
 package Cache;
 
+import DatenKlassen.Element;
 import DatenKlassen.HubQuerPodest;
 import java.sql.ResultSet;
 import java.util.List;

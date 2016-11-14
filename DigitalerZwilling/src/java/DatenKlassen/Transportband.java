@@ -23,7 +23,7 @@ public class Transportband extends Element{
     private Long vorSektorID;
     private Long nachSektorID;
 
-    public Transportband(int stoerung, int laenge, int geschwindigkeit, List<Long> warentraegerIDs, Long vorSektorID, Long nachSektorID, Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
+    public Transportband(int stoerung, int laenge, int geschwindigkeit, Long vorSektorID, Long nachSektorID, Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.stoerung = stoerung;
         this.laenge = laenge;
