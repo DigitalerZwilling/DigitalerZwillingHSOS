@@ -67,8 +67,8 @@ public class WarentraegerCache extends Cache{
         
         Warentraeger warentraeger1,warentraeger2;
         for (int i=0;i<ids.size();i++){
-            warentraeger1 = new Warentraeger(stoerung.get(i), abstand_mm.get(i), montagezustand.get(i), RFID_inhalt.get(i), Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
-            warentraeger2 = new Warentraeger(stoerung.get(i), abstand_mm.get(i), montagezustand.get(i), RFID_inhalt.get(i), Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            warentraeger1 = new Warentraeger(Integer.getInteger(stoerung.get(i)), Integer.getInteger(abstand_mm.get(i)), Integer.getInteger(montagezustand.get(i)), RFID_inhalt.get(i), Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            warentraeger2 = new Warentraeger(Integer.getInteger(stoerung.get(i)), Integer.getInteger(abstand_mm.get(i)), Integer.getInteger(montagezustand.get(i)), RFID_inhalt.get(i), Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
             
             warentraeger1.setTransportbandIDs(this.readTransportband(warentraeger1.getId()));
             warentraeger2.setTransportbandIDs(this.readTransportband(warentraeger2.getId()));
