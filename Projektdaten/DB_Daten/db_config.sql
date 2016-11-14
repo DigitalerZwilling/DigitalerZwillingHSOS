@@ -169,3 +169,11 @@ CREATE TABLE Roboter_Sektor (
 	FOREIGN KEY (id_sektor) REFERENCES Sektor(id_sektor)
 	);
 	
+CREATE TABLE Roboter_Werkzeug (
+	id_roboter BIGINT,
+	id_sektor BIGINT,
+	PRIMARY KEY (id_roboter, id_sektor),
+	FOREIGN KEY (id_roboter) REFERENCES Roboter(id_roboter),
+	FOREIGN KEY (id_sektor) REFERENCES Sektor(id_sektor)
+	);
+	
