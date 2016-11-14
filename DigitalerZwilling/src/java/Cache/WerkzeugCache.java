@@ -43,18 +43,17 @@ public class WerkzeugCache extends Cache{
         Map<Long,Element> allWerkzeug1=new HashMap<>();
         Map<Long,Element> allWerkzeug2=new HashMap<>();
         
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_werkzeug,bezeichnung,zeitstempel,user_parameter,zustand,id_roboter from Werkzeug");
-        List<String> ids_w = rsMap.get("id_werkzeug");
+        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_werkzeug,bezeichnung,zeitstempel,user_parameter,zustand from Werkzeug");
+        List<String> ids = rsMap.get("id_werkzeug");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         List<String> zeitstempel = rsMap.get("zeitstempel");
         List<String> user_parameter = rsMap.get("user_parameter");
         List<String> zustand = rsMap.get("zustand");
-        List<String> ids_r = rsMap.get("ids_r");
         
         Werkzeug werkzeug1,werkzeug2;
-        for (int i=0;i<ids_w.size();i++){
-            werkzeug1=new Werkzeug(Long.getLong(ids_w.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)),Integer.valueOf(zustand.get(i)));
-            werkzeug2=new Werkzeug(Long.getLong(ids_w.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)),Integer.valueOf(zustand.get(i)));
+        for (int i=0;i<ids.size();i++){
+            werkzeug1=new Werkzeug(Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)),Integer.valueOf(zustand.get(i)));
+            werkzeug2=new Werkzeug(Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)),Integer.valueOf(zustand.get(i)));
             
             werkzeug1.setRoboterID(this.readRoboter(werkzeug1.getId()));
             werkzeug2.setRoboterID(this.readRoboter(werkzeug2.getId()));
