@@ -23,7 +23,7 @@ public class TransportbandCache extends Cache{
 
     @Override
     public void update() {
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_transportband,zeitstempel,user_parameter,stoerung,geschwindigkeit from Gelenk");
+        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_transportband,zeitstempel,user_parameter,stoerung,geschwindigkeit FROM Transportband");
         List<String> ids = rsMap.get("id_artikel");
         List<String> zeitstempel = rsMap.get("zeitstempel");
         List<String> user_parameter = rsMap.get("user_parameter");
@@ -44,7 +44,7 @@ public class TransportbandCache extends Cache{
     public void updateAll() {
         Map<Long,Element> allTransportband1=new HashMap<>();
         Map<Long,Element> allTransportband2=new HashMap<>();
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_transportband,bezeichnung,zeitstempel,user_parameter,stoerung,laenge,geschwindigkeit,id_sektor_vor,id_sektor_nach from Transportband");
+        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_transportband,bezeichnung,zeitstempel,user_parameter,stoerung,laenge,geschwindigkeit,id_sektor_vor,id_sektor_nach FROM Transportband");
         List<String> ids = rsMap.get("id_transportband");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         List<String> zeitstempel = rsMap.get("zeitstempel");

@@ -24,7 +24,7 @@ public class WarentraegerCache extends Cache{
     @Override
     public void update() {
         
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_warentraeger, stoerung, zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt");
+        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_warentraeger, stoerung, zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt FROM Warentraeger");
         List<String> ids = rsMap.get("id_warentraeger");
         List<String> stoerung = rsMap.get("stoerung");
         List<String> zeitstempel = rsMap.get("zeitstempel");
@@ -54,7 +54,7 @@ public class WarentraegerCache extends Cache{
         Map<Long,Element> allWarentraeger1=new HashMap<>();
         Map<Long,Element> allWarentraeger2=new HashMap<>();
         
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_warentraeger , bezeichnung , stoerung , zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt from Artikel");
+        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_warentraeger , bezeichnung , stoerung , zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt FROM Warentraeger");
         List<String> ids = rsMap.get("id_warentraeger");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         List<String> stoerung = rsMap.get("stoerung");

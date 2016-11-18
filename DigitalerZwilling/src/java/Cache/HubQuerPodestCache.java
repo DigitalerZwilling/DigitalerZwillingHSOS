@@ -21,7 +21,7 @@ public class HubQuerPodestCache extends Cache{
     @Override
     public void update() {
         //--------------------------------------------------------------
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_Hubquerpodest, user_parameter, motor, oben, mittig, unten, zeitstempel form Hubquerpodest");
+        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_Hubquerpodest, user_parameter, motor, oben, mittig, unten, zeitstempel FROM Hubquerpodest");
         List<String> id = rsMap.get("id_Hubquerpodest");
         List<String> userParameter = rsMap.get("user_parameter");
         List<String> motor = rsMap.get("motor");
@@ -42,7 +42,7 @@ public class HubQuerPodestCache extends Cache{
 
     @Override
     public void updateAll() {
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_Hubquerpodest, user_parameter, motor, oben, mittig, unten, zeitstempel, bezeichnung, id_sektor form Hubquerpodest");
+        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_hubquerpodest, user_parameter, motor, oben, mittig, unten, zeitstempel, bezeichnung, id_sektor FROM Hubquerpodest");
         List<String> id = rsMap.get("id_Hubquerpodest");
         List<String> userParameter = rsMap.get("user_parameter");
         List<String> motor = rsMap.get("motor");
@@ -71,7 +71,7 @@ public class HubQuerPodestCache extends Cache{
     }
    
     private void updateGruppenIds(){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_Hubquerpodest1, id_hubquerpodest2 from Hubquerpodest_Hubquerpodest");
+        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_Hubquerpodest1, id_hubquerpodest2 FROM Hubquerpodest_Hubquerpodest");
         List<String> id1 = rsMap.get("id_Hubquerpodest1");
         List<String> id2 = rsMap.get("id_Hubquerpodest2");
         for(int i=0;i<id1.size();i++){

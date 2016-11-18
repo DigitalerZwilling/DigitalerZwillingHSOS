@@ -44,7 +44,7 @@ public class ArtikelCache extends Cache{
         Map<Long,Element> allArtikel1=new HashMap<>();
         Map<Long,Element> allArtikel2=new HashMap<>();
         
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_artikel,bezeichnung,zeitstempel,user_parameter from Artikel");
+        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_artikel,bezeichnung,zeitstempel,user_parameter FROM Artikel");
         List<String> ids = rsMap.get("id_artikel");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         List<String> zeitstempel = rsMap.get("zeitstempel");
@@ -68,7 +68,7 @@ public class ArtikelCache extends Cache{
 
 
     private List<Long> readWarentraeger(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT warentraeger_id from Artikel_Warentraeger where id_artikel="+id);
+        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_warentraeger FROM Artikel_Warentraeger WHERE id_artikel="+id);
         List<String> ids = rsMap.get("id_warentraeger");
         List<Long> w_ids= new ArrayList<>();
         for (String s : ids){
