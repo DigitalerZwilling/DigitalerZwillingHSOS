@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-12-12" view-index="0" gantt-divider-location="502" resource-divider-location="300" version="2.8.1" locale="de_DE">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-11-28" view-index="0" gantt-divider-location="502" resource-divider-location="300" version="2.8.1" locale="de">
     <description/>
-    <view zooming-state="default:4" id="gantt-chart">
+    <view zooming-state="default:6" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="365" order="0"/>
         <field id="tpd4" name="Anfang" width="67" order="1"/>
         <field id="tpd5" name="Ende" width="66" order="2"/>
@@ -36,7 +36,7 @@
         </taskproperties>
         <task id="6" name="Datenerfassung" meeting="false" start="2016-10-12" duration="1" complete="0" expand="false">
             <task id="13" name="Anforderungserfassung" color="#8cb6ce" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-            <task id="9" name="Cache" meeting="false" start="2016-10-12" duration="1" complete="0" expand="false">
+            <task id="9" name="Cache" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
                 <task id="15" name="Klassendiagramm erstellen" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                 <task id="16" name="Klassen implementieren" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
             </task>
@@ -52,7 +52,7 @@
             <task id="28" name="Weboberfläche erstellen" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
                 <task id="43" name="Menuefuehrung" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                 <task id="32" name="Übersicht" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-                <task id="33" name="Einzelansichten" meeting="false" start="2016-10-12" duration="1" complete="0" expand="false">
+                <task id="33" name="Einzelansichten" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
                     <task id="34" name="Roboter" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
                         <task id="44" name="Bewegungsvisualisierung" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                     </task>
@@ -61,7 +61,7 @@
                     </task>
                     <task id="36" name="Sektor" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                 </task>
-                <task id="37" name="Listen" meeting="false" start="2016-10-12" duration="1" complete="0" expand="false">
+                <task id="37" name="Listen" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
                     <task id="38" name="Störung" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                     <task id="39" name="Artikel" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
                     <task id="40" name="Warentraeger" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
@@ -86,9 +86,9 @@
                 <task id="59" name="Spalten erweitern" meeting="false" start="2017-01-02" duration="21" complete="0" expand="true"/>
             </task>
         </task>
-        <task id="63" name="Sektor anzeigen" meeting="false" start="2016-12-19" duration="3" complete="0" expand="true">
-            <task id="104" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-12-19" duration="2" complete="0" expand="false">
-                <task id="108" name="Tabelle Sektor erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
+        <task id="63" name="Sektor anzeigen" meeting="false" start="2016-11-04" duration="12" complete="0" expand="false">
+            <task id="104" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-11-04" duration="2" complete="0" expand="true">
+                <task id="108" name="Tabelle Sektor erstellen" meeting="false" start="2016-11-04" duration="1" complete="0" expand="true">
                     <depend id="119" type="2" difference="0" hardness="Strong"/>
                     <depend id="120" type="2" difference="0" hardness="Strong"/>
                     <depend id="121" type="2" difference="0" hardness="Strong"/>
@@ -97,185 +97,185 @@
                     <depend id="124" type="2" difference="0" hardness="Strong"/>
                     <depend id="148" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="115" name="Tabelle Sensor erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
+                <task id="115" name="Tabelle Sensor erstellen" meeting="false" start="2016-11-04" duration="1" complete="0" expand="true">
                     <depend id="121" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="119" name="Relation Sektor-Warenträger erzeugen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true">
+                <task id="119" name="Relation Sektor-Warenträger erzeugen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true">
                     <depend id="109" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="120" name="Relation Sektor-Transportband erzeugen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true">
+                <task id="120" name="Relation Sektor-Transportband erzeugen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true">
                     <depend id="125" type="2" difference="0" hardness="Strong"/>
                     <depend id="237" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="121" name="Relation Sektor-Sensor erzeugen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true">
+                <task id="121" name="Relation Sektor-Sensor erzeugen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true">
                     <depend id="126" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="122" name="Relation Sektor-Roboter erzeugen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true">
+                <task id="122" name="Relation Sektor-Roboter erzeugen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true">
                     <depend id="127" type="2" difference="0" hardness="Strong"/>
                     <depend id="239" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="123" name="Relation Sektor-Hubpodest erzeugen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true">
+                <task id="123" name="Relation Sektor-Hubpodest erzeugen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true">
                     <depend id="128" type="2" difference="0" hardness="Strong"/>
                     <depend id="241" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="124" name="Relation Sektor-Hubquerpodest erzeugen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true">
+                <task id="124" name="Relation Sektor-Hubquerpodest erzeugen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true">
                     <depend id="129" type="2" difference="0" hardness="Strong"/>
                     <depend id="243" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
-            <task id="105" name="SQL-Anfrage erstellen" meeting="false" start="2016-12-20" duration="2" complete="0" expand="false">
-                <task id="148" name="Tabelle Sektor abfragen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true"/>
-                <task id="109" name="Relation Sektor-Warenträger abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
-                <task id="125" name="Relation Sektor-Transportband abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
-                <task id="126" name="Relation Sektor-Sensor abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
-                <task id="127" name="Relation Sektor-Roboter abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
-                <task id="128" name="Relation Sektor-Hubpodest abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
-                <task id="129" name="Relation Sektor-Hubquerpodest abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
+            <task id="105" name="SQL-Anfrage erstellen" meeting="false" start="2016-11-07" duration="2" complete="0" expand="true">
+                <task id="148" name="Tabelle Sektor abfragen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true"/>
+                <task id="109" name="Relation Sektor-Warenträger abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
+                <task id="125" name="Relation Sektor-Transportband abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
+                <task id="126" name="Relation Sektor-Sensor abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
+                <task id="127" name="Relation Sektor-Roboter abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
+                <task id="128" name="Relation Sektor-Hubpodest abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
+                <task id="129" name="Relation Sektor-Hubquerpodest abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
             </task>
-            <task id="106" name="Speichern in Cache" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
-                <task id="110" name="SektorCache erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
-                <task id="138" name="Sektor-Klasse erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
+            <task id="106" name="Speichern in Cache" meeting="false" start="2016-11-07" duration="9" complete="0" expand="true">
+                <task id="110" name="SektorCache erstellen" meeting="false" start="2016-11-11" duration="5" complete="0" expand="true"/>
+                <task id="138" name="Sektor-Klasse erstellen" meeting="false" start="2016-11-07" duration="4" complete="0" expand="true"/>
             </task>
-            <task id="107" name="Darstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
-                <task id="111" name="HTML-Oberfläche" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
-                <task id="139" name="Websockets" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
+            <task id="107" name="Darstellen" meeting="false" start="2016-11-04" duration="12" complete="0" expand="true">
+                <task id="111" name="HTML-Oberfläche" meeting="false" start="2016-11-04" duration="10" complete="0" expand="true"/>
+                <task id="139" name="Websockets" meeting="false" start="2016-11-18" duration="2" complete="0" expand="true"/>
             </task>
         </task>
-        <task id="64" name="Warenträger anzeigen" meeting="false" start="2016-12-19" duration="3" complete="0" expand="false">
-            <task id="102" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-12-19" duration="2" complete="0" expand="false">
-                <task id="204" name="Tabelle Warenträger erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
+        <task id="64" name="Warenträger anzeigen" meeting="false" start="2016-11-04" duration="12" complete="0" expand="false">
+            <task id="102" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-11-04" duration="2" complete="0" expand="true">
+                <task id="204" name="Tabelle Warenträger erstellen" meeting="false" start="2016-11-04" duration="1" complete="0" expand="true">
                     <depend id="119" type="2" difference="0" hardness="Strong"/>
                     <depend id="212" type="2" difference="0" hardness="Strong"/>
                     <depend id="213" type="2" difference="0" hardness="Strong"/>
                     <depend id="222" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="205" name="Tabelle Artikel erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
+                <task id="205" name="Tabelle Artikel erstellen" meeting="false" start="2016-11-04" duration="1" complete="0" expand="true">
                     <depend id="212" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="212" name="Relation Warenträger-Artikel erzeugen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true">
+                <task id="212" name="Relation Warenträger-Artikel erzeugen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true">
                     <depend id="230" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="213" name="Relation Warenträger-Transportband erzeugen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true">
+                <task id="213" name="Relation Warenträger-Transportband erzeugen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true">
                     <depend id="231" type="2" difference="0" hardness="Strong"/>
                     <depend id="235" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
-            <task id="140" name="SQL-Anfrage erstellen" meeting="false" start="2016-12-20" duration="2" complete="0" expand="false">
-                <task id="222" name="Tabelle Warenträger abfragen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true"/>
-                <task id="230" name="Relation Warenträger-Artikel abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
-                <task id="231" name="Relation Warenträger-Transportband abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
+            <task id="140" name="SQL-Anfrage erstellen" meeting="false" start="2016-11-07" duration="2" complete="0" expand="true">
+                <task id="222" name="Tabelle Warenträger abfragen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true"/>
+                <task id="230" name="Relation Warenträger-Artikel abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
+                <task id="231" name="Relation Warenträger-Transportband abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
             </task>
-            <task id="141" name="Speichern in Cache" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
-                <task id="153" name="WarenträgerCache erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
-                <task id="154" name="Warenträger-Klasse erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
+            <task id="141" name="Speichern in Cache" meeting="false" start="2016-11-07" duration="9" complete="0" expand="true">
+                <task id="153" name="WarenträgerCache erstellen" meeting="false" start="2016-11-11" duration="5" complete="0" expand="true"/>
+                <task id="154" name="Warenträger-Klasse erstellen" meeting="false" start="2016-11-07" duration="5" complete="0" expand="true"/>
             </task>
-            <task id="142" name="Darstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
+            <task id="142" name="Darstellen" meeting="false" start="2016-11-21" duration="1" complete="0" expand="true"/>
         </task>
-        <task id="62" name="Transportband anzeigen" meeting="false" start="2016-12-12" duration="8" complete="0" expand="false">
-            <task id="94" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="false">
-                <task id="206" name="Tabelle Transportband erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
+        <task id="62" name="Transportband anzeigen" meeting="false" start="2016-11-04" duration="12" complete="0" expand="false">
+            <task id="94" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-11-04" duration="1" complete="0" expand="true">
+                <task id="206" name="Tabelle Transportband erstellen" meeting="false" start="2016-11-04" duration="1" complete="0" expand="true">
                     <depend id="120" type="2" difference="0" hardness="Strong"/>
                     <depend id="213" type="2" difference="0" hardness="Strong"/>
                     <depend id="223" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
-            <task id="98" name="SQL-Anfrage erstellen" meeting="false" start="2016-12-20" duration="2" complete="0" expand="false">
-                <task id="223" name="Tabelle Transportband abfragen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true"/>
-                <task id="235" name="Kopie_Relation Warenträger-Transportband abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
-                <task id="237" name="Kopie_Relation Sektor-Transportband abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
+            <task id="98" name="SQL-Anfrage erstellen" meeting="false" start="2016-11-07" duration="2" complete="0" expand="true">
+                <task id="223" name="Tabelle Transportband abfragen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true"/>
+                <task id="235" name="Kopie_Relation Warenträger-Transportband abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
+                <task id="237" name="Kopie_Relation Sektor-Transportband abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
             </task>
-            <task id="252" name="Speichern in Cache" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true">
-                <task id="253" name="TransportbandCache erstellen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true"/>
-                <task id="254" name="Transportband-Klasse erstellen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true"/>
+            <task id="252" name="Speichern in Cache" meeting="false" start="2016-11-07" duration="9" complete="0" expand="true">
+                <task id="253" name="TransportbandCache erstellen" meeting="false" start="2016-11-11" duration="5" complete="0" expand="true"/>
+                <task id="254" name="Transportband-Klasse erstellen" meeting="false" start="2016-11-07" duration="5" complete="0" expand="true"/>
             </task>
-            <task id="255" name="Darstellen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true"/>
+            <task id="255" name="Darstellen" meeting="false" start="2016-11-21" duration="1" complete="0" expand="true"/>
         </task>
-        <task id="61" name="Roboter anzeigen" meeting="false" start="2016-12-19" duration="3" complete="0" expand="false">
-            <task id="77" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-12-19" duration="2" complete="0" expand="false">
-                <task id="207" name="Tabelle Roboter erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
+        <task id="61" name="Roboter anzeigen" meeting="false" start="2016-11-04" duration="12" complete="0" expand="false">
+            <task id="77" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-11-04" duration="2" complete="0" expand="true">
+                <task id="207" name="Tabelle Roboter erstellen" meeting="false" start="2016-11-04" duration="1" complete="0" expand="true">
                     <depend id="122" type="2" difference="0" hardness="Strong"/>
                     <depend id="214" type="2" difference="0" hardness="Strong"/>
                     <depend id="215" type="2" difference="0" hardness="Strong"/>
                     <depend id="226" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="208" name="Tabelle Gelenk erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
+                <task id="208" name="Tabelle Gelenk erstellen" meeting="false" start="2016-11-04" duration="1" complete="0" expand="true">
                     <depend id="214" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="209" name="Tabelle Werkzeug erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
+                <task id="209" name="Tabelle Werkzeug erstellen" meeting="false" start="2016-11-04" duration="1" complete="0" expand="true">
                     <depend id="215" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="214" name="Relation Roboter-Gelenk erzeugen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true">
+                <task id="214" name="Relation Roboter-Gelenk erzeugen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true">
                     <depend id="227" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="215" name="Relation Roboter-Werkzeug erzeugen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true">
+                <task id="215" name="Relation Roboter-Werkzeug erzeugen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true">
                     <depend id="228" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
-            <task id="78" name="SQL-Anfrage erstellen" meeting="false" start="2016-12-20" duration="2" complete="0" expand="false">
-                <task id="226" name="Tabelle Roboter abfragen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true"/>
-                <task id="239" name="Kopie_Relation Sektor-Roboter abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
-                <task id="227" name="Relation Roboter-Gelenk abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
-                <task id="228" name="Relation Roboter-Werkzeug abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
+            <task id="78" name="SQL-Anfrage erstellen" meeting="false" start="2016-11-07" duration="2" complete="0" expand="true">
+                <task id="226" name="Tabelle Roboter abfragen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true"/>
+                <task id="239" name="Kopie_Relation Sektor-Roboter abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
+                <task id="227" name="Relation Roboter-Gelenk abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
+                <task id="228" name="Relation Roboter-Werkzeug abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
             </task>
-            <task id="79" name="Speichern in Cache" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
-                <task id="90" name="RoboterCache erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
-                <task id="91" name="Robotor-Klasse erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
+            <task id="79" name="Speichern in Cache" meeting="false" start="2016-11-07" duration="9" complete="0" expand="true">
+                <task id="90" name="RoboterCache erstellen" meeting="false" start="2016-11-11" duration="5" complete="0" expand="true"/>
+                <task id="91" name="Robotor-Klasse erstellen" meeting="false" start="2016-11-07" duration="5" complete="0" expand="true"/>
             </task>
-            <task id="80" name="Darstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
+            <task id="80" name="Darstellen" meeting="false" start="2016-11-21" duration="1" complete="0" expand="true"/>
         </task>
-        <task id="67" name="HuPo anzeigen" meeting="false" start="2016-12-12" duration="8" complete="0" expand="false">
-            <task id="198" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="false">
-                <task id="210" name="Tabelle Hubpodest erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
+        <task id="67" name="HuPo anzeigen" meeting="false" start="2016-11-04" duration="12" complete="0" expand="false">
+            <task id="198" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-11-04" duration="1" complete="0" expand="true">
+                <task id="210" name="Tabelle Hubpodest erstellen" meeting="false" start="2016-11-04" duration="1" complete="0" expand="true">
                     <depend id="123" type="2" difference="0" hardness="Strong"/>
                     <depend id="224" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
-            <task id="202" name="SQL-Anfrage erstellen" meeting="false" start="2016-12-20" duration="2" complete="0" expand="false">
-                <task id="224" name="Tabelle Hubpodest abfragen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true"/>
-                <task id="241" name="Kopie_Relation Sektor-Hubpodest abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
+            <task id="202" name="SQL-Anfrage erstellen" meeting="false" start="2016-11-07" duration="2" complete="0" expand="true">
+                <task id="224" name="Tabelle Hubpodest abfragen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true"/>
+                <task id="241" name="Kopie_Relation Sektor-Hubpodest abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
             </task>
-            <task id="244" name="Speichern in Cache" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true">
-                <task id="245" name="HuPoCache erstellen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true"/>
-                <task id="246" name="HuPo-Klasse erstellen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true"/>
+            <task id="244" name="Speichern in Cache" meeting="false" start="2016-11-07" duration="9" complete="0" expand="true">
+                <task id="245" name="HuPoCache erstellen" meeting="false" start="2016-11-11" duration="5" complete="0" expand="true"/>
+                <task id="246" name="HuPo-Klasse erstellen" meeting="false" start="2016-11-07" duration="5" complete="0" expand="true"/>
             </task>
-            <task id="250" name="Darstellen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true"/>
+            <task id="250" name="Darstellen" meeting="false" start="2016-11-21" duration="1" complete="0" expand="true"/>
         </task>
-        <task id="66" name="HuQu anzeigen" meeting="false" start="2016-12-12" duration="8" complete="0" expand="true">
-            <task id="197" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-12-19" duration="2" complete="0" expand="false">
-                <task id="211" name="Tabelle Hubquerpodest erstellen" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true">
+        <task id="66" name="HuQu anzeigen" meeting="false" start="2016-11-04" duration="12" complete="0" expand="false">
+            <task id="197" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-11-04" duration="2" complete="0" expand="true">
+                <task id="211" name="Tabelle Hubquerpodest erstellen" meeting="false" start="2016-11-04" duration="1" complete="0" expand="true">
                     <depend id="124" type="2" difference="0" hardness="Strong"/>
                     <depend id="216" type="2" difference="0" hardness="Strong"/>
                     <depend id="225" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="216" name="Relation Hubquerpodest-Hubquerpodest erzeugen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true">
+                <task id="216" name="Relation Hubquerpodest-Hubquerpodest erzeugen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true">
                     <depend id="229" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
-            <task id="201" name="SQL-Anfrage erstellen" meeting="false" start="2016-12-20" duration="2" complete="0" expand="false">
-                <task id="225" name="Tabelle Hubquerpodest abfragen" meeting="false" start="2016-12-20" duration="1" complete="0" expand="true"/>
-                <task id="243" name="Kopie_Relation Sektor-Hubquerpodest abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
-                <task id="229" name="Relation Hubquerpodest-Hubquerpodest abfragen" meeting="false" start="2016-12-21" duration="1" complete="0" expand="true"/>
+            <task id="201" name="SQL-Anfrage erstellen" meeting="false" start="2016-11-07" duration="2" complete="0" expand="true">
+                <task id="225" name="Tabelle Hubquerpodest abfragen" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true"/>
+                <task id="243" name="Kopie_Relation Sektor-Hubquerpodest abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
+                <task id="229" name="Relation Hubquerpodest-Hubquerpodest abfragen" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
             </task>
-            <task id="249" name="Speichern in Cache" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true">
-                <task id="247" name="HuQuCache erstellen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true"/>
-                <task id="248" name="HuQu-Klasse erstellen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true"/>
+            <task id="249" name="Speichern in Cache" meeting="false" start="2016-11-07" duration="9" complete="0" expand="true">
+                <task id="247" name="HuQuCache erstellen" meeting="false" start="2016-11-11" duration="5" complete="0" expand="true"/>
+                <task id="248" name="HuQu-Klasse erstellen" meeting="false" start="2016-11-07" duration="5" complete="0" expand="true"/>
             </task>
-            <task id="251" name="Darstellen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true"/>
+            <task id="251" name="Darstellen" meeting="false" start="2016-11-21" duration="1" complete="0" expand="true"/>
         </task>
-        <task id="65" name="Störung anzeigen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="false">
-            <task id="196" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true"/>
-            <task id="200" name="SQL-Anfrage erstellen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true"/>
+        <task id="65" name="Störung anzeigen" meeting="false" start="2016-11-28" duration="4" complete="0" expand="false">
+            <task id="196" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-11-28" duration="4" complete="0" expand="true"/>
+            <task id="200" name="SQL-Anfrage erstellen" meeting="false" start="2016-11-28" duration="1" complete="0" expand="true"/>
         </task>
-        <task id="68" name="Übersicht anzeigen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="false">
-            <task id="199" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true"/>
-            <task id="203" name="SQL-Anfrage erstellen" meeting="false" start="2016-12-12" duration="1" complete="0" expand="true"/>
+        <task id="68" name="Übersicht anzeigen" meeting="false" start="2016-11-28" duration="4" complete="0" expand="false">
+            <task id="199" name="Datenbank-Tabellen erstellen" meeting="false" start="2016-11-28" duration="4" complete="0" expand="true"/>
+            <task id="203" name="SQL-Anfrage erstellen" meeting="false" start="2016-11-28" duration="1" complete="0" expand="true"/>
         </task>
-        <task id="69" name="Liste Roboter" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
-        <task id="70" name="Liste Warenträger" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
-        <task id="71" name="Liste Transportbänder" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
-        <task id="72" name="Liste HuQu" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
-        <task id="73" name="Liste HuPo" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
-        <task id="74" name="Liste Sektoren" meeting="false" start="2016-12-19" duration="1" complete="0" expand="true"/>
+        <task id="69" name="Liste Roboter" meeting="false" start="2016-11-28" duration="1" complete="0" expand="true"/>
+        <task id="70" name="Liste Warenträger" meeting="false" start="2016-11-28" duration="1" complete="0" expand="true"/>
+        <task id="71" name="Liste Transportbänder" meeting="false" start="2016-11-28" duration="1" complete="0" expand="true"/>
+        <task id="72" name="Liste HuQu" meeting="false" start="2016-11-28" duration="1" complete="0" expand="true"/>
+        <task id="73" name="Liste HuPo" meeting="false" start="2016-11-28" duration="1" complete="0" expand="true"/>
+        <task id="74" name="Liste Sektoren" meeting="false" start="2016-11-28" duration="1" complete="0" expand="true"/>
     </tasks>
     <resources/>
     <allocations/>
