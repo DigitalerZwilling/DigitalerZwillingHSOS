@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 /**
@@ -61,13 +62,16 @@ public abstract class Cache {
     }
     
     @SuppressWarnings("LeakingThisInConstructor")
-    public Cache() {
+    public Cache() {}
+    
+    @PostConstruct
+    public void init(){
         elements = new Map[2];
         elements[0] = new HashMap<>();
         elements[1] = new HashMap<>();
         updater.registerCache(this);
     }
-    
+
     abstract public void update();
     abstract public void updateAll();
 }
