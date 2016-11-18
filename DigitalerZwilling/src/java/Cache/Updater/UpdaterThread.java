@@ -21,6 +21,5 @@ public class UpdaterThread implements Runnable{
     @Override
     public void run() {
         updater.update();
-    }
-    
+    }    
 }
