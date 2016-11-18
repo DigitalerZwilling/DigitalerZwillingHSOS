@@ -13,11 +13,14 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author User
  */
+@ApplicationScoped
 public class HubPodestCache extends Cache{
 
     @Override
@@ -43,7 +46,7 @@ public class HubPodestCache extends Cache{
         }
     }
 
-    @Override
+    @PostConstruct @Override
     public void updateAll() {
         Map<Long,Element> allHuPo1=new HashMap<>();
         Map<Long,Element> allHuPo2=new HashMap<>();

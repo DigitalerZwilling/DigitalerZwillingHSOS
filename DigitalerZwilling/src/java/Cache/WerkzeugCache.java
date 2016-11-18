@@ -22,19 +22,19 @@ public class WerkzeugCache extends Cache{
 
     @Override
     public void update() {
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_werkzeug,zeitstempel,user_parameter,zustand,id_roboter from Werkzeug");
+        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_werkzeug,zeitstempel,user_parameter,zustand from Werkzeug");
         List<String> ids_w = rsMap.get("id_werkzeug");
         List<String> zeitstempel = rsMap.get("zeitstempel");
         List<String> user_parameter = rsMap.get("user_parameter");
         List<String> zustand = rsMap.get("zustand");
-        List<String> ids_r = rsMap.get("id_roboter");
+        //List<String> ids_r = rsMap.get("id_roboter");
         Werkzeug werkzeug;
         for (int i=0;i<ids_w.size();i++){
             werkzeug=(Werkzeug)(state==true?elements[0].get(Long.getLong(ids_w.get(i))):elements[1].get(Long.getLong(ids_w.get(i))));                 //andersrum als bei getById
             werkzeug.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
             werkzeug.setUser_Parameter(user_parameter.get(i));
             werkzeug.setZustand(Integer.valueOf(zustand.get(i)));
-            werkzeug.setRoboterID(Long.valueOf(ids_r.get(i)));
+            werkzeug.setRoboterID(this.readRoboter(werkzeug.getId()));
         }
     }
 
@@ -68,7 +68,7 @@ public class WerkzeugCache extends Cache{
     }
 
     Long readRoboter(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT roboter_id from Werkzeug where id_werkzeug="+id+" ");
+        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT roboter_id from Roboter_Werkzeug where id_werkzeug="+id+" ");
         List<String> ids = rsMap.get("id_roboter");
         Long r_ids=null;
         for (String s : ids){

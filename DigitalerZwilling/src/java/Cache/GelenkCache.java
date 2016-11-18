@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
@@ -21,6 +23,7 @@ import java.util.Map;
  */
 
 //in bearbeitung
+@ApplicationScoped
 public class GelenkCache extends Cache{
 
     @Override
@@ -40,7 +43,7 @@ public class GelenkCache extends Cache{
         }
     }
 
-    @Override
+    @PostConstruct @Override
     public void updateAll() {
         Map<Long,Element> allGelenk1=new HashMap<>();
         Map<Long,Element> allGelenk2=new HashMap<>();
@@ -80,6 +83,7 @@ public class GelenkCache extends Cache{
         return r_ids;
     }
 
+    /*
     private static GelenkCache instance;
 
     public static synchronized Cache getInstance(){
@@ -88,7 +92,7 @@ public class GelenkCache extends Cache{
         }
         return instance;
     }
-
+    */
     
     
 }
