@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.inject.Inject;
 
 /**
  *
@@ -22,6 +23,9 @@ public abstract class Cache {
     static protected boolean state;
     
     protected Map<Long,Element> elements[];
+    
+    @Inject
+    Updater updater;
 
     public Map<Long, Element>[] getElements() {
         return elements;
@@ -61,7 +65,7 @@ public abstract class Cache {
         elements = new Map[2];
         elements[0] = new HashMap<>();
         elements[1] = new HashMap<>();
-        Updater.registerCache(this);
+        updater.registerCache(this);
     }
     
     abstract public void update();

@@ -25,21 +25,21 @@ public class HubPodestCache extends Cache{
     @Inject private Datenbankschnittstelle datenbankschnittstelle;
     @Override
     public void update() {
+
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubpodest,oben,unten,id_sektor,zeitstempel,user_parameter from hubpodest");
+
         List<String> ids = rsMap.get("id_hubpodest");
         List<String> zeitstempel = rsMap.get("zeitstempel");
         List<String> user_parameter = rsMap.get("user_parameter");
         
         List<String> oben = rsMap.get("oben");
         List<String> unten = rsMap.get("unten");
-        List<String> sektor = rsMap.get("id_sektor");
         
         HubPodest hubpodest;
         for (int i=0;i<ids.size();i++){
             hubpodest=(HubPodest)(state==true?elements[0].get(Long.getLong(ids.get(i))):elements[1].get(Long.getLong(ids.get(i))));
             hubpodest.setOben(Boolean.getBoolean(oben.get(i)));
             hubpodest.setUnten(Boolean.getBoolean(unten.get(i)));
-            hubpodest.setId_sektor(Long.getLong(sektor.get(i)));
             hubpodest.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
             hubpodest.setUser_Parameter(user_parameter.get(i));
             //gelenk.setId_Warentraeger(this.readWarentraeger(hubpodest.getId()));
@@ -51,7 +51,9 @@ public class HubPodestCache extends Cache{
     public void updateAll() {
         Map<Long,Element> allHuPo1=new HashMap<>();
         Map<Long,Element> allHuPo2=new HashMap<>();
+
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubpodest,bezeichnung,oben,unten,id_sektor,zeitstempel,user_parameter from hubpodest");
+
         List<String> ids = rsMap.get("id_hubpodest");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         List<String> zeitstempel = rsMap.get("zeitstempel");

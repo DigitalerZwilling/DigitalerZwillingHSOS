@@ -26,7 +26,9 @@ public class RoboterCache extends Cache{
     @Inject private Datenbankschnittstelle datenbankschnittstelle;
     @Override
     public void update() {
+
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter,stoerung,position_x,position_y,position_z,position_ausrichtung,zeitstempel,user_parameter from Roboter");
+
         List<String> ids = rsMap.get("id_roboter");
         List<String> zeitstempel = rsMap.get("zeitstempel");
         List<String> user_parameter = rsMap.get("user_parameter");
@@ -61,7 +63,9 @@ public class RoboterCache extends Cache{
     public void updateAll() {
         Map<Long,Element> allRoboter1=new HashMap<>();
         Map<Long,Element> allRoboter2=new HashMap<>();
+
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter,bezeichnung,stoerung,position_x,position_y,position_z,position_ausrichtung,zeitstempel,user_parameter from Roboter");
+
         List<String> ids = rsMap.get("id_roboter");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         List<String> zeitstempel = rsMap.get("zeitstempel");
@@ -100,7 +104,9 @@ public class RoboterCache extends Cache{
     }
     
     List<Long> readSektor(Long id){
+
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor from Roboter_Sektor where id_roboter="+id);
+
         List<String> ids = rsMap.get("id_sektor");
         List<Long> s_ids= new ArrayList<>();
         for (String s : ids){
@@ -109,7 +115,9 @@ public class RoboterCache extends Cache{
         return s_ids;
     }
     List<Long> readGelenke(Long id){
+
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_gelenk from Gelenk where id_roboter="+id);
+
         List<String> ids = rsMap.get("id_gelenk");
         List<Long> g_ids= new ArrayList<>();
         for (String s : ids){
@@ -118,7 +126,9 @@ public class RoboterCache extends Cache{
         return g_ids;
     }
     List<Long> readWerkzeug(Long id){
+
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug from Roboter_Werkzeug where id_roboter="+id);
+
         List<String> ids = rsMap.get("id_werkzeug");
         List<Long> werk_ids= new ArrayList<>();
         for (String s : ids){

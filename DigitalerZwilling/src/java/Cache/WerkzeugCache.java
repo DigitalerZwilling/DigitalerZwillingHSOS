@@ -8,46 +8,49 @@ package Cache;
 import DatenKlassen.Element;
 import DatenKlassen.Werkzeug;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
+import java.sql.ResultSet;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+
 
 /**
  *
  * @author User
  */
-@ApplicationScoped
 public class WerkzeugCache extends Cache{
     @Inject private Datenbankschnittstelle datenbankschnittstelle;
     @Override
     public void update() {
+
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug,zeitstempel,user_parameter,zustand from Werkzeug");
+
         List<String> ids_w = rsMap.get("id_werkzeug");
         List<String> zeitstempel = rsMap.get("zeitstempel");
         List<String> user_parameter = rsMap.get("user_parameter");
         List<String> zustand = rsMap.get("zustand");
-        //List<String> ids_r = rsMap.get("id_roboter");
         Werkzeug werkzeug;
         for (int i=0;i<ids_w.size();i++){
             werkzeug=(Werkzeug)(state==true?elements[0].get(Long.getLong(ids_w.get(i))):elements[1].get(Long.getLong(ids_w.get(i))));                 //andersrum als bei getById
             werkzeug.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
             werkzeug.setUser_Parameter(user_parameter.get(i));
             werkzeug.setZustand(Integer.valueOf(zustand.get(i)));
-            werkzeug.setRoboterID(this.readRoboter(werkzeug.getId()));
         }
     }
 
     @Override
-    @PostConstruct
     public void updateAll() {
         Map<Long,Element> allWerkzeug1=new HashMap<>();
         Map<Long,Element> allWerkzeug2=new HashMap<>();
         
+
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug,bezeichnung,zeitstempel,user_parameter,zustand from Werkzeug");
+
         List<String> ids = rsMap.get("id_werkzeug");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         List<String> zeitstempel = rsMap.get("zeitstempel");
@@ -72,12 +75,24 @@ public class WerkzeugCache extends Cache{
     }
 
     Long readRoboter(Long id){
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT roboter_id from Roboter_Werkzeug where id_werkzeug="+id+" ");
+
+
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter FROM Roboter_Werkzeug WHERE id_werkzeug="+id+" ");
+
         List<String> ids = rsMap.get("id_roboter");
         Long r_ids=null;
         for (String s : ids){
             r_ids=Long.getLong(s);
         }
         return r_ids;
+    }
+    
+    private static WerkzeugCache instance;
+
+    public static synchronized Cache getInstance(){
+        if(WerkzeugCache.instance == null) {
+            WerkzeugCache.instance = new WerkzeugCache();
+        }
+        return instance;
     }
 }

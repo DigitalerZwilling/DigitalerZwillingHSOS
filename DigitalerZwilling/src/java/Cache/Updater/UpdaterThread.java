@@ -5,17 +5,21 @@
  */
 package Cache.Updater;
 
-import Cache.Updater.Updater;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
  * @author User
  */
+@ApplicationScoped
 public class UpdaterThread implements Runnable{
 
+    @Inject
+    Updater updater;
+    
     @Override
     public void run() {
-        Updater.update();
-    }
-    
+        updater.update();
+    }    
 }
