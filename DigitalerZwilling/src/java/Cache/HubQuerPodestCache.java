@@ -54,7 +54,7 @@ public class HubQuerPodestCache extends Cache{
         List<String> mittig = rsMap.get("mittig");
         List<String> unten = rsMap.get("unten");
         List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> sektorId = rsMap.get("sektor_id");
+        List<String> sektorId = rsMap.get("id_sektor");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         for(int i = 0; i<id.size();i++){
             elements[0] = new HashMap<>();
