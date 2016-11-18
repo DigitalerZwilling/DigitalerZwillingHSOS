@@ -8,17 +8,19 @@ package Cache;
 import DatenKlassen.Element;
 import DatenKlassen.Sektor;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.sql.ResultSet;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author User
  */
+@ApplicationScoped
 public class SektorCache extends Cache{
 
     @Override
@@ -42,6 +44,7 @@ public class SektorCache extends Cache{
     }
 
     @Override
+    @PostConstruct
     public void updateAll() {
         Map<Long,Element> allSektor1=new HashMap<>();
         Map<Long,Element> allSektor2=new HashMap<>();
@@ -157,14 +160,4 @@ public class SektorCache extends Cache{
         }
         return idsLong;
     }
-
-    private static SektorCache instance;
-
-    public static synchronized Cache getInstance(){
-        if(SektorCache.instance == null) {
-            SektorCache.instance = new SektorCache();
-        }
-        return instance;
-    }
-    
 }

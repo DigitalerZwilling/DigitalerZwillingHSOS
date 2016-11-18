@@ -13,11 +13,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author User
  */
+@ApplicationScoped
 public class RoboterCache extends Cache{
 
     @Override
@@ -53,6 +56,7 @@ public class RoboterCache extends Cache{
     }
 
     @Override
+    @PostConstruct
     public void updateAll() {
         Map<Long,Element> allRoboter1=new HashMap<>();
         Map<Long,Element> allRoboter2=new HashMap<>();

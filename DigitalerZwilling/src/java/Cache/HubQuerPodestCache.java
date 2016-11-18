@@ -11,11 +11,14 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author User
  */
+@ApplicationScoped
 public class HubQuerPodestCache extends Cache{
 
     @Override
@@ -41,6 +44,7 @@ public class HubQuerPodestCache extends Cache{
     }
 
     @Override
+    @PostConstruct
     public void updateAll() {
         Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_hubquerpodest, user_parameter, motor, oben, mittig, unten, zeitstempel, bezeichnung, id_sektor FROM Hubquerpodest");
         List<String> id = rsMap.get("id_Hubquerpodest");
@@ -60,15 +64,6 @@ public class HubQuerPodestCache extends Cache{
         }
         updateGruppenIds();
     }
-
-    private static HubQuerPodestCache instance;
-
-    public static synchronized Cache getInstance(){
-        if(HubQuerPodestCache.instance == null) {
-            HubQuerPodestCache.instance = new HubQuerPodestCache();
-        }
-        return instance;
-    }
    
     private void updateGruppenIds(){
         Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_Hubquerpodest1, id_hubquerpodest2 FROM Hubquerpodest_Hubquerpodest");
@@ -79,6 +74,4 @@ public class HubQuerPodestCache extends Cache{
             podest.getGruppenIDs().add(Long.getLong(id2.get(i)));
         }
     }
-    
-    
 }

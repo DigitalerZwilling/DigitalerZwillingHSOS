@@ -13,11 +13,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author User
  */
+@ApplicationScoped
 public class ArtikelCache extends Cache{
     
 
@@ -39,7 +42,7 @@ public class ArtikelCache extends Cache{
         }
     }
 
-    @Override
+    @PostConstruct @Override
     public void updateAll() {
         Map<Long,Element> allArtikel1=new HashMap<>();
         Map<Long,Element> allArtikel2=new HashMap<>();
@@ -77,7 +80,7 @@ public class ArtikelCache extends Cache{
         return w_ids;
     }
 
-    private static ArtikelCache instance;
+   /* private static ArtikelCache instance;
 
     public static synchronized Cache getInstance(){
         if(ArtikelCache.instance == null) {
@@ -85,5 +88,5 @@ public class ArtikelCache extends Cache{
         }
         return instance;
     }
-    
+    */
 }
