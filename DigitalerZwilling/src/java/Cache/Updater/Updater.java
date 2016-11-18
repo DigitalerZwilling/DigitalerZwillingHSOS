@@ -6,27 +6,29 @@
 package Cache.Updater;
 
 import Cache.Cache;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author User
  */
+@ApplicationScoped
 public class Updater {
+    private final List<Cache> caches;
     
-    private Updater(){}
+    Updater(){
+        caches = new ArrayList<>();
+    }
     
-    private static final List<Cache> caches = new ArrayList<>();
-    
-    static void update(){
+    void update(){
         for(Cache cache: caches){
             cache.update();
         }
     }
     
-    public static void registerCache(Cache cache){
+    public void registerCache(Cache cache){
         caches.add(cache);
     }
 }
