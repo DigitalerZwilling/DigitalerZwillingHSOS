@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -21,10 +22,10 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class HubPodestCache extends Cache{
-
+    @Inject private Datenbankschnittstelle datenbankschnittstelle;
     @Override
     public void update() {
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_hubpodest,oben,unten,id_sektor,zeitstempel,user_parameter from hubpodest");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubpodest,oben,unten,id_sektor,zeitstempel,user_parameter from hubpodest");
         List<String> ids = rsMap.get("id_hubpodest");
         List<String> zeitstempel = rsMap.get("zeitstempel");
         List<String> user_parameter = rsMap.get("user_parameter");
@@ -50,7 +51,7 @@ public class HubPodestCache extends Cache{
     public void updateAll() {
         Map<Long,Element> allHuPo1=new HashMap<>();
         Map<Long,Element> allHuPo2=new HashMap<>();
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_hubpodest,bezeichnung,oben,unten,id_sektor,zeitstempel,user_parameter from hubpodest");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubpodest,bezeichnung,oben,unten,id_sektor,zeitstempel,user_parameter from hubpodest");
         List<String> ids = rsMap.get("id_hubpodest");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         List<String> zeitstempel = rsMap.get("zeitstempel");

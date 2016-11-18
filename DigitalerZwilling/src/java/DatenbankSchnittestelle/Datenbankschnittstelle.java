@@ -18,13 +18,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author chrklaas
  */
+@ApplicationScoped
 public class Datenbankschnittstelle {
-    private static Datenbankschnittstelle instance=null;                                //statische Instanz des Singeltons
+    //private static Datenbankschnittstelle instance=null;                                //statische Instanz des Singeltons
     
     //---------------------------------------------------------------------------
     //Datenbank verbindungs daten
@@ -38,7 +40,7 @@ public class Datenbankschnittstelle {
     private Connection data;                                                        // Datenbank Verbindung
     
     //-----------------------------------------------------------------------------
-    private Datenbankschnittstelle(){ 
+    public Datenbankschnittstelle(){ 
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
@@ -77,12 +79,12 @@ public class Datenbankschnittstelle {
      *
      * @return Instance dieses Singelton
      */
-    public static Datenbankschnittstelle getInstance(){
+    /*public static Datenbankschnittstelle getInstance(){
         if(instance==null){
             instance=new Datenbankschnittstelle();
         }
         return instance;
-    }
+    }*/
     //---------------------------------------------------------------------------------------------
 
     /**

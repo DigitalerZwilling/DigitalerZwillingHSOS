@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -23,11 +24,11 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class WarentraegerCache extends Cache{
-
+    @Inject private Datenbankschnittstelle datenbankschnittstelle;
     @Override
     public void update() {
         
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_warentraeger, stoerung, zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt");
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger, stoerung, zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt");
         List<String> ids = rsMap.get("id_warentraeger");
         List<String> stoerung = rsMap.get("stoerung");
         List<String> zeitstempel = rsMap.get("zeitstempel");
@@ -58,7 +59,7 @@ public class WarentraegerCache extends Cache{
         Map<Long,Element> allWarentraeger1=new HashMap<>();
         Map<Long,Element> allWarentraeger2=new HashMap<>();
         
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_warentraeger , bezeichnung , stoerung , zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt from Artikel");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger , bezeichnung , stoerung , zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt from Artikel");
         List<String> ids = rsMap.get("id_warentraeger");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         List<String> stoerung = rsMap.get("stoerung");
@@ -90,7 +91,7 @@ public class WarentraegerCache extends Cache{
     }
     
     private List<Long> readTransportband(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_transportband from Transportband_Warentraeger where id_warentraeger="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband from Transportband_Warentraeger where id_warentraeger="+id);
         List<String> ids = rsMap.get("id_transportband");
         List<Long> idsLong= new ArrayList<>();
         for (String s : ids){
@@ -100,7 +101,7 @@ public class WarentraegerCache extends Cache{
     }
     
     private List<Long> readSektor(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_sektor from Sektor_Transportband where id_warentraeger="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor from Sektor_Transportband where id_warentraeger="+id);
         List<String> ids = rsMap.get("id_sektor");
         List<Long> idsLong= new ArrayList<>();
         for (String s : ids){

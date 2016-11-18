@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -25,10 +26,10 @@ import javax.enterprise.context.ApplicationScoped;
 //in bearbeitung
 @ApplicationScoped
 public class GelenkCache extends Cache{
-
+    @Inject private Datenbankschnittstelle datenbankschnittstelle;
     @Override
     public void update() {
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_gelenk,gelenkstellung,zeitstempel,user_parameter from Gelenk");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_gelenk,gelenkstellung,zeitstempel,user_parameter from Gelenk");
         List<String> ids = rsMap.get("id_artikel");
         List<String> zeitstempel = rsMap.get("zeitstempel");
         List<String> user_parameter = rsMap.get("user_parameter");
@@ -47,7 +48,7 @@ public class GelenkCache extends Cache{
     public void updateAll() {
         Map<Long,Element> allGelenk1=new HashMap<>();
         Map<Long,Element> allGelenk2=new HashMap<>();
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_gelenk,bezeichnung,typ,nummer,gelenkstellung,zeitstempel,user_parameter from Artikel");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_gelenk,bezeichnung,typ,nummer,gelenkstellung,zeitstempel,user_parameter from Artikel");
         List<String> ids = rsMap.get("id_gelenk");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         List<String> zeitstempel = rsMap.get("zeitstempel");
@@ -74,7 +75,7 @@ public class GelenkCache extends Cache{
         this.setElements(m);
     }
     Long readRoboter(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT roboter_id from Gelenk where id_gelenk="+id+" ");
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT roboter_id from Gelenk where id_gelenk="+id+" ");
         List<String> ids = rsMap.get("id_roboter");
         Long r_ids=null;
         for (String s : ids){

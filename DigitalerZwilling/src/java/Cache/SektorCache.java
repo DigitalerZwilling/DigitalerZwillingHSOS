@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -22,10 +23,10 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class SektorCache extends Cache{
-
+    @Inject private Datenbankschnittstelle datenbankschnittstelle;
     @Override
     public void update() {
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_sektor,stoerung,zeitstempel,user_parameter from Sektor");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor,stoerung,zeitstempel,user_parameter from Sektor");
         List<String> ids = rsMap.get("id_sektor");
         List<String> zeitstempel = rsMap.get("zeitstempel");
         List<String> user_parameter = rsMap.get("user_parameter");
@@ -48,7 +49,7 @@ public class SektorCache extends Cache{
     public void updateAll() {
         Map<Long,Element> allSektor1=new HashMap<>();
         Map<Long,Element> allSektor2=new HashMap<>();
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_sektor,stoerung,position_x,position_y,position_z,position_ausrichtung, int ausrichtung,bezeichnung,zeitstempel,user_parameter from Sektor");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor,stoerung,position_x,position_y,position_z,position_ausrichtung, int ausrichtung,bezeichnung,zeitstempel,user_parameter from Sektor");
         List<String> ids = rsMap.get("id_sektor");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         List<String> zeitstempel = rsMap.get("zeitstempel");
@@ -97,7 +98,7 @@ public class SektorCache extends Cache{
     }
     
     private List<Long> readWarentraeger(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT warentraeger_id from Sektor_Warentraeger where id_sektor="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT warentraeger_id from Sektor_Warentraeger where id_sektor="+id);
         List<String> ids = rsMap.get("id_warentraeger");
         List<Long> idsLong= new ArrayList<>();
         for (String s : ids){
@@ -107,7 +108,7 @@ public class SektorCache extends Cache{
     }
     
     private List<Long> readVorTransportband(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_transportband from Transportband where id_sektor_nach="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband from Transportband where id_sektor_nach="+id);
         List<String> ids = rsMap.get("id_warentraeger");
         List<Long> idsLong= new ArrayList<>();
         for (String s : ids){
@@ -116,7 +117,7 @@ public class SektorCache extends Cache{
         return idsLong;
     }
     private List<Long> readNachTransportband(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_transportband from Transportband where id_sektor_vor="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband from Transportband where id_sektor_vor="+id);
         List<String> ids = rsMap.get("id_warentraeger");
         List<Long> idsLong= new ArrayList<>();
         for (String s : ids){
@@ -125,7 +126,7 @@ public class SektorCache extends Cache{
         return idsLong;
     }
     private List<Long> readSensor(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_sensor from Sensor where id_sektor="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sensor from Sensor where id_sektor="+id);
         List<String> ids = rsMap.get("id_warentraeger");
         List<Long> idsLong= new ArrayList<>();
         for (String s : ids){
@@ -134,7 +135,7 @@ public class SektorCache extends Cache{
         return idsLong;
     }
     private List<Long> readHubPodest(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_hubpodest from Hubpodest where id_sektor="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubpodest from Hubpodest where id_sektor="+id);
         List<String> ids = rsMap.get("id_warentraeger");
         List<Long> idsLong= new ArrayList<>();
         for (String s : ids){
@@ -143,7 +144,7 @@ public class SektorCache extends Cache{
         return idsLong;
     }
     private List<Long> readQuerHubPodest(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_hubquerpodest from Hubquerpodest where id_sektor="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubquerpodest from Hubquerpodest where id_sektor="+id);
         List<String> ids = rsMap.get("id_warentraeger");
         List<Long> idsLong= new ArrayList<>();
         for (String s : ids){
@@ -152,7 +153,7 @@ public class SektorCache extends Cache{
         return idsLong;
     }
     private List<Long> readRoboter(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_roboter from Roboter_Sektor where id_sektor="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter from Roboter_Sektor where id_sektor="+id);
         List<String> ids = rsMap.get("id_warentraeger");
         List<Long> idsLong= new ArrayList<>();
         for (String s : ids){

@@ -8,13 +8,17 @@ package Cache;
 import DatenKlassen.Artikel;
 import DatenKlassen.Element;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -22,12 +26,14 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class ArtikelCache extends Cache{
+    @Inject private Datenbankschnittstelle datenbankschnittstelle;
     
 
     @Override
     public void update() {
         //Map<String,List<String>> rsMap;
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_artikel,zeitstempel,user_parameter from Artikel");
+        //Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_artikel,zeitstempel,user_parameter from Artikel");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_artikel,zeitstempel,user_parameter from Artikel");
         List<String> ids = rsMap.get("id_artikel");
         List<String> zeitstempel = rsMap.get("zeitstempel");
         List<String> user_parameter = rsMap.get("user_parameter");
@@ -47,22 +53,31 @@ public class ArtikelCache extends Cache{
         Map<Long,Element> allArtikel1=new HashMap<>();
         Map<Long,Element> allArtikel2=new HashMap<>();
         
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_artikel,bezeichnung,zeitstempel,user_parameter from Artikel");
-        List<String> ids = rsMap.get("id_artikel");
-        List<String> bezeichnung = rsMap.get("bezeichnung");
-        List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> user_parameter = rsMap.get("user_parameter");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_artikel,bezeichnung,zeitstempel,user_parameter from Artikel");
+        
+        List<String> ids = rsMap.get("ID_ARTIKEL");
+        List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
+        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+        List<String> user_parameter = rsMap.get("USER_PARAMETER");
         Artikel artikel1,artikel2;
+        System.out.println(zeitstempel.get(0));
         for (int i=0;i<ids.size();i++){
-            artikel1=new Artikel(Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
-            artikel2=new Artikel(Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
             
+            
+            //artikel1=new Artikel(Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            String t=zeitstempel.get(i).replace(' ', 'T');
+            System.out.println(zeitstempel.get(0));
+            
+            artikel1=new Artikel(Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(t));
+            artikel2=new Artikel(Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(t));
+          
             artikel1.setId_Warentraeger(this.readWarentraeger(artikel1.getId()));
             artikel2.setId_Warentraeger(this.readWarentraeger(artikel2.getId()));
             
             allArtikel1.put(artikel1.getId(),(artikel1));
             allArtikel2.put(artikel2.getId(),(artikel2));
         }
+        
         Map<Long,Element>[] m = new Map[2];
         m[0]=allArtikel1;
         m[1]=allArtikel2;
@@ -71,9 +86,10 @@ public class ArtikelCache extends Cache{
 
 
     private List<Long> readWarentraeger(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT warentraeger_id from Artikel_Warentraeger where id_artikel="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger from Artikel_Warentraeger where id_artikel="+id);
         List<String> ids = rsMap.get("id_warentraeger");
         List<Long> w_ids= new ArrayList<>();
+        if(ids==null) return w_ids;
         for (String s : ids){
             w_ids.add(Long.getLong(s));
         }

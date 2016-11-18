@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -21,10 +22,10 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class WerkzeugCache extends Cache{
-
+    @Inject private Datenbankschnittstelle datenbankschnittstelle;
     @Override
     public void update() {
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_werkzeug,zeitstempel,user_parameter,zustand from Werkzeug");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug,zeitstempel,user_parameter,zustand from Werkzeug");
         List<String> ids_w = rsMap.get("id_werkzeug");
         List<String> zeitstempel = rsMap.get("zeitstempel");
         List<String> user_parameter = rsMap.get("user_parameter");
@@ -46,7 +47,7 @@ public class WerkzeugCache extends Cache{
         Map<Long,Element> allWerkzeug1=new HashMap<>();
         Map<Long,Element> allWerkzeug2=new HashMap<>();
         
-        Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_werkzeug,bezeichnung,zeitstempel,user_parameter,zustand from Werkzeug");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug,bezeichnung,zeitstempel,user_parameter,zustand from Werkzeug");
         List<String> ids = rsMap.get("id_werkzeug");
         List<String> bezeichnung = rsMap.get("bezeichnung");
         List<String> zeitstempel = rsMap.get("zeitstempel");
@@ -71,7 +72,7 @@ public class WerkzeugCache extends Cache{
     }
 
     Long readRoboter(Long id){
-        Map<String,List<String>> rsMap = Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT roboter_id from Roboter_Werkzeug where id_werkzeug="+id+" ");
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT roboter_id from Roboter_Werkzeug where id_werkzeug="+id+" ");
         List<String> ids = rsMap.get("id_roboter");
         Long r_ids=null;
         for (String s : ids){
