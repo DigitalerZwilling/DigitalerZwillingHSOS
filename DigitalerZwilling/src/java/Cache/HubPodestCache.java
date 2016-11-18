@@ -45,8 +45,8 @@ public class HubPodestCache extends Cache{
         }
     }
 
-    @Override
-    @PostConstruct
+
+    @PostConstruct @Override
     public void updateAll() {
         Map<Long,Element> allHuPo1=new HashMap<>();
         Map<Long,Element> allHuPo2=new HashMap<>();
