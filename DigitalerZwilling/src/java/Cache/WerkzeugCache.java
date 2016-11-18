@@ -8,16 +8,18 @@ package Cache;
 import DatenKlassen.Element;
 import DatenKlassen.Werkzeug;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.sql.ResultSet;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author User
  */
+@ApplicationScoped
 public class WerkzeugCache extends Cache{
 
     @Override
@@ -39,6 +41,7 @@ public class WerkzeugCache extends Cache{
     }
 
     @Override
+    @PostConstruct
     public void updateAll() {
         Map<Long,Element> allWerkzeug1=new HashMap<>();
         Map<Long,Element> allWerkzeug2=new HashMap<>();
@@ -75,14 +78,5 @@ public class WerkzeugCache extends Cache{
             r_ids=Long.getLong(s);
         }
         return r_ids;
-    }
-    
-    private static WerkzeugCache instance;
-
-    public static synchronized Cache getInstance(){
-        if(WerkzeugCache.instance == null) {
-            WerkzeugCache.instance = new WerkzeugCache();
-        }
-        return instance;
     }
 }

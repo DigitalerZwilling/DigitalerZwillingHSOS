@@ -14,11 +14,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author User
  */
+@ApplicationScoped
 public class WarentraegerCache extends Cache{
 
     @Override
@@ -50,6 +53,7 @@ public class WarentraegerCache extends Cache{
     }
 
     @Override
+    @PostConstruct
     public void updateAll() {
         Map<Long,Element> allWarentraeger1=new HashMap<>();
         Map<Long,Element> allWarentraeger2=new HashMap<>();
@@ -104,14 +108,4 @@ public class WarentraegerCache extends Cache{
         }
         return idsLong;
     }
-
-    private static WarentraegerCache instance;
-
-    public static synchronized Cache getInstance(){
-        if(WarentraegerCache.instance == null) {
-            WarentraegerCache.instance = new WarentraegerCache();
-        }
-        return instance;
-    }
-  
 }

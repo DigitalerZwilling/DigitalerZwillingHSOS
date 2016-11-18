@@ -57,7 +57,7 @@ public abstract class Cache {
     }
     
     @SuppressWarnings("LeakingThisInConstructor")
-    protected Cache() {
+    public Cache() {
         elements = new Map[2];
         elements[0] = new HashMap<>();
         elements[1] = new HashMap<>();

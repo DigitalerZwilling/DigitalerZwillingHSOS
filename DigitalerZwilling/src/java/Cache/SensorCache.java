@@ -5,13 +5,15 @@
  */
 package Cache;
 
-import java.sql.ResultSet;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author User
  */
+@ApplicationScoped
 public class SensorCache extends Cache{
 
     @Override
@@ -20,17 +22,8 @@ public class SensorCache extends Cache{
     }
 
     @Override
+    @PostConstruct
     public void updateAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    private static SensorCache instance;
-
-    public static synchronized Cache getInstance(){
-        if(SensorCache.instance == null) {
-            SensorCache.instance = new SensorCache();
-        }
-        return instance;
-    }
-    
 }

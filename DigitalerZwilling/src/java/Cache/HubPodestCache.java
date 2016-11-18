@@ -8,16 +8,18 @@ package Cache;
 import DatenKlassen.Element;
 import DatenKlassen.HubPodest;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.sql.ResultSet;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author User
  */
+@ApplicationScoped
 public class HubPodestCache extends Cache{
 
     @Override
@@ -44,6 +46,7 @@ public class HubPodestCache extends Cache{
     }
 
     @Override
+    @PostConstruct
     public void updateAll() {
         Map<Long,Element> allHuPo1=new HashMap<>();
         Map<Long,Element> allHuPo2=new HashMap<>();
@@ -72,15 +75,4 @@ public class HubPodestCache extends Cache{
         m[1]=allHuPo2;
         this.setElements(m);
     }
-    
-
-    private static HubPodestCache instance;
-
-    public static synchronized Cache getInstance(){
-        if(HubPodestCache.instance == null) {
-            HubPodestCache.instance = new HubPodestCache();
-        }
-        return instance;
-    }
-    
 }

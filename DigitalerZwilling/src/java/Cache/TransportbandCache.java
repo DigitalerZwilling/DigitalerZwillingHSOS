@@ -9,16 +9,18 @@ import static Cache.Cache.state;
 import DatenKlassen.Element;
 import DatenKlassen.Transportband;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.sql.ResultSet;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author User
  */
+@ApplicationScoped
 public class TransportbandCache extends Cache{
 
     @Override
@@ -41,6 +43,7 @@ public class TransportbandCache extends Cache{
     }
     
     @Override
+    @PostConstruct
     public void updateAll() {
         Map<Long,Element> allTransportband1=new HashMap<>();
         Map<Long,Element> allTransportband2=new HashMap<>();
@@ -70,14 +73,4 @@ public class TransportbandCache extends Cache{
         m[1]=allTransportband2;
         this.setElements(m);
     }
-
-    private static TransportbandCache instance;
-
-    public static synchronized Cache getInstance(){
-        if(TransportbandCache.instance == null) {
-            TransportbandCache.instance = new TransportbandCache();
-        }
-        return instance;
-    }
- 
 }
