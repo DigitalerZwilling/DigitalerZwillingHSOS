@@ -26,21 +26,22 @@ public class HubPodestCache extends Cache{
     @Override
     public void update() {
 
-        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubpodest,oben,unten,id_sektor,zeitstempel,user_parameter from hubpodest");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubpodest,oben,unten,zeitstempel,user_parameter from hubpodest");
 
-        List<String> ids = rsMap.get("id_hubpodest");
-        List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> user_parameter = rsMap.get("user_parameter");
+        List<String> ids = rsMap.get("ID_HUBPODEST");
+        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+        List<String> user_parameter = rsMap.get("USER_PARAMETER");
         
-        List<String> oben = rsMap.get("oben");
-        List<String> unten = rsMap.get("unten");
+        List<String> oben = rsMap.get("OBEN");
+        List<String> unten = rsMap.get("UNTEN");
         
         HubPodest hubpodest;
         for (int i=0;i<ids.size();i++){
-            hubpodest=(HubPodest)(state==true?elements[0].get(Long.getLong(ids.get(i))):elements[1].get(Long.getLong(ids.get(i))));
+            String outTime=zeitstempel.get(i).replace(' ', 'T');
+            hubpodest=(HubPodest)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));
             hubpodest.setOben(Boolean.getBoolean(oben.get(i)));
             hubpodest.setUnten(Boolean.getBoolean(unten.get(i)));
-            hubpodest.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
+            hubpodest.setZeitstempel(LocalTime.parse(outTime)); // Ueberpruefen
             hubpodest.setUser_Parameter(user_parameter.get(i));
             //gelenk.setId_Warentraeger(this.readWarentraeger(hubpodest.getId()));
         }
@@ -54,19 +55,20 @@ public class HubPodestCache extends Cache{
 
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubpodest,bezeichnung,oben,unten,id_sektor,zeitstempel,user_parameter from hubpodest");
 
-        List<String> ids = rsMap.get("id_hubpodest");
-        List<String> bezeichnung = rsMap.get("bezeichnung");
-        List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> user_parameter = rsMap.get("user_parameter");
+        List<String> ids = rsMap.get("ID_HUBPODEST");
+        List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
+        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+        List<String> user_parameter = rsMap.get("USER_PARAMETER");
         
-        List<String> oben = rsMap.get("oben");
-        List<String> unten = rsMap.get("unten");
-        List<String> sektor = rsMap.get("id_sektor");
+        List<String> oben = rsMap.get("OBEN");
+        List<String> unten = rsMap.get("UNTEN");
+        List<String> sektor = rsMap.get("ID_SEKTOR");
         
         HubPodest hupo1,hupo2;
         for (int i=0;i<ids.size();i++){
-            hupo1=new HubPodest(Boolean.getBoolean(oben.get(i)),Boolean.getBoolean(unten.get(i)),Long.getLong(sektor.get(i)),Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
-            hupo2=new HubPodest(Boolean.getBoolean(oben.get(i)),Boolean.getBoolean(unten.get(i)),Long.getLong(sektor.get(i)),Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            String ourTime=zeitstempel.get(i).replace(' ', 'T');
+            hupo1=new HubPodest(Boolean.getBoolean(oben.get(i)),Boolean.getBoolean(unten.get(i)),Long.parseLong(sektor.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(ourTime));
+            hupo2=new HubPodest(Boolean.getBoolean(oben.get(i)),Boolean.getBoolean(unten.get(i)),Long.parseLong(sektor.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(ourTime));
             
             
             

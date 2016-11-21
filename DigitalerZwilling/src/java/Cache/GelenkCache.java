@@ -38,9 +38,10 @@ public class GelenkCache extends Cache{
         List<String> gelenkstellung = rsMap.get("gelenkstellung");
         Gelenk gelenk;
         for (int i=0;i<ids.size();i++){
+            String ourTime=zeitstempel.get(i).replace(' ', 'T');
             gelenk=(Gelenk)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));
             gelenk.setGelenkstellung(Integer.valueOf(gelenkstellung.get(i)));
-            gelenk.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
+            gelenk.setZeitstempel(LocalTime.parse(ourTime)); // Ueberpruefen
             gelenk.setUser_Parameter(user_parameter.get(i));
             //gelenk.setId_Warentraeger(this.readWarentraeger(gelenk.getId()));
         }
@@ -51,21 +52,22 @@ public class GelenkCache extends Cache{
         Map<Long,Element> allGelenk1=new HashMap<>();
         Map<Long,Element> allGelenk2=new HashMap<>();
 
-        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_gelenk,bezeichnung,typ,nummer,gelenkstellung,zeitstempel,user_parameter from Artikel");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_gelenk,bezeichnung,typ,nummer,gelenkstellung,zeitstempel,user_parameter from Gelenk");
 
-        List<String> ids = rsMap.get("id_gelenk");
-        List<String> bezeichnung = rsMap.get("bezeichnung");
-        List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> user_parameter = rsMap.get("user_parameter");
+        List<String> ids = rsMap.get("ID_GELENK");
+        List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
+        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+        List<String> user_parameter = rsMap.get("USER_PARAMETER");
         
-        List<String> typ = rsMap.get("typ");
-        List<String> nummer = rsMap.get("nummer");
-        List<String> gelenkstellung = rsMap.get("gelenkstellung");
+        List<String> typ = rsMap.get("TYP");
+        List<String> nummer = rsMap.get("NUMMER");
+        List<String> gelenkstellung = rsMap.get("GELENKSTELLUNG");
         
         Gelenk gelenk1,gelenk2;
         for (int i=0;i<ids.size();i++){
-            gelenk1=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
-            gelenk2=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            String outTime=zeitstempel.get(i).replace(' ', 'T');
+            gelenk1=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(outTime));
+            gelenk2=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(outTime));
             
             gelenk1.setRoboterID(this.readRoboter(gelenk1.getId()));
             gelenk2.setRoboterID(this.readRoboter(gelenk2.getId()));
@@ -80,9 +82,9 @@ public class GelenkCache extends Cache{
     }
     Long readRoboter(Long id){
 
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT roboter_id from Gelenk where id_gelenk="+id+" ");
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter from Gelenk where id_gelenk="+id+" ");
 
-        List<String> ids = rsMap.get("id_roboter");
+        List<String> ids = rsMap.get("ID_ROBOTER");
         Long r_ids=null;
         for (String s : ids){
             r_ids=Long.parseLong(s);
