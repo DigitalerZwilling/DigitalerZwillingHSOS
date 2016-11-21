@@ -29,19 +29,20 @@ public class WarentraegerCache extends Cache{
     public void update() {
         
 
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger, stoerung, zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt");
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger, stoerung, zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt FROM Warentraeger");
 
-        List<String> ids = rsMap.get("id_warentraeger");
-        List<String> stoerung = rsMap.get("stoerung");
-        List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> user_parameter = rsMap.get("user_parameter");
-        List<String> abstand_mm = rsMap.get("abstand_mm");
-        List<String> montagezustand = rsMap.get("montagezustand");
-        List<String> RFID_inhalt = rsMap.get("RFID_inhalt");
+        List<String> ids = rsMap.get("ID_WARENTRAEGER");
+        List<String> stoerung = rsMap.get("STOERUNG");
+        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+        List<String> user_parameter = rsMap.get("USER_PARAMETER");
+        List<String> abstand_mm = rsMap.get("ABSTAND_MM");
+        List<String> montagezustand = rsMap.get("MONTAGEZUSTAND");
+        List<String> RFID_inhalt = rsMap.get("RFID_INHALT");
         
         Warentraeger warentraeger;
         for (int i=0;i<ids.size();i++){
-            warentraeger = (Warentraeger)(state==true ? elements[0].get(Long.getLong(ids.get(i))) : elements[1].get(Long.getLong(ids.get(i))));                 //andersrum als bei getById
+            String ourTime=zeitstempel.get(i).replace(' ', 'T');
+            warentraeger = (Warentraeger)(state==true ? elements[0].get(Long.parseLong(ids.get(i))) : elements[1].get(Long.parseLong(ids.get(i))));                 //andersrum als bei getById
             
             warentraeger.setStoerung(Integer.getInteger(stoerung.get(i)));
             warentraeger.setZeitstempel(LocalTime.parse(zeitstempel.get(i)));
@@ -49,8 +50,8 @@ public class WarentraegerCache extends Cache{
             warentraeger.setAbstand_mm(Integer.getInteger(abstand_mm.get(i)));
             warentraeger.setMontagezustand(Integer.getInteger(montagezustand.get(i)));
             warentraeger.setrFID_inhalt(RFID_inhalt.get(i));
-            warentraeger.setTransportbandIDs(this.readTransportband(Long.getLong(ids.get(i))));
-            warentraeger.setTransportbandIDs(this.readTransportband(Long.getLong(ids.get(i))));
+            warentraeger.setTransportbandIDs(this.readTransportband(Long.parseLong(ids.get(i))));
+            warentraeger.setTransportbandIDs(this.readTransportband(Long.parseLong(ids.get(i))));
             
         }
     }
@@ -62,22 +63,23 @@ public class WarentraegerCache extends Cache{
         Map<Long,Element> allWarentraeger2=new HashMap<>();
         
 
-        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger , bezeichnung , stoerung , zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt from Artikel");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger , bezeichnung , stoerung , zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt FROM Warentraeger");
 
-        List<String> ids = rsMap.get("id_warentraeger");
-        List<String> bezeichnung = rsMap.get("bezeichnung");
-        List<String> stoerung = rsMap.get("stoerung");
-        List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> user_parameter = rsMap.get("user_parameter");
-        List<String> abstand_mm = rsMap.get("abstand_mm");
-        List<String> montagezustand = rsMap.get("montagezustand");
-        List<String> RFID_inhalt = rsMap.get("RFID_inhalt");
+        List<String> ids = rsMap.get("ID_WARENTRAEGER");
+        List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
+        List<String> stoerung = rsMap.get("STOERUNG");
+        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+        List<String> user_parameter = rsMap.get("USER_PARAMETER");
+        List<String> abstand_mm = rsMap.get("ABSTAND_MM");
+        List<String> montagezustand = rsMap.get("MONTAGEZUSTAND");
+        List<String> RFID_inhalt = rsMap.get("RFID_INHALT");
         
         
         Warentraeger warentraeger1,warentraeger2;
         for (int i=0;i<ids.size();i++){
-            warentraeger1 = new Warentraeger(Integer.getInteger(stoerung.get(i)), Integer.getInteger(abstand_mm.get(i)), Integer.getInteger(montagezustand.get(i)), RFID_inhalt.get(i), Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
-            warentraeger2 = new Warentraeger(Integer.getInteger(stoerung.get(i)), Integer.getInteger(abstand_mm.get(i)), Integer.getInteger(montagezustand.get(i)), RFID_inhalt.get(i), Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            String ourTime=zeitstempel.get(i).replace(' ', 'T');
+            warentraeger1 = new Warentraeger(Integer.getInteger(stoerung.get(i)), Integer.getInteger(abstand_mm.get(i)), Integer.getInteger(montagezustand.get(i)), RFID_inhalt.get(i), Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            warentraeger2 = new Warentraeger(Integer.getInteger(stoerung.get(i)), Integer.getInteger(abstand_mm.get(i)), Integer.getInteger(montagezustand.get(i)), RFID_inhalt.get(i), Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
             
             warentraeger1.setTransportbandIDs(this.readTransportband(warentraeger1.getId()));
             warentraeger2.setTransportbandIDs(this.readTransportband(warentraeger2.getId()));
@@ -95,21 +97,21 @@ public class WarentraegerCache extends Cache{
     }
     
     private List<Long> readTransportband(Long id){
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband from Transportband_Warentraeger where id_warentraeger="+id);
-        List<String> ids = rsMap.get("id_transportband");
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband FROM Transportband_Warentraeger WHERE id_warentraeger="+id);
+        List<String> ids = rsMap.get("ID_TRANSPORTBAND");
         List<Long> idsLong= new ArrayList<>();
         for (String s : ids){
-            idsLong.add(Long.getLong(s));
+            idsLong.add(Long.parseLong(s));
         }
         return idsLong;
     }
     
     private List<Long> readSektor(Long id){
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor from Sektor_Transportband where id_warentraeger="+id);
-        List<String> ids = rsMap.get("id_sektor");
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor FROM Sektor_Transportband WHERE id_warentraeger="+id);
+        List<String> ids = rsMap.get("ID_SEKTOR");
         List<Long> idsLong= new ArrayList<>();
         for (String s : ids){
-            idsLong.add(Long.getLong(s));
+            idsLong.add(Long.parseLong(s));
         }
         return idsLong;
     }

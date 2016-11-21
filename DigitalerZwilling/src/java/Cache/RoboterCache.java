@@ -27,21 +27,22 @@ public class RoboterCache extends Cache{
     @Override
     public void update() {
 
-        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter,stoerung,position_x,position_y,position_z,position_ausrichtung,zeitstempel,user_parameter from Roboter");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter,stoerung,position_x,position_y,position_z,position_ausrichtung,zeitstempel,user_parameter FROM Roboter");
 
-        List<String> ids = rsMap.get("id_roboter");
-        List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> user_parameter = rsMap.get("user_parameter");
-        List<String> stoerung = rsMap.get("stoerung");  //int
+        List<String> ids = rsMap.get("ID_ROBOTER");
+        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+        List<String> user_parameter = rsMap.get("USER_PARAMETER");
+        List<String> stoerung = rsMap.get("STOERUNG");  //int
         
-        List<String> x = rsMap.get("position_x");   //int
-        List<String> y = rsMap.get("position_y");   //int
-        List<String> z = rsMap.get("position_z");   //int
-        List<String> ausrichtung = rsMap.get("position_ausrichtung");   //int
+        List<String> x = rsMap.get("POSITION_X");   //int
+        List<String> y = rsMap.get("POSITION_Y");   //int
+        List<String> z = rsMap.get("POSITION_z");   //int
+        List<String> ausrichtung = rsMap.get("POSITION_AUSRICHTUNG");   //int
         
         Roboter roboter;
         for (int i=0;i<ids.size();i++){
-            roboter=(Roboter)(state==true?elements[0].get(Long.getLong(ids.get(i))):elements[1].get(Long.getLong(ids.get(i))));
+            String ourTime=zeitstempel.get(i).replace(' ', 'T');
+            roboter=(Roboter)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));
             roboter.setStoerung(Integer.getInteger(stoerung.get(i)));
             roboter.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
             roboter.setUser_Parameter(user_parameter.get(i));
@@ -64,24 +65,25 @@ public class RoboterCache extends Cache{
         Map<Long,Element> allRoboter1=new HashMap<>();
         Map<Long,Element> allRoboter2=new HashMap<>();
 
-        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter,bezeichnung,stoerung,position_x,position_y,position_z,position_ausrichtung,zeitstempel,user_parameter from Roboter");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter,bezeichnung,stoerung,position_x,position_y,position_z,position_ausrichtung,zeitstempel,user_parameter FROM Roboter");
 
-        List<String> ids = rsMap.get("id_roboter");
-        List<String> bezeichnung = rsMap.get("bezeichnung");
-        List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> user_parameter = rsMap.get("user_parameter");
+        List<String> ids = rsMap.get("ID_ROBOTER");
+        List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
+        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+        List<String> user_parameter = rsMap.get("USER_PARAMETER");
         
-        List<String> stoerung = rsMap.get("stoerung");  //int
+        List<String> stoerung = rsMap.get("STOERUNG");  //int
         
-        List<String> x = rsMap.get("position_x");   //int
-        List<String> y = rsMap.get("position_y");   //int
-        List<String> z = rsMap.get("position_z");   //int
-        List<String> ausrichtung = rsMap.get("position_ausrichtung");   //int
+        List<String> x = rsMap.get("POSITION_X");   //int
+        List<String> y = rsMap.get("POSITION_Y");   //int
+        List<String> z = rsMap.get("POSITION_z");   //int
+        List<String> ausrichtung = rsMap.get("POSITION_AUSRICHTUNG");   //int
         
         Roboter roboter1,roboter2;
         for (int i=0;i<ids.size();i++){
-            roboter1=new Roboter(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
-            roboter2=new Roboter(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            String ourTime=zeitstempel.get(i).replace(' ', 'T');
+            roboter1=new Roboter(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            roboter2=new Roboter(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
             
             roboter1.setId_Gelenke(this.readGelenke(roboter1.getId()));
             roboter2.setId_Gelenke(this.readGelenke(roboter2.getId()));
@@ -105,34 +107,34 @@ public class RoboterCache extends Cache{
     
     List<Long> readSektor(Long id){
 
-        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor from Roboter_Sektor where id_roboter="+id);
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor FROM Roboter_Sektor WHERE id_roboter="+id);
 
-        List<String> ids = rsMap.get("id_sektor");
+        List<String> ids = rsMap.get("ID_SEKTOR");
         List<Long> s_ids= new ArrayList<>();
         for (String s : ids){
-            s_ids.add(Long.getLong(s));
+            s_ids.add(Long.parseLong(s));
         }
         return s_ids;
     }
     List<Long> readGelenke(Long id){
 
-        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_gelenk from Gelenk where id_roboter="+id);
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_gelenk FROM Gelenk WHERE id_roboter="+id);
 
-        List<String> ids = rsMap.get("id_gelenk");
+        List<String> ids = rsMap.get("ID_GELENK");
         List<Long> g_ids= new ArrayList<>();
         for (String s : ids){
-            g_ids.add(Long.getLong(s));
+            g_ids.add(Long.parseLong(s));
         }
         return g_ids;
     }
     List<Long> readWerkzeug(Long id){
 
-        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug from Roboter_Werkzeug where id_roboter="+id);
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug FROM Roboter_Werkzeug WHERE id_roboter="+id);
 
-        List<String> ids = rsMap.get("id_werkzeug");
+        List<String> ids = rsMap.get("ID_WERKZEUG");
         List<Long> werk_ids= new ArrayList<>();
         for (String s : ids){
-            werk_ids.add(Long.getLong(s));
+            werk_ids.add(Long.parseLong(s));
         }
         return werk_ids;
     }

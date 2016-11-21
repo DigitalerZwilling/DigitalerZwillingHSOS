@@ -5,6 +5,7 @@
  */
 package DatenKlassen;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -17,8 +18,8 @@ public class Werkzeug extends Element{
     int zustand;
     Long roboterID;
     
-    public Werkzeug(Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel, int zustand) {
-        super(id, bezeichnung, user_Parameter, zeitstempel);
+    public Werkzeug(Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel, int zustand) {
+        super(id, bezeichnung, user_Parameter, zeitstempel.toLocalTime());
         this.zustand = zustand;
         this.roboterID = roboterID;
     }

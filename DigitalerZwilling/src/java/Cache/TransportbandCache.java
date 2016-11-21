@@ -27,16 +27,17 @@ public class TransportbandCache extends Cache{
     @Override
     public void update() {
 
-        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband,zeitstempel,user_parameter,stoerung,geschwindigkeit from Gelenk");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband,zeitstempel,user_parameter,stoerung,geschwindigkeit FROM Gelenk");
 
-        List<String> ids = rsMap.get("id_artikel");
-        List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> user_parameter = rsMap.get("user_parameter");
-        List<String> stoerung = rsMap.get("stoerung");
-        List<String> geschwindigkeit = rsMap.get("geschwindigkeit");
+        List<String> ids = rsMap.get("ID_ARTIKEL");
+        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+        List<String> user_parameter = rsMap.get("USER_PARAMETER");
+        List<String> stoerung = rsMap.get("STOERUNG");
+        List<String> geschwindigkeit = rsMap.get("GESCHWINDIGKEIT");
         Transportband transportband;
         for (int i=0;i<ids.size();i++){
-            transportband=(Transportband)(state==true?elements[0].get(Long.getLong(ids.get(i))):elements[1].get(Long.getLong(ids.get(i))));
+            String ourTime=zeitstempel.get(i).replace(' ', 'T');
+            transportband=(Transportband)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));
             transportband.setStoerung(Integer.valueOf(stoerung.get(i)));
             transportband.setGeschwindigkeit(Integer.valueOf(geschwindigkeit.get(i)));
             transportband.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
@@ -51,24 +52,24 @@ public class TransportbandCache extends Cache{
         Map<Long,Element> allTransportband1=new HashMap<>();
         Map<Long,Element> allTransportband2=new HashMap<>();
 
-        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband,bezeichnung,zeitstempel,user_parameter,stoerung,laenge,geschwindigkeit,id_sektor_vor,id_sektor_nach from Transportband");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband,bezeichnung,zeitstempel,user_parameter,stoerung,laenge,geschwindigkeit,id_sektor_vor,id_sektor_nach FROM Transportband");
 
-        List<String> ids = rsMap.get("id_transportband");
-        List<String> bezeichnung = rsMap.get("bezeichnung");
-        List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> user_parameter = rsMap.get("user_parameter");
+        List<String> ids = rsMap.get("ID_TRANSPORTBAND");
+        List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
+        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+        List<String> user_parameter = rsMap.get("USER_PARAMETER");
         
-        List<String> stoerung = rsMap.get("stoerung");
-        List<String> laenge = rsMap.get("laenge");
-        List<String> geschwindigkeit = rsMap.get("geschwindigkeit");
+        List<String> stoerung = rsMap.get("STOERUNG");
+        List<String> laenge = rsMap.get("LAENGE");
+        List<String> geschwindigkeit = rsMap.get("GESCHWINDIGKEIT");
         
-        List<String> ids_vor = rsMap.get("id_sektor_vor");
-        List<String> ids_nach = rsMap.get("id_sektor_nach");
+        List<String> ids_vor = rsMap.get("ID_SEKTOR_VOR");
+        List<String> ids_nach = rsMap.get("ID_SEKTOR_NACH");
         
         Transportband transportband1,transportband2;
         for (int i=0;i<ids.size();i++){
-            transportband1=new Transportband(Integer.valueOf(stoerung.get(i)),Integer.valueOf(laenge.get(i)),Integer.valueOf(geschwindigkeit.get(i)),Long.getLong(ids_vor.get(i)),Long.getLong(ids_nach.get(i)),Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
-            transportband2=new Transportband(Integer.valueOf(stoerung.get(i)),Integer.valueOf(laenge.get(i)),Integer.valueOf(geschwindigkeit.get(i)),Long.getLong(ids_vor.get(i)),Long.getLong(ids_nach.get(i)),Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            transportband1=new Transportband(Integer.valueOf(stoerung.get(i)),Integer.valueOf(laenge.get(i)),Integer.valueOf(geschwindigkeit.get(i)),Long.parseLong(ids_vor.get(i)),Long.parseLong(ids_nach.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            transportband2=new Transportband(Integer.valueOf(stoerung.get(i)),Integer.valueOf(laenge.get(i)),Integer.valueOf(geschwindigkeit.get(i)),Long.parseLong(ids_vor.get(i)),Long.parseLong(ids_nach.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
             
             allTransportband1.put(transportband1.getId(),(transportband1));
             allTransportband2.put(transportband2.getId(),(transportband2));

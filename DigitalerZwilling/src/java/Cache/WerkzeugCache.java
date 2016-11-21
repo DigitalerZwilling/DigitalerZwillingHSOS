@@ -9,6 +9,7 @@ import DatenKlassen.Element;
 import DatenKlassen.Werkzeug;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
@@ -28,16 +29,17 @@ public class WerkzeugCache extends Cache{
     @Override
     public void update() {
 
-        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug,zeitstempel,user_parameter,zustand from Werkzeug");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug,zeitstempel,user_parameter,zustand FROM Werkzeug");
 
-        List<String> ids_w = rsMap.get("id_werkzeug");
-        List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> user_parameter = rsMap.get("user_parameter");
-        List<String> zustand = rsMap.get("zustand");
+        List<String> ids_w = rsMap.get("ID_WERKZEUG");
+        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+        List<String> user_parameter = rsMap.get("USER_PARAMETER");
+        List<String> zustand = rsMap.get("ZUSTAND");
         Werkzeug werkzeug;
         for (int i=0;i<ids_w.size();i++){
-            werkzeug=(Werkzeug)(state==true?elements[0].get(Long.getLong(ids_w.get(i))):elements[1].get(Long.getLong(ids_w.get(i))));                 //andersrum als bei getById
-            werkzeug.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
+            String ourTime=zeitstempel.get(i).replace(' ', 'T');
+            werkzeug=(Werkzeug)(state==true?elements[0].get(Long.parseLong(ids_w.get(i))):elements[1].get(Long.parseLong(ids_w.get(i))));                 //andersrum als bei getById
+            werkzeug.setZeitstempel(LocalDateTime.parse(ourTime).toLocalTime()); // Ueberpruefen
             werkzeug.setUser_Parameter(user_parameter.get(i));
             werkzeug.setZustand(Integer.valueOf(zustand.get(i)));
         }
@@ -49,18 +51,19 @@ public class WerkzeugCache extends Cache{
         Map<Long,Element> allWerkzeug2=new HashMap<>();
         
 
-        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug,bezeichnung,zeitstempel,user_parameter,zustand from Werkzeug");
+        Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug,bezeichnung,zeitstempel,user_parameter,zustand FROM Werkzeug");
 
-        List<String> ids = rsMap.get("id_werkzeug");
-        List<String> bezeichnung = rsMap.get("bezeichnung");
-        List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> user_parameter = rsMap.get("user_parameter");
-        List<String> zustand = rsMap.get("zustand");
+        List<String> ids = rsMap.get("ID_WERKZEUG");
+        List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
+        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+        List<String> user_parameter = rsMap.get("USER_PARAMETER");
+        List<String> zustand = rsMap.get("ZUSTAND");
         
         Werkzeug werkzeug1,werkzeug2;
         for (int i=0;i<ids.size();i++){
-            werkzeug1=new Werkzeug(Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)),Integer.valueOf(zustand.get(i)));
-            werkzeug2=new Werkzeug(Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)),Integer.valueOf(zustand.get(i)));
+            String ourTime=zeitstempel.get(i).replace(' ', 'T');
+            werkzeug1=new Werkzeug(Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime),Integer.valueOf(zustand.get(i)));
+            werkzeug2=new Werkzeug(Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime),Integer.valueOf(zustand.get(i)));
             
             werkzeug1.setRoboterID(this.readRoboter(werkzeug1.getId()));
             werkzeug2.setRoboterID(this.readRoboter(werkzeug2.getId()));
@@ -79,10 +82,10 @@ public class WerkzeugCache extends Cache{
 
         Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter FROM Roboter_Werkzeug WHERE id_werkzeug="+id+" ");
 
-        List<String> ids = rsMap.get("id_roboter");
+        List<String> ids = rsMap.get("ID_ROBOTER");
         Long r_ids=null;
         for (String s : ids){
-            r_ids=Long.getLong(s);
+            r_ids=Long.parseLong(s);
         }
         return r_ids;
     }
