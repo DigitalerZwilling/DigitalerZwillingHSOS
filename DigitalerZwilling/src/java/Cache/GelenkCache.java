@@ -38,7 +38,7 @@ public class GelenkCache extends Cache{
         List<String> gelenkstellung = rsMap.get("gelenkstellung");
         Gelenk gelenk;
         for (int i=0;i<ids.size();i++){
-            gelenk=(Gelenk)(state==true?elements[0].get(Long.getLong(ids.get(i))):elements[1].get(Long.getLong(ids.get(i))));
+            gelenk=(Gelenk)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));
             gelenk.setGelenkstellung(Integer.valueOf(gelenkstellung.get(i)));
             gelenk.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
             gelenk.setUser_Parameter(user_parameter.get(i));
@@ -64,8 +64,8 @@ public class GelenkCache extends Cache{
         
         Gelenk gelenk1,gelenk2;
         for (int i=0;i<ids.size();i++){
-            gelenk1=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
-            gelenk2=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            gelenk1=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            gelenk2=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
             
             gelenk1.setRoboterID(this.readRoboter(gelenk1.getId()));
             gelenk2.setRoboterID(this.readRoboter(gelenk2.getId()));
@@ -85,7 +85,7 @@ public class GelenkCache extends Cache{
         List<String> ids = rsMap.get("id_roboter");
         Long r_ids=null;
         for (String s : ids){
-            r_ids=Long.getLong(s);
+            r_ids=Long.parseLong(s);
         }
         return r_ids;
     }

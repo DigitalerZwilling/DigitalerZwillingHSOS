@@ -34,15 +34,16 @@ public class ArtikelCache extends Cache{
         //Map<String,List<String>> rsMap;
         //Map<String,List<String>> rsMap= Datenbankschnittstelle.getInstance().datenbankAnfrage("SELECT id_artikel,zeitstempel,user_parameter from Artikel");
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_artikel,zeitstempel,user_parameter from Artikel");
-        List<String> ids = rsMap.get("id_artikel");
-        List<String> zeitstempel = rsMap.get("zeitstempel");
-        List<String> user_parameter = rsMap.get("user_parameter");
+        List<String> ids = rsMap.get("ID_ARTIKEL");
+        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+        List<String> user_parameter = rsMap.get("USER_PARAMETER");
         Artikel artikel;
         for (int i=0;i<ids.size();i++){
+            String t=zeitstempel.get(i).replace(' ', 'T');
             //artikel=Artikel.class.cast(this.getById(Long.parseLong(ids.get(i))));
             //artikel=Artikel.class.cast(state==true?elements[1].get(Long.parseLong(ids.get(i))):elements[0].get(Long.parseLong(ids.get(i))));
             artikel=(Artikel)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));                 //andersrum als bei getById
-            artikel.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
+            artikel.setZeitstempel(LocalDateTime.parse(t).toLocalTime()); // to localTime !!!!!!!!
             artikel.setUser_Parameter(user_parameter.get(i));
             artikel.setId_Warentraeger(this.readWarentraeger(artikel.getId()));
         }
