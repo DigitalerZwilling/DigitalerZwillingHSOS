@@ -39,9 +39,9 @@ public class ArtikelCache extends Cache{
         List<String> user_parameter = rsMap.get("user_parameter");
         Artikel artikel;
         for (int i=0;i<ids.size();i++){
-            //artikel=Artikel.class.cast(this.getById(Long.getLong(ids.get(i))));
-            //artikel=Artikel.class.cast(state==true?elements[1].get(Long.getLong(ids.get(i))):elements[0].get(Long.getLong(ids.get(i))));
-            artikel=(Artikel)(state==true?elements[0].get(Long.getLong(ids.get(i))):elements[1].get(Long.getLong(ids.get(i))));                 //andersrum als bei getById
+            //artikel=Artikel.class.cast(this.getById(Long.parseLong(ids.get(i))));
+            //artikel=Artikel.class.cast(state==true?elements[1].get(Long.parseLong(ids.get(i))):elements[0].get(Long.parseLong(ids.get(i))));
+            artikel=(Artikel)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));                 //andersrum als bei getById
             artikel.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
             artikel.setUser_Parameter(user_parameter.get(i));
             artikel.setId_Warentraeger(this.readWarentraeger(artikel.getId()));
@@ -66,12 +66,11 @@ public class ArtikelCache extends Cache{
         for (int i=0;i<ids.size();i++){
             
             
-            //artikel1=new Artikel(Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            //artikel1=new Artikel(Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
             String t=zeitstempel.get(i).replace(' ', 'T');
-            System.out.println(zeitstempel.get(0));
             
-            artikel1=new Artikel(Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(t));
-            artikel2=new Artikel(Long.getLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(t));
+            artikel1=new Artikel(Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(t));
+            artikel2=new Artikel(Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(t));
           
             artikel1.setId_Warentraeger(this.readWarentraeger(artikel1.getId()));
             artikel2.setId_Warentraeger(this.readWarentraeger(artikel2.getId()));
@@ -88,13 +87,14 @@ public class ArtikelCache extends Cache{
 
 
     private List<Long> readWarentraeger(Long id){
+        
         Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger from Artikel_Warentraeger where id_artikel="+id);
-
-        List<String> ids = rsMap.get("id_warentraeger");
+        
+        List<String> ids = rsMap.get("ID_WARENTRAEGER");
         List<Long> w_ids= new ArrayList<>();
         if(ids==null) return w_ids;
         for (String s : ids){
-            w_ids.add(Long.getLong(s));
+            w_ids.add(Long.parseLong(s));
         }
         return w_ids;
     }
