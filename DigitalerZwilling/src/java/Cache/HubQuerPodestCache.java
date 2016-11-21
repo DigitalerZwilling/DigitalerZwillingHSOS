@@ -63,9 +63,9 @@ public class HubQuerPodestCache extends Cache{
         List<String> zeitstempel = rsMap.get("zeitstempel");
         List<String> sektorId = rsMap.get("id_sektor");
         List<String> bezeichnung = rsMap.get("bezeichnung");
+        elements[0] = new HashMap<>();
+        elements[1] = new HashMap<>();
         for(int i = 0; i<id.size();i++){
-            elements[0] = new HashMap<>();
-            elements[1] = new HashMap<>();
             elements[0].put(Long.getLong(id.get(i)), new HubQuerPodest(Boolean.getBoolean(motor.get(i)), Boolean.getBoolean(oben.get(i)), Boolean.getBoolean(mittig.get(i)), Boolean.getBoolean(unten.get(i)), Long.getLong(sektorId.get(i)), Long.getLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalTime.parse(zeitstempel.get(i))));
             elements[1].put(Long.getLong(id.get(i)), new HubQuerPodest(Boolean.getBoolean(motor.get(i)), Boolean.getBoolean(oben.get(i)), Boolean.getBoolean(mittig.get(i)), Boolean.getBoolean(unten.get(i)), Long.getLong(sektorId.get(i)), Long.getLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalTime.parse(zeitstempel.get(i))));
         }
