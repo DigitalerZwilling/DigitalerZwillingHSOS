@@ -45,7 +45,7 @@ public class SensorCache extends Cache{
             sensor.setStoerung((int)Long.parseLong(stoerung.get(i)));
             sensor.setUser_Parameter(userParameter.get(i));
             sensor.setZeitstempel(LocalDateTime.parse(ourTime).toLocalTime());
-            sensor.setZustand(Boolean.getBoolean(zustand.get(i)));
+            sensor.setZustand(Long.parseLong(zustand.get(i))!=0);
         }
     }
 
@@ -69,8 +69,8 @@ public class SensorCache extends Cache{
         
         for(int i=0;i<id.size();i++){
             String ourTime=zeitstempel.get(i).replace(' ', 'T');
-            elements[0].put(Long.parseLong(id.get(i)), new Sensor((int)Long.parseLong(stoerung.get(i)), phyAdress.get(i), Boolean.getBoolean(zustand.get(i)), Long.parseLong(idSektor.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(ourTime).toLocalTime()));
-            elements[1].put(Long.parseLong(id.get(i)), new Sensor((int)Long.parseLong(stoerung.get(i)), phyAdress.get(i), Boolean.getBoolean(zustand.get(i)), Long.parseLong(idSektor.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(ourTime).toLocalTime()));
+            elements[0].put(Long.parseLong(id.get(i)), new Sensor((int)Long.parseLong(stoerung.get(i)), phyAdress.get(i), Long.parseLong(zustand.get(i))!=0, Long.parseLong(idSektor.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(ourTime).toLocalTime()));
+            elements[1].put(Long.parseLong(id.get(i)), new Sensor((int)Long.parseLong(stoerung.get(i)), phyAdress.get(i), Long.parseLong(zustand.get(i))!=0, Long.parseLong(idSektor.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(ourTime).toLocalTime()));
         }
     }
 }

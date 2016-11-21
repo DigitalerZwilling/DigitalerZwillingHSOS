@@ -41,10 +41,10 @@ public class HubQuerPodestCache extends Cache{
             String ourTime=zeitstempel.get(i).replace(' ', 'T');
             HubQuerPodest huQu = (HubQuerPodest) (state==true?elements[0].get(Long.parseLong(id.get(i))):elements[0].get(Long.parseLong(id.get(i))));
             huQu.setUser_Parameter(userParameter.get(i));
-            huQu.setMotor(Boolean.getBoolean(motor.get(i)));
-            huQu.setOben(Boolean.getBoolean(oben.get(i)));
-            huQu.setMittig(Boolean.getBoolean(mittig.get(i)));
-            huQu.setUnten(Boolean.getBoolean(unten.get(i)));
+            huQu.setMotor(Long.parseLong(motor.get(i))!=0);
+            huQu.setOben(Long.parseLong(oben.get(i))!=0);
+            huQu.setMittig(Long.parseLong(mittig.get(i))!=0);
+            huQu.setUnten(Long.parseLong(unten.get(i))!=0);
             huQu.setZeitstempel(LocalTime.parse(zeitstempel.get(i)));
         }
     }
@@ -68,8 +68,8 @@ public class HubQuerPodestCache extends Cache{
         elements[1] = new HashMap<>();
         for(int i = 0; i<id.size();i++){
             String ourTime=zeitstempel.get(i).replace(' ', 'T');
-            elements[0].put(Long.parseLong(id.get(i)), new HubQuerPodest(Boolean.getBoolean(motor.get(i)), Boolean.getBoolean(oben.get(i)), Boolean.getBoolean(mittig.get(i)), Boolean.getBoolean(unten.get(i)), Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalTime.parse(zeitstempel.get(i))));
-            elements[1].put(Long.parseLong(id.get(i)), new HubQuerPodest(Boolean.getBoolean(motor.get(i)), Boolean.getBoolean(oben.get(i)), Boolean.getBoolean(mittig.get(i)), Boolean.getBoolean(unten.get(i)), Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalTime.parse(zeitstempel.get(i))));
+            elements[0].put(Long.parseLong(id.get(i)), new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalTime.parse(zeitstempel.get(i))));
+            elements[1].put(Long.parseLong(id.get(i)), new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalTime.parse(zeitstempel.get(i))));
         }
         updateGruppenIds();
     }
