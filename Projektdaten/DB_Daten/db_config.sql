@@ -16,7 +16,7 @@ DROP TABLE Sektor;
 CREATE TABLE Sektor (
 	id_sektor BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	stoerung INT,
 	position_x INT,
@@ -29,7 +29,7 @@ CREATE TABLE Sektor (
 CREATE TABLE Warentraeger (
 	id_warentraeger BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	stoerung INT,
 	montagezustand INT,
@@ -41,7 +41,7 @@ CREATE TABLE Warentraeger (
 CREATE TABLE Artikel (
 	id_artikel BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	PRIMARY KEY (id_artikel)
 	);
@@ -49,7 +49,7 @@ CREATE TABLE Artikel (
 CREATE TABLE Transportband (
 	id_transportband BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	stoerung INT,
 	laenge INT,
@@ -64,7 +64,7 @@ CREATE TABLE Transportband (
 CREATE TABLE Sensor (
 	id_sensor BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	stoerung INT,
 	zustand INT,
@@ -77,7 +77,7 @@ CREATE TABLE Sensor (
 CREATE TABLE Roboter (
 	id_roboter BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	stoerung INT,
 	position_x INT,
@@ -90,7 +90,7 @@ CREATE TABLE Roboter (
 CREATE TABLE Gelenk (
 	id_gelenk BIGINT,	
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	typ VARCHAR(100),
 	nummer INT,
@@ -103,7 +103,7 @@ CREATE TABLE Gelenk (
 CREATE TABLE Werkzeug (
 	id_werkzeug BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	zustand INT,
 	id_roboter BIGINT,
@@ -114,7 +114,7 @@ CREATE TABLE Werkzeug (
 CREATE TABLE Hubpodest (
 	id_hubpodest BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	oben INT,
 	unten INT,
