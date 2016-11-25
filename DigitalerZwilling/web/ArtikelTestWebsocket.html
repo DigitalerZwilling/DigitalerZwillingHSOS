@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        
+   <div>
+       
+       
+      
+       <div> <input type="text" size="100" id="bezeichnung" > </div>
+       <output id="a" for="bezeichnung" ></output>
+   <button type="button" onclick="send()" ></button> 
+   </div>
+        
+
+<!--<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" id="messages" >
+
+  
+</svg>-->
+<script type="text/javascript">
+    //var svgns = "http://www.w3.org/2000/svg";
+   
+      var host = "ws://131.173.127.175:8080/DigitalerZwilling/ArtikelWebSocket";
+      var wSocket = new WebSocket(host);
+      var browserSupport = ("WebSocket" in window) ? true : false;
+      
+      // called  body onLoad()
+      function initializeReception()
+      {
+        if (browserSupport)
+        {
+          wSocket.onopen = function()
+          {
+            //alert(" Web Socket is connected, sending data");
+            wSocket.send("ping");
+          };
+        }
+        else
+        {
+          // The browser doesn't support WebSocket
+          alert("WebSocket is NOT supported by your Browser!");
+        }
+      }
+      var messages = document.getElementById("messages");
+      // called when a message is received
+      wSocket.onmessage = function(event)
+      {
+        //var received_msg = event.data;
+        //document.getElementById("m1").value = received_msg;
+        //messages.innerHTML +=  received_msg;
+        //rect.setAttributeNS(null,'fill','#000000');
+        document.getElementById("bezeichnung").value=event.data;
+        
+      };
+      
+      // called when socket closes
+      wSocket.onclose = function()
+      {
+        // websocket is closed.
+        //alert("Connection is closed...");
+      };
+      
+      function send(){
+                var text = "test";
+                wSocket.send(text);
+            };
+</script>
+ </body>
+</html>
