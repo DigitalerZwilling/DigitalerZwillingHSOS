@@ -5,7 +5,7 @@
  */
 package DatenKlassen;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 
 
@@ -19,7 +19,7 @@ public class HubPodest extends Element{
     private boolean unten;
     private Long sektorID;
 
-    public HubPodest(boolean oben, boolean unten, Long id_sektor, Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
+    public HubPodest(boolean oben, boolean unten, Long id_sektor, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.oben = oben;
         this.unten = unten;

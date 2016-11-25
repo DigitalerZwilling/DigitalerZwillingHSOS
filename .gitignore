@@ -46,3 +46,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 /DigitalerZwilling/build/
+/DigitalerZwilling/dist/
+DigitalerZwilling/nbproject/private/private.properties
+
+*.properties

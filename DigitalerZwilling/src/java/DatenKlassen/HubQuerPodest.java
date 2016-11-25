@@ -5,7 +5,7 @@
  */
 package DatenKlassen;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -24,13 +24,12 @@ public class HubQuerPodest extends Element{
     private List<Long> gruppenIDs;
     private Long sektorID;
 
-    public HubQuerPodest(boolean motor, boolean oben, boolean mittig, boolean unten, List<Long> gruppenIDs, Long id_Sektor, Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
+    public HubQuerPodest(boolean motor, boolean oben, boolean mittig, boolean unten, Long id_Sektor, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.motor = motor;
         this.oben = oben;
         this.mittig = mittig;
         this.unten = unten;
-        this.gruppenIDs = gruppenIDs;
         this.sektorID = id_Sektor;
     }
 

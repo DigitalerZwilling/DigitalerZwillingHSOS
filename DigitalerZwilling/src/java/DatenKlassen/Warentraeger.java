@@ -6,7 +6,7 @@
 package DatenKlassen;
 
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -23,15 +23,12 @@ public class Warentraeger extends Element{
     private List<Long> transportbandIDs;
     private List<Long> sektorIDs;
 
-    public Warentraeger(int stoerung, int abstand_mm, int montagezustand, String rFID_inhalt, List<Long> artikelIDs, List<Long> transportbandIDs, List<Long> sektorIDs, Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
+    public Warentraeger(int stoerung, int abstand_mm, int montagezustand, String rFID_inhalt, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.stoerung = stoerung;
         this.abstand_mm = abstand_mm;
         this.montagezustand = montagezustand;
         this.rFID_inhalt = rFID_inhalt;
-        this.artikelIDs = artikelIDs;
-        this.transportbandIDs = transportbandIDs;
-        this.sektorIDs = sektorIDs;
     }
 
     public int getStoerung() {

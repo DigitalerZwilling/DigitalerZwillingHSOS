@@ -6,7 +6,7 @@
 package DatenKlassen;
 
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -28,20 +28,14 @@ public class Sektor extends Element{
     private List<Long> vorTransportbandIDs;
     private List<Long> nachTransportbandIDs;
 
-    public Sektor(int stoerung, int x, int y, int z, int ausrichtung, List<Long> warentraegerIDs, List<Long> hubpodestIDs, List<Long> hubquerpodestIDs, List<Long> roboterIDs, List<Long> sensorIDs, List<Long> vorTransportbandIDs, List<Long> nacgTransportbandIDs, Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
+    public Sektor(int stoerung, int x, int y, int z, int ausrichtung,  Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.stoerung = stoerung;
         this.x = x;
         this.y = y;
         this.z = z;
         this.ausrichtung = ausrichtung;
-        this.warentraegerIDs = warentraegerIDs;
-        this.hubpodestIDs = hubpodestIDs;
-        this.hubquerpodestIDs = hubquerpodestIDs;
-        this.roboterIDs = roboterIDs;
-        this.sensorIDs = sensorIDs;
-        this.vorTransportbandIDs = vorTransportbandIDs;
-        this.nachTransportbandIDs = nacgTransportbandIDs;
+        
     }
 
     
@@ -134,12 +128,12 @@ public class Sektor extends Element{
         this.vorTransportbandIDs = vorTransportbandIDs;
     }
 
-    public List<Long> getNacgTransportbandIDs() {
+    public List<Long> getNachTransportbandIDs() {
         return nachTransportbandIDs;
     }
 
-    public void setNacgTransportbandIDs(List<Long> nacgTransportbandIDs) {
-        this.nachTransportbandIDs = nacgTransportbandIDs;
+    public void setNachTransportbandIDs(List<Long> nachTransportbandIDs) {
+        this.nachTransportbandIDs = nachTransportbandIDs;
     }
     
     

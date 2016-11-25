@@ -5,8 +5,7 @@
  */
 package DatenKlassen;
 
-import java.time.LocalTime;
-import java.util.List;
+import java.time.LocalDateTime;
 
 
 /**
@@ -19,12 +18,11 @@ public class Gelenk extends Element{
     int gelenkstellung;
     Long roboterID;
 
-    public Gelenk(String typ, int nummer, int gelenkstellung, Long roboterID, Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
+    public Gelenk(String typ, int nummer, int gelenkstellung, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.typ = typ;
         this.nummer = nummer;
         this.gelenkstellung = gelenkstellung;
-        this.roboterID = roboterID;
     }
 
     public String getTyp() {

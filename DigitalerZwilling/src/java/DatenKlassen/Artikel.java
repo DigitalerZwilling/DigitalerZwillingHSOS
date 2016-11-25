@@ -5,6 +5,7 @@
  */
 package DatenKlassen;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Artikel extends Element{
     
     private List<Long> warentraegerIDs;
     
-    public Artikel(Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
+    public Artikel(Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
     }
 

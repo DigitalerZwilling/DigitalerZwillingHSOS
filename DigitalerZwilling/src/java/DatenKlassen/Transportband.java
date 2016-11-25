@@ -6,7 +6,7 @@
 package DatenKlassen;
 
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -23,14 +23,13 @@ public class Transportband extends Element{
     private Long vorSektorID;
     private Long nachSektorID;
 
-    public Transportband(int stoerung, int laenge, int geschwindigkeit, List<Long> warentraegerIDs, Long vorSektorID, Long nachSektorID, Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
+    public Transportband(int stoerung, int laenge, int geschwindigkeit, Long vorSektorID, Long nachSektorID, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.stoerung = stoerung;
         this.laenge = laenge;
         this.geschwindigkeit = geschwindigkeit;
-        this.warentraegerIDs = warentraegerIDs;
-        this.vorSektorID = this.vorSektorID;
-        this.nachSektorID = this.nachSektorID;
+        this.vorSektorID = vorSektorID;
+        this.nachSektorID = nachSektorID;
     }
 
     public int getStoerung() {

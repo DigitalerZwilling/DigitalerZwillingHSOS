@@ -6,6 +6,7 @@
 package Servlets;
 
 
+import Cache.ArtikelCache;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -33,6 +34,8 @@ public class index extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Inject ArtikelCache a; 
+    @Inject ArtikelCache b; 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -45,7 +48,10 @@ public class index extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet test at " + request.getContextPath() + "</h1>");
-
+            out.println(a.toString());
+            a.update();
+            out.println("<br>");
+            out.println(b.toString());
             out.println("</body>");
             out.println("</html>");
         }

@@ -5,7 +5,7 @@
  */
 package DatenKlassen;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -15,9 +15,9 @@ public class Element {
     private Long id;
     private String bezeichnung;
     private String user_Parameter;
-    private LocalTime zeitstempel;
+    private LocalDateTime zeitstempel;
 
-    public Element(Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
+    public Element(Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         this.id = id;
         this.bezeichnung = bezeichnung;
         this.user_Parameter = user_Parameter;
@@ -36,7 +36,7 @@ public class Element {
         return user_Parameter;
     }
 
-    public LocalTime getZeitstempel() {
+    public LocalDateTime getZeitstempel() {
         return zeitstempel;
     }
 
@@ -52,7 +52,7 @@ public class Element {
         this.user_Parameter = user_Parameter;
     }
 
-    public void setZeitstempel(LocalTime zeitstempel) {
+    public void setZeitstempel(LocalDateTime zeitstempel) {
         this.zeitstempel = zeitstempel;
     }
 
