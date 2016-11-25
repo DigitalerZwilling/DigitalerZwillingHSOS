@@ -48,3 +48,5 @@ Temporary Items
 /DigitalerZwilling/build/
 /DigitalerZwilling/dist/
 DigitalerZwilling/nbproject/private/private.properties
+
+*.properties
