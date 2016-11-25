@@ -7,7 +7,7 @@ package Cache;
 
 import DatenKlassen.HubQuerPodest;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +45,7 @@ public class HubQuerPodestCache extends Cache{
             huQu.setOben(Long.parseLong(oben.get(i))!=0);
             huQu.setMittig(Long.parseLong(mittig.get(i))!=0);
             huQu.setUnten(Long.parseLong(unten.get(i))!=0);
-            huQu.setZeitstempel(LocalTime.parse(zeitstempel.get(i)));
+            huQu.setZeitstempel(LocalDateTime.parse(zeitstempel.get(i)));
         }
     }
 
@@ -68,8 +68,8 @@ public class HubQuerPodestCache extends Cache{
         elements[1] = new HashMap<>();
         for(int i = 0; i<id.size();i++){
             String ourTime=zeitstempel.get(i).replace(' ', 'T');
-            elements[0].put(Long.parseLong(id.get(i)), new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalTime.parse(zeitstempel.get(i))));
-            elements[1].put(Long.parseLong(id.get(i)), new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalTime.parse(zeitstempel.get(i))));
+            elements[0].put(Long.parseLong(id.get(i)), new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(zeitstempel.get(i))));
+            elements[1].put(Long.parseLong(id.get(i)), new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(zeitstempel.get(i))));
         }
         updateGruppenIds();
     }

@@ -8,7 +8,7 @@ package Cache;
 import DatenKlassen.Element;
 import DatenKlassen.Sektor;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +36,7 @@ public class SektorCache extends Cache{
             String ourTime=zeitstempel.get(i).replace(' ', 'T');
             sektor=(Sektor)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));
             sektor.setStoerung(Integer.getInteger(stoerung.get(i)));
-            sektor.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
+            sektor.setZeitstempel(LocalDateTime.parse(zeitstempel.get(i))); // Ueberpruefen
             sektor.setUser_Parameter(user_parameter.get(i));
             
             sektor.setWarentraegerIDs(this.readWarentraeger(sektor.getId()));
@@ -68,8 +68,8 @@ public class SektorCache extends Cache{
         Sektor sektor1,sektor2;
         for (int i=0;i<ids.size();i++){
             String ourTime=zeitstempel.get(i).replace(' ', 'T');
-            sektor1=new Sektor(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
-            sektor2=new Sektor(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            sektor1=new Sektor(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(zeitstempel.get(i)));
+            sektor2=new Sektor(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(zeitstempel.get(i)));
             
             sektor1.setWarentraegerIDs(this.readWarentraeger(sektor1.getId()));
             sektor2.setWarentraegerIDs(this.readWarentraeger(sektor2.getId()));

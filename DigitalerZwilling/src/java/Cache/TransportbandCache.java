@@ -9,7 +9,7 @@ import static Cache.Cache.state;
 import DatenKlassen.Element;
 import DatenKlassen.Transportband;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +40,7 @@ public class TransportbandCache extends Cache{
             transportband=(Transportband)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));
             transportband.setStoerung(Integer.valueOf(stoerung.get(i)));
             transportband.setGeschwindigkeit(Integer.valueOf(geschwindigkeit.get(i)));
-            transportband.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
+            transportband.setZeitstempel(LocalDateTime.parse(zeitstempel.get(i)));
             transportband.setUser_Parameter(user_parameter.get(i));
         }
         
@@ -68,8 +68,8 @@ public class TransportbandCache extends Cache{
         
         Transportband transportband1,transportband2;
         for (int i=0;i<ids.size();i++){
-            transportband1=new Transportband(Integer.valueOf(stoerung.get(i)),Integer.valueOf(laenge.get(i)),Integer.valueOf(geschwindigkeit.get(i)),Long.parseLong(ids_vor.get(i)),Long.parseLong(ids_nach.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
-            transportband2=new Transportband(Integer.valueOf(stoerung.get(i)),Integer.valueOf(laenge.get(i)),Integer.valueOf(geschwindigkeit.get(i)),Long.parseLong(ids_vor.get(i)),Long.parseLong(ids_nach.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            transportband1=new Transportband(Integer.valueOf(stoerung.get(i)),Integer.valueOf(laenge.get(i)),Integer.valueOf(geschwindigkeit.get(i)),Long.parseLong(ids_vor.get(i)),Long.parseLong(ids_nach.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(zeitstempel.get(i)));
+            transportband2=new Transportband(Integer.valueOf(stoerung.get(i)),Integer.valueOf(laenge.get(i)),Integer.valueOf(geschwindigkeit.get(i)),Long.parseLong(ids_vor.get(i)),Long.parseLong(ids_nach.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(zeitstempel.get(i)));
             
             allTransportband1.put(transportband1.getId(),(transportband1));
             allTransportband2.put(transportband2.getId(),(transportband2));

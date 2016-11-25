@@ -8,9 +8,7 @@ package Cache;
 import DatenKlassen.Element;
 import DatenKlassen.Werkzeug;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.sql.ResultSet;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +22,7 @@ import javax.inject.Inject;
  *
  * @author User
  */
+@ApplicationScoped
 public class WerkzeugCache extends Cache{
     @Inject private Datenbankschnittstelle datenbankschnittstelle;
     @Override
@@ -39,13 +38,14 @@ public class WerkzeugCache extends Cache{
         for (int i=0;i<ids_w.size();i++){
             String ourTime=zeitstempel.get(i).replace(' ', 'T');
             werkzeug=(Werkzeug)(state==true?elements[0].get(Long.parseLong(ids_w.get(i))):elements[1].get(Long.parseLong(ids_w.get(i))));                 //andersrum als bei getById
-            werkzeug.setZeitstempel(LocalDateTime.parse(ourTime).toLocalTime()); // Ueberpruefen
+            werkzeug.setZeitstempel(LocalDateTime.parse(ourTime));
             werkzeug.setUser_Parameter(user_parameter.get(i));
             werkzeug.setZustand(Integer.valueOf(zustand.get(i)));
         }
     }
 
     @Override
+    @PostConstruct
     public void updateAll() {
         Map<Long,Element> allWerkzeug1=new HashMap<>();
         Map<Long,Element> allWerkzeug2=new HashMap<>();

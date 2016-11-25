@@ -8,7 +8,7 @@ package Cache;
 import DatenKlassen.Element;
 import DatenKlassen.HubPodest;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +41,7 @@ public class HubPodestCache extends Cache{
             hubpodest=(HubPodest)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));
             hubpodest.setOben(Boolean.getBoolean(oben.get(i)));
             hubpodest.setUnten(Boolean.getBoolean(unten.get(i)));
-            hubpodest.setZeitstempel(LocalTime.parse(outTime)); // Ueberpruefen
+            hubpodest.setZeitstempel(LocalDateTime.parse(outTime)); // Ueberpruefen
             hubpodest.setUser_Parameter(user_parameter.get(i));
             //gelenk.setId_Warentraeger(this.readWarentraeger(hubpodest.getId()));
         }
@@ -67,8 +67,8 @@ public class HubPodestCache extends Cache{
         HubPodest hupo1,hupo2;
         for (int i=0;i<ids.size();i++){
             String ourTime=zeitstempel.get(i).replace(' ', 'T');
-            hupo1=new HubPodest(Boolean.getBoolean(oben.get(i)),Boolean.getBoolean(unten.get(i)),Long.parseLong(sektor.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(ourTime));
-            hupo2=new HubPodest(Boolean.getBoolean(oben.get(i)),Boolean.getBoolean(unten.get(i)),Long.parseLong(sektor.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(ourTime));
+            hupo1=new HubPodest(Boolean.getBoolean(oben.get(i)),Boolean.getBoolean(unten.get(i)),Long.parseLong(sektor.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));
+            hupo2=new HubPodest(Boolean.getBoolean(oben.get(i)),Boolean.getBoolean(unten.get(i)),Long.parseLong(sektor.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));
             
             
             

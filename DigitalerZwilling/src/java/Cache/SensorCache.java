@@ -6,11 +6,9 @@
 package Cache;
 
 import static Cache.Cache.state;
-import DatenKlassen.HubQuerPodest;
 import DatenKlassen.Sensor;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +42,7 @@ public class SensorCache extends Cache{
             Sensor sensor = (Sensor) (state==true?elements[0].get(Long.parseLong(id.get(i))):elements[0].get(Long.parseLong(id.get(i))));
             sensor.setStoerung((int)Long.parseLong(stoerung.get(i)));
             sensor.setUser_Parameter(userParameter.get(i));
-            sensor.setZeitstempel(LocalDateTime.parse(ourTime).toLocalTime());
+            sensor.setZeitstempel(LocalDateTime.parse(ourTime));
             sensor.setZustand(Long.parseLong(zustand.get(i))!=0);
         }
     }
@@ -69,8 +67,8 @@ public class SensorCache extends Cache{
         
         for(int i=0;i<id.size();i++){
             String ourTime=zeitstempel.get(i).replace(' ', 'T');
-            elements[0].put(Long.parseLong(id.get(i)), new Sensor((int)Long.parseLong(stoerung.get(i)), phyAdress.get(i), Long.parseLong(zustand.get(i))!=0, Long.parseLong(idSektor.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(ourTime).toLocalTime()));
-            elements[1].put(Long.parseLong(id.get(i)), new Sensor((int)Long.parseLong(stoerung.get(i)), phyAdress.get(i), Long.parseLong(zustand.get(i))!=0, Long.parseLong(idSektor.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(ourTime).toLocalTime()));
+            elements[0].put(Long.parseLong(id.get(i)), new Sensor((int)Long.parseLong(stoerung.get(i)), phyAdress.get(i), Long.parseLong(zustand.get(i))!=0, Long.parseLong(idSektor.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(ourTime)));
+            elements[1].put(Long.parseLong(id.get(i)), new Sensor((int)Long.parseLong(stoerung.get(i)), phyAdress.get(i), Long.parseLong(zustand.get(i))!=0, Long.parseLong(idSektor.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(ourTime)));
         }
     }
 }

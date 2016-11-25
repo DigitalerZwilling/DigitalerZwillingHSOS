@@ -8,9 +8,7 @@ package Cache;
 import DatenKlassen.Element;
 import DatenKlassen.Gelenk;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.sql.ResultSet;
-import java.time.LocalTime;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +39,7 @@ public class GelenkCache extends Cache{
             String ourTime=zeitstempel.get(i).replace(' ', 'T');
             gelenk=(Gelenk)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));
             gelenk.setGelenkstellung(Integer.valueOf(gelenkstellung.get(i)));
-            gelenk.setZeitstempel(LocalTime.parse(ourTime)); // Ueberpruefen
+            gelenk.setZeitstempel(LocalDateTime.parse(ourTime)); // Ueberpruefen
             gelenk.setUser_Parameter(user_parameter.get(i));
             //gelenk.setId_Warentraeger(this.readWarentraeger(gelenk.getId()));
         }
@@ -66,8 +64,8 @@ public class GelenkCache extends Cache{
         Gelenk gelenk1,gelenk2;
         for (int i=0;i<ids.size();i++){
             String outTime=zeitstempel.get(i).replace(' ', 'T');
-            gelenk1=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(outTime));
-            gelenk2=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(outTime));
+            gelenk1=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(outTime));
+            gelenk2=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(outTime));
             
             gelenk1.setRoboterID(this.readRoboter(gelenk1.getId()));
             gelenk2.setRoboterID(this.readRoboter(gelenk2.getId()));

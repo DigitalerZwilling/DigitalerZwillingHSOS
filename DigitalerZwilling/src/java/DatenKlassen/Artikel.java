@@ -22,7 +22,7 @@ public class Artikel extends Element{
     private List<Long> warentraegerIDs;
     
     public Artikel(Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
-        super(id, bezeichnung, user_Parameter, zeitstempel.toLocalTime());
+        super(id, bezeichnung, user_Parameter, zeitstempel);
     }
 
     public List<Long> getId_Warentraeger() {

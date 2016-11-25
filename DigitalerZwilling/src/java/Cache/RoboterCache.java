@@ -8,7 +8,7 @@ package Cache;
 import DatenKlassen.Element;
 import DatenKlassen.Roboter;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +44,7 @@ public class RoboterCache extends Cache{
             String ourTime=zeitstempel.get(i).replace(' ', 'T');
             roboter=(Roboter)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));
             roboter.setStoerung(Integer.getInteger(stoerung.get(i)));
-            roboter.setZeitstempel(LocalTime.parse(zeitstempel.get(i))); // Ueberpruefen
+            roboter.setZeitstempel(LocalDateTime.parse(zeitstempel.get(i))); // Ueberpruefen
             roboter.setUser_Parameter(user_parameter.get(i));
             
             roboter.setAusrichtung(Integer.getInteger(ausrichtung.get(i)));
@@ -82,8 +82,8 @@ public class RoboterCache extends Cache{
         Roboter roboter1,roboter2;
         for (int i=0;i<ids.size();i++){
             String ourTime=zeitstempel.get(i).replace(' ', 'T');
-            roboter1=new Roboter(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
-            roboter2=new Roboter(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            roboter1=new Roboter(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(zeitstempel.get(i)));
+            roboter2=new Roboter(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(zeitstempel.get(i)));
             
             roboter1.setId_Gelenke(this.readGelenke(roboter1.getId()));
             roboter2.setId_Gelenke(this.readGelenke(roboter2.getId()));

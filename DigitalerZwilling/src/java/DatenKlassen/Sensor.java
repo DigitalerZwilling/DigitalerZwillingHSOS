@@ -5,7 +5,7 @@
  */
 package DatenKlassen;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 
 
@@ -20,7 +20,7 @@ public class Sensor extends Element{
     private  boolean zustand;                      //fehlerzustand
     private Long sektorID;
 
-    public Sensor(int stoerung, String phy_adresse, boolean zustand, Long sektorID, Long id, String bezeichnung, String user_Parameter, LocalTime zeitstempel) {
+    public Sensor(int stoerung, String phy_adresse, boolean zustand, Long sektorID, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.stoerung = stoerung;
         this.phy_adresse = phy_adresse;

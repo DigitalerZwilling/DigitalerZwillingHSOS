@@ -9,7 +9,7 @@ import static Cache.Cache.state;
 import DatenKlassen.Element;
 import DatenKlassen.Warentraeger;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +45,7 @@ public class WarentraegerCache extends Cache{
             warentraeger = (Warentraeger)(state==true ? elements[0].get(Long.parseLong(ids.get(i))) : elements[1].get(Long.parseLong(ids.get(i))));                 //andersrum als bei getById
             
             warentraeger.setStoerung(Integer.getInteger(stoerung.get(i)));
-            warentraeger.setZeitstempel(LocalTime.parse(zeitstempel.get(i)));
+            warentraeger.setZeitstempel(LocalDateTime.parse(zeitstempel.get(i)));
             warentraeger.setUser_Parameter(user_parameter.get(i));
             warentraeger.setAbstand_mm(Integer.getInteger(abstand_mm.get(i)));
             warentraeger.setMontagezustand(Integer.getInteger(montagezustand.get(i)));
@@ -78,8 +78,8 @@ public class WarentraegerCache extends Cache{
         Warentraeger warentraeger1,warentraeger2;
         for (int i=0;i<ids.size();i++){
             String ourTime=zeitstempel.get(i).replace(' ', 'T');
-            warentraeger1 = new Warentraeger(Integer.getInteger(stoerung.get(i)), Integer.getInteger(abstand_mm.get(i)), Integer.getInteger(montagezustand.get(i)), RFID_inhalt.get(i), Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
-            warentraeger2 = new Warentraeger(Integer.getInteger(stoerung.get(i)), Integer.getInteger(abstand_mm.get(i)), Integer.getInteger(montagezustand.get(i)), RFID_inhalt.get(i), Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalTime.parse(zeitstempel.get(i)));
+            warentraeger1 = new Warentraeger(Integer.getInteger(stoerung.get(i)), Integer.getInteger(abstand_mm.get(i)), Integer.getInteger(montagezustand.get(i)), RFID_inhalt.get(i), Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(zeitstempel.get(i)));
+            warentraeger2 = new Warentraeger(Integer.getInteger(stoerung.get(i)), Integer.getInteger(abstand_mm.get(i)), Integer.getInteger(montagezustand.get(i)), RFID_inhalt.get(i), Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(zeitstempel.get(i)));
             
             warentraeger1.setTransportbandIDs(this.readTransportband(warentraeger1.getId()));
             warentraeger2.setTransportbandIDs(this.readTransportband(warentraeger2.getId()));

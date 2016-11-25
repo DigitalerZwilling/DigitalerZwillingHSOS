@@ -8,10 +8,7 @@ package Cache;
 import DatenKlassen.Artikel;
 import DatenKlassen.Element;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +40,7 @@ public class ArtikelCache extends Cache{
             //artikel=Artikel.class.cast(this.getById(Long.parseLong(ids.get(i))));
             //artikel=Artikel.class.cast(state==true?elements[1].get(Long.parseLong(ids.get(i))):elements[0].get(Long.parseLong(ids.get(i))));
             artikel=(Artikel)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));                 //andersrum als bei getById
-            artikel.setZeitstempel(LocalDateTime.parse(ourTime).toLocalTime()); // to localTime !!!!!!!!
+            artikel.setZeitstempel(LocalDateTime.parse(ourTime));
             artikel.setUser_Parameter(user_parameter.get(i));
             artikel.setId_Warentraeger(this.readWarentraeger(artikel.getId()));
         }
