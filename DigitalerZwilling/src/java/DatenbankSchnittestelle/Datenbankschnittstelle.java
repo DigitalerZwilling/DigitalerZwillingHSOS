@@ -5,6 +5,8 @@
  */
 package DatenbankSchnittestelle;
 
+import DatenbankSchnittestelle.Exeption.DBNotFoundExeption;
+import DatenbankSchnittestelle.Exeption.QueryExeption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -39,7 +41,7 @@ public class Datenbankschnittstelle {
     private Connection data;                                                        // Datenbank Verbindung
     
     //-----------------------------------------------------------------------------
-    public Datenbankschnittstelle(){ 
+    public Datenbankschnittstelle() throws DBNotFoundExeption{ 
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
@@ -50,6 +52,7 @@ public class Datenbankschnittstelle {
             
         } catch (SQLException ex) {
             Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DBNotFoundExeption();
             //throw new Exception("Fehler: Datenbankverbindung auf "+ this._DbURL+" nicht möglich");
         }
     }
@@ -93,10 +96,15 @@ public class Datenbankschnittstelle {
      *
      * @param sqlStatement  sql-Anfrage an die Datenbank
      * @return Map die das Result set darstellt
+     * @throws DatenbankSchnittestelle.Exeption.DBNotFoundExeption
+     * @throws DatenbankSchnittestelle.Exeption.QueryExeption
      */
-    public Map<String,List<String>> datenbankAnfrage(String sqlStatement){
+    public Map<String,List<String>> datenbankAnfrage(String sqlStatement) throws DBNotFoundExeption, QueryExeption{
         Map<String,List<String>> rsMap = new HashMap<>();
-        try {
+        
+        if(data == null){
+            throw new DBNotFoundExeption();
+        }else try {
             Statement stmt=this.data.createStatement();
             ResultSet rs=stmt.executeQuery(sqlStatement);
             //----------------------------------------------------
@@ -115,6 +123,7 @@ public class Datenbankschnittstelle {
             stmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
+            throw new QueryExeption();
         }
         return rsMap;
     }
