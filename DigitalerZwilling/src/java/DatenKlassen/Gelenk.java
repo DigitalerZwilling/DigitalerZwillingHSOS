@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
  * @author chris
  */
 public class Gelenk extends Element{
-    String typ;
-    int nummer;
-    int gelenkstellung;
-    Long roboterID;
+    private String typ;
+    private int nummer;
+    private int gelenkstellung;
+    private Long roboterID;
 
     public Gelenk(String typ, int nummer, int gelenkstellung, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
