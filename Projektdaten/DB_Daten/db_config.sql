@@ -14,7 +14,7 @@ DROP TABLE Warentraeger;
 DROP TABLE Sektor;
 
 CREATE TABLE Sektor (
-	id_sektor BIGINT AUTO_INCREMENT,
+	id_sektor BIGINT,
 	bezeichnung VARCHAR(100),
 	zeitstempel TIMESTAMP,
 	user_parameter LONGTEXT,
@@ -27,7 +27,7 @@ CREATE TABLE Sektor (
 	);
 
 CREATE TABLE Warentraeger (
-	id_warentraeger BIGINT AUTO_INCREMENT,
+	id_warentraeger BIGINT,
 	bezeichnung VARCHAR(100),
 	zeitstempel TIMESTAMP,
 	user_parameter LONGTEXT,
@@ -39,7 +39,7 @@ CREATE TABLE Warentraeger (
 	);
 
 CREATE TABLE Artikel (
-	id_artikel BIGINT AUTO_INCREMENT,
+	id_artikel BIGINT,
 	bezeichnung VARCHAR(100),
 	zeitstempel TIMESTAMP,
 	user_parameter LONGTEXT,
@@ -47,7 +47,7 @@ CREATE TABLE Artikel (
 	);
 	
 CREATE TABLE Transportband (
-	id_transportband BIGINT AUTO_INCREMENT,
+	id_transportband BIGINT,
 	bezeichnung VARCHAR(100),
 	zeitstempel TIMESTAMP,
 	user_parameter LONGTEXT,
@@ -62,7 +62,7 @@ CREATE TABLE Transportband (
 	);
 	
 CREATE TABLE Sensor (
-	id_sensor BIGINT AUTO_INCREMENT,
+	id_sensor BIGINT,
 	bezeichnung VARCHAR(100),
 	zeitstempel TIMESTAMP,
 	user_parameter LONGTEXT,
@@ -75,7 +75,7 @@ CREATE TABLE Sensor (
 	);
 
 CREATE TABLE Roboter (
-	id_roboter BIGINT AUTO_INCREMENT,
+	id_roboter BIGINT,
 	bezeichnung VARCHAR(100),
 	zeitstempel TIMESTAMP,
 	user_parameter LONGTEXT,
@@ -88,7 +88,7 @@ CREATE TABLE Roboter (
 	);
 	
 CREATE TABLE Gelenk (
-	id_gelenk BIGINT AUTO_INCREMENT,	
+	id_gelenk BIGINT,	
 	bezeichnung VARCHAR(100),
 	zeitstempel TIMESTAMP,
 	user_parameter LONGTEXT,
@@ -101,7 +101,7 @@ CREATE TABLE Gelenk (
 	);
 	
 CREATE TABLE Werkzeug (
-	id_werkzeug BIGINT AUTO_INCREMENT,
+	id_werkzeug BIGINT,
 	bezeichnung VARCHAR(100),
 	zeitstempel TIMESTAMP,
 	user_parameter LONGTEXT,
@@ -112,7 +112,7 @@ CREATE TABLE Werkzeug (
 	);
 	
 CREATE TABLE Hubpodest (
-	id_hubpodest BIGINT AUTO_INCREMENT,
+	id_hubpodest BIGINT,
 	bezeichnung VARCHAR(100),
 	zeitstempel TIMESTAMP,
 	user_parameter LONGTEXT,
@@ -124,7 +124,7 @@ CREATE TABLE Hubpodest (
 	);
 	
 CREATE TABLE Hubquerpodest (
-	id_hubquerpodest BIGINT AUTO_INCREMENT,
+	id_hubquerpodest BIGINT,
 	bezeichnung VARCHAR(100),
 	zeitstempel TIMESTAMP,
 	user_parameter LONGTEXT,
@@ -138,9 +138,10 @@ CREATE TABLE Hubquerpodest (
 	);
 	
 CREATE TABLE Artikel_Warentraeger (
+	id BIGINT AUTO_INCREMENT, --Nur zur internen Verarbeitung / PRIMARY KEY (Roboter1 <--> 2x Artikel1)
 	id_artikel BIGINT,
 	id_warentraeger BIGINT,
-	PRIMARY KEY (id_artikel, id_warentraeger),
+	PRIMARY KEY (id),
 	FOREIGN KEY (id_artikel) REFERENCES Artikel(id_artikel),
 	FOREIGN KEY (id_warentraeger) REFERENCES Warentraeger(id_warentraeger)
 	);
