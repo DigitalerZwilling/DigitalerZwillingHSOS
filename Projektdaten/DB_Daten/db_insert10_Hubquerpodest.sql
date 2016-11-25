@@ -13,8 +13,10 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		1
-	)
+	);
 	
 
 INSERT INTO Hubquerpodest (
@@ -32,8 +34,10 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		8
-	)
+	);
 	
 
 INSERT INTO Hubquerpodest (
@@ -51,8 +55,10 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		9
-	)	
+	);	
 
 INSERT INTO Hubquerpodest (
 		id_hubquerpodest,
@@ -69,8 +75,10 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		9
-	)
+	);
 
 INSERT INTO Hubquerpodest (
 		id_hubquerpodest,
@@ -87,8 +95,10 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		11
-	)
+	);
 	
 INSERT INTO Hubquerpodest (
 		id_hubquerpodest,
@@ -105,8 +115,10 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		11
-	)
+	);
 	
 
 	
@@ -125,8 +137,10 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		11
-	)
+	);
 	
 INSERT INTO Hubquerpodest (
 		id_hubquerpodest,
@@ -143,8 +157,10 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		11
-	)
+	);
 
 INSERT INTO Hubquerpodest (
 		id_hubquerpodest,
@@ -161,8 +177,10 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		13
-	)
+	);
 	
 INSERT INTO Hubquerpodest (
 		id_hubquerpodest,
@@ -179,8 +197,10 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		13
-	)
+	);
 	
 INSERT INTO Hubquerpodest (
 		id_hubquerpodest,
@@ -197,8 +217,10 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		13
-	)
+	);
 	
 INSERT INTO Hubquerpodest (
 		id_hubquerpodest,
@@ -215,8 +237,10 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		13
-	)
+	);
 	
 INSERT INTO Hubquerpodest (
 		id_hubquerpodest,
@@ -233,8 +257,10 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		15
-	)
+	);
 
 INSERT INTO Hubquerpodest (
 		id_hubquerpodest,
@@ -251,5 +277,7 @@ INSERT INTO Hubquerpodest (
 		'',
 		0,
 		0,
+		0,
+		0,
 		15
-	)
+	);

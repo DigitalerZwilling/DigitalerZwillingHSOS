@@ -12,7 +12,7 @@ INSERT INTO Hubpodest (
 		0,
 		0,
 		3
-	)
+	);
 	
 INSERT INTO Hubpodest (
 		id_hubpodest,
@@ -28,7 +28,7 @@ INSERT INTO Hubpodest (
 		0,
 		0,
 		5
-	)
+	);
 	
 INSERT INTO Hubpodest (
 		id_hubpodest,
@@ -44,7 +44,7 @@ INSERT INTO Hubpodest (
 		0,
 		0,
 		6
-	)
+	);
 	
 INSERT INTO Hubpodest (
 		id_hubpodest,
@@ -60,7 +60,7 @@ INSERT INTO Hubpodest (
 		0,
 		0,
 		7
-	)
+	);
 	
 INSERT INTO Hubpodest (
 		id_hubpodest,
@@ -76,7 +76,7 @@ INSERT INTO Hubpodest (
 		0,
 		0,
 		10
-	)
+	);
 	
 INSERT INTO Hubpodest (
 		id_hubpodest,
@@ -92,7 +92,7 @@ INSERT INTO Hubpodest (
 		0,
 		0,
 		12
-	)
+	);
 	
 INSERT INTO Hubpodest (
 		id_hubpodest,
@@ -108,4 +108,4 @@ INSERT INTO Hubpodest (
 		0,
 		0,
 		14
-	)
+	);

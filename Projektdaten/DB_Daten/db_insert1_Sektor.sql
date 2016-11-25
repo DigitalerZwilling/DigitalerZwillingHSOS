@@ -297,23 +297,3 @@ INSERT INTO Sektor(
 		0,
 		0		
 	);
-	
-INSERT INTO Sektor(
-		id_sektor, 
-		bezeichnung,
-		user_parameter, 
-		stoerung, 
-		position_x, 
-		position_y, 
-		position_z, 
-		position_ausrichtung 
-	) VALUES (
-		8,
-		'Ecke',
-		'',
-		0,
-		0,
-		0,
-		0,
-		0		
-	);

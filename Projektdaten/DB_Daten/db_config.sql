@@ -1,18 +1,3 @@
-DROP TABLE Roboter_Sektor;
-DROP TABLE Transportband_Warentraeger;
-DROP TABLE Sektor_Warentraeger;
-DROP TABLE Artikel_Warentraeger;
-DROP TABLE Hubquerpodest;
-DROP TABLE Hubpodest;
-DROP TABLE Werkzeug;
-DROP TABLE Gelenk;
-DROP TABLE Roboter;
-DROP TABLE Sensor;
-DROP TABLE Transportband;
-DROP TABLE Artikel;
-DROP TABLE Warentraeger;
-DROP TABLE Sektor;
-
 CREATE TABLE Sektor (
 	id_sektor BIGINT,
 	bezeichnung VARCHAR(100),
@@ -138,7 +123,7 @@ CREATE TABLE Hubquerpodest (
 	);
 	
 CREATE TABLE Artikel_Warentraeger (
-	id BIGINT AUTO_INCREMENT, --Nur zur internen Verarbeitung / PRIMARY KEY (Roboter1 <--> 2x Artikel1)
+	id BIGINT AUTO_INCREMENT,
 	id_artikel BIGINT,
 	id_warentraeger BIGINT,
 	PRIMARY KEY (id),

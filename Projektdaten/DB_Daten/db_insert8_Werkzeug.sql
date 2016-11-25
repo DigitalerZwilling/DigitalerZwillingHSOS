@@ -6,7 +6,7 @@ INSERT INTO Werkzeug (
 		id_roboter
 	) VALUES (
 		1,
-		'Beispielwerkzeug'
+		'Beispielwerkzeug',
 		'',
 		0,
 		3
