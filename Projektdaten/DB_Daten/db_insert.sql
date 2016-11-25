@@ -889,6 +889,8 @@ INSERT INTO Roboter (
 		0	
 	);
 	
+--INSERT Gelenk--------------------------------
+	
 INSERT INTO Gelenk (
 		id_gelenk,	
 		bezeichnung,
@@ -906,3 +908,438 @@ INSERT INTO Gelenk (
 		0,
 		3
 	);
+	
+--INSERT Werkzeug--------------------------------
+
+INSERT INTO Werkzeug (
+		id_werkzeug,
+		bezeichnung,
+		user_parameter,
+		zustand,
+		id_roboter
+	) VALUES (
+		1,
+		'Beispielwerkzeug'
+		'',
+		0,
+		3
+	);
+	
+--INSERT Hubpodest--------------------------------
+	
+INSERT INTO Hubpodest (
+		id_hubpodest,
+		bezeichnung,
+		user_parameter,
+		oben,
+		unten,
+		id_sektor
+	) VALUES (
+		31,
+		'HUPO Sekt3',
+		'',
+		0,
+		0,
+		3
+	)
+	
+INSERT INTO Hubpodest (
+		id_hubpodest,
+		bezeichnung,
+		user_parameter,
+		oben,
+		unten,
+		id_sektor
+	) VALUES (
+		51,
+		'HUPO Sekt5',
+		'',
+		0,
+		0,
+		5
+	)
+	
+INSERT INTO Hubpodest (
+		id_hubpodest,
+		bezeichnung,
+		user_parameter,
+		oben,
+		unten,
+		id_sektor
+	) VALUES (
+		61,
+		'HUPO Sekt6',
+		'',
+		0,
+		0,
+		6
+	)
+	
+INSERT INTO Hubpodest (
+		id_hubpodest,
+		bezeichnung,
+		user_parameter,
+		oben,
+		unten,
+		id_sektor
+	) VALUES (
+		71,
+		'HUPO Sekt7',
+		'',
+		0,
+		0,
+		7
+	)
+	
+INSERT INTO Hubpodest (
+		id_hubpodest,
+		bezeichnung,
+		user_parameter,
+		oben,
+		unten,
+		id_sektor
+	) VALUES (
+		101,
+		'HUPO Sekt10',
+		'',
+		0,
+		0,
+		10
+	)
+	
+INSERT INTO Hubpodest (
+		id_hubpodest,
+		bezeichnung,
+		user_parameter,
+		oben,
+		unten,
+		id_sektor
+	) VALUES (
+		121,
+		'HUPO Sekt12',
+		'',
+		0,
+		0,
+		12
+	)
+	
+INSERT INTO Hubpodest (
+		id_hubpodest,
+		bezeichnung,
+		user_parameter,
+		oben,
+		unten,
+		id_sektor
+	) VALUES (
+		141,
+		'HUPO Sekt10',
+		'',
+		0,
+		0,
+		14
+	)
+	
+
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		11,
+		'HuQu Sekt1',
+		'',
+		0,
+		0,
+		1
+	)
+	
+
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		81,
+		'HuQu Sekt1',
+		'',
+		0,
+		0,
+		8
+	)
+	
+
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		91,
+		'HuQu Sekt9 (innen)',
+		'',
+		0,
+		0,
+		9
+	)	
+
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		92,
+		'HuQu Sekt9 (aussen)',
+		'',
+		0,
+		0,
+		9
+	)
+
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		111,
+		'HuQu Sekt11 (erstes innen)',
+		'',
+		0,
+		0,
+		11
+	)
+	
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		112,
+		'HuQu Sekt11 (erstes aussen)',
+		'',
+		0,
+		0,
+		11
+	)
+	
+
+	
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		113,
+		'HuQu Sekt11 (zweites innen)',
+		'',
+		0,
+		0,
+		11
+	)
+	
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		114,
+		'HuQu Sekt11 (zweites aussen)',
+		'',
+		0,
+		0,
+		11
+	)
+
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		131,
+		'HuQu Sekt13 (erstes innen)',
+		'',
+		0,
+		0,
+		13
+	)
+	
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		132,
+		'HuQu Sekt13 (erstes aussen)',
+		'',
+		0,
+		0,
+		13
+	)
+	
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		133,
+		'HuQu Sekt13 (zweites innen)',
+		'',
+		0,
+		0,
+		13
+	)
+	
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		134,
+		'HuQu Sekt13 (zweites aussen)',
+		'',
+		0,
+		0,
+		13
+	)
+	
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		151,
+		'HuQu Sekt15 (innen)',
+		'',
+		0,
+		0,
+		15
+	)
+
+INSERT INTO Hubquerpodest (
+		id_hubquerpodest,
+		bezeichnung,
+		user_parameter,
+		motor,
+		oben,
+		mittig,
+		unten,
+		id_sektor
+	) VALUES (
+		152,
+		'HuQu Sekt15 (aussen)',
+		'',
+		0,
+		0,
+		15
+	)
+	
+INSERT INTO Roboter_Sektor (
+		id_roboter,
+		id_sektor
+	) VALUES (
+		3,
+		3	
+	)
+	
+INSERT INTO Roboter_Sektor (
+		id_roboter,
+		id_sektor
+	) VALUES (
+		5,
+		5	
+	)
+	
+INSERT INTO Roboter_Sektor (
+		id_roboter,
+		id_sektor
+	) VALUES (
+		7,
+		7	
+	)
+	
+INSERT INTO Roboter_Sektor (
+		id_roboter,
+		id_sektor
+	) VALUES (
+		10,
+		10	
+	)
+	
+INSERT INTO Roboter_Sektor (
+		id_roboter,
+		id_sektor
+	) VALUES (
+		12,
+		12	
+	)
+	
+INSERT INTO Roboter_Sektor (
+		id_roboter,
+		id_sektor
+	) VALUES (
+		14,
+		14	
+	)

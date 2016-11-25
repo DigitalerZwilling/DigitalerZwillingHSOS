@@ -126,7 +126,7 @@ CREATE TABLE Hubpodest (
 CREATE TABLE Hubquerpodest (
 	id_hubquerpodest BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	motor INT,
 	oben INT,
