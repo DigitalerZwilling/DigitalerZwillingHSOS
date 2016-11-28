@@ -5,6 +5,8 @@
  */
 package Cache;
 
+import Cache.Exeption.DBErrorExeption;
+import Cache.Exeption.ElementNotFoundExeption;
 import Cache.Updater.Updater;
 import DatenKlassen.Element;
 import java.util.ArrayList;
@@ -48,7 +50,10 @@ public abstract class Cache {
         state = !state;
     }
     
-    public Element getById(Long id) {
+    public Element getById(Long id) throws ElementNotFoundExeption{
+        if(id < 0 || id>= (state==true?elements[1]:elements[0]).size())
+            throw new ElementNotFoundExeption();
+        
         return state==true?elements[1].get(id):elements[0].get(id);
     }
     
@@ -61,7 +66,6 @@ public abstract class Cache {
         return elementList;
     }
     
-    @SuppressWarnings("LeakingThisInConstructor")
     public Cache() {}
     
     @PostConstruct
@@ -72,6 +76,6 @@ public abstract class Cache {
         updater.registerCache(this);
     }
 
-    abstract public void update();
+    abstract public void update() throws DBErrorExeption;
     abstract public void updateAll();
 }
