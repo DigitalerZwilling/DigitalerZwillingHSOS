@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlets;
+package Websockets;
 
 import Cache.ArtikelCache;
+import Websockets.SessionRegister.ArtikelSessionRegister;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,13 +23,17 @@ import javax.websocket.server.ServerEndpoint;
  * @author user
  */
 @ServerEndpoint("/ArtikelWebSocket")
-public class ArtikelWebSocket {
-  @Inject ArtikelCache aCache;
-  private Session session;
+public class ArtikelWebSocket extends WebSocketConfig{
+  @Inject ArtikelSessionRegister artikelSessionRegister;
+  //private WebSocketConfig webSocketConfig;
   
   @OnMessage
   public void messageReceiver(String message) {
-      try {
+      System.out.println(message);
+      this.setId(Long.parseLong(message));
+      this.setKlasseninfo("Artikel");
+      
+      /*try {
           //System.out.println("Received message:" + message);
           session.getBasicRemote().sendObject(aCache.getById(1L));
           System.out.println("onMessage: " + aCache.getById(1L).getBezeichnung());
@@ -37,18 +42,16 @@ public class ArtikelWebSocket {
           Logger.getLogger(ArtikelWebSocket.class.getName()).log(Level.SEVERE, null, ex);
       /*} catch (EncodeException ex) {
           Logger.getLogger(ArtikelWebSocket.class.getName()).log(Level.SEVERE, null, ex);
-      */} catch (EncodeException ex) {
-          Logger.getLogger(ArtikelWebSocket.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      */
   }
 
   @OnOpen
   public void onOpen(Session session) {
     //this.session=session;
-    this.session=session;
-    
+    //this.session=session;
+    this.setSession(session);
     System.out.println("onOpen: " + session.getId());
-    this.messageReceiver("hi");
+    //this.messageReceiver("hi");
     
     //System.out.println("onOpen: Notification list size: " + sessions.size());
   }
