@@ -111,14 +111,4 @@ public class ArtikelCache extends Cache{
         }
         return w_ids;
     }
-
-   /* private static ArtikelCache instance;
-
-    public static synchronized Cache getInstance(){
-        if(ArtikelCache.instance == null) {
-            ArtikelCache.instance = new ArtikelCache();
-        }
-        return instance;
-    }
-    */
 }

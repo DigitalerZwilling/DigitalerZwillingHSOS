@@ -77,5 +77,5 @@ public abstract class Cache {
     }
 
     abstract public void update() throws DBErrorExeption;
-    abstract public void updateAll() throws DBErrorExeption;
+    abstract public void updateAll();
 }

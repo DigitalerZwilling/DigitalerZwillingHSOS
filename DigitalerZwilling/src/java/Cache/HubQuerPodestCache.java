@@ -5,12 +5,17 @@
  */
 package Cache;
 
+import Cache.Exeption.DBErrorExeption;
 import DatenKlassen.HubQuerPodest;
 import DatenbankSchnittestelle.Datenbankschnittstelle;
+import DatenbankSchnittestelle.Exeption.DBNotFoundExeption;
+import DatenbankSchnittestelle.Exeption.QueryExeption;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -25,27 +30,35 @@ public class HubQuerPodestCache extends Cache{
     @Inject private Datenbankschnittstelle datenbankschnittstelle;
     
     @Override
-    public void update() {
-        //--------------------------------------------------------------
-
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_Hubquerpodest, user_parameter, motor, oben, mittig, unten, zeitstempel FROM Hubquerpodest");
-
-        List<String> id = rsMap.get("ID_HUBQUERPODEST");
-        List<String> userParameter = rsMap.get("USER_PARAMETER");
-        List<String> motor = rsMap.get("MOTOR");
-        List<String> oben = rsMap.get("OBEN");
-        List<String> mittig = rsMap.get("MITTIG");
-        List<String> unten = rsMap.get("UNTEN");
-        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
-        for(int i = 0; i<id.size();i++){
-            String ourTime=zeitstempel.get(i).replace(' ', 'T');
-            HubQuerPodest huQu = (HubQuerPodest) (state==true?elements[0].get(Long.parseLong(id.get(i))):elements[0].get(Long.parseLong(id.get(i))));
-            huQu.setUser_Parameter(userParameter.get(i));
-            huQu.setMotor(Long.parseLong(motor.get(i))!=0);
-            huQu.setOben(Long.parseLong(oben.get(i))!=0);
-            huQu.setMittig(Long.parseLong(mittig.get(i))!=0);
-            huQu.setUnten(Long.parseLong(unten.get(i))!=0);
-            huQu.setZeitstempel(LocalDateTime.parse(zeitstempel.get(i)));
+    public void update() throws DBErrorExeption {
+        try {
+            //--------------------------------------------------------------
+            
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_Hubquerpodest, user_parameter, motor, oben, mittig, unten, zeitstempel FROM Hubquerpodest");
+            
+            List<String> id = rsMap.get("ID_HUBQUERPODEST");
+            List<String> userParameter = rsMap.get("USER_PARAMETER");
+            List<String> motor = rsMap.get("MOTOR");
+            List<String> oben = rsMap.get("OBEN");
+            List<String> mittig = rsMap.get("MITTIG");
+            List<String> unten = rsMap.get("UNTEN");
+            List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+            for(int i = 0; i<id.size();i++){
+                String ourTime=zeitstempel.get(i).replace(' ', 'T');
+                HubQuerPodest huQu = (HubQuerPodest) (state==true?elements[0].get(Long.parseLong(id.get(i))):elements[0].get(Long.parseLong(id.get(i))));
+                huQu.setUser_Parameter(userParameter.get(i));
+                huQu.setMotor(Long.parseLong(motor.get(i))!=0);
+                huQu.setOben(Long.parseLong(oben.get(i))!=0);
+                huQu.setMittig(Long.parseLong(mittig.get(i))!=0);
+                huQu.setUnten(Long.parseLong(unten.get(i))!=0);
+                huQu.setZeitstempel(LocalDateTime.parse(zeitstempel.get(i)));
+            }
+        } catch (DBNotFoundExeption ex) {
+            Logger.getLogger(ArtikelCache.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DBErrorExeption("DB not found");
+        } catch (QueryExeption ex) {
+            Logger.getLogger(ArtikelCache.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DBErrorExeption("Query error");
         }
     }
 
@@ -53,28 +66,34 @@ public class HubQuerPodestCache extends Cache{
     @PostConstruct
     public void updateAll() {
 
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_Hubquerpodest, user_parameter, motor, oben, mittig, unten, zeitstempel, bezeichnung, id_sektor FROM Hubquerpodest");
-
-        List<String> id = rsMap.get("ID_HUBQUERPODEST");
-        List<String> userParameter = rsMap.get("USER_PARAMETER");
-        List<String> motor = rsMap.get("MOTOR");
-        List<String> oben = rsMap.get("OBEN");
-        List<String> mittig = rsMap.get("MITTIG");
-        List<String> unten = rsMap.get("UNTEN");
-        List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
-        List<String> sektorId = rsMap.get("ID_SEKTOR");
-        List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
-        elements[0] = new HashMap<>();
-        elements[1] = new HashMap<>();
-        for(int i = 0; i<id.size();i++){
-            String ourTime=zeitstempel.get(i).replace(' ', 'T');
-            elements[0].put(Long.parseLong(id.get(i)), new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(zeitstempel.get(i))));
-            elements[1].put(Long.parseLong(id.get(i)), new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(zeitstempel.get(i))));
+        try {
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_Hubquerpodest, user_parameter, motor, oben, mittig, unten, zeitstempel, bezeichnung, id_sektor FROM Hubquerpodest");
+            
+            List<String> id = rsMap.get("ID_HUBQUERPODEST");
+            List<String> userParameter = rsMap.get("USER_PARAMETER");
+            List<String> motor = rsMap.get("MOTOR");
+            List<String> oben = rsMap.get("OBEN");
+            List<String> mittig = rsMap.get("MITTIG");
+            List<String> unten = rsMap.get("UNTEN");
+            List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+            List<String> sektorId = rsMap.get("ID_SEKTOR");
+            List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
+            elements[0] = new HashMap<>();
+            elements[1] = new HashMap<>();
+            for(int i = 0; i<id.size();i++){
+                String ourTime=zeitstempel.get(i).replace(' ', 'T');
+                elements[0].put(Long.parseLong(id.get(i)), new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(zeitstempel.get(i))));
+                elements[1].put(Long.parseLong(id.get(i)), new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(zeitstempel.get(i))));
+            }
+            updateGruppenIds();
+        } catch (DBNotFoundExeption ex) {
+            Logger.getLogger(HubQuerPodestCache.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (QueryExeption ex) {
+            Logger.getLogger(HubQuerPodestCache.class.getName()).log(Level.SEVERE, null, ex);
         }
-        updateGruppenIds();
     }
    
-    private void updateGruppenIds(){
+    private void updateGruppenIds() throws DBNotFoundExeption, QueryExeption{
 
         Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_Hubquerpodest1, id_hubquerpodest2 FROM Hubquerpodest_Hubquerpodest");
 
