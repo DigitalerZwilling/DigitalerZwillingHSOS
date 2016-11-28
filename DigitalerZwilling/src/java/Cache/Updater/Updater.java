@@ -6,10 +6,15 @@
 package Cache.Updater;
 
 import Cache.Cache;
+import Cache.Exeption.DBErrorExeption;
 import WebSockets.WebSocket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import javax.annotation.Resource;
+import javax.ejb.Timeout;
+import javax.ejb.Timer;
+import javax.ejb.TimerService;
 import javax.enterprise.concurrent.ManagedThreadFactory;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -35,9 +40,15 @@ public class Updater {
     @Resource
     private ManagedThreadFactory managedThreadFactory;
     
+    @Resource
+    private TimerService timerService;
+    
+    private Timer timer;
+    
     Updater(){
         caches = new ArrayList<>();
         webSockets = new ArrayList<>();
+        timer = timerService.createTimer(500, 500, "New Updater interval Timer");
     }
     
     public void updateSockets(){
@@ -48,11 +59,16 @@ public class Updater {
     
     public void updateCaches(){
         for(Cache cache: caches){
-            cache.update();
+            try {
+                cache.update();
+            } catch (DBErrorExeption ex) {
+                java.util.logging.Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
-    public void updateAll(){
+    @Timeout
+    public void updateAll(Timer timer){
         for(Cache cache: caches){
             cache.toggleState();
         }
