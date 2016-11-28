@@ -5,6 +5,7 @@
  */
 package Cache;
 
+import Cache.Exeption.DBErrorExeption;
 import Cache.Exeption.ElementNotFoundExeption;
 import Cache.Updater.Updater;
 import DatenKlassen.Element;
@@ -75,6 +76,6 @@ public abstract class Cache {
         updater.registerCache(this);
     }
 
-    abstract public void update();
-    abstract public void updateAll();
+    abstract public void update() throws DBErrorExeption;
+    abstract public void updateAll() throws DBErrorExeption;
 }
