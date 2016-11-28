@@ -10,5 +10,12 @@ package DatenbankSchnittestelle.Exeption;
  * @author florian
  */
 public class QueryExeption extends Exception{
+
+    public QueryExeption() {
+        super("QueryExetion");
+    }
     
+    public QueryExeption(String str){
+        super(str);
+    }
 }
