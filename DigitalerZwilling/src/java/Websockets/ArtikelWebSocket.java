@@ -49,6 +49,7 @@ public class ArtikelWebSocket extends WebSocketConfig{
   public void onOpen(Session session) {
     //this.session=session;
     //this.session=session;
+    
     this.setSession(session);
     System.out.println("onOpen: " + session.getId());
     //this.messageReceiver("hi");

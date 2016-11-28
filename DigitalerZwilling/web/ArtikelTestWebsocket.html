@@ -31,8 +31,9 @@
           wSocket.onopen = function()
           {
             //alert(" Web Socket is connected, sending data");
-            wSocket.send("1");
+            wSocket.send("ping");
           };
+          send();
         }
         else
         {
@@ -60,7 +61,7 @@
       };
       
       function send(){
-                var text = "test";
+                var text = "1";
                 wSocket.send(text);
                 
             };
