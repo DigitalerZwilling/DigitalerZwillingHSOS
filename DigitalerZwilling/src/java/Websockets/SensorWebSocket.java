@@ -5,7 +5,7 @@
  */
 package Websockets;
 
-import Websockets.SessionRegister.SektorSessionRegister;
+import Websockets.SessionRegister.SensorSessionRegister;
 import javax.inject.Inject;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -17,9 +17,10 @@ import javax.websocket.server.ServerEndpoint;
  *
  * @author user
  */
-@ServerEndpoint("/SektorWebSocket")
-public class SektorWebSocket extends WebSocketConfig{
-    @Inject SektorSessionRegister sektorSessionRegister;
+@ServerEndpoint("/SensorWebSocket")
+public class SensorWebSocket extends WebSocketConfig{
+
+    @Inject SensorSessionRegister sensorSessionRegister;
   
   
 
@@ -42,7 +43,7 @@ public class SektorWebSocket extends WebSocketConfig{
           this.setId(Long.parseLong(message));
       }
       this.setKlasseninfo("Warentraeger");
-      this.sektorSessionRegister.addSession(this);
+      this.sensorSessionRegister.addSession(this);
       this.fertigRegistriert();
   }
 
@@ -60,7 +61,8 @@ public class SektorWebSocket extends WebSocketConfig{
     @OnClose
     public void onClose(Session session){
         this.nichtmehrRegistriert();
-        this.sektorSessionRegister.remove(this);
+        this.sensorSessionRegister.remove(this);
         System.out.println("Session " +session.getId()+" has ended");
     }
+    
 }
