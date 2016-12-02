@@ -5,12 +5,14 @@
  */
 package Cache.Updater;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 /**
  *
  * @author florian
  */
+@ApplicationScoped
 public class WebSocketUpdateThread implements Runnable{
     @Inject
     Updater updater;
