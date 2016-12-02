@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
  *
  * @author user
  */
-public class Element {
-    private Long id;
-    private String bezeichnung;
-    private String user_Parameter;
-    private LocalDateTime zeitstempel;
+public abstract class Element {
+    protected Long id;
+    protected String bezeichnung;
+    protected String user_Parameter;
+    protected LocalDateTime zeitstempel;
 
     public Element(Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         this.id = id;
@@ -55,7 +55,7 @@ public class Element {
     public void setZeitstempel(LocalDateTime zeitstempel) {
         this.zeitstempel = zeitstempel;
     }
-
     
+    abstract public String toJson();    
     
 }

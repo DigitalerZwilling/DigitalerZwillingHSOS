@@ -59,8 +59,22 @@ public class Sensor extends Element{
     public void setSektorID(Long sektorID) {
         this.sektorID = sektorID;
     }
-    
-    
-    
-    
+
+    @Override
+    public String toJson() {
+        String json = new String();
+        json += '{';
+        json += "\"id\": " + id + ",\n";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
+        json += "\"user_Parameter\": \"" + user_Parameter + "\",\n";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
+        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",\n";
+        json += "\"stoerung\": " + stoerung + ",\n";
+        json += "\"phy_adresse\": \"" + phy_adresse + "\",\n";
+        json += "\"zustand\": " + zustand + ",\n";
+        json += "\"sektorID\": " + sektorID + "\n";
+        json += '}';
+        return json;
+    }
+       
 }

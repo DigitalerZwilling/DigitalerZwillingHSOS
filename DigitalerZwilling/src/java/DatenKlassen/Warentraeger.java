@@ -86,4 +86,51 @@ public class Warentraeger extends Element{
     public void setSektorIDs(List<Long> sektorIDs) {
         this.sektorIDs = sektorIDs;
     }
+
+    @Override
+    public String toJson() {
+        String json = new String();
+        json += '{';
+        json += "\"id\": " + id + ",\n";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
+        json += "\"user_Parameter\": \"" + user_Parameter + "\",\n";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
+        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",\n";
+        json += "\"stoerung\": " + stoerung + ",\n";
+        json += "\"abstand_mm\": " + abstand_mm + ",\n";
+        json += "\"montagezustand\": " + montagezustand + ",\n";
+        
+        json += "\"artikelIDs\": \n{";
+        for(int i=0;i<artikelIDs.size();i++){
+            json += "\"" + i + "\": " + artikelIDs.get(i);
+            if(i < (artikelIDs.size()-1))
+                json += ",";
+            
+            json += '\n';
+        }
+        json += "},\n";
+        
+        json += "\"transportbandIDs\": \n{";
+        for(int i=0;i<transportbandIDs.size();i++){
+            json += "\"" + i + "\": " + transportbandIDs.get(i);
+            if(i < (transportbandIDs.size()-1))
+                json += ",";
+            
+            json += '\n';
+        }
+        json += "},\n";
+        
+        json += "\"sektorIDs\": \n{";
+        for(int i=0;i<sektorIDs.size();i++){
+            json += "\"" + i + "\": " + sektorIDs.get(i);
+            if(i < (sektorIDs.size()-1))
+                json += ",";
+            
+            json += '\n';
+        }
+        json += "}\n";
+        
+        return json;
+    }
+    
 }

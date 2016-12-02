@@ -82,6 +82,35 @@ public class HubQuerPodest extends Element{
     public void setId_Sektor(Long id_Sektor) {
         this.sektorID = id_Sektor;
     }
-    
+
+    @Override
+    public String toJson() {
+        String json = new String();
+        json += '{';
+        json += "\"id\": " + id + ",\n";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
+        json += "\"user_Parameter\": \"" + user_Parameter + "\",\n";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
+        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",\n";
+        json += "\"motor\": " + motor + ",\n";
+        json += "\"oben\": " + oben + ",\n";
+        json += "\"mittig\": " + mittig + ",\n";
+        json += "\"unten\": " + unten + ",\n";
+        
+        json += "\"gruppenIDs\": \n{";
+        for(int i=0;i<gruppenIDs.size();i++){
+            json += "\"" + i + "\": " + gruppenIDs.get(i);
+            if(i < (gruppenIDs.size()-1))
+                json += ",";
+            
+            json += '\n';
+        }
+        json += "}\n";
+        
+        json += "\"sektorID\": " + sektorID + "\n";
+        json += '}';
+        
+        return json;
+    }
     
 }
