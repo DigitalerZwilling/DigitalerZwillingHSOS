@@ -6,6 +6,7 @@
 package Websockets.SessionRegister;
 
 import Websockets.WebSocketConfig;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,12 +15,13 @@ import java.util.List;
  * @author user
  */
 public abstract class WebSocketSessionRegister {
-    protected List<WebSocketConfig> sessions;
+    protected List<WebSocketConfig> sessions = new ArrayList<>();
     // fuer Websockets
     public void addSession(WebSocketConfig webSocketConfig){
         this.sessions.add(webSocketConfig);
     };
     public void remove(WebSocketConfig webSocketConfig){
+      this.updateWebSockets();
       this.sessions.remove(webSocketConfig);
     };
     // fuer updater

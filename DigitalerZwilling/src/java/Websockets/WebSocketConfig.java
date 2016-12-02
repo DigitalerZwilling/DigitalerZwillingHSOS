@@ -17,12 +17,19 @@ public class WebSocketConfig {
     private Long id;
     private String klasseninfo;
     private Boolean istListe;
+    
+    private Boolean registriert;
 
     public WebSocketConfig() {
-        this.istListe = false;
+        this.istListe = Boolean.FALSE;
+        this.registriert = Boolean.FALSE;
         System.out.println("config hier!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
+    protected void isRegistriert(){
+        this.registriert=Boolean.TRUE;
+    }
+    
     public Boolean getIstListe() {
         return istListe;
     }
