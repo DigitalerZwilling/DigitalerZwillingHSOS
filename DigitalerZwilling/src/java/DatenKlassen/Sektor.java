@@ -135,10 +135,93 @@ public class Sektor extends Element{
     public void setNachTransportbandIDs(List<Long> nachTransportbandIDs) {
         this.nachTransportbandIDs = nachTransportbandIDs;
     }
-    
-    
-    
 
-    
-    
+    @Override
+    public String toJson() {
+    String json = new String();
+        json += '{';
+        json += "\"id\": " + id + ",\n";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
+        json += "\"user_Parameter\": \"" + user_Parameter + "\",\n";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
+        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",\n";
+        json += "\"stoerung\": " + stoerung + ",\n";
+        json += "\"x\": " + x + ",\n";
+        json += "\"y\": " + y + ",\n";
+        json += "\"z\": " + z + ",\n";
+        json += "\"ausrichtung\": " + ausrichtung + ",\n";
+        
+        json += "\"warentraegerIDs\": \n{";
+        for(int i=0;i<warentraegerIDs.size();i++){
+            json += "\"" + i + "\": " + warentraegerIDs.get(i);
+            if(i < (warentraegerIDs.size()-1))
+                json += ",";
+            
+            json += '\n';
+        }
+        json += "},\n";
+        
+        json += "\"hubpodestIDs\": \n{";
+        for(int i=0;i<hubpodestIDs.size();i++){
+            json += "\"" + i + "\": " + hubpodestIDs.get(i);
+            if(i < (hubpodestIDs.size()-1))
+                json += ",";
+            
+            json += '\n';
+        }
+        json += "},\n";
+        
+        json += "\"hubquerpodestIDs\": \n{";
+        for(int i=0;i<hubquerpodestIDs.size();i++){
+            json += "\"" + i + "\": " + hubquerpodestIDs.get(i);
+            if(i < (hubquerpodestIDs.size()-1))
+                json += ",";
+            
+            json += '\n';
+        }
+        json += "},\n";
+        
+        json += "\"roboterIDs\": \n{";
+        for(int i=0;i<roboterIDs.size();i++){
+            json += "\"" + i + "\": " + roboterIDs.get(i);
+            if(i < (roboterIDs.size()-1))
+                json += ",";
+            
+            json += '\n';
+        }
+        json += "},\n";
+        
+        json += "\"sensorIDs\": \n{";
+        for(int i=0;i<sensorIDs.size();i++){
+            json += "\"" + i + "\": " + sensorIDs.get(i);
+            if(i < (sensorIDs.size()-1))
+                json += ",";
+            
+            json += '\n';
+        }
+        json += "},\n";
+        
+        json += "\"vorTransportbandIDs\": \n{";
+        for(int i=0;i<vorTransportbandIDs.size();i++){
+            json += "\"" + i + "\": " + vorTransportbandIDs.get(i);
+            if(i < (vorTransportbandIDs.size()-1))
+                json += ",";
+            
+            json += '\n';
+        }
+        json += "},\n";
+        
+        json += "\"nachTransportbandIDs\": \n{";
+        for(int i=0;i<nachTransportbandIDs.size();i++){
+            json += "\"" + i + "\": " + nachTransportbandIDs.get(i);
+            if(i < (nachTransportbandIDs.size()-1))
+                json += ",";
+            
+            json += '\n';
+        }
+        json += "}\n";
+        
+        return json;
+    }
+        
 }

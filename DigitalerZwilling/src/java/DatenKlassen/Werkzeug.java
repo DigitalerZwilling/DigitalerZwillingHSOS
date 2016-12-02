@@ -37,4 +37,21 @@ public class Werkzeug extends Element{
     public void setRoboterID(Long roboterID) {
         this.roboterID = roboterID;
     }
+
+    @Override
+    public String toJson() {
+        String json = new String();
+        json += '{';
+        json += "\"id\": " + id + ",\n";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
+        json += "\"user_Parameter\": \"" + user_Parameter + "\",\n";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
+        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",\n";
+        json += "\"zustand\": " + zustand + ",\n";
+        json += "\"roboterID\": " + roboterID + "\n";
+        json += '}';
+        
+        return json;
+    }
+    
 }

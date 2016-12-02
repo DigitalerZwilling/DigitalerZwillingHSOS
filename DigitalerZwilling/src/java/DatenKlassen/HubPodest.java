@@ -52,6 +52,22 @@ public class HubPodest extends Element{
     public void setId_sektor(Long id_sektor) {
         this.sektorID = id_sektor;
     }
+
+    @Override
+    public String toJson() {
+        String json = new String();
+        json += '{';
+        json += "\"id\": " + id + ",\n";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
+        json += "\"user_Parameter\": \"" + user_Parameter + "\",\n";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
+        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",\n";
+        json += "\"oben\": \"" + oben + "\",\n";
+        json += "\"unten\": " + unten + ",\n";
+        json += "\"sektorID\": " + sektorID + "\n";
+        json += "}";
+        return json;
+    }
    
     
 }
