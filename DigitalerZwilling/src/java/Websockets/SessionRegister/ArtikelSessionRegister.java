@@ -5,29 +5,38 @@
  */
 package Websockets.SessionRegister;
 
+import Cache.ArtikelCache;
 import Websockets.WebSocketConfig;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.websocket.Session;
 
 /**
  *
  * @author user
  */
 @ApplicationScoped
-public class ArtikelSessionRegister implements WebSocketSessionRegister{
+public class ArtikelSessionRegister extends WebSocketSessionRegister{
+    @Inject ArtikelCache artikelCache;
 
-    @Override
-    public void addSession(WebSocketConfig webSocketConfig) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void remove(WebSocketConfig webSocketConfig) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
+    @Override   //mit Timer annotation versehen
     public void updateWebSockets() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (WebSocketConfig session : this.sessions ){
+            try {
+                if(session.getIstListe()){
+                    session.getSession().getBasicRemote().sendText(this.artikelCache.getAll().toString());  //mit toJson versehen
+                }
+                else{
+                    session.getSession().getBasicRemote().sendText(this.artikelCache.getById(session.getId()).toString());  //mit toJson versehen
+                }
+                
+            } catch (IOException ex) {
+                Logger.getLogger(ArtikelSessionRegister.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
 }
