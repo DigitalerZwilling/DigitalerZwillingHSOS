@@ -27,67 +27,34 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class Datenbankschnittstelle {
-    //private static Datenbankschnittstelle instance=null;                                //statische Instanz des Singeltons
+    private final String driverMqsql = "com.mysql.jdbc.Driver";
+    private final String dbURLMysql="jdbc:mysql://131.173.117.48:3306/df_16115";
     
+    private final String driverDerby = "org.apache.derby.jdbc.ClientDriver";
+    private final String dbURLDerby="jdbc:derby://localhost:1527/db_DigitalerZwilling";
+     
+    private final String dbUser="root";
+    private final String dbPw="Didpw4df";
     //---------------------------------------------------------------------------
-    //Datenbank verbindungs daten
     
-    private final String _DbURL="jdbc:derby://localhost:1527/db_DigitalerZwilling";   //URL
-    //MySQL
-    //private final String _DbURL="jdbc:mysql://localhost:1527/db_DigitalerZwilling";   //URL
-    private final String _DbUser="db_user";                                            //User
-    private final String _DbPw="SB0222";                                              //Passswort
-    //---------------------------------------------------------------------------
-    private Connection data;                                                        // Datenbank Verbindung
+    private Connection data;
     
     //-----------------------------------------------------------------------------
     public Datenbankschnittstelle() throws DBNotFoundExeption{ 
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            Class.forName(driverMqsql).newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            this.data = DriverManager.getConnection(this._DbURL,this._DbUser,this._DbPw);
+            this.data = DriverManager.getConnection(this.dbURLMysql,this.dbUser,this.dbPw);
             
         } catch (SQLException ex) {
             Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
             throw new DBNotFoundExeption();
-            //throw new Exception("Fehler: Datenbankverbindung auf "+ this._DbURL+" nicht möglich");
         }
     }
-    //--------------------------------------------------------------------------------------------
     
-    /*-----------------------------------------------------------------------------
-    //MySQL
-    private Datenbankschnittstelle(){ 
-        try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            this.data = DriverManager.getConnection(this._DbURL,this._DbUser,this._DbPw);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
-            //throw new Exception("Fehler: Datenbankverbindung auf "+ this._DbURL+" nicht möglich");
-        }
-    }
-    //--------------------------------------------------------------------------------------------*/
-    
-    /**
-     * Gibt die vorhandene Instance zurueck bzw. erstellt wenn nötig die erste Instanz dieses Singeltons
-     *
-     * @return Instance dieses Singelton
-     */
-    /*public static Datenbankschnittstelle getInstance(){
-        if(instance==null){
-            instance=new Datenbankschnittstelle();
-        }
-        return instance;
-    }*/
-    //---------------------------------------------------------------------------------------------
 
     /**
      * Die Funktion uebermittelt das Statement an die Datenbank und ruft
