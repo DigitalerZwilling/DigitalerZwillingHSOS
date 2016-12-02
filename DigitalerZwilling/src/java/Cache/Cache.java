@@ -38,15 +38,15 @@ public abstract class Cache {
         this.elements = elements;
     }
 
-    public static boolean isState() {
+    public boolean isState() {
         return state;
     }
 
-    public static void setState(boolean state) {
+    public void setState(boolean state) {
         Cache.state = state;
     }
     
-    public static void toggleState() {
+    public void toggleState() {
         state = !state;
     }
     

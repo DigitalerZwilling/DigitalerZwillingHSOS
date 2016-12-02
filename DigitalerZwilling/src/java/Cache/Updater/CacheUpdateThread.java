@@ -13,13 +13,21 @@ import javax.inject.Inject;
  * @author User
  */
 @ApplicationScoped
-public class UpdaterThread implements Runnable{
+public class CacheUpdateThread implements Runnable{
 
     @Inject
     Updater updater;
     
+    private boolean running;
+
+    public boolean isRunning() {
+        return running;
+    }
+    
     @Override
     public void run() {
-        updater.update();
-    }    
+        running = true;
+        updater.updateCaches();
+        running = false;
+    }
 }

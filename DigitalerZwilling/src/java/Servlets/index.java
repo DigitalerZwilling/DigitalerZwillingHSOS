@@ -49,7 +49,7 @@ public class index extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet test at " + request.getContextPath() + "</h1>");
             out.println(a.toString());
-            a.update();
+            //a.update();
             out.println("<br>");
             out.println(b.toString());
             out.println("</body>");
