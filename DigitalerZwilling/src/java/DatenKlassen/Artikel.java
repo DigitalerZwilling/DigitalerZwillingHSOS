@@ -31,7 +31,10 @@ public class Artikel extends Element{
 
     public void setId_Warentraeger(List<Long> id_Warentraeger) {
         this.warentraegerIDs = id_Warentraeger;
+        
     }
+    
+    
     
     
 }

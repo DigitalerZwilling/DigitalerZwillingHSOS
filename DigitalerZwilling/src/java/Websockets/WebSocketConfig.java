@@ -26,8 +26,14 @@ public class WebSocketConfig {
         System.out.println("config hier!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
-    protected void isRegistriert(){
+    protected void fertigRegistriert(){
         this.registriert=Boolean.TRUE;
+    }
+    protected void nichtmehrRegistriert(){
+        this.registriert=Boolean.FALSE;
+    }
+    public Boolean istRegistriert(){
+        return this.registriert;
     }
     
     public Boolean getIstListe() {

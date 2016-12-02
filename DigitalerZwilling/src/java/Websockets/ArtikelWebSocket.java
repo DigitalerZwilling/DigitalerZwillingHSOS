@@ -33,6 +33,7 @@ public class ArtikelWebSocket extends WebSocketConfig{
       this.setId(Long.parseLong(message));
       this.setKlasseninfo("Artikel");
       this.artikelSessionRegister.addSession(this);
+      this.fertigRegistriert();
       
       /*try {
           //System.out.println("Received message:" + message);
@@ -65,7 +66,7 @@ public class ArtikelWebSocket extends WebSocketConfig{
      */
     @OnClose
     public void onClose(Session session){
-        
+        this.nichtmehrRegistriert();
         this.artikelSessionRegister.remove(this);
         System.out.println("Session " +session.getId()+" has ended");
     }

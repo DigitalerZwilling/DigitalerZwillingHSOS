@@ -25,16 +25,18 @@ public class WarentraegerSessionRegister extends WebSocketSessionRegister{
     @Override
     public void updateWebSockets() {
         for (WebSocketConfig session : this.sessions ){
-            try {
-                if(session.getIstListe()){
-                    session.getSession().getBasicRemote().sendText(this.warentraegerCache.getAll().toString());  //mit toJson versehen
-                }
-                else{
-                    session.getSession().getBasicRemote().sendText(this.warentraegerCache.getById(session.getId()).toString());  //mit toJson versehen
-                }
+            if (session.istRegistriert()){
+                try {
+                    if(session.getIstListe()){
+                        session.getSession().getBasicRemote().sendText(this.warentraegerCache.getAll().toString());  //mit toJson versehen
+                    }
+                    else{
+                        session.getSession().getBasicRemote().sendText(this.warentraegerCache.getById(session.getId()).toString());  //mit toJson versehen
+                    }
                 
-            } catch (IOException ex) {
-                Logger.getLogger(ArtikelSessionRegister.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(ArtikelSessionRegister.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }

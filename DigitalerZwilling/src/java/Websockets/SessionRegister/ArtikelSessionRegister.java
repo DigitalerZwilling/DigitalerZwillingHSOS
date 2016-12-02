@@ -25,16 +25,18 @@ public class ArtikelSessionRegister extends WebSocketSessionRegister{
     @Override   //mit Timer annotation versehen
     public void updateWebSockets() {
         for (WebSocketConfig session : this.sessions ){
-            try {
-                if(session.getIstListe()){
-                    session.getSession().getBasicRemote().sendText(this.artikelCache.getAll().toString());  //mit toJson versehen
+            if (session.istRegistriert()){
+                try {
+                    if(session.getIstListe()){
+                        session.getSession().getBasicRemote().sendText(this.artikelCache.getAll().toString());  //mit toJson versehen
+                    }
+                    else{
+                        session.getSession().getBasicRemote().sendText(this.artikelCache.getById(session.getId()).toString());  //mit toJson versehen
+                    }
+  
+                } catch (IOException ex) {
+                    Logger.getLogger(ArtikelSessionRegister.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                else{
-                    session.getSession().getBasicRemote().sendText(this.artikelCache.getById(session.getId()).toString());  //mit toJson versehen
-                }
-                
-            } catch (IOException ex) {
-                Logger.getLogger(ArtikelSessionRegister.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

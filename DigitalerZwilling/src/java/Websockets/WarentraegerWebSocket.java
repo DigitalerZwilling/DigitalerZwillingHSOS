@@ -44,6 +44,7 @@ public class WarentraegerWebSocket extends WebSocketConfig{
       }
       this.setKlasseninfo("Warentraeger");
       this.warentraegerSessionRegister.addSession(this);
+      this.fertigRegistriert();
   }
 
   @OnOpen
@@ -59,6 +60,7 @@ public class WarentraegerWebSocket extends WebSocketConfig{
      */
     @OnClose
     public void onClose(Session session){
+        this.nichtmehrRegistriert();
         this.warentraegerSessionRegister.remove(this);
         System.out.println("Session " +session.getId()+" has ended");
     }
