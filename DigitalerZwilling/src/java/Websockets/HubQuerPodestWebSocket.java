@@ -18,9 +18,9 @@ import javax.websocket.server.ServerEndpoint;
  * @author user
  */
 @ServerEndpoint("/HubQuerPodestWebSocket")
-public class HubQuerPodestWebSocket {
+public class HubQuerPodestWebSocket extends WebSocketConfig{
 
-    //@Inject HubQuerPodestSessionRegister hubQuerPodestSessionRegister;
+    @Inject HubQuerPodestSessionRegister hubQuerPodestSessionRegister;
   
   
 
@@ -31,7 +31,7 @@ public class HubQuerPodestWebSocket {
    * ansonsten muss in der message die id des zu erwartenen Objektes enthalten sein
    * 
    */
-  /*
+  
   @OnMessage
   public void messageReceiver(String message) {
       if (message.equals("LIST")){
@@ -58,7 +58,7 @@ public class HubQuerPodestWebSocket {
      * 
      * Note: you can't send messages to the client from this method
      */
-    /*
+    
     @OnClose
     public void onClose(Session session){
         this.nichtmehrRegistriert();
@@ -66,5 +66,5 @@ public class HubQuerPodestWebSocket {
         System.out.println("Session " +session.getId()+" has ended");
     }
     
-    */
+    
 }

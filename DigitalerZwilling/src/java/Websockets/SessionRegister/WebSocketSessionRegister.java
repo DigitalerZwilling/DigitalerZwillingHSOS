@@ -21,7 +21,6 @@ public abstract class WebSocketSessionRegister {
         this.sessions.add(webSocketConfig);
     };
     public void remove(WebSocketConfig webSocketConfig){
-      this.updateWebSockets();
       this.sessions.remove(webSocketConfig);
     };
     // fuer updater

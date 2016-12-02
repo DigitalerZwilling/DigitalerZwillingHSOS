@@ -7,7 +7,6 @@ package Cache.Updater;
 
 import Cache.Cache;
 import Cache.Exeption.DBErrorExeption;
-import WebSockets.WebSocket;
 import Websockets.SessionRegister.WebSocketSessionRegister;
 import java.util.ArrayList;
 import java.util.List;

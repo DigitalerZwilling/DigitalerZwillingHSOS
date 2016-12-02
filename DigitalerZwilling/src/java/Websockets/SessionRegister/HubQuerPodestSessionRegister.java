@@ -6,7 +6,7 @@
 package Websockets.SessionRegister;
 
 import Cache.Exeption.ElementNotFoundExeption;
-//import Cache.HubQuerPodestCache;
+import Cache.HubQuerPodestCache;
 import Websockets.WebSocketConfig;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -19,11 +19,8 @@ import javax.inject.Inject;
  */
 public class HubQuerPodestSessionRegister extends WebSocketSessionRegister{
 
-    @Override
-    public void updateWebSockets() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-/*    @Inject private HubQuerPodestCache hubQuerPodestCache;
+    
+    @Inject private HubQuerPodestCache hubQuerPodestCache;
     
     @Override
     public void updateWebSockets() {
@@ -45,5 +42,5 @@ public class HubQuerPodestSessionRegister extends WebSocketSessionRegister{
                 }
             }
         }
-    }*/
+    }
 }
