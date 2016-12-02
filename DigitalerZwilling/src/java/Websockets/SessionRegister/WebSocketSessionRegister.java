@@ -6,16 +6,22 @@
 package Websockets.SessionRegister;
 
 import Websockets.WebSocketConfig;
+import java.util.List;
+
 
 /**
  *
  * @author user
  */
-public interface WebSocketSessionRegister {
+public abstract class WebSocketSessionRegister {
+    protected List<WebSocketConfig> sessions;
     // fuer Websockets
-    public void addSession(WebSocketConfig webSocketConfig);
-    public void remove(WebSocketConfig webSocketConfig);
-    
+    public void addSession(WebSocketConfig webSocketConfig){
+        this.sessions.add(webSocketConfig);
+    };
+    public void remove(WebSocketConfig webSocketConfig){
+      this.sessions.remove(webSocketConfig);
+    };
     // fuer updater
-    public void updateWebSockets();
+    abstract public void updateWebSockets();
 }
