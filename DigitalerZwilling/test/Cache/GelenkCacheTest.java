@@ -17,8 +17,10 @@ import static org.junit.Assert.*;
  * @author user
  */
 public class GelenkCacheTest {
+    WarentraegerCache cache;
     
     public GelenkCacheTest() {
+        
     }
     
     @BeforeClass
@@ -42,4 +44,10 @@ public class GelenkCacheTest {
     //
     // @Test
     // public void hello() {}
+    @Test
+    public void test1() {
+        //gelenk(1, "gelenk1", 37);
+        //gelenk.winkel=39;
+        //if gelenk.winkel=39
+    }
 }
