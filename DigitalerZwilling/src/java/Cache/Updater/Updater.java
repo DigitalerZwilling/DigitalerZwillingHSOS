@@ -45,10 +45,10 @@ public class Updater {
     
     private Timer timer;
     
-    Updater(){
+    Updater(int ms){
         caches = new ArrayList<>();
         webSockets = new ArrayList<>();
-        timer = timerService.createTimer(500, 500, "New Updater interval Timer");
+        timer = timerService.createTimer(ms, ms, "New Updater interval Timer");
     }
     
     public void updateSockets(){
