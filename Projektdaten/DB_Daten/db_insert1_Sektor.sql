@@ -12,10 +12,10 @@ INSERT INTO Sektor(
 		'Ecke',
 		'',
 		0,
+		175,
+		375,
 		0,
-		0,
-		0,
-		0		
+		90		
 	);
 	
 INSERT INTO Sektor(
@@ -32,10 +32,10 @@ INSERT INTO Sektor(
 		'Nacharbeit',
 		'',
 		0,
+		935,
+		175,
 		0,
-		0,
-		0,
-		0		
+		90		
 	);
 	
 INSERT INTO Sektor(
@@ -52,10 +52,10 @@ INSERT INTO Sektor(
 		'Kawasaki',
 		'',
 		0,
+		1575,
+		375,
 		0,
-		0,
-		0,
-		0		
+		90		
 	);
 	
 INSERT INTO Sektor(
@@ -72,10 +72,10 @@ INSERT INTO Sektor(
 		'Manuell',
 		'',
 		0,
+		2985,
+		375,
 		0,
-		0,
-		0,
-		0		
+		90		
 	);
 	
 INSERT INTO Sektor(
@@ -92,10 +92,10 @@ INSERT INTO Sektor(
 		'Adept',
 		'',
 		0,
+		4785,
+		375,
 		0,
-		0,
-		0,
-		0		
+		90		
 	);
 	
 INSERT INTO Sektor(
@@ -112,10 +112,10 @@ INSERT INTO Sektor(
 		'Fanuc Default',
 		'',
 		0,
+		6015,
+		375,
 		0,
-		0,
-		0,
-		0		
+		90		
 	);
 	
 INSERT INTO Sektor(
@@ -132,10 +132,10 @@ INSERT INTO Sektor(
 		'IBM',
 		'',
 		0,
+		6815,
+		375,
 		0,
-		0,
-		0,
-		0		
+		90		
 	);
 	
 INSERT INTO Sektor(
@@ -152,10 +152,10 @@ INSERT INTO Sektor(
 		'Ecke',
 		'',
 		0,
+		8295,
+		375,
 		0,
-		0,
-		0,
-		0		
+		180		
 	);
 
 INSERT INTO Sektor(
@@ -172,10 +172,10 @@ INSERT INTO Sektor(
 		'Verteilung',
 		'',
 		0,
+		8295,
+		2165,
 		0,
-		0,
-		0,
-		0		
+		270		
 	);
 	
 INSERT INTO Sektor(
@@ -192,10 +192,10 @@ INSERT INTO Sektor(
 		'Staeubli 1',
 		'',
 		0,
+		7025,
+		2340,
 		0,
-		0,
-		0,
-		0		
+		270		
 	);
 	
 INSERT INTO Sektor(
@@ -212,10 +212,10 @@ INSERT INTO Sektor(
 		'Bandwechsel 1',
 		'',
 		0,
+		6015,
+		2165,
 		0,
-		0,
-		0,
-		0		
+		270		
 	);
 	
 INSERT INTO Sektor(
@@ -232,10 +232,10 @@ INSERT INTO Sektor(
 		'Staeubli 2',
 		'',
 		0,
+		4695,
+		2340,
 		0,
-		0,
-		0,
-		0		
+		270		
 	);
 	
 INSERT INTO Sektor(
@@ -252,10 +252,10 @@ INSERT INTO Sektor(
 		'Bandwechsel 2',
 		'',
 		0,
+		3355,
+		2165,
 		0,
-		0,
-		0,
-		0		
+		270		
 	);
 	
 INSERT INTO Sektor(
@@ -272,10 +272,10 @@ INSERT INTO Sektor(
 		'KuKa',
 		'',
 		0,
+		1825,
+		2340,
 		0,
-		0,
-		0,
-		0		
+		270		
 	);
 	
 INSERT INTO Sektor(
@@ -292,8 +292,8 @@ INSERT INTO Sektor(
 		'Zusammenführung',
 		'',
 		0,
+		175,
+		2165,
 		0,
-		0,
-		0,
-		0		
+		0
 	);
