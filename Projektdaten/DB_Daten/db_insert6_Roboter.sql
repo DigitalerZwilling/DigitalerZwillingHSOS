@@ -12,10 +12,10 @@ INSERT INTO Roboter (
 		'Kawasaki',
 		'',
 		0,
+		1575,
+		200,
 		0,
-		0,
-		0,
-		0	
+		180	
 	);
 
 INSERT INTO Roboter (
@@ -32,10 +32,10 @@ INSERT INTO Roboter (
 		'Adept',
 		'',
 		0,
+		4785,
+		550,
 		0,
-		0,
-		0,
-		0	
+		0
 	);
 	
 INSERT INTO Roboter (
@@ -52,8 +52,8 @@ INSERT INTO Roboter (
 		'Fanuc',
 		'',
 		0,
-		0,
-		0,
+		6015,
+		550,
 		0,
 		0	
 	);
@@ -72,8 +72,8 @@ INSERT INTO Roboter (
 		'IBM',
 		'',
 		0,
-		0,
-		0,
+		6815,
+		550,
 		0,
 		0	
 	);
@@ -92,8 +92,8 @@ INSERT INTO Roboter (
 		'Staeubli 1',
 		'',
 		0,
-		0,
-		0,
+		7025,
+		2515,
 		0,
 		0	
 	);
@@ -113,8 +113,8 @@ INSERT INTO Roboter (
 		'Staeubli 2',
 		'',
 		0,
-		0,
-		0,
+		4695,
+		2515,
 		0,
 		0	
 	);
@@ -134,8 +134,8 @@ INSERT INTO Roboter (
 		'KuKa',
 		'',
 		0,
-		0,
-		0,
+		1825,
+		2515,
 		0,
 		0	
 	);
