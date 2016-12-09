@@ -32,16 +32,16 @@ public class Datenbankschnittstelle {
     //---------------------------------------------------------------------------
     //Datenbank verbindungs daten
     
-    private final String _DbURL="jdbc:derby://localhost:1527/db_DigitalerZwilling";   //URL
+    //private final String _DbURL="jdbc:derby://localhost:1527/db_DigitalerZwilling";   //URL
     //MySQL
-    //private final String _DbURL="jdbc:mysql://localhost:1527/db_DigitalerZwilling";   //URL
-    private final String _DbUser="db_user";                                            //User
-    private final String _DbPw="SB0222";                                              //Passswort
+    private final String _DbURL="jdbc:mysql://131.173.117.48:3306/df_16115";   //URL
+    private final String _DbUser="root";                                            //User
+    private final String _DbPw="Didpw4df";                                              //Passswort
     //---------------------------------------------------------------------------
     private Connection data;                                                        // Datenbank Verbindung
     
     //-----------------------------------------------------------------------------
-    public Datenbankschnittstelle() throws DBNotFoundExeption{ 
+   /* public Datenbankschnittstelle() throws DBNotFoundExeption{ 
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
@@ -55,10 +55,10 @@ public class Datenbankschnittstelle {
             throw new DBNotFoundExeption();
             //throw new Exception("Fehler: Datenbankverbindung auf "+ this._DbURL+" nicht möglich");
         }
-    }
+    }*/
     //--------------------------------------------------------------------------------------------
     
-    /*-----------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------
     //MySQL
     private Datenbankschnittstelle(){ 
         try {

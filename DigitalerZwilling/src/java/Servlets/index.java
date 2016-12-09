@@ -74,12 +74,13 @@ public class index extends HttpServlet {
             }
             out.println("<br><br>");
             
-            //Sektoren
-            out.println("<h1>Sektoren</h1>");
-            for(Element e : this.sektorCache.getAll()){
+            //Transportbaender
+            out.println("<h1>Transportbänder</h1>");
+            for(Element e : this.transportbandCache.getAll()){
                 out.println(e.toJson());
             }
             out.println("<br><br>");
+            
             out.println("</body>");
             out.println("</html>");
         }
