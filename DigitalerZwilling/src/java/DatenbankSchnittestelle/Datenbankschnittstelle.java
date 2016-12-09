@@ -31,6 +31,26 @@ public class Datenbankschnittstelle {
     private Connection data;                                                        // Datenbank Verbindung
     //-----------------------------------------------------------------------------
 
+    public Datenbankschnittstelle() throws DBNotFoundExeption{
+        String DbUrl = "jdbc:derby://localhost:1527/db_DigitalerZwilling";
+        String DbCd = "org.apache.derby.jdbc.ClientDriver";
+        String DbUser = "root";
+        String DbPw = "Didpw4df";
+        
+        try {
+            Class.forName(DbCd).newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            this.data = DriverManager.getConnection(DbUrl, DbUser, DbPw);
+        } catch (SQLException ex) {
+            Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DBNotFoundExeption();
+            //throw new Exception("Fehler: Datenbankverbindung auf "+ this._DbURL+" nicht möglich");
+        }
+    }
+    
     public Datenbankschnittstelle(String DbUrl, String DbCd, String DbUser, String DbPw) throws DBNotFoundExeption {
         try {
             Class.forName(DbCd).newInstance();
