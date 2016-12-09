@@ -17,21 +17,22 @@ import javax.inject.Inject;
  *
  * @author user
  */
-public class TransportbandSessionRegister extends WebSocketSessionRegister{
-    @Inject private TransportbandCache transportbandCache;
-    
+public class TransportbandSessionRegister extends WebSocketSessionRegister {
+
+    @Inject
+    private TransportbandCache transportbandCache;
+
     @Override
     public void updateWebSockets() {
-        for (WebSocketConfig session : this.sessions ){
-            if (session.istRegistriert()){
+        for (WebSocketConfig session : this.sessions) {
+            if (session.istRegistriert()) {
                 try {
-                    if(session.getIstListe()){
+                    if (session.getIstListe()) {
                         session.getSession().getBasicRemote().sendText(this.transportbandCache.getAll().toString());  //mit toJson versehen
-                    }
-                    else{
+                    } else {
                         session.getSession().getBasicRemote().sendText(this.transportbandCache.getById(session.getId()).toString());  //mit toJson versehen
                     }
-                
+
                 } catch (IOException ex) {
                     Logger.getLogger(ArtikelSessionRegister.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ElementNotFoundExeption ex) {

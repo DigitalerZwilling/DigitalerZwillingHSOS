@@ -7,14 +7,12 @@ package DatenKlassen;
 
 import java.time.LocalDateTime;
 
-
-
 /**
  *
  * @author chris
  */
-public class HubPodest extends Element{
-    
+public class HubPodest extends Element {
+
     private boolean oben;
     private boolean unten;
     private Long sektorID;
@@ -42,9 +40,6 @@ public class HubPodest extends Element{
         this.unten = unten;
     }
 
-    
-    
-
     public Long getId_sektor() {
         return sektorID;
     }
@@ -68,6 +63,5 @@ public class HubPodest extends Element{
         json += "}";
         return json;
     }
-   
-    
+
 }

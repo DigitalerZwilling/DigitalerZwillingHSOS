@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
  * @author user
  */
 public abstract class Element {
+
     protected Long id;
     protected String bezeichnung;
     protected String user_Parameter;
@@ -55,7 +56,7 @@ public abstract class Element {
     public void setZeitstempel(LocalDateTime zeitstempel) {
         this.zeitstempel = zeitstempel;
     }
-    
-    abstract public String toJson();    
-    
+
+    abstract public String toJson();
+
 }

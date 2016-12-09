@@ -5,7 +5,6 @@
  */
 package DatenKlassen;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
  *
  * @author user
  */
-public class Warentraeger extends Element{
+public class Warentraeger extends Element {
 
     private int stoerung;
     private int abstand_mm;
@@ -99,38 +98,40 @@ public class Warentraeger extends Element{
         json += "\"stoerung\": " + stoerung + ",\n";
         json += "\"abstand_mm\": " + abstand_mm + ",\n";
         json += "\"montagezustand\": " + montagezustand + ",\n";
-        
+
         json += "\"artikelIDs\": \n{";
-        for(int i=0;i<artikelIDs.size();i++){
+        for (int i = 0; i < artikelIDs.size(); i++) {
             json += "\"" + i + "\": " + artikelIDs.get(i);
-            if(i < (artikelIDs.size()-1))
+            if (i < (artikelIDs.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "},\n";
-        
+
         json += "\"transportbandIDs\": \n{";
-        for(int i=0;i<transportbandIDs.size();i++){
+        for (int i = 0; i < transportbandIDs.size(); i++) {
             json += "\"" + i + "\": " + transportbandIDs.get(i);
-            if(i < (transportbandIDs.size()-1))
+            if (i < (transportbandIDs.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "},\n";
-        
+
         json += "\"sektorIDs\": \n{";
-        for(int i=0;i<sektorIDs.size();i++){
+        for (int i = 0; i < sektorIDs.size(); i++) {
             json += "\"" + i + "\": " + sektorIDs.get(i);
-            if(i < (sektorIDs.size()-1))
+            if (i < (sektorIDs.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "}\n";
-        
+
         return json;
     }
-    
 }

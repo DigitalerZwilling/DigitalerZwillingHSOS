@@ -13,20 +13,21 @@ import javax.inject.Inject;
  * @author florian
  */
 @ApplicationScoped
-public class WebSocketUpdateThread implements Runnable{
+public class WebSocketUpdateThread implements Runnable {
+
     @Inject
     Updater updater;
-    
+
     private boolean running;
 
     public boolean isRunning() {
         return running;
     }
-    
+
     @Override
     public void run() {
         running = true;
         updater.updateSockets();
         running = false;
-    } 
+    }
 }

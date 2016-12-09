@@ -27,57 +27,28 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class Datenbankschnittstelle {
-    //private static Datenbankschnittstelle instance=null;                                //statische Instanz des Singeltons
-    
-    //---------------------------------------------------------------------------
-    //Datenbank verbindungs daten
-    
-    private final String _DbURL="jdbc:derby://localhost:1527/db_DigitalerZwilling";   //URL
-    //MySQL
-    //private final String _DbURL="jdbc:mysql://localhost:1527/db_DigitalerZwilling";   //URL
-    private final String _DbUser="db_user";                                            //User
-    private final String _DbPw="SB0222";                                              //Passswort
-    //---------------------------------------------------------------------------
+
     private Connection data;                                                        // Datenbank Verbindung
-    
     //-----------------------------------------------------------------------------
-    public Datenbankschnittstelle() throws DBNotFoundExeption{ 
+
+    public Datenbankschnittstelle(String DbUrl, String DbCd, String DbUser, String DbPw) throws DBNotFoundExeption {
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            Class.forName(DbCd).newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            this.data = DriverManager.getConnection(this._DbURL,this._DbUser,this._DbPw);
-            
+            this.data = DriverManager.getConnection(DbUrl, DbUser, DbPw);
         } catch (SQLException ex) {
             Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
             throw new DBNotFoundExeption();
             //throw new Exception("Fehler: Datenbankverbindung auf "+ this._DbURL+" nicht möglich");
         }
     }
-    //--------------------------------------------------------------------------------------------
-    
-    /*-----------------------------------------------------------------------------
-    //MySQL
-    private Datenbankschnittstelle(){ 
-        try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            this.data = DriverManager.getConnection(this._DbURL,this._DbUser,this._DbPw);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
-            //throw new Exception("Fehler: Datenbankverbindung auf "+ this._DbURL+" nicht möglich");
-        }
-    }
-    //--------------------------------------------------------------------------------------------*/
-    
+
     /**
-     * Gibt die vorhandene Instance zurueck bzw. erstellt wenn nötig die erste Instanz dieses Singeltons
+     * Gibt die vorhandene Instance zurueck bzw. erstellt wenn nötig die erste
+     * Instanz dieses Singeltons
      *
      * @return Instance dieses Singelton
      */
@@ -88,44 +59,45 @@ public class Datenbankschnittstelle {
         return instance;
     }*/
     //---------------------------------------------------------------------------------------------
-
     /**
-     * Die Funktion uebermittelt das Statement an die Datenbank und ruft
-     * eine im Parameter "goal" angegeben Funktion parseResult auf in der das ResultSet
-     * uebergeben wurde. Anschließend werden ResultSet und Statement geschlossen.
+     * Die Funktion uebermittelt das Statement an die Datenbank und ruft eine im
+     * Parameter "goal" angegeben Funktion parseResult auf in der das ResultSet
+     * uebergeben wurde. Anschließend werden ResultSet und Statement
+     * geschlossen.
      *
-     * @param sqlStatement  sql-Anfrage an die Datenbank
+     * @param sqlStatement sql-Anfrage an die Datenbank
      * @return Map die das Result set darstellt
      * @throws DatenbankSchnittestelle.Exeption.DBNotFoundExeption
      * @throws DatenbankSchnittestelle.Exeption.QueryExeption
      */
-    public Map<String,List<String>> datenbankAnfrage(String sqlStatement) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = new HashMap<>();
-        
-        if(data == null){
+    public Map<String, List<String>> datenbankAnfrage(String sqlStatement) throws DBNotFoundExeption, QueryExeption {
+        Map<String, List<String>> rsMap = new HashMap<>();
+
+        if (data == null) {
             throw new DBNotFoundExeption();
-        }else try {
-            Statement stmt=this.data.createStatement();
-            ResultSet rs=stmt.executeQuery(sqlStatement);
-            //----------------------------------------------------
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnCount = rsmd.getColumnCount();
-            for(int i = 1;i<=columnCount;i++){
-                rsMap.put(rsmd.getColumnName(i),new ArrayList<>());
-            }
-            while(rs.next()){
-                for(int i = 1;i<=columnCount;i++){   
-                    rsMap.get(rsmd.getColumnName(i)).add(rs.getString(i));
+        } else {
+            try {
+                Statement stmt = this.data.createStatement();
+                ResultSet rs = stmt.executeQuery(sqlStatement);
+                //----------------------------------------------------
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int columnCount = rsmd.getColumnCount();
+                for (int i = 1; i <= columnCount; i++) {
+                    rsMap.put(rsmd.getColumnName(i), new ArrayList<>());
                 }
+                while (rs.next()) {
+                    for (int i = 1; i <= columnCount; i++) {
+                        rsMap.get(rsmd.getColumnName(i)).add(rs.getString(i));
+                    }
+                }
+                //------------------------------------------------------
+                rs.close();
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
+                throw new QueryExeption();
             }
-            //------------------------------------------------------
-            rs.close();
-            stmt.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Datenbankschnittstelle.class.getName()).log(Level.SEVERE, null, ex);
-            throw new QueryExeption();
         }
         return rsMap;
     }
-    
 }

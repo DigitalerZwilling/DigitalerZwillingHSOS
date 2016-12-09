@@ -9,12 +9,13 @@ package DatenbankSchnittestelle.Exeption;
  *
  * @author florian
  */
-public class DBNotFoundExeption extends Exception{
-    public DBNotFoundExeption(){
+public class DBNotFoundExeption extends Exception {
+
+    public DBNotFoundExeption() {
         super("DBNotFoundExeption");
     }
-    
-    public DBNotFoundExeption(String str){
+
+    public DBNotFoundExeption(String str) {
         super(str);
     }
 }

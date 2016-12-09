@@ -5,14 +5,14 @@
  */
 package DatenKlassen;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
+
 /**
  *
  * @author user
  */
-public class Roboter extends Element{
+public class Roboter extends Element {
 
     private int stoerung;
     private int x;
@@ -32,8 +32,6 @@ public class Roboter extends Element{
         this.ausrichtung = ausrichtung;
 
     }
-
-    
 
     public int getStoerung() {
         return stoerung;
@@ -113,38 +111,40 @@ public class Roboter extends Element{
         json += "\"y\": " + y + ",\n";
         json += "\"z\": " + z + ",\n";
         json += "\"ausrichtung\": " + ausrichtung + ",\n";
-        
+
         json += "\"IsektorIDs\": \n{";
-        for(int i=0;i<sektorID.size();i++){
+        for (int i = 0; i < sektorID.size(); i++) {
             json += "\"" + i + "\": " + sektorID.get(i);
-            if(i < (sektorID.size()-1))
+            if (i < (sektorID.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "},\n";
-        
+
         json += "\"gelenkeIDs\": \n{";
-        for(int i=0;i<gelenkeIDs.size();i++){
+        for (int i = 0; i < gelenkeIDs.size(); i++) {
             json += "\"" + i + "\": " + gelenkeIDs.get(i);
-            if(i < (gelenkeIDs.size()-1))
+            if (i < (gelenkeIDs.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "},\n";
-        
+
         json += "\"werzeugIDs\": \n{";
-        for(int i=0;i<werkzeugID.size();i++){
+        for (int i = 0; i < werkzeugID.size(); i++) {
             json += "\"" + i + "\": " + werkzeugID.get(i);
-            if(i < (werkzeugID.size()-1))
+            if (i < (werkzeugID.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "}\n}";
-        
+
         return json;
-    }    
-    
+    }
 }

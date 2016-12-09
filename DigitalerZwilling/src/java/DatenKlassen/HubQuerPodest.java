@@ -8,15 +8,12 @@ package DatenKlassen;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
-
-
 /**
  *
  * @author user
  */
-public class HubQuerPodest extends Element{
-    
+public class HubQuerPodest extends Element {
+
     private boolean motor;
     private boolean oben;
     private boolean mittig;
@@ -32,8 +29,6 @@ public class HubQuerPodest extends Element{
         this.unten = unten;
         this.sektorID = id_Sektor;
     }
-
-    
 
     public boolean isMotor() {
         return motor;
@@ -96,21 +91,22 @@ public class HubQuerPodest extends Element{
         json += "\"oben\": " + oben + ",\n";
         json += "\"mittig\": " + mittig + ",\n";
         json += "\"unten\": " + unten + ",\n";
-        
+
         json += "\"gruppenIDs\": \n{";
-        for(int i=0;i<gruppenIDs.size();i++){
+        for (int i = 0; i < gruppenIDs.size(); i++) {
             json += "\"" + i + "\": " + gruppenIDs.get(i);
-            if(i < (gruppenIDs.size()-1))
+            if (i < (gruppenIDs.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "}\n";
-        
+
         json += "\"sektorID\": " + sektorID + "\n";
         json += '}';
-        
+
         return json;
     }
-    
+
 }

@@ -13,11 +13,12 @@ import javax.websocket.Session;
  * @author user
  */
 public class WebSocketConfig {
+
     private Session session;
     private Long id;
     private String klasseninfo;
     private Boolean istListe;
-    
+
     private Boolean registriert;
 
     public WebSocketConfig() {
@@ -26,16 +27,18 @@ public class WebSocketConfig {
         System.out.println("config hier!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
-    protected void fertigRegistriert(){
-        this.registriert=Boolean.TRUE;
+    protected void fertigRegistriert() {
+        this.registriert = Boolean.TRUE;
     }
-    protected void nichtmehrRegistriert(){
-        this.registriert=Boolean.FALSE;
+
+    protected void nichtmehrRegistriert() {
+        this.registriert = Boolean.FALSE;
     }
-    public Boolean istRegistriert(){
+
+    public Boolean istRegistriert() {
         return this.registriert;
     }
-    
+
     public Boolean getIstListe() {
         return istListe;
     }
@@ -43,7 +46,6 @@ public class WebSocketConfig {
     public void setIstListe(Boolean istListe) {
         this.istListe = istListe;
     }
-    
 
     public Session getSession() {
         return session;
@@ -101,5 +103,5 @@ public class WebSocketConfig {
         }
         return true;
     }
-    
+
 }

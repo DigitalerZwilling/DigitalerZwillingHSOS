@@ -26,39 +26,40 @@ import org.jboss.logging.Logger;
  */
 @ApplicationScoped
 public class Updater {
+
     private final List<Cache> caches;
     private final List<WebSocketSessionRegister> webSockets;
-    
+
     @Inject
     private WebSocketUpdateThread webSocketUpdateThread;
     private Thread webSocketThread;
-    
+
     @Inject
     private CacheUpdateThread cacheUpdateThread;
     private Thread cacheThraed;
-    
+
     @Resource
     private ManagedThreadFactory managedThreadFactory;
-    
+
     @Resource
     private TimerService timerService;
-    
+
     private Timer timer;
-    
-    Updater(int ms){
+
+    Updater(int ms) {
         caches = new ArrayList<>();
         webSockets = new ArrayList<>();
         timer = timerService.createTimer(ms, ms, "New Updater interval Timer");
     }
-    
-    public void updateSockets(){
-        for(WebSocketSessionRegister webSocket: webSockets){
+
+    public void updateSockets() {
+        for (WebSocketSessionRegister webSocket : webSockets) {
             webSocket.updateWebSockets();
         }
     }
-    
-    public void updateCaches(){
-        for(Cache cache: caches){
+
+    public void updateCaches() {
+        for (Cache cache : caches) {
             try {
                 cache.update();
             } catch (DBErrorExeption ex) {
@@ -66,32 +67,34 @@ public class Updater {
             }
         }
     }
-    
+
     @Timeout
-    public void updateAll(Timer timer){
-        for(Cache cache: caches){
+    public void updateAll(Timer timer) {
+        for (Cache cache : caches) {
             cache.toggleState();
         }
-        
-        if(!cacheUpdateThread.isRunning())
+
+        if (!cacheUpdateThread.isRunning()) {
             cacheThraed = managedThreadFactory.newThread(cacheUpdateThread);
-        else
+        } else {
             Logger.getLogger("TIMEOUT: Cache update takes to long...");
-        if(!webSocketUpdateThread.isRunning())
+        }
+        if (!webSocketUpdateThread.isRunning()) {
             webSocketThread = managedThreadFactory.newThread(webSocketUpdateThread);
-        else
+        } else {
             Logger.getLogger("TIMEOUT: WebSocket update takes to long...");
+        }
     }
-    
-    public void registerCache(Cache cache){
+
+    public void registerCache(Cache cache) {
         caches.add(cache);
     }
-    
-    public void registerWebSocket(WebSocketSessionRegister webSocket){
+
+    public void registerWebSocket(WebSocketSessionRegister webSocket) {
         webSockets.add(webSocket);
     }
-    
-    public boolean unRegisterWebSocket(WebSocketSessionRegister webSocket){
+
+    public boolean unRegisterWebSocket(WebSocketSessionRegister webSocket) {
         return webSockets.remove(webSocket);
     }
 }

@@ -5,7 +5,6 @@
  */
 package DatenKlassen;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
  *
  * @author user
  */
-public class Sektor extends Element{
+public class Sektor extends Element {
 
     private int stoerung;
     private int x;
@@ -28,17 +27,14 @@ public class Sektor extends Element{
     private List<Long> vorTransportbandIDs;
     private List<Long> nachTransportbandIDs;
 
-    public Sektor(int stoerung, int x, int y, int z, int ausrichtung,  Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
+    public Sektor(int stoerung, int x, int y, int z, int ausrichtung, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.stoerung = stoerung;
         this.x = x;
         this.y = y;
         this.z = z;
         this.ausrichtung = ausrichtung;
-        
     }
-
-    
 
     public int getStoerung() {
         return stoerung;
@@ -138,7 +134,7 @@ public class Sektor extends Element{
 
     @Override
     public String toJson() {
-    String json = new String();
+        String json = new String();
         json += '{';
         json += "\"id\": " + id + ",\n";
         json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
@@ -150,78 +146,84 @@ public class Sektor extends Element{
         json += "\"y\": " + y + ",\n";
         json += "\"z\": " + z + ",\n";
         json += "\"ausrichtung\": " + ausrichtung + ",\n";
-        
+
         json += "\"warentraegerIDs\": \n{";
-        for(int i=0;i<warentraegerIDs.size();i++){
+        for (int i = 0; i < warentraegerIDs.size(); i++) {
             json += "\"" + i + "\": " + warentraegerIDs.get(i);
-            if(i < (warentraegerIDs.size()-1))
+            if (i < (warentraegerIDs.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "},\n";
-        
+
         json += "\"hubpodestIDs\": \n{";
-        for(int i=0;i<hubpodestIDs.size();i++){
+        for (int i = 0; i < hubpodestIDs.size(); i++) {
             json += "\"" + i + "\": " + hubpodestIDs.get(i);
-            if(i < (hubpodestIDs.size()-1))
+            if (i < (hubpodestIDs.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "},\n";
-        
+
         json += "\"hubquerpodestIDs\": \n{";
-        for(int i=0;i<hubquerpodestIDs.size();i++){
+        for (int i = 0; i < hubquerpodestIDs.size(); i++) {
             json += "\"" + i + "\": " + hubquerpodestIDs.get(i);
-            if(i < (hubquerpodestIDs.size()-1))
+            if (i < (hubquerpodestIDs.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "},\n";
-        
+
         json += "\"roboterIDs\": \n{";
-        for(int i=0;i<roboterIDs.size();i++){
+        for (int i = 0; i < roboterIDs.size(); i++) {
             json += "\"" + i + "\": " + roboterIDs.get(i);
-            if(i < (roboterIDs.size()-1))
+            if (i < (roboterIDs.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "},\n";
-        
+
         json += "\"sensorIDs\": \n{";
-        for(int i=0;i<sensorIDs.size();i++){
+        for (int i = 0; i < sensorIDs.size(); i++) {
             json += "\"" + i + "\": " + sensorIDs.get(i);
-            if(i < (sensorIDs.size()-1))
+            if (i < (sensorIDs.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "},\n";
-        
+
         json += "\"vorTransportbandIDs\": \n{";
-        for(int i=0;i<vorTransportbandIDs.size();i++){
+        for (int i = 0; i < vorTransportbandIDs.size(); i++) {
             json += "\"" + i + "\": " + vorTransportbandIDs.get(i);
-            if(i < (vorTransportbandIDs.size()-1))
+            if (i < (vorTransportbandIDs.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "},\n";
-        
+
         json += "\"nachTransportbandIDs\": \n{";
-        for(int i=0;i<nachTransportbandIDs.size();i++){
+        for (int i = 0; i < nachTransportbandIDs.size(); i++) {
             json += "\"" + i + "\": " + nachTransportbandIDs.get(i);
-            if(i < (nachTransportbandIDs.size()-1))
+            if (i < (nachTransportbandIDs.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "}\n";
-        
+
         return json;
     }
-        
 }

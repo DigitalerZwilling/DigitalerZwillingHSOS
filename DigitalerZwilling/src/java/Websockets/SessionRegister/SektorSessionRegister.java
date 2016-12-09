@@ -17,21 +17,22 @@ import javax.inject.Inject;
  *
  * @author user
  */
-public class SektorSessionRegister extends WebSocketSessionRegister{
-    @Inject private SektorCache sektorCache;
-    
+public class SektorSessionRegister extends WebSocketSessionRegister {
+
+    @Inject
+    private SektorCache sektorCache;
+
     @Override
     public void updateWebSockets() {
-        for (WebSocketConfig session : this.sessions ){
-            if (session.istRegistriert()){
+        for (WebSocketConfig session : this.sessions) {
+            if (session.istRegistriert()) {
                 try {
-                    if(session.getIstListe()){
+                    if (session.getIstListe()) {
                         session.getSession().getBasicRemote().sendText(this.sektorCache.getAll().toString());  //mit toJson versehen
-                    }
-                    else{
+                    } else {
                         session.getSession().getBasicRemote().sendText(this.sektorCache.getById(session.getId()).toString());  //mit toJson versehen
                     }
-                
+
                 } catch (IOException ex) {
                     Logger.getLogger(ArtikelSessionRegister.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ElementNotFoundExeption ex) {

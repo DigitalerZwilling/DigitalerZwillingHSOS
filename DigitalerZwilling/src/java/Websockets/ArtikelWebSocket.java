@@ -23,19 +23,21 @@ import javax.websocket.server.ServerEndpoint;
  * @author user
  */
 @ServerEndpoint("/ArtikelWebSocket")
-public class ArtikelWebSocket extends WebSocketConfig{
-  @Inject ArtikelSessionRegister artikelSessionRegister;
-  //private WebSocketConfig webSocketConfig;
-  
-  @OnMessage
-  public void messageReceiver(String message) {
-      System.out.println(message);
-      this.setId(Long.parseLong(message));
-      this.setKlasseninfo("Artikel");
-      this.artikelSessionRegister.addSession(this);
-      this.fertigRegistriert();
-      
-      /*try {
+public class ArtikelWebSocket extends WebSocketConfig {
+
+    @Inject
+    ArtikelSessionRegister artikelSessionRegister;
+    //private WebSocketConfig webSocketConfig;
+
+    @OnMessage
+    public void messageReceiver(String message) {
+        System.out.println(message);
+        this.setId(Long.parseLong(message));
+        this.setKlasseninfo("Artikel");
+        this.artikelSessionRegister.addSession(this);
+        this.fertigRegistriert();
+
+        /*try {
           //System.out.println("Received message:" + message);
           session.getBasicRemote().sendObject(aCache.getById(1L));
           System.out.println("onMessage: " + aCache.getById(1L).getBezeichnung());
@@ -44,31 +46,31 @@ public class ArtikelWebSocket extends WebSocketConfig{
           Logger.getLogger(ArtikelWebSocket.class.getName()).log(Level.SEVERE, null, ex);
       /*} catch (EncodeException ex) {
           Logger.getLogger(ArtikelWebSocket.class.getName()).log(Level.SEVERE, null, ex);
-      */
-  }
+         */
+    }
 
-  @OnOpen
-  public void onOpen(Session session) {
-    //this.session=session;
-    //this.session=session;
-    
-    this.setSession(session);
-    System.out.println("onOpen: " + session.getId());
-    //this.messageReceiver("hi");
-    
-    //System.out.println("onOpen: Notification list size: " + sessions.size());
-  }
- 
+    @OnOpen
+    public void onOpen(Session session) {
+        //this.session=session;
+        //this.session=session;
+
+        this.setSession(session);
+        System.out.println("onOpen: " + session.getId());
+        //this.messageReceiver("hi");
+
+        //System.out.println("onOpen: Notification list size: " + sessions.size());
+    }
+
     /**
      * The user closes the connection.
-     * 
+     *
      * Note: you can't send messages to the client from this method
      */
     @OnClose
-    public void onClose(Session session){
+    public void onClose(Session session) {
         this.nichtmehrRegistriert();
         this.artikelSessionRegister.remove(this);
-        System.out.println("Session " +session.getId()+" has ended");
+        System.out.println("Session " + session.getId() + " has ended");
     }
-    
+
 }

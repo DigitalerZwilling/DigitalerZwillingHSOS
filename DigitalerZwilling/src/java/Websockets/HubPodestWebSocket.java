@@ -18,52 +18,48 @@ import javax.websocket.server.ServerEndpoint;
  * @author user
  */
 @ServerEndpoint("/HubPodestWebSocket")
-public class HubPodestWebSocket extends WebSocketConfig{
+public class HubPodestWebSocket extends WebSocketConfig {
 
-    @Inject HubPodestSessionRegister hubPodestSessionRegister;
-  
-  
+    @Inject
+    HubPodestSessionRegister hubPodestSessionRegister;
 
-  /**
-   * 
-   * zum konfigurieren der Verbindung nach Verbindungsaufbau
-   * Schluesselwort "LIST" gibt an das Listen der Objekte in Json geschickt werden
-   * ansonsten muss in der message die id des zu erwartenen Objektes enthalten sein
-   * 
-   */
-  
-  @OnMessage
-  public void messageReceiver(String message) {
-      if (message.equals("LIST")){
-          this.setIstListe(Boolean.TRUE);
-          this.setId(0L);
-      }
-      else{
-          this.setIstListe(Boolean.FALSE);
-          this.setId(Long.parseLong(message));
-      }
-      this.setKlasseninfo("Warentraeger");
-      this.hubPodestSessionRegister.addSession(this);
-      this.fertigRegistriert();
-  }
+    /**
+     *
+     * zum konfigurieren der Verbindung nach Verbindungsaufbau Schluesselwort
+     * "LIST" gibt an das Listen der Objekte in Json geschickt werden ansonsten
+     * muss in der message die id des zu erwartenen Objektes enthalten sein
+     *
+     */
+    @OnMessage
+    public void messageReceiver(String message) {
+        if (message.equals("LIST")) {
+            this.setIstListe(Boolean.TRUE);
+            this.setId(0L);
+        } else {
+            this.setIstListe(Boolean.FALSE);
+            this.setId(Long.parseLong(message));
+        }
+        this.setKlasseninfo("Warentraeger");
+        this.hubPodestSessionRegister.addSession(this);
+        this.fertigRegistriert();
+    }
 
-  @OnOpen
-  public void onOpen(Session session) {
-    this.setSession(session);
-    System.out.println("onOpen: " + session.getId());
-  }
- 
+    @OnOpen
+    public void onOpen(Session session) {
+        this.setSession(session);
+        System.out.println("onOpen: " + session.getId());
+    }
+
     /**
      * The user closes the connection.
-     * 
+     *
      * Note: you can't send messages to the client from this method
      */
     @OnClose
-    public void onClose(Session session){
+    public void onClose(Session session) {
         this.nichtmehrRegistriert();
         this.hubPodestSessionRegister.remove(this);
-        System.out.println("Session " +session.getId()+" has ended");
+        System.out.println("Session " + session.getId() + " has ended");
     }
-    
-    
+
 }

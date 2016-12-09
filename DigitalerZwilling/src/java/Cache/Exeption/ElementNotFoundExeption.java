@@ -10,11 +10,12 @@ package Cache.Exeption;
  * @author florian
  */
 public class ElementNotFoundExeption extends Exception {
-    public ElementNotFoundExeption(){
+
+    public ElementNotFoundExeption() {
         super("ElementNotFoundExeption");
     }
-    
-    public ElementNotFoundExeption(String str){
+
+    public ElementNotFoundExeption(String str) {
         super(str);
     }
 }

@@ -7,15 +7,15 @@ package DatenKlassen;
 
 import java.time.LocalDateTime;
 
-
 /**
  *
  * @author user
  */
-public class Werkzeug extends Element{
+public class Werkzeug extends Element {
+
     int zustand;
     Long roboterID;
-    
+
     public Werkzeug(Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel, int zustand) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.zustand = zustand;
@@ -50,8 +50,7 @@ public class Werkzeug extends Element{
         json += "\"zustand\": " + zustand + ",\n";
         json += "\"roboterID\": " + roboterID + "\n";
         json += '}';
-        
+
         return json;
     }
-    
 }

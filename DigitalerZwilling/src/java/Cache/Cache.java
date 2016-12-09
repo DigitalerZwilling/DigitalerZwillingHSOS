@@ -19,14 +19,15 @@ import javax.inject.Inject;
 /**
  *
  * @author User
- * 
+ *
  * getAll -> Funktionaler aufruf möglich.
  */
 public abstract class Cache {
+
     static protected boolean state;
-    
-    protected Map<Long,Element> elements[];
-    
+
+    protected Map<Long, Element> elements[];
+
     @Inject
     Updater updater;
 
@@ -45,31 +46,33 @@ public abstract class Cache {
     public void setState(boolean state) {
         Cache.state = state;
     }
-    
+
     public void toggleState() {
         state = !state;
     }
-    
-    public Element getById(Long id) throws ElementNotFoundExeption{
-        if(id < 0 || id>= (state==true?elements[1]:elements[0]).size())
+
+    public Element getById(Long id) throws ElementNotFoundExeption {
+        if (id < 0 || id >= (state == true ? elements[1] : elements[0]).size()) {
             throw new ElementNotFoundExeption();
-        
-        return state==true?elements[1].get(id):elements[0].get(id);
+        }
+
+        return state == true ? elements[1].get(id) : elements[0].get(id);
     }
-    
+
     public List<Element> getAll() {
         List<Element> elementList = new ArrayList<>();
-        Map<Long,Element> currentElemets = state==true?elements[1]:elements[0];
-        for(Map.Entry<Long,Element> entry : currentElemets.entrySet()){
+        Map<Long, Element> currentElemets = state == true ? elements[1] : elements[0];
+        for (Map.Entry<Long, Element> entry : currentElemets.entrySet()) {
             elementList.add(entry.getValue());
         }
         return elementList;
     }
-    
-    public Cache() {}
-    
+
+    public Cache() {
+    }
+
     @PostConstruct
-    public void init(){
+    public void init() {
         elements = new Map[2];
         elements[0] = new HashMap<>();
         elements[1] = new HashMap<>();
@@ -77,5 +80,6 @@ public abstract class Cache {
     }
 
     abstract public void update() throws DBErrorExeption;
+
     abstract public void updateAll();
 }

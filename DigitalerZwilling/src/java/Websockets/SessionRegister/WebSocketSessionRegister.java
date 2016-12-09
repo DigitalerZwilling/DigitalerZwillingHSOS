@@ -9,20 +9,25 @@ import Websockets.WebSocketConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author user
  */
 public abstract class WebSocketSessionRegister {
+
     protected List<WebSocketConfig> sessions = new ArrayList<>();
+
     // fuer Websockets
-    public void addSession(WebSocketConfig webSocketConfig){
+    public void addSession(WebSocketConfig webSocketConfig) {
         this.sessions.add(webSocketConfig);
-    };
-    public void remove(WebSocketConfig webSocketConfig){
-      this.sessions.remove(webSocketConfig);
-    };
+    }
+
+    ;
+    public void remove(WebSocketConfig webSocketConfig) {
+        this.sessions.remove(webSocketConfig);
+    }
+
+    ;
     // fuer updater
     abstract public void updateWebSockets();
 }

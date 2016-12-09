@@ -9,7 +9,7 @@ package Cache.Exeption;
  *
  * @author florian
  */
-public class DBErrorExeption extends Exception{
+public class DBErrorExeption extends Exception {
 
     public DBErrorExeption(String string) {
         super(string);

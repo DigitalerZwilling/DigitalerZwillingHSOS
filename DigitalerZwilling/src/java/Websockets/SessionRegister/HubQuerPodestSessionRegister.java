@@ -17,27 +17,25 @@ import javax.inject.Inject;
  *
  * @author user
  */
-public class HubQuerPodestSessionRegister extends WebSocketSessionRegister{
+public class HubQuerPodestSessionRegister extends WebSocketSessionRegister {
 
-    
-    @Inject private HubQuerPodestCache hubQuerPodestCache;
-    
+    @Inject
+    private HubQuerPodestCache hubQuerPodestCache;
+
     @Override
     public void updateWebSockets() {
-        for (WebSocketConfig session : this.sessions ){
-            if (session.istRegistriert()){
+        for (WebSocketConfig session : this.sessions) {
+            if (session.istRegistriert()) {
                 try {
-                    if(session.getIstListe()){
+                    if (session.getIstListe()) {
                         session.getSession().getBasicRemote().sendText(this.hubQuerPodestCache.getAll().toString());  //mit toJson versehen
-                    }
-                    else{
+                    } else {
                         session.getSession().getBasicRemote().sendText(this.hubQuerPodestCache.getById(session.getId()).toString());  //mit toJson versehen
                     }
-                
+
                 } catch (IOException ex) {
                     Logger.getLogger(ArtikelSessionRegister.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                catch (ElementNotFoundExeption ex) {
+                } catch (ElementNotFoundExeption ex) {
                     Logger.getLogger(HubQuerPodestSessionRegister.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

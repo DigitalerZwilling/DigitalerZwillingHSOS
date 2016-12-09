@@ -7,12 +7,12 @@ package DatenKlassen;
 
 import java.time.LocalDateTime;
 
-
 /**
  *
  * @author chris
  */
-public class Gelenk extends Element{
+public class Gelenk extends Element {
+
     private String typ;
     private int nummer;
     private int gelenkstellung;
@@ -71,8 +71,8 @@ public class Gelenk extends Element{
         json += "\"gelenkstellung\": " + gelenkstellung + ",\n";
         json += "\"roboterID\": " + roboterID + "\n";
         json += "}";
-        
+
         return json;
     }
-    
+
 }

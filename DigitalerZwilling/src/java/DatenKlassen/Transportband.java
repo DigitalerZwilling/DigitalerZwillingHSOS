@@ -5,7 +5,6 @@
  */
 package DatenKlassen;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,9 +12,8 @@ import java.util.List;
  *
  * @author user
  */
-public class Transportband extends Element{
-    
-    
+public class Transportband extends Element {
+
     private int stoerung;
     private int laenge;
     private int geschwindigkeit;
@@ -92,22 +90,22 @@ public class Transportband extends Element{
         json += "\"stoerung\": " + stoerung + ",\n";
         json += "\"laenge\": " + laenge + ",\n";
         json += "\"geschwindigkeit\": " + geschwindigkeit + ",\n";
-        
+
         json += "\"warentraegerIDs\": \n{";
-        for(int i=0;i<warentraegerIDs.size();i++){
+        for (int i = 0; i < warentraegerIDs.size(); i++) {
             json += "\"" + i + "\": " + warentraegerIDs.get(i);
-            if(i < (warentraegerIDs.size()-1))
+            if (i < (warentraegerIDs.size() - 1)) {
                 json += ",";
-            
+            }
+
             json += '\n';
         }
         json += "},\n";
-        
+
         json += "\"vorSektorID\": " + vorSektorID + ",\n";
         json += "\"nachSektorID\": " + nachSektorID + "\n";
         json += '}';
-        
+
         return json;
     }
-    
 }

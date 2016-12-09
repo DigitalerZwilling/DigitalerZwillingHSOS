@@ -18,50 +18,47 @@ import javax.websocket.server.ServerEndpoint;
  * @author user
  */
 @ServerEndpoint("/TransportbandWebSocket")
-public class TransportbandWebSocket extends WebSocketConfig{
+public class TransportbandWebSocket extends WebSocketConfig {
 
-    @Inject TransportbandSessionRegister transportbandSessionRegister;
-  
-  
+    @Inject
+    TransportbandSessionRegister transportbandSessionRegister;
 
-  /**
-   * 
-   * zum konfigurieren der Verbindung nach Verbindungsaufbau
-   * Schluesselwort "LIST" gibt an das Listen der Objekte in Json geschickt werden
-   * ansonsten muss in der message die id des zu erwartenen Objektes enthalten sein
-   * 
-   */
-  
-  @OnMessage
-  public void messageReceiver(String message) {
-      if (message.equals("LIST")){
-          this.setIstListe(Boolean.TRUE);
-          this.setId(0L);
-      }
-      else{
-          this.setIstListe(Boolean.FALSE);
-          this.setId(Long.parseLong(message));
-      }
-      this.setKlasseninfo("Warentraeger");
-      this.transportbandSessionRegister.addSession(this);
-      this.fertigRegistriert();
-  }
+    /**
+     *
+     * zum konfigurieren der Verbindung nach Verbindungsaufbau Schluesselwort
+     * "LIST" gibt an das Listen der Objekte in Json geschickt werden ansonsten
+     * muss in der message die id des zu erwartenen Objektes enthalten sein
+     *
+     */
+    @OnMessage
+    public void messageReceiver(String message) {
+        if (message.equals("LIST")) {
+            this.setIstListe(Boolean.TRUE);
+            this.setId(0L);
+        } else {
+            this.setIstListe(Boolean.FALSE);
+            this.setId(Long.parseLong(message));
+        }
+        this.setKlasseninfo("Warentraeger");
+        this.transportbandSessionRegister.addSession(this);
+        this.fertigRegistriert();
+    }
 
-  @OnOpen
-  public void onOpen(Session session) {
-    this.setSession(session);
-    System.out.println("onOpen: " + session.getId());
-  }
- 
+    @OnOpen
+    public void onOpen(Session session) {
+        this.setSession(session);
+        System.out.println("onOpen: " + session.getId());
+    }
+
     /**
      * The user closes the connection.
-     * 
+     *
      * Note: you can't send messages to the client from this method
      */
     @OnClose
-    public void onClose(Session session){
+    public void onClose(Session session) {
         this.nichtmehrRegistriert();
         this.transportbandSessionRegister.remove(this);
-        System.out.println("Session " +session.getId()+" has ended");
+        System.out.println("Session " + session.getId() + " has ended");
     }
 }
