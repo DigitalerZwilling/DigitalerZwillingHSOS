@@ -27,36 +27,22 @@ public class ArtikelWebSocket extends WebSocket{
     @Inject
     ArtikelCache artikelCache;
   
-  @OnMessage
-  public void messageReceiver(String message) {
-      System.out.println(message);
-      this.setId(Long.parseLong(message));
-      this.webSocketUpdater.addWebSocket(this);
-      this.setRegistriert(Boolean.TRUE);
-      
-      /*try {
-          //System.out.println("Received message:" + message);
-          session.getBasicRemote().sendObject(aCache.getById(1L));
-          System.out.println("onMessage: " + aCache.getById(1L).getBezeichnung());
-          aCache.update();
-      } catch (IOException ex) {
-          Logger.getLogger(ArtikelWebSocket.class.getName()).log(Level.SEVERE, null, ex);
-      /*} catch (EncodeException ex) {
-          Logger.getLogger(ArtikelWebSocket.class.getName()).log(Level.SEVERE, null, ex);
-      */
-  }
+    @OnMessage
+    public void messageReceiver(String message) {
+        if (message.equals("LIST")){
+            this.setId(null);
+        }
+        else{
+            this.setId(Long.parseLong(message));
+        }
+        this.webSocketUpdater.addWebSocket(this);
+        this.setRegistriert(Boolean.TRUE);
+    }
 
-  @OnOpen
-  public void onOpen(Session session) {
-    //this.session=session;
-    //this.session=session;
-    
-    this.setSession(session);
-    System.out.println("onOpen: " + session.getId());
-    //this.messageReceiver("hi");
-    
-    //System.out.println("onOpen: Notification list size: " + sessions.size());
-  }
+    @OnOpen
+    public void onOpen(Session session) {
+      this.setSession(session);
+    }
  
     /**
      * The user closes the connection.
@@ -67,12 +53,10 @@ public class ArtikelWebSocket extends WebSocket{
     public void onClose(Session session){
         this.setRegistriert(Boolean.FALSE);
         this.webSocketUpdater.removeWebSocket(this);
-        System.out.println("Session " +session.getId()+" has ended");
     }
 
     @Override
     protected Cache getCache() {
         return artikelCache;
     }
-    
 }

@@ -49,7 +49,6 @@ public class WerkzeugWebSocket extends WebSocket{
   @OnOpen
   public void onOpen(Session session) {
     this.setSession(session);
-    System.out.println("onOpen: " + session.getId());
   }
  
     /**
@@ -61,12 +60,10 @@ public class WerkzeugWebSocket extends WebSocket{
     public void onClose(Session session){
         this.setRegistriert(Boolean.FALSE);
         this.webSocketUpdater.removeWebSocket(this);
-        System.out.println("Session " +session.getId()+" has ended");
     }
 
     @Override
     protected Cache getCache() {
         return werkzeugCache;
     }
-    
 }

@@ -6,7 +6,13 @@
 package Websockets;
 
 import Cache.Cache;
+import Cache.Exeption.ElementNotFoundExeption;
+import DatenKlassen.Element;
+import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.websocket.Session;
 
 /**
@@ -20,11 +26,22 @@ public abstract class WebSocket {
 
     public WebSocket() {
         this.registriert = Boolean.FALSE;
-        System.out.println("config hier!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
     
-    public void update(){
-        //Update Methode fehlt!!!!
+    public void update() {
+        try{
+            if(id == null){
+                // Liste
+                session.getBasicRemote().sendText(this.ListToJson(this.getCache().getAll()));
+            } else {
+                // nur ein Element
+                session.getBasicRemote().sendText(this.getCache().getById(id).toJson());
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(WebSocket.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ElementNotFoundExeption ex) {
+            Logger.getLogger(WebSocket.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     protected abstract Cache getCache();
@@ -82,4 +99,17 @@ public abstract class WebSocket {
         return true;
     }
     
+    public String ListToJson(List<Element> list){
+        String json = "{";
+        
+        for(int i=0 ; i<list.size() ; i++){
+            json += list.get(i).toJson();
+            if(i<list.size()-1)
+                json += ',';
+        }
+        
+        json += '}';
+        
+        return json;
+    }
 }

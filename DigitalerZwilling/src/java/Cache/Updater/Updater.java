@@ -51,7 +51,7 @@ public class Updater {
         timer = timerService.createTimer(ms, ms, "New Updater interval Timer");
     }
     
-    public void updateSockets(){
+    public void updateWebSockets(){
         for(WebSocket webSocket: webSockets){
             webSocket.update();
         }

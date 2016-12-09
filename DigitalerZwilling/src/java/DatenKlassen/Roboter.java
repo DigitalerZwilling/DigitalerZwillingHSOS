@@ -114,7 +114,7 @@ public class Roboter extends Element{
         json += "\"z\": " + z + ",\n";
         json += "\"ausrichtung\": " + ausrichtung + ",\n";
         
-        json += "\"IsektorIDs\": \n{";
+        json += "\"sektorIDs\": \n{";
         for(int i=0;i<sektorID.size();i++){
             json += "\"" + i + "\": " + sektorID.get(i);
             if(i < (sektorID.size()-1))
