@@ -11,6 +11,7 @@ import Websockets.SessionRegister.WebSocketSessionRegister;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
@@ -18,6 +19,7 @@ import javax.ejb.TimerService;
 import javax.enterprise.concurrent.ManagedThreadFactory;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import org.jboss.logging.Logger;
 
 /**
@@ -45,11 +47,23 @@ public class Updater {
     
     private Timer timer;
     
-    Updater(int ms){
+    @Inject @Zeitgeber private int ms;
+    
+    Updater(){
+        caches = new ArrayList<>();
+        webSockets = new ArrayList<>();
+    }
+    
+    @PostConstruct
+    public void init(){
+        timer = timerService.createTimer(ms, ms, "New Updater interval Timer");
+    }
+    
+    /*Updater(int ms){
         caches = new ArrayList<>();
         webSockets = new ArrayList<>();
         timer = timerService.createTimer(ms, ms, "New Updater interval Timer");
-    }
+    }*/
     
     public void updateSockets(){
         for(WebSocketSessionRegister webSocket: webSockets){

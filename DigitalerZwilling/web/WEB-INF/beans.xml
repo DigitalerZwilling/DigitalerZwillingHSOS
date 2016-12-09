@@ -4,8 +4,9 @@
        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
        bean-discovery-mode="all">
     
-    <bean id="updater" class="Cache.Updater.Updater">
-      <constructor-arg type="int" value="500"/>
-   </bean>
+   <!-- <bean name="Zeitintervall" type="Integer">
+        <int>500</int>
+   </bean>-->
    
 </beans>
+<!--type="int" value="500"/>-->

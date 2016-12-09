@@ -29,6 +29,10 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class ArtikelCache extends Cache{
     @Inject private Datenbankschnittstelle datenbankschnittstelle;
+
+    public ArtikelCache() {
+    }
+    
     
 
     @Override
