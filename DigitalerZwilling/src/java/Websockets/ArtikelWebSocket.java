@@ -6,12 +6,9 @@
 package Websockets;
 
 import Cache.ArtikelCache;
-import Websockets.SessionRegister.ArtikelSessionRegister;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Cache.Cache;
+import Cache.Updater.Updater;
 import javax.inject.Inject;
-import javax.websocket.EncodeException;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -23,6 +20,7 @@ import javax.websocket.server.ServerEndpoint;
  * @author user
  */
 @ServerEndpoint("/ArtikelWebSocket")
+<<<<<<< HEAD
 public class ArtikelWebSocket extends WebSocketConfig {
 
     @Inject
@@ -61,16 +59,54 @@ public class ArtikelWebSocket extends WebSocketConfig {
         //System.out.println("onOpen: Notification list size: " + sessions.size());
     }
 
+=======
+public class ArtikelWebSocket extends WebSocket{
+    @Inject
+    Updater webSocketUpdater;
+    
+    @Inject
+    ArtikelCache artikelCache;
+  
+    @OnMessage
+    public void messageReceiver(String message) {
+        if (message.equals("LIST")){
+            this.setId(null);
+        }
+        else{
+            this.setId(Long.parseLong(message));
+        }
+        this.webSocketUpdater.addWebSocket(this);
+        this.setRegistriert(Boolean.TRUE);
+    }
+
+    @OnOpen
+    public void onOpen(Session session) {
+      this.setSession(session);
+    }
+ 
+>>>>>>> refs/remotes/origin/master
     /**
      * The user closes the connection.
      *
      * Note: you can't send messages to the client from this method
      */
     @OnClose
+<<<<<<< HEAD
     public void onClose(Session session) {
         this.nichtmehrRegistriert();
         this.artikelSessionRegister.remove(this);
         System.out.println("Session " + session.getId() + " has ended");
     }
 
+=======
+    public void onClose(Session session){
+        this.setRegistriert(Boolean.FALSE);
+        this.webSocketUpdater.removeWebSocket(this);
+    }
+
+    @Override
+    protected Cache getCache() {
+        return artikelCache;
+    }
+>>>>>>> refs/remotes/origin/master
 }

@@ -5,7 +5,9 @@
  */
 package Websockets;
 
-import Websockets.SessionRegister.WerkzeugSessionRegister;
+import Cache.Cache;
+import Cache.Updater.Updater;
+import Cache.WerkzeugCache;
 import javax.inject.Inject;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -18,6 +20,7 @@ import javax.websocket.server.ServerEndpoint;
  * @author user
  */
 @ServerEndpoint("/WerkzeugWebSocket")
+<<<<<<< HEAD
 public class WerkzeugWebSocket extends WebSocketConfig {
 
     @Inject
@@ -50,16 +53,61 @@ public class WerkzeugWebSocket extends WebSocketConfig {
         System.out.println("onOpen: " + session.getId());
     }
 
+=======
+public class WerkzeugWebSocket extends WebSocket{
+    @Inject
+    Updater webSocketUpdater;
+    
+    @Inject
+    WerkzeugCache werkzeugCache;
+  /**
+   * 
+   * zum konfigurieren der Verbindung nach Verbindungsaufbau
+   * Schluesselwort "LIST" gibt an das Listen der Objekte in Json geschickt werden
+   * ansonsten muss in der message die id des zu erwartenen Objektes enthalten sein
+   * 
+   */
+  
+  @OnMessage
+  public void messageReceiver(String message) {
+      if (message.equals("LIST")){
+          this.setId(null);
+      }
+      else{
+          this.setId(Long.parseLong(message));
+      }
+      this.webSocketUpdater.addWebSocket(this);
+      this.setRegistriert(Boolean.TRUE);
+  }
+
+  @OnOpen
+  public void onOpen(Session session) {
+    this.setSession(session);
+  }
+ 
+>>>>>>> refs/remotes/origin/master
     /**
      * The user closes the connection.
      *
      * Note: you can't send messages to the client from this method
      */
     @OnClose
+<<<<<<< HEAD
     public void onClose(Session session) {
         this.nichtmehrRegistriert();
         this.werkzeugSessionRegister.remove(this);
         System.out.println("Session " + session.getId() + " has ended");
     }
 
+=======
+    public void onClose(Session session){
+        this.setRegistriert(Boolean.FALSE);
+        this.webSocketUpdater.removeWebSocket(this);
+    }
+
+    @Override
+    protected Cache getCache() {
+        return werkzeugCache;
+    }
+>>>>>>> refs/remotes/origin/master
 }

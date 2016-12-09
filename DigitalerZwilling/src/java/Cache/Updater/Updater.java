@@ -7,7 +7,7 @@ package Cache.Updater;
 
 import Cache.Cache;
 import Cache.Exeption.DBErrorExeption;
-import Websockets.SessionRegister.WebSocketSessionRegister;
+import Websockets.WebSocket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,8 +28,13 @@ import org.jboss.logging.Logger;
 public class Updater {
 
     private final List<Cache> caches;
+<<<<<<< HEAD
     private final List<WebSocketSessionRegister> webSockets;
 
+=======
+    private final List<WebSocket> webSockets;
+    
+>>>>>>> refs/remotes/origin/master
     @Inject
     private WebSocketUpdateThread webSocketUpdateThread;
     private Thread webSocketThread;
@@ -51,10 +56,17 @@ public class Updater {
         webSockets = new ArrayList<>();
         timer = timerService.createTimer(ms, ms, "New Updater interval Timer");
     }
+<<<<<<< HEAD
 
     public void updateSockets() {
         for (WebSocketSessionRegister webSocket : webSockets) {
             webSocket.updateWebSockets();
+=======
+    
+    public void updateWebSockets(){
+        for(WebSocket webSocket: webSockets){
+            webSocket.update();
+>>>>>>> refs/remotes/origin/master
         }
     }
 
@@ -89,6 +101,7 @@ public class Updater {
     public void registerCache(Cache cache) {
         caches.add(cache);
     }
+<<<<<<< HEAD
 
     public void registerWebSocket(WebSocketSessionRegister webSocket) {
         webSockets.add(webSocket);
@@ -96,5 +109,14 @@ public class Updater {
 
     public boolean unRegisterWebSocket(WebSocketSessionRegister webSocket) {
         return webSockets.remove(webSocket);
+=======
+    
+    public void addWebSocket(WebSocket webSocket){
+        this.webSockets.add(webSocket);
+    }
+    
+    public void removeWebSocket(WebSocket webSocket){
+      this.webSockets.remove(webSocket);
+>>>>>>> refs/remotes/origin/master
     }
 }

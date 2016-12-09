@@ -111,9 +111,15 @@ public class Roboter extends Element {
         json += "\"y\": " + y + ",\n";
         json += "\"z\": " + z + ",\n";
         json += "\"ausrichtung\": " + ausrichtung + ",\n";
+<<<<<<< HEAD
 
         json += "\"sektorIDs\": \n{";
         for (int i = 0; i < sektorID.size(); i++) {
+=======
+        
+        json += "\"sektorIDs\": \n{";
+        for(int i=0;i<sektorID.size();i++){
+>>>>>>> refs/remotes/origin/master
             json += "\"" + i + "\": " + sektorID.get(i);
             if (i < (sektorID.size() - 1)) {
                 json += ",";
