@@ -7,6 +7,17 @@ package Servlets;
 
 
 import Cache.ArtikelCache;
+import Cache.GelenkCache;
+import Cache.HubPodestCache;
+import Cache.HubQuerPodestCache;
+import Cache.RoboterCache;
+import Cache.SektorCache;
+import Cache.SensorCache;
+import Cache.TransportbandCache;
+import Cache.WarentraegerCache;
+import Cache.WerkzeugCache;
+import DatenKlassen.Element;
+import DatenKlassen.Sektor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -34,8 +45,16 @@ public class index extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Inject ArtikelCache a; 
-    @Inject ArtikelCache b; 
+    @Inject ArtikelCache artikelCache; 
+    @Inject GelenkCache gelenkCache; 
+    @Inject HubPodestCache hubPodestCache; 
+    @Inject HubQuerPodestCache hubQuerPodestCache; 
+    @Inject RoboterCache roboterCache; 
+    @Inject SektorCache sektorCache;
+    @Inject SensorCache sensorCache;
+    @Inject TransportbandCache transportbandCache;
+    @Inject WarentraegerCache warentraegerCache;
+    @Inject WerkzeugCache warkzeugCache;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -44,14 +63,23 @@ public class index extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet test</title>");   
+            out.println("<title>Server Ausgabe</title>");   
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet test at " + request.getContextPath() + "</h1>");
-            out.println(a.toString());
-            //a.update();
-            out.println("<br>");
-            out.println(b.toString());
+            
+            //Sektoren
+            out.println("<h1>Sektoren</h1>");
+            for(Element e : this.sektorCache.getAll()){
+                out.println(e.toJson());
+            }
+            out.println("<br><br>");
+            
+            //Sektoren
+            out.println("<h1>Sektoren</h1>");
+            for(Element e : this.sektorCache.getAll()){
+                out.println(e.toJson());
+            }
+            out.println("<br><br>");
             out.println("</body>");
             out.println("</html>");
         }
