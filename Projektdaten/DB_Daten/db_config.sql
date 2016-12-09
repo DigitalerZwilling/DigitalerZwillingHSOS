@@ -1,22 +1,7 @@
-DROP TABLE Roboter_Sektor;
-DROP TABLE Transportband_Warentraeger;
-DROP TABLE Sektor_Warentraeger;
-DROP TABLE Artikel_Warentraeger;
-DROP TABLE Hubquerpodest;
-DROP TABLE Hubpodest;
-DROP TABLE Werkzeug;
-DROP TABLE Gelenk;
-DROP TABLE Roboter;
-DROP TABLE Sensor;
-DROP TABLE Transportband;
-DROP TABLE Artikel;
-DROP TABLE Warentraeger;
-DROP TABLE Sektor;
-
 CREATE TABLE Sektor (
-	id_sektor BIGINT AUTO_INCREMENT,
+	id_sektor BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	stoerung INT,
 	position_x INT,
@@ -27,9 +12,9 @@ CREATE TABLE Sektor (
 	);
 
 CREATE TABLE Warentraeger (
-	id_warentraeger BIGINT AUTO_INCREMENT,
+	id_warentraeger BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	stoerung INT,
 	montagezustand INT,
@@ -39,17 +24,17 @@ CREATE TABLE Warentraeger (
 	);
 
 CREATE TABLE Artikel (
-	id_artikel BIGINT AUTO_INCREMENT,
+	id_artikel BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	PRIMARY KEY (id_artikel)
 	);
 	
 CREATE TABLE Transportband (
-	id_transportband BIGINT AUTO_INCREMENT,
+	id_transportband BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	stoerung INT,
 	laenge INT,
@@ -62,9 +47,9 @@ CREATE TABLE Transportband (
 	);
 	
 CREATE TABLE Sensor (
-	id_sensor BIGINT AUTO_INCREMENT,
+	id_sensor BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	stoerung INT,
 	zustand INT,
@@ -75,9 +60,9 @@ CREATE TABLE Sensor (
 	);
 
 CREATE TABLE Roboter (
-	id_roboter BIGINT AUTO_INCREMENT,
+	id_roboter BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	stoerung INT,
 	position_x INT,
@@ -88,9 +73,9 @@ CREATE TABLE Roboter (
 	);
 	
 CREATE TABLE Gelenk (
-	id_gelenk BIGINT AUTO_INCREMENT,	
+	id_gelenk BIGINT,	
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	typ VARCHAR(100),
 	nummer INT,
@@ -101,9 +86,9 @@ CREATE TABLE Gelenk (
 	);
 	
 CREATE TABLE Werkzeug (
-	id_werkzeug BIGINT AUTO_INCREMENT,
+	id_werkzeug BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	zustand INT,
 	id_roboter BIGINT,
@@ -112,9 +97,9 @@ CREATE TABLE Werkzeug (
 	);
 	
 CREATE TABLE Hubpodest (
-	id_hubpodest BIGINT AUTO_INCREMENT,
+	id_hubpodest BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	oben INT,
 	unten INT,
@@ -124,9 +109,9 @@ CREATE TABLE Hubpodest (
 	);
 	
 CREATE TABLE Hubquerpodest (
-	id_hubquerpodest BIGINT AUTO_INCREMENT,
+	id_hubquerpodest BIGINT,
 	bezeichnung VARCHAR(100),
-	zeitstempel TIMESTAMP,
+	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
 	motor INT,
 	oben INT,
@@ -138,9 +123,10 @@ CREATE TABLE Hubquerpodest (
 	);
 	
 CREATE TABLE Artikel_Warentraeger (
+	id BIGINT AUTO_INCREMENT,
 	id_artikel BIGINT,
 	id_warentraeger BIGINT,
-	PRIMARY KEY (id_artikel, id_warentraeger),
+	PRIMARY KEY (id),
 	FOREIGN KEY (id_artikel) REFERENCES Artikel(id_artikel),
 	FOREIGN KEY (id_warentraeger) REFERENCES Warentraeger(id_warentraeger)
 	);
