@@ -5,7 +5,9 @@
  */
 package Websockets;
 
-import Websockets.SessionRegister.TransportbandSessionRegister;
+import Cache.Cache;
+import Cache.TransportbandCache;
+import Cache.Updater.Updater;
 import javax.inject.Inject;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -18,11 +20,13 @@ import javax.websocket.server.ServerEndpoint;
  * @author user
  */
 @ServerEndpoint("/TransportbandWebSocket")
-public class TransportbandWebSocket extends WebSocketConfig{
+public class TransportbandWebSocket extends WebSocket{
 
-    @Inject TransportbandSessionRegister transportbandSessionRegister;
-  
-  
+    @Inject
+    Updater webSocketUpdater;
+    
+    @Inject
+    TransportbandCache transportbandCache;  
 
   /**
    * 
@@ -35,16 +39,13 @@ public class TransportbandWebSocket extends WebSocketConfig{
   @OnMessage
   public void messageReceiver(String message) {
       if (message.equals("LIST")){
-          this.setIstListe(Boolean.TRUE);
-          this.setId(0L);
+          this.setId(null);
       }
       else{
-          this.setIstListe(Boolean.FALSE);
           this.setId(Long.parseLong(message));
       }
-      this.setKlasseninfo("Warentraeger");
-      this.transportbandSessionRegister.addSession(this);
-      this.fertigRegistriert();
+      this.webSocketUpdater.addWebSocket(this);
+      this.setRegistriert(Boolean.TRUE);
   }
 
   @OnOpen
@@ -60,8 +61,13 @@ public class TransportbandWebSocket extends WebSocketConfig{
      */
     @OnClose
     public void onClose(Session session){
-        this.nichtmehrRegistriert();
-        this.transportbandSessionRegister.remove(this);
+        this.setRegistriert(Boolean.FALSE);
+        this.webSocketUpdater.removeWebSocket(this);
         System.out.println("Session " +session.getId()+" has ended");
+    }
+
+    @Override
+    protected Cache getCache() {
+        return transportbandCache;
     }
 }

@@ -5,7 +5,9 @@
  */
 package Websockets;
 
-import Websockets.SessionRegister.RoboterSessionRegister;
+import Cache.Cache;
+import Cache.RoboterCache;
+import Cache.Updater.Updater;
 import javax.inject.Inject;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -18,13 +20,14 @@ import javax.websocket.server.ServerEndpoint;
  * @author user
  */
 @ServerEndpoint("/RoboterWebSocket")
-public class RoboterWebSocket extends WebSocketConfig{
+public class RoboterWebSocket extends WebSocket{
 
-    @Inject RoboterSessionRegister roboterSessionRegister;
-  
-  
-
-  /**
+    @Inject
+    Updater webSocketUpdater;
+    
+    @Inject
+    RoboterCache roboterCache;
+ /**
    * 
    * zum konfigurieren der Verbindung nach Verbindungsaufbau
    * Schluesselwort "LIST" gibt an das Listen der Objekte in Json geschickt werden
@@ -35,16 +38,13 @@ public class RoboterWebSocket extends WebSocketConfig{
   @OnMessage
   public void messageReceiver(String message) {
       if (message.equals("LIST")){
-          this.setIstListe(Boolean.TRUE);
-          this.setId(0L);
+          this.setId(null);
       }
       else{
-          this.setIstListe(Boolean.FALSE);
           this.setId(Long.parseLong(message));
       }
-      this.setKlasseninfo("Warentraeger");
-      this.roboterSessionRegister.addSession(this);
-      this.fertigRegistriert();
+      this.webSocketUpdater.addWebSocket(this);
+      this.setRegistriert(Boolean.TRUE);
   }
 
   @OnOpen
@@ -60,9 +60,14 @@ public class RoboterWebSocket extends WebSocketConfig{
      */
     @OnClose
     public void onClose(Session session){
-        this.nichtmehrRegistriert();
-        this.roboterSessionRegister.remove(this);
+        this.setRegistriert(Boolean.FALSE);
+        this.webSocketUpdater.removeWebSocket(this);
         System.out.println("Session " +session.getId()+" has ended");
+    }
+
+    @Override
+    protected Cache getCache() {
+        return roboterCache;
     }
     
     

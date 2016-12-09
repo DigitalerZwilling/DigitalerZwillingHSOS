@@ -5,6 +5,7 @@
  */
 package Websockets;
 
+import Cache.Cache;
 import java.util.Objects;
 import javax.websocket.Session;
 
@@ -12,39 +13,30 @@ import javax.websocket.Session;
  *
  * @author user
  */
-public class WebSocketConfig {
+public abstract class WebSocket {
     private Session session;
     private Long id;
-    private String klasseninfo;
-    private Boolean istListe;
-    
     private Boolean registriert;
 
-    public WebSocketConfig() {
-        this.istListe = Boolean.FALSE;
+    public WebSocket() {
         this.registriert = Boolean.FALSE;
         System.out.println("config hier!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
-
-    protected void fertigRegistriert(){
-        this.registriert=Boolean.TRUE;
-    }
-    protected void nichtmehrRegistriert(){
-        this.registriert=Boolean.FALSE;
-    }
-    public Boolean istRegistriert(){
-        return this.registriert;
+    
+    public void update(){
+        //Update Methode fehlt!!!!
     }
     
-    public Boolean getIstListe() {
-        return istListe;
+    protected abstract Cache getCache();
+
+    public Boolean getRegistriert() {
+        return registriert;
     }
 
-    public void setIstListe(Boolean istListe) {
-        this.istListe = istListe;
+    public void setRegistriert(Boolean registriert) {
+        this.registriert = registriert;
     }
     
-
     public Session getSession() {
         return session;
     }
@@ -61,20 +53,11 @@ public class WebSocketConfig {
         this.id = id;
     }
 
-    public String getKlasseninfo() {
-        return klasseninfo;
-    }
-
-    public void setKlasseninfo(String klasseninfo) {
-        this.klasseninfo = klasseninfo;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.session);
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.klasseninfo);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.session);
+        hash = 59 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -89,10 +72,7 @@ public class WebSocketConfig {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final WebSocketConfig other = (WebSocketConfig) obj;
-        if (!Objects.equals(this.klasseninfo, other.klasseninfo)) {
-            return false;
-        }
+        final WebSocket other = (WebSocket) obj;
         if (!Objects.equals(this.session, other.session)) {
             return false;
         }

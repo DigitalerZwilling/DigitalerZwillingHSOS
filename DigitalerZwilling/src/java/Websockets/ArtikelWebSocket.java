@@ -6,12 +6,9 @@
 package Websockets;
 
 import Cache.ArtikelCache;
-import Websockets.SessionRegister.ArtikelSessionRegister;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Cache.Cache;
+import Cache.Updater.Updater;
 import javax.inject.Inject;
-import javax.websocket.EncodeException;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -23,17 +20,19 @@ import javax.websocket.server.ServerEndpoint;
  * @author user
  */
 @ServerEndpoint("/ArtikelWebSocket")
-public class ArtikelWebSocket extends WebSocketConfig{
-  @Inject ArtikelSessionRegister artikelSessionRegister;
-  //private WebSocketConfig webSocketConfig;
+public class ArtikelWebSocket extends WebSocket{
+    @Inject
+    Updater webSocketUpdater;
+    
+    @Inject
+    ArtikelCache artikelCache;
   
   @OnMessage
   public void messageReceiver(String message) {
       System.out.println(message);
       this.setId(Long.parseLong(message));
-      this.setKlasseninfo("Artikel");
-      this.artikelSessionRegister.addSession(this);
-      this.fertigRegistriert();
+      this.webSocketUpdater.addWebSocket(this);
+      this.setRegistriert(Boolean.TRUE);
       
       /*try {
           //System.out.println("Received message:" + message);
@@ -66,9 +65,14 @@ public class ArtikelWebSocket extends WebSocketConfig{
      */
     @OnClose
     public void onClose(Session session){
-        this.nichtmehrRegistriert();
-        this.artikelSessionRegister.remove(this);
+        this.setRegistriert(Boolean.FALSE);
+        this.webSocketUpdater.removeWebSocket(this);
         System.out.println("Session " +session.getId()+" has ended");
+    }
+
+    @Override
+    protected Cache getCache() {
+        return artikelCache;
     }
     
 }

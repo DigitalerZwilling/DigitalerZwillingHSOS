@@ -5,7 +5,9 @@
  */
 package Websockets;
 
-import Websockets.SessionRegister.HubPodestSessionRegister;
+import Cache.Cache;
+import Cache.HubPodestCache;
+import Cache.Updater.Updater;
 import javax.inject.Inject;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -18,11 +20,13 @@ import javax.websocket.server.ServerEndpoint;
  * @author user
  */
 @ServerEndpoint("/HubPodestWebSocket")
-public class HubPodestWebSocket extends WebSocketConfig{
+public class HubPodestWebSocket extends WebSocket{
 
-    @Inject HubPodestSessionRegister hubPodestSessionRegister;
+    @Inject
+    Updater webSocketUpdater;
   
-  
+    @Inject
+    HubPodestCache hubPodestCache;
 
   /**
    * 
@@ -35,16 +39,13 @@ public class HubPodestWebSocket extends WebSocketConfig{
   @OnMessage
   public void messageReceiver(String message) {
       if (message.equals("LIST")){
-          this.setIstListe(Boolean.TRUE);
-          this.setId(0L);
+          this.setId(null);
       }
       else{
-          this.setIstListe(Boolean.FALSE);
           this.setId(Long.parseLong(message));
       }
-      this.setKlasseninfo("Warentraeger");
-      this.hubPodestSessionRegister.addSession(this);
-      this.fertigRegistriert();
+      this.webSocketUpdater.addWebSocket(this);
+      this.setRegistriert(Boolean.TRUE);
   }
 
   @OnOpen
@@ -60,9 +61,14 @@ public class HubPodestWebSocket extends WebSocketConfig{
      */
     @OnClose
     public void onClose(Session session){
-        this.nichtmehrRegistriert();
-        this.hubPodestSessionRegister.remove(this);
+        this.setRegistriert(Boolean.FALSE);
+        this.webSocketUpdater.removeWebSocket(this);
         System.out.println("Session " +session.getId()+" has ended");
+    }
+
+    @Override
+    protected Cache getCache() {
+        return hubPodestCache;
     }
     
     

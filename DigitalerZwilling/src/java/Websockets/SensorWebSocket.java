@@ -5,7 +5,9 @@
  */
 package Websockets;
 
-import Websockets.SessionRegister.SensorSessionRegister;
+import Cache.Cache;
+import Cache.SensorCache;
+import Cache.Updater.Updater;
 import javax.inject.Inject;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -18,11 +20,13 @@ import javax.websocket.server.ServerEndpoint;
  * @author user
  */
 @ServerEndpoint("/SensorWebSocket")
-public class SensorWebSocket extends WebSocketConfig{
+public class SensorWebSocket extends WebSocket{
 
-    @Inject SensorSessionRegister sensorSessionRegister;
-  
-  
+    @Inject
+    Updater webSocketUpdater;
+
+    @Inject
+    SensorCache sensorCache;  
 
   /**
    * 
@@ -35,16 +39,13 @@ public class SensorWebSocket extends WebSocketConfig{
   @OnMessage
   public void messageReceiver(String message) {
       if (message.equals("LIST")){
-          this.setIstListe(Boolean.TRUE);
-          this.setId(0L);
+          this.setId(null);
       }
       else{
-          this.setIstListe(Boolean.FALSE);
           this.setId(Long.parseLong(message));
       }
-      this.setKlasseninfo("Warentraeger");
-      this.sensorSessionRegister.addSession(this);
-      this.fertigRegistriert();
+      this.webSocketUpdater.addWebSocket(this);
+      this.setRegistriert(Boolean.TRUE);
   }
 
   @OnOpen
@@ -60,9 +61,14 @@ public class SensorWebSocket extends WebSocketConfig{
      */
     @OnClose
     public void onClose(Session session){
-        this.nichtmehrRegistriert();
-        this.sensorSessionRegister.remove(this);
+        this.setRegistriert(Boolean.FALSE);
+        this.webSocketUpdater.removeWebSocket(this);
         System.out.println("Session " +session.getId()+" has ended");
+    }
+
+    @Override
+    protected Cache getCache() {
+        return sensorCache;
     }
     
 }

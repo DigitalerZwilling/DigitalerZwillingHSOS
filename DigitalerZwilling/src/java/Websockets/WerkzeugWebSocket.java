@@ -5,7 +5,9 @@
  */
 package Websockets;
 
-import Websockets.SessionRegister.WerkzeugSessionRegister;
+import Cache.Cache;
+import Cache.Updater.Updater;
+import Cache.WerkzeugCache;
 import javax.inject.Inject;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -18,11 +20,12 @@ import javax.websocket.server.ServerEndpoint;
  * @author user
  */
 @ServerEndpoint("/WerkzeugWebSocket")
-public class WerkzeugWebSocket extends WebSocketConfig{
-    @Inject WerkzeugSessionRegister werkzeugSessionRegister;
-  
-  
-
+public class WerkzeugWebSocket extends WebSocket{
+    @Inject
+    Updater webSocketUpdater;
+    
+    @Inject
+    WerkzeugCache werkzeugCache;
   /**
    * 
    * zum konfigurieren der Verbindung nach Verbindungsaufbau
@@ -34,16 +37,13 @@ public class WerkzeugWebSocket extends WebSocketConfig{
   @OnMessage
   public void messageReceiver(String message) {
       if (message.equals("LIST")){
-          this.setIstListe(Boolean.TRUE);
-          this.setId(0L);
+          this.setId(null);
       }
       else{
-          this.setIstListe(Boolean.FALSE);
           this.setId(Long.parseLong(message));
       }
-      this.setKlasseninfo("Warentraeger");
-      this.werkzeugSessionRegister.addSession(this);
-      this.fertigRegistriert();
+      this.webSocketUpdater.addWebSocket(this);
+      this.setRegistriert(Boolean.TRUE);
   }
 
   @OnOpen
@@ -59,9 +59,14 @@ public class WerkzeugWebSocket extends WebSocketConfig{
      */
     @OnClose
     public void onClose(Session session){
-        this.nichtmehrRegistriert();
-        this.werkzeugSessionRegister.remove(this);
+        this.setRegistriert(Boolean.FALSE);
+        this.webSocketUpdater.removeWebSocket(this);
         System.out.println("Session " +session.getId()+" has ended");
+    }
+
+    @Override
+    protected Cache getCache() {
+        return werkzeugCache;
     }
     
 }
