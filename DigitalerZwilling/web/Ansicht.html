@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+
+
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <div>
+            <button type="button" onclick="(initializeReception());" >Open</button>
+           
+            <button type="button" onclick="send();" value="hiich" id="b1">Send</button>
+            
+           <!-- <button type="button" onclick="closeSocket();" >Close</button> -->
+   </div>
+        <div id="messages"></div>
+        
+        <script type="text/javascript">
+    
+      var host = "ws://131.173.127.175:8080/test/echo";
+      var wSocket = new WebSocket(host);
+      var browserSupport = ("WebSocket" in window) ? true : false;
+      
+      // called  body onLoad()
+      function initializeReception()
+      {
+        if (browserSupport)
+        {
+          wSocket.onopen = function()
+          {
+            //alert(" Web Socket is connected, sending data");
+            wSocket.send("ping");
+          };
+        }
+        else
+        {
+          // The browser doesn't support WebSocket
+          alert("WebSocket is NOT supported by your Browser!");
+        }
+      }
+      var messages = document.getElementById("messages");
+      // called when a message is received
+      wSocket.onmessage = function(event)
+      {
+        var received_msg = event.data;
+        //document.getElementById("m1").value = received_msg;
+        
+        messages.innerHTML += "<br/>" + received_msg;
+      };
+      
+      // called when socket closes
+      wSocket.onclose = function()
+      {
+        // websocket is closed.
+        //alert("Connection is closed...");
+      };
+      
+      function send(){
+                var text = document.getElementById("b1").value;
+                wSocket.send(text);
+            };
+      </script>
+    </body>
+</html>
