@@ -29,6 +29,7 @@ public class ArtikelWebSocket extends WebSocket{
   
     @OnMessage
     public void messageReceiver(String message) {
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!8");
         if (message.equals("LIST")){
             this.setId(null);
         }
@@ -41,7 +42,9 @@ public class ArtikelWebSocket extends WebSocket{
 
     @OnOpen
     public void onOpen(Session session) {
+      System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
       this.setSession(session);
+      System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!3");
     }
  
     /**

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.websocket.Session;
 
 /**
@@ -26,6 +27,11 @@ public abstract class WebSocket {
 
     public WebSocket() {
         this.registriert = Boolean.FALSE;
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!2");
+    }
+    @PostConstruct
+    public void init(){
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!init");
     }
     
     public void update() {
@@ -59,7 +65,9 @@ public abstract class WebSocket {
     }
 
     public void setSession(Session session) {
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!4");
         this.session = session;
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!5");
     }
 
     public Long getId() {
