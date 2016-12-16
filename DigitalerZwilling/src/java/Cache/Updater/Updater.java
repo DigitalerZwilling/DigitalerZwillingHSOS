@@ -56,14 +56,14 @@ public class Updater {
         caches = new ArrayList<>();
         webSockets = new ArrayList<>();
         //timer = timerService.createTimer(500, 500, "New Updater interval Timer");
-        System.out.println("vor erstellt!!!!!!!!!!!!!!!!!!!!!");
+        //System.out.println("vor erstellt!!!!!!!!!!!!!!!!!!!!!");
     }
     @PostConstruct
     public void init(){
         //timer = timerService.createTimer(0, 500, "New Updater interval Timer");
-        System.out.println("vor erstellt!!!!!!!!!!!!!!!!!!!!!");
+
         sT.cancelTimer("New Updater interval Timer");
-        System.out.println("vor erstellt!!!!!!!!!!!!!!!!!!!!!");
+        
         sT.createTimer(1000, 1000, "New Updater interval Timer");
         System.out.println("erstellt!!!!!!!!!!!!!!!!!!!!!");
         //timerService.crea
@@ -76,6 +76,7 @@ public class Updater {
     }
     
     public void updateWebSockets(){
+        System.out.println("updateWebSockets");
         for(WebSocket webSocket: webSockets){
             webSocket.update();
         }
@@ -93,17 +94,24 @@ public class Updater {
     
     //@Timeout
     public void updateAll(Timer timer){
-        System.out.println("timer!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(this.webSockets.get(0).toString());
+        
         for(Cache cache: caches){
             cache.toggleState();
         }
         
-        if(!cacheUpdateThread.isRunning())
+        if(!cacheUpdateThread.isRunning()){
            cacheThraed = managedThreadFactory.newThread(cacheUpdateThread);
-        else
+        }
+        else{
+            
+        
             Logger.getLogger("TIMEOUT: Cache update takes to long...");
-        if(!webSocketUpdateThread.isRunning())
+        }
+        if(!webSocketUpdateThread.isRunning()){
             webSocketThread = managedThreadFactory.newThread(webSocketUpdateThread);
+            webSocketUpdateThread.run();
+    }
         else
             Logger.getLogger("TIMEOUT: WebSocket update takes to long...");
     }
