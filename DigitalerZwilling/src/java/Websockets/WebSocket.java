@@ -100,7 +100,7 @@ public abstract class WebSocket {
     }
     
     public String ListToJson(List<Element> list){
-        String json = "{";
+        String json = "{\"inhalt\":[";
         
         for(int i=0 ; i<list.size() ; i++){
             json += list.get(i).toJson();
@@ -108,7 +108,7 @@ public abstract class WebSocket {
                 json += ',';
         }
         
-        json += '}';
+        json += "]}";
         
         return json;
     }

@@ -103,46 +103,43 @@ public class Roboter extends Element{
     public String toJson() {
         String json = new String();
         json += '{';
-        json += "\"id\": " + id + ",\n";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
-        json += "\"user_Parameter\": \"" + user_Parameter + "\",\n";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
-        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",\n";
-        json += "\"stoerung\": " + stoerung + ",\n";
-        json += "\"x\": " + x + ",\n";
-        json += "\"y\": " + y + ",\n";
-        json += "\"z\": " + z + ",\n";
-        json += "\"ausrichtung\": " + ausrichtung + ",\n";
+        json += "\"id\": " + id + ",";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
+        json += "\"user_Parameter\": \"" + user_Parameter + "\",";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
+        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",";
+        json += "\"stoerung\": " + stoerung + ",";
+        json += "\"x\": " + x + ",";
+        json += "\"y\": " + y + ",";
+        json += "\"z\": " + z + ",";
+        json += "\"ausrichtung\": " + ausrichtung + ",";
         
-        json += "\"sektorIDs\": \n{";
+        json += "\"sektorIDs\": {";
         for(int i=0;i<sektorID.size();i++){
-            json += "\"" + i + "\": " + sektorID.get(i);
-            if(i < (sektorID.size()-1))
+            json += sektorID.get(i);
+            if(i < (sektorID.size()-1)){
                 json += ",";
-            
-            json += '\n';
+            }
         }
-        json += "},\n";
+        json += "},";
         
-        json += "\"gelenkeIDs\": \n{";
+        json += "\"gelenkeIDs\": {";
         for(int i=0;i<gelenkeIDs.size();i++){
-            json += "\"" + i + "\": " + gelenkeIDs.get(i);
-            if(i < (gelenkeIDs.size()-1))
+            json += gelenkeIDs.get(i);
+            if(i < (gelenkeIDs.size()-1)){
                 json += ",";
-            
-            json += '\n';
+            }
         }
-        json += "},\n";
+        json += "},";
         
-        json += "\"werzeugIDs\": \n{";
+        json += "\"werzeugIDs\": {";
         for(int i=0;i<werkzeugID.size();i++){
-            json += "\"" + i + "\": " + werkzeugID.get(i);
-            if(i < (werkzeugID.size()-1))
+            json += werkzeugID.get(i);
+            if(i < (werkzeugID.size()-1)){
                 json += ",";
-            
-            json += '\n';
+            }
         }
-        json += "}\n}";
+        json += "}}";
         
         return json;
     }    

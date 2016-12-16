@@ -61,15 +61,15 @@ public class Gelenk extends Element{
     public String toJson() {
         String json = new String();
         json += '{';
-        json += "\"id\": " + id + ",\n";
+        json += "\"id\": " + id + ",";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
+        json += "\"user_Parameter\": \"" + user_Parameter + "\",";
         json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
-        json += "\"user_Parameter\": \"" + user_Parameter + "\",\n";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
-        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",\n";
-        json += "\"typ\": \"" + typ + "\",\n";
-        json += "\"nummer\": " + nummer + ",\n";
-        json += "\"gelenkstellung\": " + gelenkstellung + ",\n";
-        json += "\"roboterID\": " + roboterID + "\n";
+        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",";
+        json += "\"typ\": \"" + typ + "\",";
+        json += "\"nummer\": " + nummer + ",";
+        json += "\"gelenkstellung\": " + gelenkstellung + ",";
+        json += "\"roboterID\": " + roboterID;
         json += "}";
         
         return json;

@@ -64,15 +64,15 @@ public class Sensor extends Element{
     public String toJson() {
         String json = new String();
         json += '{';
-        json += "\"id\": " + id + ",\n";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
-        json += "\"user_Parameter\": \"" + user_Parameter + "\",\n";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
-        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",\n";
-        json += "\"stoerung\": " + stoerung + ",\n";
-        json += "\"phy_adresse\": \"" + phy_adresse + "\",\n";
-        json += "\"zustand\": " + zustand + ",\n";
-        json += "\"sektorID\": " + sektorID + "\n";
+        json += "\"id\": " + id + ",";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
+        json += "\"user_Parameter\": \"" + user_Parameter + "\",";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
+        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",";
+        json += "\"stoerung\": " + stoerung + ",";
+        json += "\"phy_adresse\": \"" + phy_adresse + "\",";
+        json += "\"zustand\": " + zustand + ",";
+        json += "\"sektorID\": " + sektorID;
         json += '}';
         return json;
     }
