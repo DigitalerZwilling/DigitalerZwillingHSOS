@@ -17,7 +17,7 @@ public class Sensor extends Element{
 
     private  int stoerung;
     private  String phy_adresse;
-    private  boolean zustand;                      //fehlerzustand
+    private  boolean zustand;
     private Long sektorID;
 
     public Sensor(int stoerung, String phy_adresse, boolean zustand, Long sektorID, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {

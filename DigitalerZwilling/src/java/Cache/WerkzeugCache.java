@@ -68,12 +68,9 @@ public class WerkzeugCache extends Cache{
             Werkzeug werkzeug1,werkzeug2;
             for (int i=0;i<ids.size();i++){
                 String ourTime=zeitstempel.get(i).replace(' ', 'T');
-                werkzeug1=new Werkzeug(Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime),Integer.valueOf(zustand.get(i)));
-                werkzeug2=new Werkzeug(Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime),Integer.valueOf(zustand.get(i)));
-                
-                werkzeug1.setRoboterID(this.readRoboter(werkzeug1.getId()));
-                werkzeug2.setRoboterID(this.readRoboter(werkzeug2.getId()));
-                
+                werkzeug1=new Werkzeug(this.readRoboter(Long.parseLong(ids.get(i))), Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime),Integer.valueOf(zustand.get(i)));
+                werkzeug2=new Werkzeug(this.readRoboter(Long.parseLong(ids.get(i))), Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime),Integer.valueOf(zustand.get(i)));
+                                
                 allWerkzeug1.put(werkzeug1.getId(),(werkzeug1));
                 allWerkzeug2.put(werkzeug2.getId(),(werkzeug2));
             }   

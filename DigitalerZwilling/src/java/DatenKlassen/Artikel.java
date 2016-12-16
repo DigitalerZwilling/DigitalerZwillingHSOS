@@ -15,6 +15,7 @@ public class Artikel extends Element{
     
     public Artikel(Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
+        warentraegerIDs = null;
     }
 
     public List<Long> getId_Warentraeger() {

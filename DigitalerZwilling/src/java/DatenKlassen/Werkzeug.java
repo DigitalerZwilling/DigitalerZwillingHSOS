@@ -16,7 +16,7 @@ public class Werkzeug extends Element{
     int zustand;
     Long roboterID;
     
-    public Werkzeug(Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel, int zustand) {
+    public Werkzeug(Long roboterID, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel, int zustand) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.zustand = zustand;
         this.roboterID = roboterID;

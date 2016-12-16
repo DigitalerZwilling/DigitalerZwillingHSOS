@@ -64,7 +64,7 @@ public class GelenkCache extends Cache{
             Map<Long,Element> allGelenk1=new HashMap<>();
             Map<Long,Element> allGelenk2=new HashMap<>();
             
-            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_gelenk,bezeichnung,typ,nummer,gelenkstellung,zeitstempel,user_parameter from Gelenk");
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_gelenk,bezeichnung,typ,nummer,gelenkstellung,id_roboter,zeitstempel,user_parameter from Gelenk");
             List<String> ids = rsMap.get("ID_GELENK");
             List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
             List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
@@ -72,15 +72,13 @@ public class GelenkCache extends Cache{
             List<String> typ = rsMap.get("TYP");
             List<String> nummer = rsMap.get("NUMMER");
             List<String> gelenkstellung = rsMap.get("GELENKSTELLUNG");
+            List<String> roboterids = rsMap.get("ID_ROBOTER");
             
             Gelenk gelenk1,gelenk2;
             for (int i=0;i<ids.size();i++){
                 String outTime=zeitstempel.get(i).replace(' ', 'T');
-                gelenk1=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(outTime));
-                gelenk2=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(outTime));
-                
-                gelenk1.setRoboterID(this.readRoboter(gelenk1.getId()));
-                gelenk2.setRoboterID(this.readRoboter(gelenk2.getId()));
+                gelenk1=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(roboterids.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(outTime));
+                gelenk2=new Gelenk(typ.get(i),Integer.valueOf(nummer.get(i)),Integer.valueOf(gelenkstellung.get(i)),Long.parseLong(roboterids.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(outTime));
                 
                 allGelenk1.put(gelenk1.getId(),(gelenk1));
                 allGelenk2.put(gelenk2.getId(),(gelenk2));
@@ -98,17 +96,5 @@ public class GelenkCache extends Cache{
             Logger.getLogger(GelenkCache.class.getName()).log(Level.SEVERE, null, ex);
             throw new DBErrorExeption("Query error");
         }
-    }
-    Long readRoboter(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter from Gelenk where id_gelenk="+id+" ");
-        List<String> ids = rsMap.get("ID_ROBOTER");
-        
-        Long r_ids=null;
-        if(ids==null) return r_ids;
-        
-        for (String s : ids){
-            r_ids=Long.parseLong(s);
-        }
-        return r_ids;
     }
 }

@@ -18,11 +18,12 @@ public class Gelenk extends Element{
     private int gelenkstellung;
     private Long roboterID;
 
-    public Gelenk(String typ, int nummer, int gelenkstellung, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
+    public Gelenk(String typ, int nummer, int gelenkstellung, Long roboterID, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.typ = typ;
         this.nummer = nummer;
         this.gelenkstellung = gelenkstellung;
+        this.roboterID = roboterID;
     }
 
     public String getTyp() {
