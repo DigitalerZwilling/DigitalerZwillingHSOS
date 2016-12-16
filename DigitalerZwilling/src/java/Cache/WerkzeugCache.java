@@ -97,6 +97,8 @@ public class WerkzeugCache extends Cache{
         List<String> ids = rsMap.get("ID_ROBOTER");
         
         Long r_ids=null;
+        if(ids==null) return r_ids;
+        
         for (String s : ids){
             r_ids=Long.parseLong(s);
         }

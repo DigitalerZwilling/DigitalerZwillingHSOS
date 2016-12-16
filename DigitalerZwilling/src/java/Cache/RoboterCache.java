@@ -121,7 +121,9 @@ public class RoboterCache extends Cache{
     List<Long> readSektor(Long id) throws DBNotFoundExeption, QueryExeption{
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor FROM Roboter_Sektor WHERE id_roboter="+id);
         List<String> ids = rsMap.get("ID_SEKTOR");
+        
         List<Long> s_ids= new ArrayList<>();
+        if(ids==null) return s_ids;
         
         for (String s : ids){
             s_ids.add(Long.parseLong(s));
@@ -131,7 +133,9 @@ public class RoboterCache extends Cache{
     List<Long> readGelenke(Long id) throws DBNotFoundExeption, QueryExeption{
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_gelenk FROM Gelenk WHERE id_roboter="+id);
         List<String> ids = rsMap.get("ID_GELENK");
+        
         List<Long> g_ids= new ArrayList<>();
+        if(ids==null) return g_ids;
         
         for (String s : ids){
             g_ids.add(Long.parseLong(s));
@@ -141,7 +145,9 @@ public class RoboterCache extends Cache{
     List<Long> readWerkzeug(Long id) throws DBNotFoundExeption, QueryExeption{
         Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug FROM Roboter_Werkzeug WHERE id_roboter="+id);
         List<String> ids = rsMap.get("ID_WERKZEUG");
+        
         List<Long> werk_ids= new ArrayList<>();
+        if(ids==null) return werk_ids;
         
         for (String s : ids){
             werk_ids.add(Long.parseLong(s));

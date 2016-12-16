@@ -100,11 +100,12 @@ public class GelenkCache extends Cache{
         }
     }
     Long readRoboter(Long id) throws DBNotFoundExeption, QueryExeption{
-
         Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter from Gelenk where id_gelenk="+id+" ");
-
         List<String> ids = rsMap.get("ID_ROBOTER");
+        
         Long r_ids=null;
+        if(ids==null) return r_ids;
+        
         for (String s : ids){
             r_ids=Long.parseLong(s);
         }

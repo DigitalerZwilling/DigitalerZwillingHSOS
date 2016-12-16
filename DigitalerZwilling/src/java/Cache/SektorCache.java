@@ -120,7 +120,9 @@ public class SektorCache extends Cache{
     private List<Long> readWarentraeger(Long id) throws DBNotFoundExeption, QueryExeption{
         Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT warentraeger_id FROM Sektor_Warentraeger WHERE id_sektor="+id);
         List<String> ids = rsMap.get("ID_WARENTRAEGER");
+        
         List<Long> idsLong = new ArrayList<>();
+        if(ids==null) return idsLong;
         
         for (String s : ids){
             idsLong.add(Long.parseLong(s));
@@ -131,7 +133,9 @@ public class SektorCache extends Cache{
     private List<Long> readVorTransportband(Long id) throws DBNotFoundExeption, QueryExeption{
         Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband FROM Transportband WHERE id_sektor_nach="+id);
         List<String> ids = rsMap.get("ID_TRANSPORTBAND");
+        
         List<Long> idsLong= new ArrayList<>();
+        if(ids==null) return idsLong;
         
         for (String s : ids){
             idsLong.add(Long.parseLong(s));
@@ -142,7 +146,9 @@ public class SektorCache extends Cache{
     private List<Long> readNachTransportband(Long id) throws DBNotFoundExeption, QueryExeption{
         Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband FROM Transportband WHERE id_sektor_vor="+id);
         List<String> ids = rsMap.get("ID_TRANSPORTBAND");
+        
         List<Long> idsLong= new ArrayList<>();
+        if(ids==null) return idsLong;
 
         for (String s : ids){
             idsLong.add(Long.parseLong(s));
@@ -153,7 +159,9 @@ public class SektorCache extends Cache{
     private List<Long> readSensor(Long id) throws DBNotFoundExeption, QueryExeption{
         Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sensor FROM Sensor WHERE id_sektor="+id);
         List<String> ids = rsMap.get("ID_SENSOR");
+        
         List<Long> idsLong= new ArrayList<>();
+        if(ids==null) return idsLong;
 
         for (String s : ids){
             idsLong.add(Long.parseLong(s));
@@ -164,7 +172,9 @@ public class SektorCache extends Cache{
     private List<Long> readHubPodest(Long id) throws DBNotFoundExeption, QueryExeption{
         Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubpodest FROM Hubpodest WHERE id_sektor="+id);
         List<String> ids = rsMap.get("ID_HUBPODEST");
+        
         List<Long> idsLong= new ArrayList<>();
+        if(ids==null) return idsLong;
 
         for (String s : ids){
             idsLong.add(Long.parseLong(s));
@@ -175,7 +185,9 @@ public class SektorCache extends Cache{
     private List<Long> readQuerHubPodest(Long id) throws DBNotFoundExeption, QueryExeption{
         Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubquerpodest FROM Hubquerpodest WHERE id_sektor="+id);
         List<String> ids = rsMap.get("ID_HUBQUERPODEST");
+        
         List<Long> idsLong= new ArrayList<>();
+        if(ids==null) return idsLong;
 
         for (String s : ids){
             idsLong.add(Long.parseLong(s));
@@ -186,7 +198,9 @@ public class SektorCache extends Cache{
     private List<Long> readRoboter(Long id) throws DBNotFoundExeption, QueryExeption{
         Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter FROM Roboter_Sektor WHERE id_sektor="+id);
         List<String> ids = rsMap.get("ID_ROBOTER");
+        
         List<Long> idsLong= new ArrayList<>();
+        if(ids==null) return idsLong;
 
         for (String s : ids){
             idsLong.add(Long.parseLong(s));

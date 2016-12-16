@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Cache;
 
 import static Cache.Cache.state;
@@ -117,6 +112,8 @@ public class WarentraegerCache extends Cache{
         List<String> ids = rsMap.get("ID_TRANSPORTBAND");
         
         List<Long> idsLong= new ArrayList<>();
+        if(ids==null) return idsLong;
+        
         for (String s : ids){
             idsLong.add(Long.parseLong(s));
         }
@@ -128,6 +125,8 @@ public class WarentraegerCache extends Cache{
         List<String> ids = rsMap.get("ID_SEKTOR");
         
         List<Long> idsLong= new ArrayList<>();
+        if(ids==null) return idsLong;
+        
         for (String s : ids){
             idsLong.add(Long.parseLong(s));
         }

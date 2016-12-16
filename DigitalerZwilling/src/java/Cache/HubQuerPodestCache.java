@@ -98,6 +98,7 @@ public class HubQuerPodestCache extends Cache{
         List<String> id1 = rsMap.get("ID_HUBQUERPODEST1");
         List<String> id2 = rsMap.get("ID_HUBQUERPODEST2");
         
+        if(id1==null || id2==null) return;
         for(int i=0;i<id1.size();i++){
             HubQuerPodest podest = (HubQuerPodest) (state==true?elements[0].get(Long.parseLong(id1.get(i))):elements[0].get(Long.parseLong(id1.get(i))));
             podest.getGruppenIDs().add(Long.parseLong(id2.get(i)));
