@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Cache;
 
 import Cache.Exeption.DBErrorExeption;
@@ -13,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -28,7 +25,7 @@ public abstract class Cache {
     protected Map<Long,Element> elements[];
     
     @Inject
-    Updater updater;
+    private Updater updater;
 
     public Map<Long, Element>[] getElements() {
         return elements;
@@ -74,8 +71,14 @@ public abstract class Cache {
         elements[0] = new HashMap<>();
         elements[1] = new HashMap<>();
         updater.registerCache(this);
+        
+        try {
+            this.updateAll();
+        } catch (DBErrorExeption ex) {
+            Logger.getLogger(Cache.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     abstract public void update() throws DBErrorExeption;
-    abstract public void updateAll();
+    abstract public void updateAll() throws DBErrorExeption;
 }

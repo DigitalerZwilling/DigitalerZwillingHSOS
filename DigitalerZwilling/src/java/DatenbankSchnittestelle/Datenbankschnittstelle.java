@@ -65,20 +65,7 @@ public class Datenbankschnittstelle {
             //throw new Exception("Fehler: Datenbankverbindung auf "+ this._DbURL+" nicht möglich");
         }
     }
-
-    /**
-     * Gibt die vorhandene Instance zurueck bzw. erstellt wenn nötig die erste
-     * Instanz dieses Singeltons
-     *
-     * @return Instance dieses Singelton
-     */
-    /*public static Datenbankschnittstelle getInstance(){
-        if(instance==null){
-            instance=new Datenbankschnittstelle();
-        }
-        return instance;
-    }*/
-    //---------------------------------------------------------------------------------------------
+    
     /**
      * Die Funktion uebermittelt das Statement an die Datenbank und ruft eine im
      * Parameter "goal" angegeben Funktion parseResult auf in der das ResultSet

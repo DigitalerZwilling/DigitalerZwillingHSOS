@@ -61,8 +61,7 @@ public class SensorCache extends Cache{
     }
 
     @Override
-    @PostConstruct
-    public void updateAll() {
+    public void updateAll() throws DBErrorExeption {
         try {
             elements[0] = new HashMap<>();
             elements[1] = new HashMap<>();
@@ -86,8 +85,10 @@ public class SensorCache extends Cache{
             }
         } catch (DBNotFoundExeption ex) {
             Logger.getLogger(SensorCache.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DBErrorExeption("DB not found");
         } catch (QueryExeption ex) {
             Logger.getLogger(SensorCache.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DBErrorExeption("Query error");
         }
     }
 }
