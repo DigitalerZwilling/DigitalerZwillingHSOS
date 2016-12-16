@@ -25,6 +25,7 @@ public class WebSocketUpdateThread implements Runnable{
     
     @Override
     public void run() {
+        System.out.println("updater");
         running = true;
         updater.updateWebSockets();
         running = false;

@@ -26,7 +26,9 @@ public class SelfTimer {
     
     @Resource
     TimerService timerS;
-    
+    public SelfTimer(){
+        //timerS=new TimerService();
+    }
     
     public void createTimer(int Startwert, int Intervall, String info){
         //timerS.

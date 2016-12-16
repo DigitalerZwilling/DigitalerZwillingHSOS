@@ -34,8 +34,11 @@ public class ArtikelWebSocket extends WebSocket{
             this.setId(null);
         }
         else{
+            System.out.println(message);
             this.setId(Long.parseLong(message));
+            
         }
+        System.out.println(this.getId());
         this.webSocketUpdater.addWebSocket(this);
         this.setRegistriert(Boolean.TRUE);
     }
