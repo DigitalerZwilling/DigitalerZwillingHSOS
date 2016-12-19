@@ -42,6 +42,7 @@ and open the template in the editor.
           
           wSocket.onopen = function()
           {
+            wSocket.send("LIST");
             //alert(" Web Socket is connected, sending data");
             //wSocket.send("ping");
           };
@@ -51,8 +52,6 @@ and open the template in the editor.
           // The browser doesn't support WebSocket
           alert("WebSocket is NOT supported by your Browser!");
         }
-        
-        send();
          
       }
       
@@ -72,11 +71,17 @@ and open the template in the editor.
         //alert("Connection is closed...");
       };
       
+      window.onload = function(){
+          initializeReception();
+      };
+      
       function send(){
       //$( document ).ready(function(){
                 
                 wSocket.send("LIST");
             };
+      
+            
             
       </script>
     </body>
