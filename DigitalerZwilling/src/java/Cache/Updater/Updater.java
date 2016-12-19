@@ -102,6 +102,7 @@ public class Updater {
         
         if(!cacheUpdateThread.isRunning()){
            cacheThraed = managedThreadFactory.newThread(cacheUpdateThread);
+           cacheUpdateThread.run();
         }
         else{
             
