@@ -6,6 +6,7 @@
 package Websockets;
 
 import Cache.Cache;
+import Cache.Exeption.DBErrorExeption;
 import Cache.Exeption.ElementNotFoundExeption;
 import DatenKlassen.Element;
 import java.io.IOException;
@@ -43,7 +44,7 @@ public abstract class WebSocket {
             Logger.getLogger(WebSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalStateException ex){
             Logger.getLogger(WebSocket.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
     
     protected abstract Cache getCache();

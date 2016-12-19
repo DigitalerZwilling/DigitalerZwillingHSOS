@@ -14,26 +14,37 @@
 <body> 
     <table class="table table-striped" width="100" border="0" cellpadding="0" cellspacing="1" id="tabelle">
     <!--Tabelle an der die Daten angehangen werden -->
-        <thead>
+        <!--<thead>
             <tr>
                 <th id = "spalte1"></th>
                 <th id = "spalte2"></th>
                 <th id = "spalte3"></th> 
             </tr>
-        </thead>
+        </thead>-->
     </table>
 
 
 </body>
 
 <script language="javascript">
+    var endpoint;
+    
+            var browsersupport = ("WebSocket" in window) ? true : false;
+    
+    
+            //Zugriff auf Elemente der HTML-Seite
+            var messages = document.getElementById("messages");
+            
+            //Deklariere WebSocket
+            var host = "ws://localhost:8080/DigitalerZwilling/";
+            var wSocket = new WebSocket(host+"ArtikelWebSocket");
 
    $(document).ready(function(){
         console.log("Start");
         switch ($val) {
             case 'Artikel':
-
-                erzeugeTabelleArtikel();
+                endpoint="ArtikelWebSocket";
+                //erzeugeTabelleArtikel();
                 break;
             case "Warenträger":
                 erzeugeTabelleWarentraeger();
@@ -66,24 +77,30 @@
                 document.getElementById("spalte1").innerHTML = 'Fehler beim Darstellen der Tabelle';
 
       }
+      init();
     });
 
     //-------------ARTIKEL----------------------------------------------------------
-    function erzeugeTabelleArtikel() {
+    function erzeugeTabelleArtikel(liste) {
         //JSON-Array mit Artikeln:
-        var artikelListeJSON = '{ "inhalt" : [' +
+        /*var artikelListeJSON = '{ "inhalt" : [' +
         '{ "bezeichnung":"Artikel_1" , "zeitstempel":"14:21:03" },' +
         '{ "bezeichnung":"Artikel_2" , "zeitstempel":"14:22:05" },' +
         '{ "bezeichnung":"Artikel_3" , "zeitstempel":"14:22:12" },' +
-        '{ "bezeichnung":"Artikel_4" , "zeitstempel":"14:23:16" } ]}';
+        '{ "bezeichnung":"Artikel_4" , "zeitstempel":"14:23:16" } ]}';*/
 
-        var artikelListe = JSON.parse(artikelListeJSON);
+        var artikelListe = JSON.parse(liste);
 
         //Spaltennamen für die Artikel-Tabelle
         var spaltennamen = ['Bezeichnung', 'Zeitstempel']; 
 
         //Erstellen der Tabelle
         node = document.getElementById("tabelle");
+        var childs = node.childNodes;
+        for(var i=0; i<childs.length; i++){
+            node.removeChild(childs[i]);
+            console.log("!!!");
+        }
         node.parentNode.insertBefore(createTable(artikelListe, spaltennamen, artikelListe.inhalt.length, spaltennamen.length), node);
     }   
 
@@ -279,7 +296,7 @@
     function createTable(liste, spaltennamen, row, col) {
 
         //Gibt den Spalten, die im Body erzeugt wurden die jeweiligen Namen
-        if (spaltennamen < 2){
+        /*if (spaltennamen < 2){
             console.log("Fehler: spaltennamen < 2");
         }else{
             document.getElementById("spalte1").innerHTML = spaltennamen[0];
@@ -289,12 +306,14 @@
         //Falls eine dritte Spalte benötigt wird:
         if (spaltennamen.length == 3){
             document.getElementById("spalte3").innerHTML = spaltennamen[2];
-        }
+        }*/
 
         var myTable = document.getElementById("tabelle"); //holt sich die im Body erstellte Tabelle
-
+        
+            
+                      
             var mytablebody = document.createElement("tbody");
-
+            
             for(var j = 0; j < row; j++) {
                  mycurrent_row = document.createElement("tr");     
 
@@ -348,6 +367,81 @@
         myTable.appendChild(mytablebody); //kompletter Tabellenbody mit allen Spalten wird an die schon existierende Tabelle angehangen
         return myTable;
     }
+    
+    //---------------------------------------------
+    //Browserunterstuetzung vorhanden?
+            
+            //Initalisierung der WebSockets
+            function init(){
+                if (browsersupport) {
+                    //Oeffnen des WebSockets und Senden einer Nachricht
+                    wSocket.onopen = function() {
+                        wSocket.send("LIST");
+                    };
+                    
+                }
+                else {
+                    alert("WebSocket is NOT supported by your Browser:)");
+                }
+            }
+            
+            
+            //Wird nach Start der Seite aufgerufen
+            /*window.onload = function () {
+                
+            };*/
+    
+    
+            //called when a message is received
+            wSocket.onmessage = function(event) {
+                var received_msg = event.data;
+                console.log("Message"+received_msg);
+                    switch ($val) {
+                        case 'Artikel':
+                            erzeugeTabelleArtikel(received_msg);
+                            break;
+                        case "Warenträger":
+                            erzeugeTabelleWarentraeger();
+                            break;
+                        case "Transportbänder":
+                            erzeugeTabelleTransportbaender();
+                            break;
+                        case "Roboter":
+                            erzeugeTabelleRoboter();
+                            break;
+                        case "Sektoren":
+                            erzeugeTabelleSektoren();
+                            break;
+                        case "Sensoren":
+                            erzeugeTabelleSensoren();
+                            break;
+                        case "Gelenke":
+                            erzeugeTabelleGelenke();
+                            break;
+                        case "Werkzeuge":
+                            erzeugeTabelleWerkzeuge();
+                            break;
+                        case "Hubpositionierstationen":
+                            erzeugeTabelleHubpositionierstationen();
+                            break;
+                        case "Hub-Quer-Stationen":
+                            erzeugeTabelleHubQuerStationen();
+                            break;
+                        default:
+                            document.getElementById("spalte1").innerHTML = 'Fehler beim Darstellen der Tabelle';
+
+          }
+            };
+    
+            // websocket is closed.
+            wSocket.onclose = function() {
+                alert("Connection is closed...");
+            };
+            
+            //Send something to the WebSocket 
+            function send(){
+                wSocket.send("GET");
+            }
 
 </script> 
 </html>
