@@ -22,13 +22,13 @@ and open the template in the editor.
         
         <script type="text/javascript">
     
-            //Browserunterstuetzung vorhanden?
-            var browserSupport = ("WebSocket" in window) ? true : false;
+            
     
     
             //Zugriff auf Elemente der HTML-Seite
             var messages = document.getElementById("messages");
-            
+            //Browserunterstuetzung vorhanden?
+            var browserSupport = ("WebSocket" in window) ? true : false;
             //Deklariere WebSocket
             var host = "ws://localhost:8080/DigitalerZwilling/ArtikelWebSocket";
             var wSocket = new WebSocket(host);

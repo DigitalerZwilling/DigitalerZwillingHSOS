@@ -27,9 +27,29 @@
 </body>
 
 <script language="javascript">
+    var endpoint="WarentraegerWebSocket";
+    var browserSupport = ("WebSocket" in window) ? true : false;
+    var spaltennamen;
+                var host = "ws://localhost:8080/DigitalerZwilling/";
+            
+            var wSocket = new WebSocket(host+endpoint);
+            function init(){
+                if (browserSupport) {
+                    //Oeffnen des WebSockets und Senden einer Nachricht
+                    wSocket.onopen = function() {
+                        wSocket.send("LIST");
+                    };
+                    
+                }
+                else {
+                    alert("WebSocket is NOT supported by your Browser!");
+                }
+            }
+            
 
    $(document).ready(function(){
         console.log("Start");
+        init();
         switch ($val) {
             case 'Artikel':
 
@@ -71,20 +91,22 @@
     //-------------ARTIKEL----------------------------------------------------------
     function erzeugeTabelleArtikel() {
         //JSON-Array mit Artikeln:
-        var artikelListeJSON = '{ "inhalt" : [' +
+        endpoint="ArtikelWebSocket";
+        
+        /*var artikelListeJSON = '{ "inhalt" : [' +
         '{ "bezeichnung":"Artikel_1" , "zeitstempel":"14:21:03" },' +
         '{ "bezeichnung":"Artikel_2" , "zeitstempel":"14:22:05" },' +
         '{ "bezeichnung":"Artikel_3" , "zeitstempel":"14:22:12" },' +
         '{ "bezeichnung":"Artikel_4" , "zeitstempel":"14:23:16" } ]}';
-
-        var artikelListe = JSON.parse(artikelListeJSON);
+*/
+        //artikelListe = JSON.parse(artikelListeJSON);
 
         //Spaltennamen für die Artikel-Tabelle
-        var spaltennamen = ['Bezeichnung', 'Zeitstempel']; 
-
+        spaltennamen = ['Bezeichnung', 'Zeitstempel']; 
+        console.log("!!!!!!!!!!!!!!!!1");
         //Erstellen der Tabelle
-        node = document.getElementById("tabelle");
-        node.parentNode.insertBefore(createTable(artikelListe, spaltennamen, artikelListe.inhalt.length, spaltennamen.length), node);
+        // node = document.getElementById("tabelle");
+        // node.parentNode.insertBefore(createTable(artikelListe, spaltennamen, artikelListe.inhalt.length, spaltennamen.length), node);
     }   
 
 
@@ -93,20 +115,20 @@
     function erzeugeTabelleWarentraeger() {
 
         //JSON-Array mit Warenträger:
-        var warentraegerListeJSON = '{ "inhalt" : [' +
+       /* var warentraegerListeJSON = '{ "inhalt" : [' +
         '{ "bezeichnung":"WT_1" , "zeitstempel":"14:21:03" , "montagezustand":"60%" },' +
         '{ "bezeichnung":"WT_2" , "zeitstempel":"14:22:05" , "montagezustand":"60%" },' +
         '{ "bezeichnung":"WT_3" , "zeitstempel":"14:21:23" , "montagezustand":"60%" },' +
         '{ "bezeichnung":"WT_4" , "zeitstempel":"14:23:16" , "montagezustand":"60%" } ]}';
-
-        var warentraegerListe = JSON.parse(warentraegerListeJSON); 
+*/
+       // var warentraegerListe = JSON.parse(warentraegerListeJSON); 
 
         //Spaltennamen für die Warenträger-Tabelle:
         spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Montagezustand'];
         
         //Erstellen der Tabelle
-        node = document.getElementById("tabelle");
-        node.parentNode.insertBefore(createTable(warentraegerListe, spaltennamen, warentraegerListe.inhalt.length, spaltennamen.length), node);
+        //node = document.getElementById("tabelle");
+        //node.parentNode.insertBefore(createTable(warentraegerListe, spaltennamen, warentraegerListe.inhalt.length, spaltennamen.length), node);
     }   
 
 
@@ -348,6 +370,39 @@
         myTable.appendChild(mytablebody); //kompletter Tabellenbody mit allen Spalten wird an die schon existierende Tabelle angehangen
         return myTable;
     }
+    //Browserunterstuetzung vorhanden?
+            
+            //Deklariere WebSocket
+
+            
+            //Initalisierung der WebSockets
+            
+            
+            //Wird nach Start der Seite aufgerufen
+          /*  window.onload = function () {
+                init();
+                console.log("!!!!!!!!!!!!!!!!");
+            };*/
+    
+    
+            //called when a message is received
+            wSocket.onmessage = function(event) {
+                //console.log(event.data);
+                var liste = event.data;
+                console.log(liste);
+                var elementListe = JSON.parse(liste);
+                
+                //elementListe.toString();
+                //messages.innerHTML = "<br/>" + received_msg;
+                
+                node = document.getElementById("tabelle");
+                node.parentNode.insertBefore(createTable(elementListe, spaltennamen, elementListe.inhalt.length, spaltennamen.length), node);
+            };
+    
+            // websocket is closed.
+            wSocket.onclose = function() {
+                alert("Connection is closed...");
+            };
 
 </script> 
 </html>
