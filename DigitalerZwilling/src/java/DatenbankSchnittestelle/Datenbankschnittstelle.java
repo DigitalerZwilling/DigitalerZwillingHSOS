@@ -36,6 +36,8 @@ public class Datenbankschnittstelle {
         String DbCd = "org.apache.derby.jdbc.ClientDriver";
         String DbUser = "root";
         String DbPw = "Didpw4df";
+        //String DbUser = "db_user";
+        //String DbPw = "SB0222";
         
         try {
             Class.forName(DbCd).newInstance();
