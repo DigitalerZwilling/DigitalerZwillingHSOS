@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  </head>
+
+<!-- TODO: - WebSockets mit einbringen und die bisher genutztenJSON-Arrays löschen
+           - bei Hubpodest und Hubquerpodest Pfeile für die Darstellung benutzten
+ -->
+
+<body> 
+    <table class="table table-striped" width="100" border="0" cellpadding="0" cellspacing="1" id="tabelle">
+    <!--Tabelle an der die Daten angehangen werden -->
+        <thead>
+            <tr>
+                <th id = "spalte1"></th>
+                <th id = "spalte2"></th>
+                <th id = "spalte3"></th> 
+            </tr>
+        </thead>
+    </table>
+
+
+</body>
+
+<script language="javascript">
+
+   $(document).ready(function(){
+        console.log("Start");
+        switch ($val) {
+            case 'Artikel':
+
+                erzeugeTabelleArtikel();
+                break;
+            case "Warenträger":
+                erzeugeTabelleWarentraeger();
+                break;
+            case "Transportbänder":
+                erzeugeTabelleTransportbaender();
+                break;
+            case "Roboter":
+                erzeugeTabelleRoboter();
+                break;
+            case "Sektoren":
+                erzeugeTabelleSektoren();
+                break;
+            case "Sensoren":
+                erzeugeTabelleSensoren();
+                break;
+            case "Gelenke":
+                erzeugeTabelleGelenke();
+                break;
+            case "Werkzeuge":
+                erzeugeTabelleWerkzeuge();
+                break;
+            case "Hubpositionierstationen":
+                erzeugeTabelleHubpositionierstationen();
+                break;
+            case "Hub-Quer-Stationen":
+                erzeugeTabelleHubQuerStationen();
+                break;
+            default:
+                document.getElementById("spalte1").innerHTML = 'Fehler beim Darstellen der Tabelle';
+
+      }
+    });
+
+    //-------------ARTIKEL----------------------------------------------------------
+    function erzeugeTabelleArtikel() {
+        //JSON-Array mit Artikeln:
+        var artikelListeJSON = '{ "inhalt" : [' +
+        '{ "bezeichnung":"Artikel_1" , "zeitstempel":"14:21:03" },' +
+        '{ "bezeichnung":"Artikel_2" , "zeitstempel":"14:22:05" },' +
+        '{ "bezeichnung":"Artikel_3" , "zeitstempel":"14:22:12" },' +
+        '{ "bezeichnung":"Artikel_4" , "zeitstempel":"14:23:16" } ]}';
+
+        var artikelListe = JSON.parse(artikelListeJSON);
+
+        //Spaltennamen für die Artikel-Tabelle
+        var spaltennamen = ['Bezeichnung', 'Zeitstempel']; 
+
+        //Erstellen der Tabelle
+        node = document.getElementById("tabelle");
+        node.parentNode.insertBefore(createTable(artikelListe, spaltennamen, artikelListe.inhalt.length, spaltennamen.length), node);
+    }   
+
+
+
+    //-------------WARENTRÄGER--------------------------------------------------------
+    function erzeugeTabelleWarentraeger() {
+
+        //JSON-Array mit Warenträger:
+        var warentraegerListeJSON = '{ "inhalt" : [' +
+        '{ "bezeichnung":"WT_1" , "zeitstempel":"14:21:03" , "montagezustand":"60%" },' +
+        '{ "bezeichnung":"WT_2" , "zeitstempel":"14:22:05" , "montagezustand":"60%" },' +
+        '{ "bezeichnung":"WT_3" , "zeitstempel":"14:21:23" , "montagezustand":"60%" },' +
+        '{ "bezeichnung":"WT_4" , "zeitstempel":"14:23:16" , "montagezustand":"60%" } ]}';
+
+        var warentraegerListe = JSON.parse(warentraegerListeJSON); 
+
+        //Spaltennamen für die Warenträger-Tabelle:
+        spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Montagezustand'];
+        
+        //Erstellen der Tabelle
+        node = document.getElementById("tabelle");
+        node.parentNode.insertBefore(createTable(warentraegerListe, spaltennamen, warentraegerListe.inhalt.length, spaltennamen.length), node);
+    }   
+
+
+
+    //-------------TRANSPORTBÄNDER------------------------------------------------------
+    function erzeugeTabelleTransportbaender() {
+
+        //Array mit Transportband:
+        var transportbaenderListeJSON = '{ "inhalt" : [' +
+        '{ "bezeichnung":"TB_1" , "zeitstempel":"14:21:03" , "stoerung":"0"},' +
+        '{ "bezeichnung":"TB_2" , "zeitstempel":"14:22:05" , "stoerung":"2"},' +
+        '{ "bezeichnung":"TB_3" , "zeitstempel":"14:22:12" , "stoerung":"0"},' +
+        '{ "bezeichnung":"TB_4" , "zeitstempel":"14:23:16" , "stoerung":"0"} ]}';
+
+        var transportbaenderListe = JSON.parse(transportbaenderListeJSON);
+
+        //Spaltennamen für die Transportbaender-Tabelle:
+        var spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Stoerung'];
+
+        //Erstellen der Tabelle
+        node = document.getElementById("tabelle");
+        node.parentNode.insertBefore(createTable(transportbaenderListe, spaltennamen, transportbaenderListe.inhalt.length, spaltennamen.length), node);
+    }
+
+    //-------------ROBOTER------------------------------------------------------
+    function erzeugeTabelleRoboter() {
+
+        //Array mit Roboter:
+        var roboterListeJSON = '{ "inhalt" : [' +
+        '{ "bezeichnung":"Roboter_1" , "zeitstempel":"14:21:03" , "stoerung":"0"},' +
+        '{ "bezeichnung":"Roboter_2" , "zeitstempel":"14:22:05" , "stoerung":"2"},' +
+        '{ "bezeichnung":"Roboter_3" , "zeitstempel":"14:22:12" , "stoerung":"0"},' +
+        '{ "bezeichnung":"Roboter_4" , "zeitstempel":"14:23:16" , "stoerung":"0"} ]}';
+
+        var roboterListe = JSON.parse(roboterListeJSON);
+
+        //Spaltennamen für die Roboter-Tabelle:
+        var spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Stoerung'];
+
+        //Erstellen der Tabelle
+        node = document.getElementById("tabelle");
+        node.parentNode.insertBefore(createTable(roboterListe, spaltennamen, roboterListe.inhalt.length, spaltennamen.length), node);
+    }
+
+    //-------------SEKTOREN------------------------------------------------------
+    function erzeugeTabelleSektoren() {
+
+        //Array mit Sektoren:
+        var sektorenListeJSON = '{ "inhalt" : [' +
+        '{ "bezeichnung":"Sektor_1" , "zeitstempel":"14:21:03" , "stoerung":"0"},' +
+        '{ "bezeichnung":"Sektor_2" , "zeitstempel":"14:22:05" , "stoerung":"2"},' +
+        '{ "bezeichnung":"Sektor_3" , "zeitstempel":"14:22:12" , "stoerung":"0"},' +
+        '{ "bezeichnung":"Sektor_4" , "zeitstempel":"14:23:16" , "stoerung":"0"} ]}';
+
+        var sektorenListe = JSON.parse(sektorenListeJSON);
+
+        //Spaltennamen für die Sektoren-Tabelle:
+        var spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Stoerung'];
+
+        //Erstellen der Tabelle
+        node = document.getElementById("tabelle");
+        node.parentNode.insertBefore(createTable(sektorenListe, spaltennamen, sektorenListe.inhalt.length, spaltennamen.length), node);
+    }
+
+     //-------------SENSOREN------------------------------------------------------
+    function erzeugeTabelleSensoren() {
+
+        //Array mit Sensoren:
+        var sensorenListeJSON = '{ "inhalt" : [' +
+        '{ "bezeichnung":"Sensor_1" , "zeitstempel":"14:21:03" , "zustand":"0"},' +
+        '{ "bezeichnung":"Sensor_2" , "zeitstempel":"14:22:05" , "zustand":"1"},' +
+        '{ "bezeichnung":"Sensor_3" , "zeitstempel":"14:22:12" , "zustand":"0"},' +
+        '{ "bezeichnung":"Sensor_4" , "zeitstempel":"14:23:16" , "zustand":"0"} ]}';
+
+        var sensorenListe = JSON.parse(sensorenListeJSON);
+
+        //Spaltennamen für die Sensoren-Tabelle:
+        var spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Zustand'];
+
+        //Erstellen der Tabelle
+        node = document.getElementById("tabelle");
+        node.parentNode.insertBefore(createTable(sensorenListe, spaltennamen, sensorenListe.inhalt.length, spaltennamen.length), node);
+    }
+
+     //-------------GELENKE------------------------------------------------------
+    function erzeugeTabelleGelenke() {
+
+        //Array mit Gelenken:
+        var gelenkeListeJSON = '{ "inhalt" : [' +
+        '{ "bezeichnung":"Gelenk_1" , "zeitstempel":"14:21:03" , "gelenkstellung":"0"},' +
+        '{ "bezeichnung":"Gelenk_2" , "zeitstempel":"14:22:05" , "gelenkstellung":"1"},' +
+        '{ "bezeichnung":"Gelenk_3" , "zeitstempel":"14:22:12" , "gelenkstellung":"0"},' +
+        '{ "bezeichnung":"Gelenk_4" , "zeitstempel":"14:23:16" , "gelenkstellung":"0"} ]}';
+
+        var gelenkeListe = JSON.parse(gelenkeListeJSON);
+
+        //Spaltennamen für die Gelenke-Tabelle:
+        var spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Gelenkstellung'];
+
+        //Erstellen der Tabelle
+        node = document.getElementById("tabelle");
+        node.parentNode.insertBefore(createTable(gelenkeListe, spaltennamen, gelenkeListe.inhalt.length, spaltennamen.length), node);
+    }
+
+     //-------------WERKZEUGE------------------------------------------------------
+    function erzeugeTabelleWerkzeuge() {
+
+        //Array mit Werkzeugen:
+        var werkzeugeListeJSON = '{ "inhalt" : [' +
+        '{ "bezeichnung":"Werkzeug_1" , "zeitstempel":"14:21:03" , "zustand":"0"},' +
+        '{ "bezeichnung":"Werkzeug_2" , "zeitstempel":"14:22:05" , "zustand":"1"},' +
+        '{ "bezeichnung":"Werkzeug_3" , "zeitstempel":"14:22:12" , "zustand":"0"},' +
+        '{ "bezeichnung":"Werkzeug_4" , "zeitstempel":"14:23:16" , "zustand":"0"} ]}';
+
+        var werkzeugeListe = JSON.parse(werkzeugeListeJSON);
+
+        //Spaltennamen für die Werkzeuge-Tabelle:
+        var spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Zustand'];
+
+        //Erstellen der Tabelle
+        node = document.getElementById("tabelle");
+        node.parentNode.insertBefore(createTable(werkzeugeListe, spaltennamen, werkzeugeListe.inhalt.length, spaltennamen.length), node);
+    }
+
+      //-------------Hubpositionierstationen------------------------------------------------------
+    function erzeugeTabelleHubpositionierstationen() {
+
+        //Array mit Hubpositionierstationenn:
+        var hubpositionierstationenListeJSON = '{ "inhalt" : [' +
+        '{ "bezeichnung":"HuPo_1" , "zeitstempel":"14:21:03" , "oben":"0", "unten":"1"},' +
+        '{ "bezeichnung":"HuPo_2" , "zeitstempel":"14:22:05" , "oben":"0", "unten":"1"},' +
+        '{ "bezeichnung":"HuPo_3" , "zeitstempel":"14:22:12" , "oben":"1", "unten":"0"},' +
+        '{ "bezeichnung":"HuPo_4" , "zeitstempel":"14:23:16" , "oben":"1", "unten":"0"} ]}';
+
+        var hubpositionierstationenListe = JSON.parse(hubpositionierstationenListeJSON);
+
+        //Spaltennamen für die Hubquerpodest-Tabelle:
+        var spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Position'];
+
+        //Erstellen der Tabelle
+        node = document.getElementById("tabelle");
+        node.parentNode.insertBefore(createTable(hubpositionierstationenListe, spaltennamen, hubpositionierstationenListe.inhalt.length, spaltennamen.length), node);
+    }
+
+     //-------------Hub-Quer-Stationen------------------------------------------------------
+    function erzeugeTabelleHubQuerStationen() {
+
+        //Array mit Hub-Quer-Stationenn:
+        var hubQuerStationenListeJSON = '{ "inhalt" : [' +
+        '{ "bezeichnung":"HuQu_1" , "zeitstempel":"14:21:03" , "motor":"0", "oben":"1", "mittig":"0", "unten":"0"},' +
+        '{ "bezeichnung":"HuQu_2" , "zeitstempel":"14:22:05" , "motor":"1", "oben":"0", "mittig":"0", "unten":"1"},' +
+        '{ "bezeichnung":"HuQu_3" , "zeitstempel":"14:22:12" , "motor":"0", "oben":"1", "mittig":"0", "unten":"0"},' +
+        '{ "bezeichnung":"HuQu_4" , "zeitstempel":"14:23:16" , "motor":"1", "oben":"0", "mittig":"0", "unten":"1"} ]}';
+
+        var hubQuerStationenListe = JSON.parse(hubQuerStationenListeJSON);
+
+        //Spaltennamen für die hubQuerStationen-Tabelle:
+        var spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Motor'];
+
+        //Erstellen der Tabelle
+        node = document.getElementById("tabelle");
+        node.parentNode.insertBefore(createTable(hubQuerStationenListe, spaltennamen, hubQuerStationenListe.inhalt.length, spaltennamen.length), node);
+    }
+
+
+
+
+
+    //-------------TABELLENERZEUGUNG-----------------------------------------------------
+    function createTable(liste, spaltennamen, row, col) {
+
+        //Gibt den Spalten, die im Body erzeugt wurden die jeweiligen Namen
+        if (spaltennamen < 2){
+            console.log("Fehler: spaltennamen < 2");
+        }else{
+            document.getElementById("spalte1").innerHTML = spaltennamen[0];
+            document.getElementById("spalte2").innerHTML = spaltennamen[1];
+        }
+
+        //Falls eine dritte Spalte benötigt wird:
+        if (spaltennamen.length == 3){
+            document.getElementById("spalte3").innerHTML = spaltennamen[2];
+        }
+
+        var myTable = document.getElementById("tabelle"); //holt sich die im Body erstellte Tabelle
+
+            var mytablebody = document.createElement("tbody");
+
+            for(var j = 0; j < row; j++) {
+                 mycurrent_row = document.createElement("tr");     
+
+                for(var i = 0; i < col; i++) {
+                        mycurrent_cell = document.createElement("td");     
+
+
+                        //1.Spalte - Bezeichnung:
+                        if (i == 0){
+                            currenttext = document.createTextNode(liste.inhalt[j].bezeichnung);
+                        }
+
+                        //2.Spalte - Zeitstempel:
+                        if (i == 1){
+                            currenttext = document.createTextNode(liste.inhalt[j].zeitstempel);
+                        }
+                     
+                        //3.Spalte:
+                        if (i == 2){
+                            switch (spaltennamen[2]) {
+                                case 'Montagezustand':
+                                    currenttext = document.createTextNode(liste.inhalt[j].montagezustand);
+                                    break;
+                                case "Zustand":
+                                    currenttext = document.createTextNode(liste.inhalt[j].zustand);
+                                    break;
+                                case "Stoerung":
+                                    currenttext = document.createTextNode(liste.inhalt[j].stoerung);
+                                    break;
+                                case "Gelenkstellung":
+                                   currenttext = document.createTextNode(liste.inhalt[j].gelenkstellung);
+                                    break;
+                                case "Position":
+                                    //TODO: muss noch durch Symbole ersetzt werden!
+                                   currenttext = document.createTextNode(liste.inhalt[j].oben + "-" + liste.inhalt[j].unten);
+                                    break;
+                                case "Motor":
+                                    //TODO: muss noch durch Symbole ersetzt werden!
+                                   currenttext = document.createTextNode(liste.inhalt[j].motor + "-" + liste.inhalt[j].oben + "-" +              liste.inhalt[j].mittig + "-" + liste.inhalt[j].unten);
+                                    break;
+                                default:
+                                 document.getElementById("spalte3").innerHTML = 'Fehler im switch case';
+                                    
+                            } 
+                        }
+                        mycurrent_cell.appendChild(currenttext); //akt. Text wird an Zeile angehangen
+                        mycurrent_row.appendChild(mycurrent_cell); //akt. Zeile wird an Spalte angehangen
+                }
+                mytablebody.appendChild(mycurrent_row); //komplette Spalte wird an Tabellenbody angehangen
+        }
+        myTable.appendChild(mytablebody); //kompletter Tabellenbody mit allen Spalten wird an die schon existierende Tabelle angehangen
+        return myTable;
+    }
+
+</script> 
+</html>
+
