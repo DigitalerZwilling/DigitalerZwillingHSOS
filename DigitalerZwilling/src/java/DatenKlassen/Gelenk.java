@@ -18,11 +18,12 @@ public class Gelenk extends Element{
     private int gelenkstellung;
     private Long roboterID;
 
-    public Gelenk(String typ, int nummer, int gelenkstellung, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
+    public Gelenk(String typ, int nummer, int gelenkstellung, Long roboterID, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.typ = typ;
         this.nummer = nummer;
         this.gelenkstellung = gelenkstellung;
+        this.roboterID = roboterID;
     }
 
     public String getTyp() {
@@ -61,15 +62,15 @@ public class Gelenk extends Element{
     public String toJson() {
         String json = new String();
         json += '{';
-        json += "\"id\": " + id + ",\n";
+        json += "\"id\": " + id + ",";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
+        json += "\"user_Parameter\": \"" + user_Parameter + "\",";
         json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
-        json += "\"user_Parameter\": \"" + user_Parameter + "\",\n";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
-        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",\n";
-        json += "\"typ\": \"" + typ + "\",\n";
-        json += "\"nummer\": " + nummer + ",\n";
-        json += "\"gelenkstellung\": " + gelenkstellung + ",\n";
-        json += "\"roboterID\": " + roboterID + "\n";
+        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",";
+        json += "\"typ\": \"" + typ + "\",";
+        json += "\"nummer\": " + nummer + ",";
+        json += "\"gelenkstellung\": " + gelenkstellung + ",";
+        json += "\"roboterID\": " + roboterID;
         json += "}";
         
         return json;

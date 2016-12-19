@@ -91,44 +91,41 @@ public class Warentraeger extends Element{
     public String toJson() {
         String json = new String();
         json += '{';
-        json += "\"id\": " + id + ",\n";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
-        json += "\"user_Parameter\": \"" + user_Parameter + "\",\n";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
-        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",\n";
-        json += "\"stoerung\": " + stoerung + ",\n";
-        json += "\"abstand_mm\": " + abstand_mm + ",\n";
-        json += "\"montagezustand\": " + montagezustand + ",\n";
+        json += "\"id\": " + id + ",";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
+        json += "\"user_Parameter\": \"" + user_Parameter + "\",";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
+        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",";
+        json += "\"stoerung\": " + stoerung + ",";
+        json += "\"abstand_mm\": " + abstand_mm + ",";
+        json += "\"montagezustand\": " + montagezustand + ",";
         
-        json += "\"artikelIDs\": \n{";
+        json += "\"artikelIDs\": {";
         for(int i=0;i<artikelIDs.size();i++){
-            json += "\"" + i + "\": " + artikelIDs.get(i);
-            if(i < (artikelIDs.size()-1))
+            json += artikelIDs.get(i);
+            if(i < (artikelIDs.size()-1)){
                 json += ",";
-            
-            json += '\n';
+            }
         }
-        json += "},\n";
+        json += "},";
         
-        json += "\"transportbandIDs\": \n{";
+        json += "\"transportbandIDs\": {";
         for(int i=0;i<transportbandIDs.size();i++){
-            json += "\"" + i + "\": " + transportbandIDs.get(i);
-            if(i < (transportbandIDs.size()-1))
+            json += transportbandIDs.get(i);
+            if(i < (transportbandIDs.size()-1)){
                 json += ",";
-            
-            json += '\n';
+            }
         }
-        json += "},\n";
+        json += "},";
         
-        json += "\"sektorIDs\": \n{";
+        json += "\"sektorIDs\": {";
         for(int i=0;i<sektorIDs.size();i++){
-            json += "\"" + i + "\": " + sektorIDs.get(i);
-            if(i < (sektorIDs.size()-1))
+            json += sektorIDs.get(i);
+            if(i < (sektorIDs.size()-1)){
                 json += ",";
-            
-            json += '\n';
+            }
         }
-        json += "}\n";
+        json += "}";
         
         return json;
     }

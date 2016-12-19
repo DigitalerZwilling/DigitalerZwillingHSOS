@@ -57,14 +57,14 @@ public class HubPodest extends Element{
     public String toJson() {
         String json = new String();
         json += '{';
-        json += "\"id\": " + id + ",\n";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
-        json += "\"user_Parameter\": \"" + user_Parameter + "\",\n";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
-        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",\n";
-        json += "\"oben\": \"" + oben + "\",\n";
-        json += "\"unten\": " + unten + ",\n";
-        json += "\"sektorID\": " + sektorID + "\n";
+        json += "\"id\": " + id + ",";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
+        json += "\"user_Parameter\": \"" + user_Parameter + "\",";
+        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
+        json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",";
+        json += "\"oben\": " + oben + ",";
+        json += "\"unten\": " + unten + ",";
+        json += "\"sektorID\": " + sektorID;
         json += "}";
         return json;
     }
