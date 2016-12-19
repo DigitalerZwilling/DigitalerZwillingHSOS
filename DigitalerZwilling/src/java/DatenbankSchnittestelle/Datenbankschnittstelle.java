@@ -34,8 +34,10 @@ public class Datenbankschnittstelle {
     public Datenbankschnittstelle() throws DBNotFoundExeption{
         String DbUrl = "jdbc:derby://localhost:1527/db_DigitalerZwilling";
         String DbCd = "org.apache.derby.jdbc.ClientDriver";
-        String DbUser = "root";
-        String DbPw = "Didpw4df";
+        //String DbUser = "root";
+        //String DbPw = "Didpw4df";
+        String DbUser = "SB0222";
+        String DbPw = "db_user";
         
         try {
             Class.forName(DbCd).newInstance();
