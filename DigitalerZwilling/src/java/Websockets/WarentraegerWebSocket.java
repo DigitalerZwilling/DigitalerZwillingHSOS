@@ -44,7 +44,9 @@ public class WarentraegerWebSocket extends WebSocket{
       else{
           this.setId(Long.parseLong(message));
       }
-      this.webSocketUpdater.addWebSocket(this);
+      if (this.getRegistriert()==Boolean.FALSE){
+          this.webSocketUpdater.addWebSocket(this);
+      }
       this.setRegistriert(Boolean.TRUE);
   }
 
