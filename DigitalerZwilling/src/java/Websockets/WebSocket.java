@@ -41,7 +41,10 @@ public abstract class WebSocket {
             Logger.getLogger(WebSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ElementNotFoundExeption ex) {
             Logger.getLogger(WebSocket.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalStateException ex){
+            Logger.getLogger(WebSocket.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
     
     protected abstract Cache getCache();
