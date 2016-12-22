@@ -33,6 +33,7 @@ public abstract class WebSocket {
             if(id == null){
                 // Liste
                 session.getBasicRemote().sendText(this.ListToJson(this.getCache().getAll()));
+                //session.getBasicRemote().sendText(this.getCache().getAll().toString());
             } else {
                 // nur ein Element
                 session.getBasicRemote().sendText(this.getCache().getById(id).toJson());

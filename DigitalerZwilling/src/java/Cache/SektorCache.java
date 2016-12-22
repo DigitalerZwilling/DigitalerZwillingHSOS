@@ -39,7 +39,7 @@ public class SektorCache extends Cache{
                 
                 String ourTime=zeitstempel.get(i).replace(' ', 'T');
                 sektor.setZeitstempel(LocalDateTime.parse(ourTime));
-                sektor.setStoerung(Integer.getInteger(stoerung.get(i)));
+                sektor.setStoerung(Integer.parseInt(stoerung.get(i)));
                 sektor.setUser_Parameter(user_parameter.get(i));
                 
                 sektor.setWarentraegerIDs(this.readWarentraeger(sektor.getId()));
@@ -75,8 +75,8 @@ public class SektorCache extends Cache{
             Sektor sektor1,sektor2;
             for (int i=0;i<ids.size();i++){
                 String ourTime=zeitstempel.get(i).replace(' ', 'T');
-                sektor1=new Sektor(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));
-                sektor2=new Sektor(Integer.getInteger(stoerung.get(i)),Integer.getInteger(x.get(i)),Integer.getInteger(y.get(i)),Integer.getInteger(z.get(i)),Integer.getInteger(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));
+                sektor1=new Sektor(Integer.parseInt(stoerung.get(i)),Integer.parseInt(x.get(i)),Integer.parseInt(y.get(i)),Integer.parseInt(z.get(i)),Integer.parseInt(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));
+                sektor2=new Sektor(Integer.parseInt(stoerung.get(i)),Integer.parseInt(x.get(i)),Integer.parseInt(y.get(i)),Integer.parseInt(z.get(i)),Integer.parseInt(ausrichtung.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));
                 
                 sektor1.setWarentraegerIDs(this.readWarentraeger(sektor1.getId()));
                 sektor2.setWarentraegerIDs(this.readWarentraeger(sektor2.getId()));

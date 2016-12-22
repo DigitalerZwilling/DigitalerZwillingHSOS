@@ -98,14 +98,20 @@ public class ArtikelCache extends Cache{
     }
 
 
-    private List<Long> readWarentraeger(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger from Artikel_Warentraeger where id_artikel="+id);
-        List<String> ids = rsMap.get("ID_WARENTRAEGER");
-        
+    private List<Long> readWarentraeger(Long id) throws DBNotFoundExeption{
         List<Long> w_ids= new ArrayList<>();
-        if(ids==null) return w_ids;
-        for (String s : ids){
-            w_ids.add(Long.parseLong(s));
+        try {
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger from Artikel_Warentraeger where id_artikel="+id);
+            List<String> ids = rsMap.get("ID_WARENTRAEGER");
+            
+            
+            if(ids==null) return w_ids;
+            for (String s : ids){
+                w_ids.add(Long.parseLong(s));
+            }
+            
+        } catch (QueryExeption ex) {
+            Logger.getLogger(ArtikelCache.class.getName()).log(Level.SEVERE, null, ex);
         }
         return w_ids;
     }
