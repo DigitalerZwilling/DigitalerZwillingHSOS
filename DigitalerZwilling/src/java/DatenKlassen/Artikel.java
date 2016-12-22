@@ -33,7 +33,6 @@ public class Artikel extends Element{
         json += "\"id\": " + id + ",";
         json += "\"bezeichnung\": \"" + bezeichnung + "\",";
         json += "\"user_Parameter\": \"" + user_Parameter + "\",";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
         json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",";
         
         json += "\"warentraegerIDs\": {";

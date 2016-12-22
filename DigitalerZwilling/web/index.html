@@ -1,74 +1,97 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  </head>
+  <body id="body"> 
+      <table id="attributes" border="0"></table><br/>
+      <div id="lists"></div>
+  </body>
+  
+  <script language="javascript"> 
+    function createAttributes(attribute, id){
+        var attributes = document.getElementById("attributes");
+        
+        
+        for(var i=0; i<attribute.length; i++){
+            var zeile = document.createElement("tr");
+            var name = document.createElement("td");
+            name.innerHTML = attribute[i];
+            zeile.appendChild(name);
+
+            var value = document.createElement("td");
+            value.id = id[i];
+            zeile.appendChild(value);
+
+            attributes.appendChild(zeile);
+        }
+    }
+        
+    function createLists(list, listid){
+        var lists = document.getElementById("lists");
+        
+        for(var i=0; i<list.length; i++){
+            var name = document.createTextNode(list[i]);
+            lists.appendChild(name);
+            var table = document.createElement("table");
+            table.id = listid[i];            
+            lists.appendChild(table);
+            lists.appendChild(document.createElement("br"));
+        }
+    }
+    
+    function removeLists(listid){
+        for(var i=0; i<listid.length; i++){
+            var parent = document.getElementById(listid[i])
+            var childs = parent.childNodes;
+            for(var j=1; j<childs.length; i++){
+                parent.removeChild(childs[j]);
+            }
+        }
+        
+    }
+    
+    function setHeader(headerlist, parentid){
+            var parent = document.getElementById(parentid);
+            
+            var th = document.createElement("th");
+            for(var i=0; i<headerlist.length; i++){
+                var td = document.createElement("td");
+                td.innerHTML = headerlist[i];
+                th.appendChild(td);
+            }
+            parent.appendChild(th);
+    }
+    
+    function update(jsonString, listid){
+        var json = JSON.parse(jsonString);
+        var header = ['Bezeichnung','Zeitstempel','Montagezustand'];
+        for(var i=0; i<listid.length; i++){
+            setHeader(header, listid[i]);
+            
+        }
+    }
+        
+        
+        
         
 
-
-    </head>
-    <body>
-        <div>TODO write content</div>
-        <div>
-            <button type="button" onclick="send();" value="send" id="b1">Send</button>
-        </div>
-        <div id="messages"></div>
+    $(document).ready(function(){
+        console.log("Start");
         
-        <script type="text/javascript">
+        var string = '{"id":1, "bezeichnung":"Artikel_1" , "user_paramenter":"TEST", "zeitstempel":"14:21:03", "warentraegerIDs":{"inhalt": ["1","2","3"]}}';
+        var attribute = ['Bezeichnung', 'Zeitstempel', 'User Parameter'];
+        var id =        ['bezeichnung', 'zeitstempel', 'user_parameter'];
+        
+        var list =   ['Wartenträger' ];
+        var listid = ['wartentraeger'];
+        createAttributes(attribute,id);
+        createLists(list, listid);
+        update(string, listid);
+    });
     
-            //Browserunterstuetzung vorhanden?
-            var browserSupport = ("WebSocket" in window) ? true : false;
-    
-    
-            //Zugriff auf Elemente der HTML-Seite
-            var messages = document.getElementById("messages");
-            
-            //Deklariere WebSocket
-            var host = "ws://localhost:8080/DigitalerZwilling/ArtikelWebSocket";
-            var wSocket = new WebSocket(host);
-            
-            //Initalisierung der WebSockets
-            function init(){
-                if (browserSupport) {
-                    //Oeffnen des WebSockets und Senden einer Nachricht
-                    wSocket.onopen = function() {
-                        wSocket.send("LIST");
-                    };
-                    
-                }
-                else {
-                    alert("WebSocket is NOT supported by your Browser!");
-                }
-            }
-            
-            
-            //Wird nach Start der Seite aufgerufen
-            window.onload = function () {
-                init();
-            };
-    
-    
-            //called when a message is received
-            wSocket.onmessage = function(event) {
-                var received_msg = event.data;
-                messages.innerHTML = "<br/>" + received_msg;
-            };
-    
-            // websocket is closed.
-            wSocket.onclose = function() {
-                alert("Connection is closed...");
-            };
-            
-            //Send something to the WebSocket 
-            function send(){
-                wSocket.send("GET");
-            }
-      </script>
-    </body>
+  </script>
 </html>
