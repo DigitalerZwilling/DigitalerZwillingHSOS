@@ -12,6 +12,26 @@
   </body>
   
   <script language="javascript"> 
+      var attribute;
+      var id;
+      var list;
+      var listid;
+      var childheader;
+      var childAttributes;
+      
+      //Browserunterstuetzung vorhanden?
+      var browserSupport = ("WebSocket" in window) ? true : false;
+            
+      //Deklariere WebSocket
+       var host = "ws://localhost:8080/DigitalerZwilling/";
+    
+      
+      
+      
+      
+      
+      
+      
     function createAttributes(attribute, id){
         var attributes = document.getElementById("attributes");
         
@@ -31,6 +51,8 @@
     }
         
     function createLists(list, listid){
+        if(list.length !== listid.length) return;
+        
         var lists = document.getElementById("lists");
         
         for(var i=0; i<list.length; i++){
@@ -54,25 +76,135 @@
         
     }
     
-    function setHeader(headerlist, parentid){
-            var parent = document.getElementById(parentid);
-            
-            var th = document.createElement("th");
+    function setHeader(headerlist, parentNode){
+            var tr = document.createElement("tr");
             for(var i=0; i<headerlist.length; i++){
-                var td = document.createElement("td");
-                td.innerHTML = headerlist[i];
-                th.appendChild(td);
+                var th = document.createElement("th");
+                th.innerHTML = headerlist[i];
+                tr.appendChild(th);
             }
-            parent.appendChild(th);
+            parentNode.appendChild(tr);
     }
     
-    function update(jsonString, listid){
+    function addLines(jsonString, attributes, parentNode){
         var json = JSON.parse(jsonString);
-        var header = ['Bezeichnung','Zeitstempel','Montagezustand'];
+        for(var j=0; j<json.inhalt.length; j++){
+            var zeile = document.createElement("tr");
+            for(var k=0; k<attributes.length; k++){
+                var element = document.createElement("td");
+                element.innerHTML = json.inhalt[j][attributes[k]];
+                zeile.appendChild(element);
+            }
+            parentNode.appendChild(zeile);
+        }
+    }
+    
+ 
+    
+    function updateAttributes(id, jsonString){
+        var json = JSON.parse(jsonString);
+        
+        //Update Attributes
+        for(var i=0; i<id.length; i++){
+            var element = document.getElementById(id[i]);
+            element.innerHTML = json[id[i]];
+        }
+    }
+    
+    function updateLists(listid, childheader, childString, childAttributes, elementid, elementid_key){
+        if(childheader.length !== childAttributes.length || listid.length !== childheader.length) return;
         for(var i=0; i<listid.length; i++){
-            setHeader(header, listid[i]);
             
         }
+    }
+    
+    function create(attribute, id, list, listid, childheader, childAttributes){
+        createAttributes(attribute,id);
+        createLists(list, listid);
+        updateLists(listid, childheader, ["{\"inhalt\":[{}]}"], childAttributes);
+    }
+    
+    function init(){
+        $val = 'Artikel';
+        switch ($val) {
+            case 'Artikel':
+                //Einzelne Attribute:
+                attribute = ['Bezeichnung', 'Zeitstempel', 'User Parameter'];
+                id =        ['bezeichnung', 'zeitstempel', 'user_paramenter'];
+                
+                //Einzelne Tabellen:
+                list =   ['Wartenträger' ];
+                listid = ['wartentraeger'];
+                
+                //Eigenschaften der Tabellen
+                childheader     = [['Bezeichnung', 'Zeitstempel']];
+                childAttributes = [['bezeichnung', 'zeitstempel']];
+                
+                //JSONStrings
+                var childString = ['{"inhalt": [{"id":1, "bezeichnung":"WT1" , "zeitstempel":"14:21:03"},{"id":2, "bezeichnung":"WT2" , "zeitstempel":"15:33:02"}]}'];
+                
+                //Tabelle Erstellen
+                create(attribute, id, list, listid, childheader, childAttributes);
+                
+                //WebSockets
+                var ArtikelWebSocket = new WebSocket(host+"ArtikelWebSocket");
+                var WarentraegerWebSocket = new WebSocket(host+"WartentraegerWebSocket");
+                
+                ArtikelWebSocket.onopen = function() {
+                        ArtikelWebSocket.send("1");
+                    };
+                    
+                WarentraegerWebSocket.onopen = function() {
+                        WarentraegerWebSocket.send("LIST");
+                    };
+                    
+                ArtikelWebSocket.onmessage = function(event) {
+                var jsonString = event.data;
+                    updateAttributes(id,jsonString);
+                };
+                    
+                WarentraegerWebSocket.onmessage = function(event) {
+                var jsonString = event.data;
+                    
+                    //TODO nur benötigte Warenträger ausgeben
+                
+                    var parent = document.getElementById(listid[0]);
+                    setHeader(childheader[0], parent);
+                    addLines("{}",childAttributes[0],parent);
+                };
+                
+                break;
+            case "Warenträger":
+                erzeugeTabelleWarentraeger();
+                break;
+            case "Transportbänder":
+                erzeugeTabelleTransportbaender();
+                break;
+            case "Roboter":
+                erzeugeTabelleRoboter();
+                break;
+            case "Sektoren":
+                erzeugeTabelleSektoren();
+                break;
+            case "Sensoren":
+                erzeugeTabelleSensoren();
+                break;
+            case "Gelenke":
+                erzeugeTabelleGelenke();
+                break;
+            case "Werkzeuge":
+                erzeugeTabelleWerkzeuge();
+                break;
+            case "Hubpositionierstationen":
+                erzeugeTabelleHubpositionierstationen();
+                break;
+            case "Hub-Quer-Stationen":
+                erzeugeTabelleHubQuerStationen();
+                break;
+            default:
+                document.getElementById("spalte1").innerHTML = 'Fehler beim Darstellen der Tabelle';
+
+      }
     }
         
         
@@ -81,16 +213,7 @@
 
     $(document).ready(function(){
         console.log("Start");
-        
-        var string = '{"id":1, "bezeichnung":"Artikel_1" , "user_paramenter":"TEST", "zeitstempel":"14:21:03", "warentraegerIDs":{"inhalt": ["1","2","3"]}}';
-        var attribute = ['Bezeichnung', 'Zeitstempel', 'User Parameter'];
-        var id =        ['bezeichnung', 'zeitstempel', 'user_parameter'];
-        
-        var list =   ['Wartenträger' ];
-        var listid = ['wartentraeger'];
-        createAttributes(attribute,id);
-        createLists(list, listid);
-        update(string, listid);
+        init();
     });
     
   </script>
