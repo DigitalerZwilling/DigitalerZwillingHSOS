@@ -3,22 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Websockets/WerkzeugWebSocket.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Cache/Updater/WebSocketUpdateThread.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Websockets/GelenkWebSocket.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Websockets/HubQuerPodestWebSocket.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Cache/Updater/Updater.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Websockets/WebSocket.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Websockets/WarentraegerWebSocket.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/DatenbankSchnittestelle/Datenbankschnittstelle.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Websockets/SensorWebSocket.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Websockets/ArtikelWebSocket.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Websockets/HubPodestWebSocket.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Websockets/TransportbandWebSocket.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Websockets/RoboterWebSocket.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Websockets/SektorWebSocket.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Cache/Updater/CacheUpdateThread.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/src/java/Servlets/index.java</file>
+            <file>file:/C:/Users/Manuela/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/Manuela/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/web/details.html</file>
+            <file>file:/C:/Users/Manuela/Documents/GitHub/DigitalerZwillingHSOS/DigitalerZwilling/web/index.html</file>
         </group>
     </open-files>
 </project-private>

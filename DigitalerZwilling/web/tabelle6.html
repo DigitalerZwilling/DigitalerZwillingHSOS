@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <title>Bootstrap 101 Template</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+   
+  </head>
+
+<!-- Ereugt Tabelle je nach übergebener Liste
+Idee: Wenn wir ein Warenträger-Array bekommen, müssen wir Tabelle mit den Spalten Bezeichnung, Zeitstempel, Montagezustand erzeugen,
+d.h. wir müssen der Funktion, die die Tabelle erzeugt sowohl das Array, als auch die Spalten Bezeichnungen übergeben -->
+
+<body> 
+<!--<body> -->
+
+
+    <table class="table table-striped" width="100" border="0" cellpadding="0" cellspacing="1" id="tabelle6">
+    <!--Tabelle an der die Daten angehangen werden -->
+        <thead>
+            <tr>
+                <th id = "spalte6.1"></th>
+                <th id = "spalte6.2"></th>
+                <th id = "spalte6.3"></th> 
+            </tr>
+        </thead>
+
+
+</body>
+
+<script language="javascript">
+
+    $(document).ready(function(){
+    switch ($val) {
+        case 'Artikel':
+            erzeugeTabelleArtikel();
+            break;
+        case "Warenträger":
+            erzeugeTabelleWarentraeger();
+            break;
+        case "Transportbänder":
+            erzeugeTabelleTransportbaender();
+            break;
+      }
+    });
+
+    //-------------ARTIKEL----------------------------------------------------------
+    function erzeugeTabelleArtikel() {
+        //JSON-Array mit Artikeln:
+        var artikelListeJSON = '{ "inhalt" : [' +
+        '{ "bezeichnung":"Artikel_1" , "zeitstempel":"14:21:03" },' +
+        '{ "bezeichnung":"Artikel_2" , "zeitstempel":"14:22:05" },' +
+        '{ "bezeichnung":"Artikel_3" , "zeitstempel":"14:22:12" },' +
+        '{ "bezeichnung":"Artikel_4" , "zeitstempel":"14:23:16" } ]}';
+
+        var artikelListe = JSON.parse(artikelListeJSON);
+
+        //Spaltennamen für die Artikel-Tabelle
+        var spaltennamen = ['Bezeichnung', 'Zeitstempel']; 
+
+        //Erstellen der Tabelle
+        node = document.getElementById("tabelle6");
+        node.parentNode.insertBefore(createTable(artikelListe, spaltennamen, artikelListe.inhalt.length, spaltennamen.length), node);
+    }   
+
+
+
+    //-------------WARENTRÄGER--------------------------------------------------------
+    function erzeugeTabelleWarentraeger() {
+
+        //JSON-Array mit Warenträger:
+        var warentraegerListeJSON = '{ "inhalt" : [' +
+        '{ "bezeichnung":"WT_1" , "zeitstempel":"14:21:03" , "montagezustand":"60%" },' +
+        '{ "bezeichnung":"WT_2" , "zeitstempel":"14:22:05" , "montagezustand":"60%" },' +
+        '{ "bezeichnung":"WT_3" , "zeitstempel":"14:21:23" , "montagezustand":"60%" },' +
+        '{ "bezeichnung":"WT_4" , "zeitstempel":"14:23:16" , "montagezustand":"60%" } ]}';
+
+        var warentraegerListe = JSON.parse(warentraegerListeJSON); 
+
+        //Spaltennamen für die Warenträger-Tabelle:
+        spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Montagezustand'];
+        
+        //Erstellen der Tabelle
+        node = document.getElementById("tabelle6");
+        node.parentNode.insertBefore(createTable(warentraegerListe, spaltennamen, warentraegerListe.inhalt.length, spaltennamen.length), node);
+    }   
+
+
+
+    //-------------TRANSPORTBÄNDER------------------------------------------------------
+    function erzeugeTabelleTransportbaender() {
+
+        //Array mit Transportband:
+        var transportbaenderListeJSON = '{ "inhalt" : [' +
+        '{ "bezeichnung":"TB_1" , "zeitstempel":"14:21:03" , "stoerung":"0"},' +
+        '{ "bezeichnung":"TB_2" , "zeitstempel":"14:22:05" , "stoerung":"2"},' +
+        '{ "bezeichnung":"TB_3" , "zeitstempel":"14:22:12" , "stoerung":"0"},' +
+        '{ "bezeichnung":"TB_4" , "zeitstempel":"14:23:16" , "stoerung":"0"} ]}';
+
+        var transportbaenderListe = JSON.parse(transportbaenderListeJSON);
+
+        //Spaltennamen für die Transportbaender-Tabelle:
+        var spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Stoerung'];
+
+        //Erstellen der Tabelle
+        node = document.getElementById("tabelle6");
+        node.parentNode.insertBefore(createTable(transportbaenderListe, spaltennamen, transportbaenderListe.inhalt.length, spaltennamen.length), node);
+    }
+
+
+
+    //-------------TABELLENERZEUGUNG-----------------------------------------------------
+    function createTable(liste, spaltennamen, row, col) {
+
+        //Gibt den Spalten, die im Body erzeugt wurden die jeweiligen Namen
+        if (spaltennamen < 2){
+            console.log("Fehler: spaltennamen < 2");
+        }else{
+            document.getElementById("spalte6.1").innerHTML = spaltennamen[0];
+            document.getElementById("spalte6.2").innerHTML = spaltennamen[1];
+        }
+
+        //Falls eine dritte Spalte benötigt wird:
+        if (spaltennamen.length == 3){
+            document.getElementById("spalte6.3").innerHTML = spaltennamen[2];
+        }
+
+        var myTable = document.getElementById("tabelle6"); //holt sich die im Body erstellte Tabelle
+
+            var mytablebody = document.createElement("tbody");
+
+            for(var j = 0; j < row; j++) {
+                 mycurrent_row = document.createElement("tr");     
+
+                for(var i = 0; i < col; i++) {
+                        mycurrent_cell = document.createElement("td");     
+
+
+                        //1.Spalte - Bezeichnung:
+                        if (i == 0){
+                            currenttext = document.createTextNode(liste.inhalt[j].bezeichnung);
+                        }
+
+                        //2.Spalte - Zeitstempel:
+                        if (i == 1){
+                            currenttext = document.createTextNode(liste.inhalt[j].zeitstempel);
+                        }
+                     
+                        //3.Spalte:
+                        if (i == 2){
+                            switch (spaltennamen[2]) {
+                                case 'Montagezustand':
+                                    currenttext = document.createTextNode(liste.inhalt[j].montagezustand);
+                                    break;
+                                case "Zustand":
+                                    currenttext = document.createTextNode(liste.inhalt[j].zustand);
+                                    break;
+                                case "Stoerung":
+                                    currenttext = document.createTextNode(liste.inhalt[j].stoerung);
+                                    break;
+                                case "Gelenkstellung":
+                                   currenttext = document.createTextNode(liste.inhalt[j].gelenkstellung);
+                                    break;
+                                case "Oben Unten":
+                                    break;
+                                case "Motor":
+                                    break;
+                                default:
+                                 document.getElementById("spalte6.3").innerHTML = 'Fehler in switch case';
+                                    
+                            } 
+                        }
+                        mycurrent_cell.appendChild(currenttext); //akt. Text wird an Zeile angehangen
+                        mycurrent_row.appendChild(mycurrent_cell); //akt. Zeile wird an Spalte angehangen
+                }
+                mytablebody.appendChild(mycurrent_row); //komplette Spalte wird an Tabellenbody angehangen
+        }
+        myTable.appendChild(mytablebody); //kompletter Tabellbody mit allen Spalten wird an die schon existierende Tabelle angehangen
+        return myTable;
+    }
+
+</script> 
+</html>
+

@@ -1,426 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	</head>
 
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+			<script>
+				var idBtn = null;
 
-	<!-- css-Changes for "Digitaler Zwilling" -->
-	<link rel="stylesheet" href="CSS/digitalerZwilling.css">
+				$(document).ready(function(){
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-    
-
-	<!--Höhe des Content-Fensters passt sich dynamisch an-->
-	<script>
-		$(window).on('load', function() {
-		    if($(window).width() > 768) {
-		        $('#wrapper').addClass('wrapperLarge');
-		        $('#wrapper').removeClass('wrapperSmall');
-		        $('#headerID').addClass('largeWindow');
-		        $('#headerID').removeClass('smallWindow');
-		    }else{
-		        $('#wrapper').addClass('wrapperSmall');
-		        $('#wrapper').removeClass('wrapperLarge');
-		        $('#headerID').addClass('smallWindow');
-		        $('#headerID').removeClass('largeWindow');
-		    }
-		})
-
-
-		$(window).on('resize', function() {
-		    if($(window).width() > 768) {
-		        $('#wrapper').addClass('wrapperLarge');
-		        $('#wrapper').removeClass('wrapperSmall');
-		       	$('#headerID').addClass('largeWindow');
-		        $('#headerID').removeClass('smallWindow');
-		    }else{
-		        $('#wrapper').addClass('wrapperSmall');
-		        $('#wrapper').removeClass('wrapperLarge');
-		        $('#headerID').addClass('smallWindow');
-		        $('#headerID').removeClass('largeWindow');
-		    }
-		})
-
-	</script>
-	<!--ENDE (Höhe des Content-Fensters passt sich dynamisch an)-->
+					$(".btn.btn-default.dropdown-toggle").on('click', function(){
+	            		idBtn = $(this).attr('id');
+	            		console.log(idBtn);
+	            		loadDiv(idBtn);
+	            	});
+	            });
 
 
 
+	            function loadDiv(idBtn){
+	            	console.log("loadDivOpt");
+	            	$caret = ' <span class="caret"></span>';
+	            	switch(idBtn){
+	            		case "dd-btn1":
+	            		$(".dropdown1 li a").click(function(){
+	            			$val = $(this).html();
+        					$(".dd-btn1").html($val+$caret);
+            				$("#einzelansicht1").load("tabelle1.html", $val);
+            			});
 
-  </head>
-  <body>
-  	<!--WRAPPER, um div-Höhen für Contentfenster dynamisch zu berechnen-->
-  	<div class="wrapperLarge" id="wrapper">
+	            		case "dd-btn2":
+	            		$(".dropdown2 li a").click(function(){
+	            			$val = $(this).html();
+        					$(".dd-btn2").html($val+$caret);
+            				$("#einzelansicht2").load("tabelle2.html", $val);
+            			});
 
-  		<!--HEADER-->
-  		<header class="largeWindow" id="headerID">
-  			<!--LIGHTBLUE NAVBAR-->
-			<nav class="navbar navbar-default">
-			  <div class="container-fluid">	
-			    <!-- Brand and toggle get grouped for better mobile display -->
-			    <div class="navbar-header">
-			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"style="margin-left:10px">
-			        <span class="sr-only">Toggle navigation</span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			      </button>
-			      	<a class="navbar-brand" style="font-size:16pt; color:#ffffff;">Digitaler Zwilling</a>
-			      	<div id="mobile_error" align="right" style="padding-top:12px">
-			       		<a class="hidden-lg hidden-md hidden-sm" href="#"><span class="badge">0</span></a>
-			      	</div>
-			    </div>
+	            		case "dd-btn3":
+	            		$(".dropdown3 li a").click(function(){
+	            			$val = $(this).html();
+        					$(".dd-btn3").html($val+$caret);
+            				$("#einzelansicht3").load("tabelle3.html", $val);
+            			});
 
-				<!-- nav links, forms, and other content for toggling -->
-			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			      	<ul class="nav navbar-nav hidden-md hidden-lg hidden-sm">
-			        	<li><a href="#">Übersicht</a></li>
-			        	<li><a href="#">Details</a></li>
-			        	<li><a href="#">Anmelden</a></li>
-				  	</ul>
-				  	<ul class="nav navbar-nav navbar-right hidden-xs">
-		        		<li><a href="#">Anmelden</a></li>
-		        	</ul>
-			    </div>
-			  </div>
-			</nav>
+            			case "dd-btn4":
+	            		$(".dropdown4 li a").click(function(){
+	            			$val = $(this).html();
+        					$(".dd-btn4").html($val+$caret);
+            				$("#einzelansicht4").load("tabelle4.html", $val);
+            			});
+
+            			case "dd-btn5":
+	            		$(".dropdown5 li a").click(function(){
+        					$(".dd-btn5").html($val+$caret);
+            				$("#einzelansicht5").load("tabelle5.html", $val);
+            			});
+
+            			case "dd-btn6":
+	            		$(".dropdown6 li a").click(function(){
+	            			$val = $(this).html();
+        					$(".dd-btn6").html($val+$caret);
+            				$("#einzelansicht6").load("tabelle6.html", $val);
+            			});
+
+	            	}
+	            }      
+
+	            	
+			</script>
+
 			
-			<!--GREY NAVBAR DESKTOP-->
-			<div class="container-fluid headerbar hidden-xs">
-				<div class="row">
-				   	<div class="col-lg-3 col-md-4 col-sm-5 col-xs-12" style="margin-bottom:-20px">
-				   		<table class="table" style="margin-bottom:-20px">
-				   			<tr>
-				   				<td>
-				   					<a class="menue" href="#">Übersicht</a>
-				   				</td>
-				   				<td>
-				   					<a class="menue" href="#">Details</a>
-				   				</td>
-				   				<td>
-				   					<a class="menue" href="#">Störung <span class="badge">0</span></a>
-				   				</td>
-				   			</tr>
-				   		</table>
-				  	</div>
-			  	</div>
+
+			<div class="row" style="background-color:lightgrey; height:100%;">
+
+				<!--COL1-->
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="height:100%;">
+					<div class="row" style="background-color:lightgrey; height:100%;">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panelEinzelansicht">
+							<div class="panel panel-default" style="height:100%; overflow-y: auto;">
+							  	<div class="panel-body" id="panel1">
+							  		<div class="btn-group" role="group" aria-label="...">
+								    	<div class="btn-group" role="group">
+	  										<button type="button" class="btn btn-default dropdown-toggle dd-btn1" id="dd-btn1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wähle Komponente! <span class="caret"></span></button>
+											<ul class="dropdown-menu dropdown1 scrollable-menu">
+										    	<li><a href="#">Artikel</a></li>
+										    	<!--<li><a href="#">Gelenk</a></li>-->
+										    	<li><a href="#">Hubpositionierstationen</a></li>
+										    	<li><a href="#">Hub-Quer-Stationen</a></li>
+										    	<li><a href="#">Roboter</a></li>
+										    	<li><a href="#">Sektoren</a></li>
+										    	<li><a href="#">Sensoren</a></li>
+										    	<li><a href="#">Transportbänder</a></li>
+										    	<li><a href="#">Warenträger</a></li>
+										    	<!--<li><a href="#">Werkzeug</a></li>-->
+										  	</ul>  	
+										</div> 
+										<button type="button" class="btn btn-default">Speichern</button>
+									</div>
+									<div></br></div>
+									<div id="einzelansicht1">Keine Komponente gewählt.</div>
+							  	</div>
+							</div>
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panelEinzelansicht">
+							<div class="panel panel-default" style="height:100%; overflow-y: auto;">
+							  	<div class="panel-body">
+							  		<div class="btn-group" role="group" aria-label="...">
+								    	<div class="btn-group" role="group">
+	  										<button type="button" class="btn btn-default dropdown-toggle dd-btn2" id="dd-btn2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wähle Komponente <span class="caret"></span></button>
+											<ul class="dropdown-menu dropdown2 scrollable-menu">
+										    	<li><a href="#">Artikel</a></li>
+										    	<!--<li><a href="#">Gelenk</a></li>-->
+										    	<li><a href="#">Hubpositionierstationen</a></li>
+										    	<li><a href="#">Hub-Quer-Stationen</a></li>
+										    	<li><a href="#">Roboter</a></li>
+										    	<li><a href="#">Sektoren</a></li>
+										    	<li><a href="#">Sensoren</a></li>
+										    	<li><a href="#">Transportbänder</a></li>
+										    	<li><a href="#">Warenträger</a></li>
+										    	<!--<li><a href="#">Werkzeug</a></li>-->
+										  	</ul>  	
+										</div> 
+										<button type="button" class="btn btn-default">Speichern</button>
+									</div>
+									<div></br></div>
+									<div id="einzelansicht2">Keine Komponente gewählt.</div>
+							  	</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--COL2-->
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="height:100%;">
+					<div class="row" style="background-color:lightgrey; height:100%;">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panelEinzelansicht">
+							<div class="panel panel-default" style="height:100%; overflow-y: auto;">
+							  	<div class="panel-body" id="panel3">
+							  		<div class="btn-group" role="group" aria-label="...">
+								    	<div class="btn-group" role="group">
+	  										<button type="button" class="btn btn-default dropdown-toggle dd-btn3" id="dd-btn3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wähle Komponente <span class="caret"></span></button>
+											<ul class="dropdown-menu dropdown3 scrollable-menu">
+										    	<li><a href="#">Artikel</a></li>
+										    	<!--<li><a href="#">Gelenk</a></li>-->
+										    	<li><a href="#">Hubpositionierstationen</a></li>
+										    	<li><a href="#">Hub-Quer-Stationen</a></li>
+										    	<li><a href="#">Roboter</a></li>
+										    	<li><a href="#">Sektoren</a></li>
+										    	<li><a href="#">Sensoren</a></li>
+										    	<li><a href="#">Transportbänder</a></li>
+										    	<li><a href="#">Warenträger</a></li>
+										    	<!--<li><a href="#">Werkzeug</a></li>-->
+										  	</ul>  	
+										</div> 
+										<button type="button" class="btn btn-default">Speichern</button>
+									</div>
+									<div></br></div>
+									<div id="einzelansicht3">Keine Komponente gewählt.</div>
+							  	</div>
+							</div>
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panelEinzelansicht">
+							<div class="panel panel-default" style="height:100%; overflow-y: auto;">
+							  	<div class="panel-body">
+							  		<div class="btn-group" role="group" aria-label="...">
+								    	<div class="btn-group" role="group">
+	  										<button type="button" class="btn btn-default dropdown-toggle dd-btn4" id="dd-btn4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wähle Komponente <span class="caret"></span></button>
+											<ul class="dropdown-menu dropdown4 scrollable-menu">
+										    	<li><a href="#">Artikel</a></li>
+										    	<!--<li><a href="#">Gelenk</a></li>-->
+										    	<li><a href="#">Hubpositionierstationen</a></li>
+										    	<li><a href="#">Hub-Quer-Stationen</a></li>
+										    	<li><a href="#">Roboter</a></li>
+										    	<li><a href="#">Sektoren</a></li>
+										    	<li><a href="#">Sensoren</a></li>
+										    	<li><a href="#">Transportbänder</a></li>
+										    	<li><a href="#">Warenträger</a></li>
+										    	<!--<li><a href="#">Werkzeug</a></li>-->
+										  	</ul>  	
+										</div> 
+										<button type="button" class="btn btn-default">Speichern</button>
+									</div>
+									<div></br></div>
+									<div id="einzelansicht4">Keine Komponente gewählt.</div>
+							  	</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--END COL2-->
+
+				<!--COL3-->
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="height:100%;">
+					<div class="row" style="background-color:lightgrey; height:100%;">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panelEinzelansicht">
+							<div class="panel panel-default" style="height:100%; overflow-y: auto;">
+							  	<div class="panel-body">
+							  		<div class="btn-group" role="group" aria-label="...">
+								    	<div class="btn-group" role="group">
+	  										<button type="button" class="btn btn-default dropdown-toggle dd-btn5" id="dd-btn5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wähle Komponente <span class="caret"></span></button>
+											<ul class="dropdown-menu dropdown5 scrollable-menu">
+										    	<li><a href="#">Artikel</a></li>
+										    	<!--<li><a href="#">Gelenk</a></li>-->
+										    	<li><a href="#">Hubpositionierstationen</a></li>
+										    	<li><a href="#">Hub-Quer-Stationen</a></li>
+										    	<li><a href="#">Roboter</a></li>
+										    	<li><a href="#">Sektoren</a></li>
+										    	<li><a href="#">Sensoren</a></li>
+										    	<li><a href="#">Transportbänder</a></li>
+										    	<li><a href="#">Warenträger</a></li>
+										    	<!--<li><a href="#">Werkzeug</a></li>-->
+										  	</ul>  	
+										</div> 
+										<button type="button" class="btn btn-default">Speichern</button>
+									</div>
+									<div></br></div>
+									<div id="einzelansicht5">Keine Komponente gewählt.</div>
+							  	</div>
+							</div>
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panelEinzelansicht">
+							<div class="panel panel-default" style="height:100%; overflow-y: auto;">
+							  	<div class="panel-body">
+							  		<div class="btn-group" role="group" aria-label="...">
+								    	<div class="btn-group" role="group">
+	  										<button type="button" class="btn btn-default dropdown-toggle dd-btn6" id="dd-btn6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wähle Komponente <span class="caret"></span></button>
+											<ul class="dropdown-menu dropdown6 scrollable-menu">
+										    	<li><a href="#">Artikel</a></li>
+										    	<!--<li><a href="#">Gelenk</a></li>-->
+										    	<li><a href="#">Hubpositionierstationen</a></li>
+										    	<li><a href="#">Hub-Quer-Stationen</a></li>
+										    	<li><a href="#">Roboter</a></li>
+										    	<li><a href="#">Sektoren</a></li>
+										    	<li><a href="#">Sensoren</a></li>
+										    	<li><a href="#">Transportbänder</a></li>
+										    	<li><a href="#">Warenträger</a></li>
+										    	<!--<li><a href="#">Werkzeug</a></li>-->
+										  	</ul>  	
+										</div> 
+										<button type="button" class="btn btn-default">Speichern</button>
+									</div>
+									<div></br></div>
+									<div id="einzelansicht6">Keine Komponente gewählt.</div>
+							  	</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-  		</header>
+		
 
-  		<!--CONTENT-->
-  		<div id="content">
-
-  			<div id="contentBoxes">
-  				<div class="row-fluid" id="row-height" style="border: 0px solid red">
-  					<div class="row-fluid" style="height:50%">
-  						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pre-scrollable" style="background-color:white; height:100%; border:1px darkgrey solid">
-  							<div>
-								<h4>HupPodest</h4>
-									<table class="table table-striped" style="font-size:11px;">
-								    <thead>
-								      <tr>
-								        <th>Bezeichnung</th>
-								        <th>Zeitstempel</th>
-								        <th>Position</th>
-								      </tr>
-								    </thead>
-								    <tbody>
-								      <tr>
-								        <td>HuPo_1</td>
-								        <td>12:45:13</td>
-								        <td>&darr;</td>
-								      </tr>
-								      <tr>
-								        <td>HuPo_2</td>
-								        <td>13:20:21</td>
-								        <td>&uarr;</td>
-								      </tr>
-								      <tr>
-								        <td>HuPo_3</td>
-								        <td>13:25:45</td>
-								        <td>&uarr;</td>
-								      </tr>
-								    </tbody>
-								</table>
-							</div>
-  						</div>
-  						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pre-scrollable" style="background-color:white; height:100%; border:1px darkgrey solid">
-  							<div>
-							<h4>Warenträger</h4>
-								<table class="table table-striped" style="font-size:11px;">
-								    <thead>
-								      <tr>
-								        <th>Bezeichnung</th>
-								        <th>Zeitstempel</th>
-								        <th>Zustand - RFID</th>
-								      </tr>
-								    </thead>
-								    <tbody>
-								      <tr>
-								        <td>WT_1</td>
-								        <td>12:45:13</td>
-								        <td>60% - H064754</td>
-								      </tr>
-								      <tr>
-								        <td>WT_2</td>
-								        <td>13:20:21</td>
-								        <td>20% - H064755</td>
-								      </tr>
-								      <tr>
-								        <td>WT_3</td>
-								        <td>13:25:45</td>
-								        <td>30% - H064756</td>
-								      </tr>
-								      <tr>
-								        <td>WT_4</td>
-								        <td>13:20:21</td>
-								        <td>20% - H064755</td>
-								      </tr>
-								      <tr>
-								        <td>WT_5</td>
-								        <td>13:25:45</td>
-								        <td>30% - H064756</td>
-								      </tr>
-								      <tr>
-								        <td>WT_6</td>
-								        <td>13:20:21</td>
-								        <td>20% - H064755</td>
-								      </tr>
-								      <tr>
-								        <td>WT_7</td>
-								        <td>13:25:45</td>
-								        <td>30% - H064756</td>
-								      </tr>
-								    </tbody>
-								</table>
-							</div>
-  						</div>
-  						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pre-scrollable" style="background-color:white; height:100%; border:1px darkgrey solid">
-  							<div>
-							<h4>Hupquerpodest</h4>
-								<table class="table table-striped" style="font-size:11px;">
-								    <thead>
-								      <tr>
-								      	<th>Bezeichnung</th>
-								        <th>Zeitstempel</th>							        
-								        <th>Motor | Stellung</th>
-								      </tr>
-								    </thead>
-								    <tbody>
-								      <tr>
-								        <td>HuQu_1</td>
-								         <td>14:22:46</td>
-								        <td>1 &nbsp | &nbsp &uarr;</td>
-								      </tr>
-								      <tr>
-								        <td>HuQu_2</td>
-								        <td>14:23:36</td>
-								        <td>1 &nbsp | &nbsp &uarr;</td>
-								      </tr>
-								      <tr>
-								        <td>HuQu_3</td>
-								        <td>14:23:58</td>
-								        <td>0 &nbsp | &nbsp &darr; </td>
-								      </tr>
-								       <tr>
-								        <td>HuQu_4</td>
-								         <td>14:22:58</td>
-								        <td>1 &nbsp | &nbsp &uarr;</td>
-								      </tr>
-								       <tr>
-								        <td>HuQu_5</td>
-								        <td>14:24:58</td>
-								        <td>0 &nbsp | &nbsp &mdash;</td>
-								      </tr>
-								    </tbody>
-								  </table>
-							</div>
-  						</div>
-  					</div>
-  					
-  					<div class="row-fluid" style="height:50%">
-  						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pre-scrollable" style="background-color:white; height:100%; border:1px darkgrey solid">
-  							<div>
-							<h4>Transportband</h4>
-								<table class="table table-striped" style="font-size:11px;">
-								    <thead>
-								      <tr>
-								        <th>Bezeichung</th>
-								        <th>Zeitstempel</th>
-								        <th>Störung</th>
-								      </tr>
-								    </thead>
-								    <tbody>
-								      <tr>
-								        <td>TB_1</td>
-								        <td>12:45:13</td>
-								        <td>3</td>
-								      </tr>
-								      <tr>
-								        <td>TB_2</td>
-								        <td>13:20:21</td>
-								        <td>0</td>
-								      </tr>
-								      <tr>
-								        <td>TB_3</td>
-								        <td>13:25:45</td>
-								        <td>4</td>
-								      </tr>
-								      <tr>
-								        <td>TB_4</td>
-								        <td>13:20:21</td>
-								        <td>0</td>
-								      </tr>
-								      <tr>
-								        <td>TB_5</td>
-								        <td>13:25:45</td>
-								        <td>0</td>
-								      </tr>
-								      <tr>
-								        <td>TB_6</td>
-								        <td>13:20:21</td>
-								        <td>0</td>
-								      </tr>
-								      <tr>
-								        <td>TB_7</td>
-								        <td>13:25:45</td>
-								        <td>1</td>
-								      </tr>
-								    </tbody>
-								</table>
-							</div>
-  						</div>
-  						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pre-scrollable" style="background-color:white; height:100%; border:1px darkgrey solid">
-  							<div>
-							<h4>Sensor</h4>
-								<table class="table table-striped" style="font-size:11px;">
-								    <thead>
-								      <tr>
-								        <th>Bezeichung</th>
-								        <th>Zeitstempel</th>
-								        <th>Zustand</th>
-								      </tr>
-								    </thead>
-								    <tbody>
-								      <tr>
-								        <td>Sensor_1</td>
-								        <td>12:45:13</td>
-								        <td>0</td>
-								      </tr>
-								      <tr>
-								        <td>Sensor_2</td>
-								        <td>13:20:21</td>
-								        <td>1</td>
-								      </tr>
-								      <tr>
-								        <td>Sensor_3</td>
-								        <td>13:25:45</td>
-								        <td>0</td>
-								      </tr>
-								      <tr>
-								        <td>Sensor_4</td>
-								        <td>13:20:21</td>
-								        <td>1</td>
-								      </tr>
-								      <tr>
-								        <td>Sensor_5</td>
-								        <td>13:25:45</td>
-								        <td>1</td>
-								      </tr>
-								      <tr>
-								        <td>Sensor_6</td>
-								        <td>13:20:21</td>
-								        <td>0</td>
-								      </tr>
-								      <tr>
-								        <td>Sensor_7</td>
-								        <td>13:25:45</td>
-								        <td>1</td>
-								      </tr>
-								    </tbody>
-								</table>
-							</div>
-  						</div>
-  						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pre-scrollable" style="background-color:white; height:100%; border:1px darkgrey solid">
-  							<div>
-							<h4>Artikel</h4>
-								<table class="table table-striped" style="font-size:11px;">
-								    <thead>
-								      <tr>
-								        <th>Bezeichung</th>
-								        <th>Zeitstempel</th>
-								      </tr>
-								    </thead>
-								    <tbody>
-								      <tr>
-								        <td>Artikel_1</td>
-								        <td>12:45:13</td>
-								      </tr>
-								      <tr>
-								        <td>Artikel_2</td>
-								        <td>13:20:21</td>
-								      </tr>
-								      <tr>
-								        <td>Artikel_3</td>
-								        <td>13:25:45</td>
-								      </tr>
-								      <tr>
-								        <td>Artikel_4</td>
-								        <td>13:20:21</td>
-								      </tr>
-								      <tr>
-								        <td>Artikel_5</td>
-								        <td>13:25:45</td>
-								      </tr>
-								      <tr>
-								        <td>Artikel_6</td>
-								        <td>13:20:21</td>
-								      </tr>
-								      <tr>
-								        <td>Artikel_7</td>
-								        <td>13:25:45</td>
-								      </tr>
-								    </tbody>
-								</table>
-							</div>
-  						</div>
-  					</div>
-  					
-  				</div>
-
-
-  			</div>
-
-	    </div>
-
-	    <!--FOOTER-->
-	    <footer>
-			<div class="navbar navbar-default navbar-fixed-bottom">
-				<div class="container"></div>
-			</div>	
-		</footer>
-
-
-  	</div>
-
-    
-  </body>
 </html>
