@@ -28,8 +28,7 @@ public class SensorCache extends Cache{
     @Override
     public void update() throws DBErrorExeption {
         try {
-            Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_sensor"+
-                    ",stoerung,zustand,user_parameter,zeitstempel from Sensor");
+            Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_sensor,stoerung,zustand,user_parameter,zeitstempel from Sensor");
             
             List<String> id = rsMap.get("ID_SENSOR");
             List<String> stoerung = rsMap.get("STOERUNG");

@@ -81,18 +81,11 @@ public class WarentraegerCache extends Cache{
             List<String> rFID_inhalt = rsMap.get("RFID_INHALT");
             List<String> montagezustand = rsMap.get("MONTAGEZUSTAND");
             Warentraeger warentraeger1,warentraeger2;
-            //System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+ ids.size());
             for (int i=0;i<ids.size();i++){
                 
                 String ourTime=zeitstempel.get(i).replace(' ', 'T');
-                System.out.println(bezeichnung.get(i)+" "+ids.get(i));
-                System.out.println(montagezustand.get(i)+ " "+stoerung.get(i));
-                System.out.println(Integer.parseInt(stoerung.get(i)));
-                //System.out.println(Integer.parseInt(stoerung.get(i))+ Integer.parseInt(abstand_mm.get(i))+ Integer.parseInt(montagezustand.get(i))+ rFID_inhalt.get(i)+ Long.parseLong(ids.get(i))+bezeichnung.get(i)+user_parameter.get(i)+LocalDateTime.parse(ourTime));
                 warentraeger1 = new Warentraeger(Integer.parseInt(stoerung.get(i)), Integer.parseInt(abstand_mm.get(i)), Integer.parseInt(montagezustand.get(i)), rFID_inhalt.get(i)+"", Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));
-                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+ ids.size());
                 warentraeger2 = new Warentraeger(Integer.parseInt(stoerung.get(i)), Integer.parseInt(abstand_mm.get(i)), Integer.parseInt(montagezustand.get(i)), rFID_inhalt.get(i), Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));
-                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+ ids.size());
                 warentraeger1.setTransportbandIDs(this.readTransportband(warentraeger1.getId()));
                 warentraeger2.setTransportbandIDs(this.readTransportband(warentraeger2.getId()));
                 
@@ -121,39 +114,57 @@ public class WarentraegerCache extends Cache{
         }
     }
     
-    private List<Long> readTransportband(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband FROM Transportband_Warentraeger WHERE id_warentraeger="+id);
-        List<String> ids = rsMap.get("ID_TRANSPORTBAND");
-        
+    private List<Long> readTransportband(Long id) throws DBNotFoundExeption{
         List<Long> idsLong= new ArrayList<>();
-        if(ids==null) return idsLong;
-        
-        for (String s : ids){
-            idsLong.add(Long.parseLong(s));
+        try {
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband FROM Transportband_Warentraeger WHERE id_warentraeger="+id);
+            List<String> ids = rsMap.get("ID_TRANSPORTBAND");
+            
+            
+            if(ids==null) return idsLong;
+            
+            for (String s : ids){
+                idsLong.add(Long.parseLong(s));
+            }
+            
+        } catch (QueryExeption ex) {
+            Logger.getLogger(WarentraegerCache.class.getName()).log(Level.SEVERE, null, ex);
         }
         return idsLong;
     }
     
-    private List<Long> readSektor(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor FROM Sektor_Warentraeger WHERE id_warentraeger="+id);
-        List<String> ids = rsMap.get("ID_SEKTOR");
-        
+    private List<Long> readSektor(Long id) throws DBNotFoundExeption{
         List<Long> idsLong= new ArrayList<>();
-        if(ids==null) return idsLong;
-        
-        for (String s : ids){
-            idsLong.add(Long.parseLong(s));
+        try {
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor FROM Sektor_Warentraeger WHERE id_warentraeger="+id);
+            List<String> ids = rsMap.get("ID_SEKTOR");
+            
+            
+            if(ids==null) return idsLong;
+            
+            for (String s : ids){
+                idsLong.add(Long.parseLong(s));
+            }
+            
+        } catch (QueryExeption ex) {
+            Logger.getLogger(WarentraegerCache.class.getName()).log(Level.SEVERE, null, ex);
         }
         return idsLong;
     }
-    private List<Long> readArtikel(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_artikel from Artikel_Warentraeger where id_warentraeger="+id);
-        List<String> ids = rsMap.get("ID_ARTIKEL");
-        
+    private List<Long> readArtikel(Long id) throws DBNotFoundExeption{
         List<Long> w_ids= new ArrayList<>();
-        if(ids==null) return w_ids;
-        for (String s : ids){
-            w_ids.add(Long.parseLong(s));
+        try {
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_artikel from Artikel_Warentraeger where id_warentraeger="+id);
+            List<String> ids = rsMap.get("ID_ARTIKEL");
+            
+            
+            if(ids==null) return w_ids;
+            for (String s : ids){
+                w_ids.add(Long.parseLong(s));
+            }
+            
+        } catch (QueryExeption ex) {
+            Logger.getLogger(WarentraegerCache.class.getName()).log(Level.SEVERE, null, ex);
         }
         return w_ids;
     }

@@ -25,7 +25,6 @@ public class Warentraeger extends Element{
 
     public Warentraeger(int stoerung, int abstand_mm, int montagezustand, String rFID_inhalt, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!con");
         this.stoerung = stoerung;
         this.abstand_mm = abstand_mm;
         this.montagezustand = montagezustand;
