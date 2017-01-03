@@ -68,7 +68,7 @@ public class Updater {
         //timer = timerService.createTimer(500, 500, "New Updater interval Timer");
         this.ejbTimerService.cancelTimer("New Updater interval Timer");
         
-        this.ejbTimerService.createTimer(500, 500, "New Updater interval Timer");
+        this.ejbTimerService.createTimer(1000, 500, "New Updater interval Timer");
         System.out.println("erstellt!!!!!!!!!!!!!!!!!!!!!");
         //timerService.crea
     }

@@ -35,10 +35,10 @@ public class GelenkCache extends Cache{
         try {
             Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_gelenk,gelenkstellung,zeitstempel,user_parameter from Gelenk");
             
-            List<String> ids = rsMap.get("id_artikel");
-            List<String> zeitstempel = rsMap.get("zeitstempel");
-            List<String> user_parameter = rsMap.get("user_parameter");
-            List<String> gelenkstellung = rsMap.get("gelenkstellung");
+            List<String> ids = rsMap.get("ID_GELENK");
+            List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
+            List<String> user_parameter = rsMap.get("USER_PARAMETER");
+            List<String> gelenkstellung = rsMap.get("GELENKSTELLUNG");
             
             Gelenk gelenk;
             for (int i=0;i<ids.size();i++){
