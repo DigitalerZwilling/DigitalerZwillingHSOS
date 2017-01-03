@@ -32,36 +32,48 @@
        // $val = "Transportbänder";
         switch ($val) {
             case 'Artikel':
+                //Durch WebSockets ersetzten!
                 var artikelListeJSON = '{ "inhalt" : [' +
                 '{  "id":"1" , "bezeichnung":"Artikel_1" , "zeitstempel":"14:21:03" },' +
                 '{  "id":"2" , "bezeichnung":"Artikel_2" , "zeitstempel":"14:22:05" },' +
                 '{  "id":"3" , "bezeichnung":"Artikel_3" , "zeitstempel":"14:22:12" },' +
                 '{  "id":"4" , "bezeichnung":"Artikel_4" , "zeitstempel":"14:23:16" } ]}';
+
+                //Erzeugen der Tabelle:
                 erzeugeTabelle("Artikel", artikelListeJSON);
 
+                //Durch WebSockets ersetzten!
                 var neueListeJSON = '{ "inhalt" : [' +
                 '{  "id":"1" , "bezeichnung":"Artikel_1" , "zeitstempel":"14:21:05" },' +
                 '{  "id":"2" , "bezeichnung":"Artikel_2" , "zeitstempel":"14:22:07" },' +
                 '{  "id":"3" , "bezeichnung":"Artikel_3" , "zeitstempel":"14:22:14" },' +
                 '{  "id":"4" , "bezeichnung":"Artikel_4" , "zeitstempel":"14:23:18" } ]}';
+
+                //Update der Tabelleninhalte:
                 updateTabelle("Artikel", neueListeJSON); 
                 break;
 
             case "Warenträger":
+                //Durch WebSockets ersetzten!
                 var warentraegerListeJSON = '{ "inhalt" : [' +
                 '{  "id":"1" ,"bezeichnung":"WT_1" , "zeitstempel":"14:21:03" , "montagezustand":"60%" },' +
                 '{  "id":"2" ,"bezeichnung":"WT_2" , "zeitstempel":"14:22:05" , "montagezustand":"60%" },' +
                 '{  "id":"3" ,"bezeichnung":"WT_3" , "zeitstempel":"14:21:23" , "montagezustand":"60%" },' +
                 '{  "id":"4" ,"bezeichnung":"WT_4" , "zeitstempel":"14:23:16" , "montagezustand":"60%" } ]}';
+
+                //Erzeugen der Tabelle:
                 erzeugeTabelle("Warentraeger", warentraegerListeJSON);
 
-
+                //Durch WebSockets ersetzten!
                 var neueListeJSON = '{ "inhalt" : [' +
                 '{  "id":"1" ,"bezeichnung":"WT_1" , "zeitstempel":"14:21:05" , "montagezustand":"65%" },' +
                 '{  "id":"2" ,"bezeichnung":"WT_2" , "zeitstempel":"14:22:07" , "montagezustand":"60%" },' +
                 '{  "id":"3" ,"bezeichnung":"WT_3" , "zeitstempel":"14:21:25" , "montagezustand":"65%" },' +
                 '{  "id":"4" ,"bezeichnung":"WT_4" , "zeitstempel":"14:23:18" , "montagezustand":"60%" } ]}';
+
+                //Update der Tabelleninhalte:
                 updateTabelle("Warentraeger", neueListeJSON); 
+                
                 break;
 
             case "Transportbänder":
@@ -238,12 +250,12 @@
     }
 
 
-    function holeTabelleRoboter() {
+    /*function holeTabelleRoboter() {
         node = document.getElementById("tabelle");
         node.parentNode.insertBefore(roboterTabelle, node);
 
         Timer = setTimeout('updateTabelleRoboter()', 2000);
-    }
+    }*/
 
 
 
