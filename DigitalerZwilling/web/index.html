@@ -22,8 +22,8 @@
 		<script type="text/javascript">
 
 			$(document).ready(function(){
-				//Clear local storage information for steady div, by refreshing website
-				localStorage.removeItem("divOfTwoViews"); 
+				//Clear local storage information, by refreshing website
+				localStorage.clear();
 
             	$("#mainContainer").load("uebersicht.html");
         	});
@@ -31,7 +31,12 @@
 			$(function() {
 			  	$(".buttonStoerung").on("click",function(e) {
 			    	e.preventDefault();
-			    	$("#uebersichtsinfos").load("stoerungen.html");
+			    	if(localStorage.getItem("mainContainer")=="details"){
+			    		localStorage.setItem("stoerung", "stoerungLaden");
+			    		$("#mainContainer").load("uebersicht.html");
+			    	}else{
+			    		$("#uebersichtsinfos").load("stoerungen.html");
+			    	}
 			  	});
 			});
 
@@ -70,6 +75,8 @@
 			        <span class="icon-bar"></span>
 			      </button>
 			      <a class="navbar-brand">Digitaler Zwilling</a>
+			      <a href="#" class="buttonStoerung"><span class="badge hidden-lg hidden-md hidden-sm" id="iconStoerung" style="margin-top:15px">0</span></a>
+
 			    </div>
 
 			    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -77,12 +84,11 @@
 			      	<ul class="nav navbar-nav">
 			        	<li><a href="#" class="buttonUebersicht">Übersicht <span class="sr-only">(current)</span></a></li>
 			        	<li><a href="#" class="buttonDetails">Details</a></li>
-			        	<li><a href="#" class="buttonStoerung">Störung <span class="badge">0</span></a></li>
+			        	<li><a href="#" class="buttonStoerung">Störung <span class="badge" id="iconStoerung">0</span></a></li>
 			      	</ul>
 			     	<ul class="nav navbar-nav navbar-right">
 				        <li><a href="#">Anmelden</a></li>
 				    </ul>
-			      
 			    </div><!-- /.navbar-collapse -->
 			  </div><!-- /.container-fluid -->
 			</nav>
