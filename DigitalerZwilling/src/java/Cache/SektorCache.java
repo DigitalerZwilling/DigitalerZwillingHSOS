@@ -29,7 +29,7 @@ public class SektorCache extends Cache{
         try {
             Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor, stoerung, zeitstempel, user_parameter FROM Sektor");
             List<String> ids = rsMap.get("ID_SEKTOR");
-            List<String> zeitstempel = rsMap.get("ZEITSTEMEPL");
+            List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
             List<String> user_parameter = rsMap.get("USER_PARAMETER");
             List<String> stoerung = rsMap.get("STOERUNG");  //int
             
@@ -120,7 +120,7 @@ public class SektorCache extends Cache{
     private List<Long> readWarentraeger(Long id) throws DBNotFoundExeption{
         List<Long> idsLong = new ArrayList<>();
         try {
-            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT warentraeger_id FROM Sektor_Warentraeger WHERE id_sektor="+id);
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger FROM Sektor_Warentraeger WHERE id_sektor="+id);
             List<String> ids = rsMap.get("ID_WARENTRAEGER");
             
             
