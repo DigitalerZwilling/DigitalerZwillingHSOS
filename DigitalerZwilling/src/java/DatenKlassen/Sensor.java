@@ -67,7 +67,6 @@ public class Sensor extends Element{
         json += "\"id\": " + id + ",";
         json += "\"bezeichnung\": \"" + bezeichnung + "\",";
         json += "\"user_Parameter\": \"" + user_Parameter + "\",";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
         json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",";
         json += "\"stoerung\": " + stoerung + ",";
         json += "\"phy_adresse\": \"" + phy_adresse + "\",";

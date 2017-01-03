@@ -151,68 +151,68 @@ public class Sektor extends Element{
         json += "\"z\": " + z + ",";
         json += "\"ausrichtung\": " + ausrichtung + ",";
         
-        json += "\"warentraegerIDs\": {";
+        json += "\"warentraegerIDs\": [";
         for(int i=0;i<warentraegerIDs.size();i++){
             json += warentraegerIDs.get(i);
             if(i < (warentraegerIDs.size()-1)){
                 json += ",";
             }
         }
-        json += "},";
+        json += "],";
         
-        json += "\"hubpodestIDs\": {";
+        json += "\"hubpodestIDs\": [";
         for(int i=0;i<hubpodestIDs.size();i++){
             json += hubpodestIDs.get(i);
             if(i < (hubpodestIDs.size()-1)){
                 json += ",";
             } 
         }
-        json += "},";
+        json += "],";
         
-        json += "\"hubquerpodestIDs\": {";
+        json += "\"hubquerpodestIDs\": [";
         for(int i=0;i<hubquerpodestIDs.size();i++){
             json += hubquerpodestIDs.get(i);
             if(i < (hubquerpodestIDs.size()-1)){
                 json += ",";
             }
         }
-        json += "},";
+        json += "],";
         
-        json += "\"roboterIDs\": {";
+        json += "\"roboterIDs\": [";
         for(int i=0;i<roboterIDs.size();i++){
             json += roboterIDs.get(i);
             if(i < (roboterIDs.size()-1)){
                 json += ",";
             }
         }
-        json += "},";
+        json += "],";
         
-        json += "\"sensorIDs\": {";
+        json += "\"sensorIDs\": [";
         for(int i=0;i<sensorIDs.size();i++){
             json += sensorIDs.get(i);
             if(i < (sensorIDs.size()-1)){
                 json += ",";
             }
         }
-        json += "},";
+        json += "],";
         
-        json += "\"vorTransportbandIDs\": {";
+        json += "\"vorTransportbandIDs\": [";
         for(int i=0;i<vorTransportbandIDs.size();i++){
             json += vorTransportbandIDs.get(i);
             if(i < (vorTransportbandIDs.size()-1)){
                 json += ",";
             }
         }
-        json += "},";
+        json += "],";
         
-        json += "\"nachTransportbandIDs\": {";
+        json += "\"nachTransportbandIDs\": [";
         for(int i=0;i<nachTransportbandIDs.size();i++){
             json += nachTransportbandIDs.get(i);
             if(i < (nachTransportbandIDs.size()-1)){
                 json += ",";
             }
         }
-        json += "}";
+        json += "]}";
         
         return json;
     }

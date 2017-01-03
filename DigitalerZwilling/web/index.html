@@ -12,24 +12,11 @@
   </body>
   
   <script language="javascript"> 
-      var attribute;
-      var id;
-      var list;
-      var listid;
-      var childheader;
-      var childAttributes;
-      
       //Browserunterstuetzung vorhanden?
       var browserSupport = ("WebSocket" in window) ? true : false;
             
       //Deklariere WebSocket
-       var host = "ws://localhost:8080/DigitalerZwilling/";
-    
-      
-      var ArtikelWebSocket;
-      var WarentraegerWebSocket;
-      
-      
+       var host = "ws://localhost:8080/DigitalerZwilling/";     
       
       
     function createAttributes(attribute, id){
@@ -50,26 +37,25 @@
         }
     }
         
-    function createLists(list, listid){
-        if(list.length !== listid.length) return;
+    function createLists(list_tilte, list_id, list_header){
+        if(list_tilte.length !== list_id.length) return;
         
         var lists = document.getElementById("lists");
         
-        for(var i=0; i<list.length; i++){
-            var name = document.createTextNode(list[i]);
+        for(var i=0; i<list_tilte.length; i++){
+            var name = document.createTextNode(list_tilte[i]);
             lists.appendChild(name);
             var table = document.createElement("table");
-            table.id = listid[i];            
+            table.id = list_id[i];            
             lists.appendChild(table);
             lists.appendChild(document.createElement("br"));
-            setHeader(childheader[i], table);
+            setHeader(list_header[i], table);
         }
         
     }
     
     function removeList(parent){
             var childs = parent.childNodes;
-            console.log("Remove:"+childs.length);
             
             while(childs.length>1){
                 parent.removeChild(childs[1]);
@@ -98,123 +84,205 @@
     
  
     
-    function updateAttributes(id, jsonString){
+    function updateAttributes(attribute_id, jsonString){
         var json = JSON.parse(jsonString);
         
         //Update Attributes
-        for(var i=0; i<id.length; i++){
-            var element = document.getElementById(id[i]);
-            element.innerHTML = json[id[i]];
+        for(var i=0; i<attribute_id.length; i++){
+            var element = document.getElementById(attribute_id[i]);
+            element.innerHTML = json[attribute_id[i]];
         }
     }
     
-    function updateLists(listid, childheader, childString, childAttributes, elementid, elementid_key){
-        if(childheader.length !== childAttributes.length || listid.length !== childheader.length) return;
-        for(var i=0; i<listid.length; i++){
+    function updateList(id, list_id, jsonString, childAttributes, objectIDs){        
+        var json = JSON.parse(jsonString);
+        var parent = document.getElementById(list_id);
+        removeList(parent);
+        
+        for(var i=0; i<json.inhalt.length; i++){
+            var ids = json.inhalt[i][objectIDs];
+            for(var j=0; j<ids.length; j++){
+                if(ids[j]==id){
+                    addLine(json.inhalt[i],childAttributes,parent);
+                }
+            }
+        }
+    }
+    
+    function create(attribute_title, attribute_id, list_title, list_id, list_header){
+        createAttributes(attribute_title,attribute_id);
+        createLists(list_title, list_id, list_header);
+    }
+    
+    function initArtikel(id){
+        //Einzelne Attribute:
+        var attribute_title = ['Bezeichnung', 'Zeitstempel', 'User Parameter'];
+        var attribute_id    = ['bezeichnung', 'zeitstempel', 'user_parameter'];
+
+        //Einzelne Tabellen:
+        var list_title = ['Wartenträger' ];
+        var list_id    = ['wartentraeger'];
+
+        //Eigenschaften der Tabellen
+        var list_header     = [['Bezeichnung', 'Zeitstempel']];
+        var list_attribute = [['bezeichnung', 'zeitstempel']];
+
+        //Tabelle Erstellen
+        create(attribute_title, attribute_id, list_title, list_id, list_header);
+
+        //WebSockets
+        var ArtikelWebSocket = new WebSocket(host+"ArtikelWebSocket");
+        var WarentraegerWebSocket = new WebSocket(host+"WarentraegerWebSocket");
+
+        ArtikelWebSocket.onopen = function() {
+                ArtikelWebSocket.send(id);
+            };
+
+        WarentraegerWebSocket.onopen = function() {
+                WarentraegerWebSocket.send("LIST");
+            };
+
+        ArtikelWebSocket.onmessage = function(event) {
+            var jsonString = event.data;
+            updateAttributes(attribute_id,jsonString);
+        };
+
+        WarentraegerWebSocket.onmessage = function(event) {
+            var jsonString = event.data;
+            updateList(id, list_id[0], jsonString, list_attribute[0],"artikelIDs");
+        };
+    }
+    
+    function initSensor(id){
+        //Einzelne Attribute:
+        var attribute_title = ['Bezeichnung', 'Zeitstempel', 'User Parameter', 'Störung', 'phy. Adresse', 'Zustand'];
+        var attribute_id    = ['bezeichnung', 'zeitstempel', 'user_parameter', 'stoerung', 'phy_adresse', 'zustand'];
+
+        //Einzelne Tabellen:
+        var list_title = ['Sektoren' ];
+        var list_id    = ['sektoren'];
+
+        //Eigenschaften der Tabellen
+        var list_header     = [['Bezeichnung', 'Zeitstempel', 'Störung']];
+        var list_attribute = [['bezeichnung', 'zeitstempel', 'stoerung']];
+
+        //Tabelle Erstellen
+        create(attribute_title, attribute_id, list_title, list_id, list_header);
+
+        //WebSockets
+        var SensorWebSocket = new WebSocket(host+"SensorWebSocket");
+        var SektorWebSocket = new WebSocket(host+"SektorWebSocket");
+        
+        SensorWebSocket.onopen = function() {
+                SensorWebSocket.send(id);
+            };
+
+        SektorWebSocket.onopen = function() {
+                SektorWebSocket.send("LIST");
+            };
+
+        SensorWebSocket.onmessage = function(event) {
+            var jsonString = event.data;
+            updateAttributes(attribute_id,jsonString);
+        };
+
+        SektorWebSocket.onmessage = function(event) {
+            var jsonString = event.data;
+            updateList(id, list_id[0], jsonString, list_attribute[0],"sensorIDs");
+        };
+    }
+    
+    function initWarentraeger(id){
+        //Einzelne Attribute:
+        var attribute_title = ['Bezeichnung', 'Zeitstempel', 'User Parameter', 'Störung', 'Abstand', 'Montagezustand'];
+        var attribute_id    = ['bezeichnung', 'zeitstempel', 'user_parameter', 'stoerung', 'abstand_mm', 'montagezustand'];
+
+        //Einzelne Tabellen:
+        var list_title = ['Artikel', 'Transportband', 'Sektoren'];
+        var list_id    = ['artikel', 'transportband', 'sektoren'];
+
+        //Eigenschaften der Tabellen
+        var list_header     = [['Bezeichnung', 'Zeitstempel'],['Bezeichnung', 'Zeitstempel','Störung'],['Bezeichnung', 'Zeitstempel','Störung']];
+        var list_attribute = [['bezeichnung', 'zeitstempel'],['bezeichnung', 'zeitstempel','stoerung'],['bezeichnung', 'zeitstempel','stoerung']];
+
+        //Tabelle Erstellen
+        create(attribute_title, attribute_id, list_title, list_id, list_header);
+
+        //WebSockets
+        var WarentreagerWebSocket = new WebSocket(host+"WarentraegerWebSocket");
+        var ArtikelWebSocket = new WebSocket(host+"ArtikelWebSocket");
+        var TransportbandWebSocket = new WebSocket(host+"TransportbandWebSocket");
+        var SektorWebSocket = new WebSocket(host+"SektorWebSocket");
+        
+        WarentreagerWebSocket.onopen = function() {
+                WarentreagerWebSocket.send(id);
+            };
+
+        ArtikelWebSocket.onopen = function() {
+                ArtikelWebSocket.send("LIST");
+            };
             
-        }
-    }
-    
-    function create(attribute, id, list, listid, childheader, childAttributes){
-        createAttributes(attribute,id);
-        createLists(list, listid);
-        updateLists(listid, childheader, ["{\"inhalt\":[{}]}"], childAttributes);
+        TransportbandWebSocket.onopen = function() {
+                TransportbandWebSocket.send("LIST");
+            };
+            
+        SektorWebSocket.onopen = function() {
+                SektorWebSocket.send("LIST");
+            };
+
+        WarentreagerWebSocket.onmessage = function(event) {
+            var jsonString = event.data;
+            updateAttributes(attribute_id,jsonString);
+        };
+
+        ArtikelWebSocket.onmessage = function(event) {
+            var jsonString = event.data;
+            updateList(id, list_id[0], jsonString, list_attribute[0],"warentraegerIDs");
+        };
+        
+        TransportbandWebSocket.onmessage = function(event) {
+            var jsonString = event.data;
+            updateList(id, list_id[0], jsonString, list_attribute[0],"warentraegerIDs");
+        };
+
+        SektorWebSocket.onmessage = function(event) {
+            var jsonString = event.data;
+            updateList(id, list_id[0], jsonString, list_attribute[0],"warentraegerIDs");
+        };
     }
     
     function init(){
-        $val = 'Artikel';
+        $val = 'Warenträger';
         switch ($val) {
             case 'Artikel':
-                //Einzelne Attribute:
-                attribute = ['Bezeichnung', 'Zeitstempel', 'User Parameter'];
-                id =        ['bezeichnung', 'zeitstempel', 'user_paramenter'];
-                
-                //Einzelne Tabellen:
-                list =   ['Wartenträger' ];
-                listid = ['wartentraeger'];
-                
-                //Eigenschaften der Tabellen
-                childheader     = [['Bezeichnung', 'Zeitstempel']];
-                childAttributes = [['bezeichnung', 'zeitstempel']];
-                
-                //JSONStrings
-                var childString = ['{"inhalt": [{"id":1, "bezeichnung":"WT1" , "zeitstempel":"14:21:03"},{"id":2, "bezeichnung":"WT2" , "zeitstempel":"15:33:02"}]}'];
-                
-                //Tabelle Erstellen
-                create(attribute, id, list, listid, childheader, childAttributes);
-                
-                //WebSockets
-                ArtikelWebSocket = new WebSocket(host+"ArtikelWebSocket");
-                WarentraegerWebSocket = new WebSocket(host+"WarentraegerWebSocket");
-                
-                ArtikelWebSocket.onopen = function() {
-                        ArtikelWebSocket.send("1");
-                    };
-                    
-                WarentraegerWebSocket.onopen = function() {
-                        WarentraegerWebSocket.send("LIST");
-                    };
-                    
-                ArtikelWebSocket.onmessage = function(event) {
-                var jsonString = event.data;
-                    updateAttributes(id,jsonString);
-                };
-                
-                ArtikelWebSocket.onclose = function() {
-                };    
-                WarentraegerWebSocket.onclose = function() {
-                };
-                    
-                WarentraegerWebSocket.onmessage = function(event) {
-                //var jsonString = event.data;
-                var jsonString = '{"inhalt":[{"id": 1,"bezeichnung": "WT1","user_Parameter": "null","zeitstempel": "2016-12-22T12:43:34.712","stoerung": 0,"abstand_mm": 100,"montagezustand": 0,"artikelIDs": [4,1,2,3],"transportbandIDs": [],"sektorIDs": []},{"id": 2,"bezeichnung": "WT2","user_Parameter": "null","zeitstempel": "2016-12-22T12:43:41.275","stoerung": 1,"abstand_mm": 0,"montagezustand": 1,"artikelIDs": [1,4,5,6],"transportbandIDs": [],"sektorIDs": []}]}';
-                    var json = JSON.parse(jsonString);
-                    var parent = document.getElementById(listid[0]);
-                    removeList(parent);
-                    
-                    console.log(json.inhalt.length);
-                    for(var i=0; i<json.inhalt.length; i++){
-                        var artikelIDs = json.inhalt[i].artikelIDs;
-                        console.log(artikelIDs.length);
-                        for(var j=0; j<artikelIDs.length; j++){
-                            if(artikelIDs[j]==1){
-                                console.log(json.inhalt[i]);
-                                addLine(json.inhalt[i],childAttributes[0],parent);
-                            }
-                        }
-                    }
-                };
-                
+                var id = 1;
+                initArtikel(id);
                 break;
             case "Warenträger":
-                erzeugeTabelleWarentraeger();
+                var id = 1;
+                initWarentraeger(id);
                 break;
             case "Transportbänder":
-                erzeugeTabelleTransportbaender();
+                var id = 1;
+                initTransportbaender(id);
                 break;
             case "Roboter":
-                erzeugeTabelleRoboter();
                 break;
             case "Sektoren":
-                erzeugeTabelleSektoren();
                 break;
             case "Sensoren":
-                erzeugeTabelleSensoren();
+                var id = 2;
+                initSensor(id);
                 break;
             case "Gelenke":
-                erzeugeTabelleGelenke();
                 break;
             case "Werkzeuge":
-                erzeugeTabelleWerkzeuge();
                 break;
             case "Hubpositionierstationen":
-                erzeugeTabelleHubpositionierstationen();
                 break;
             case "Hub-Quer-Stationen":
-                erzeugeTabelleHubQuerStationen();
                 break;
             default:
-                document.getElementById("spalte1").innerHTML = 'Fehler beim Darstellen der Tabelle';
 
       }
     }

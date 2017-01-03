@@ -117,15 +117,20 @@ public class SektorCache extends Cache{
         }
     }
     
-    private List<Long> readWarentraeger(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT warentraeger_id FROM Sektor_Warentraeger WHERE id_sektor="+id);
-        List<String> ids = rsMap.get("ID_WARENTRAEGER");
-        
+    private List<Long> readWarentraeger(Long id) throws DBNotFoundExeption{
         List<Long> idsLong = new ArrayList<>();
-        if(ids==null) return idsLong;
-        
-        for (String s : ids){
-            idsLong.add(Long.parseLong(s));
+        try {
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT warentraeger_id FROM Sektor_Warentraeger WHERE id_sektor="+id);
+            List<String> ids = rsMap.get("ID_WARENTRAEGER");
+            
+            
+            if(ids==null) return idsLong;
+            
+            for (String s : ids){
+                idsLong.add(Long.parseLong(s));
+            }
+        } catch (QueryExeption ex) {
+            Logger.getLogger(SektorCache.class.getName()).log(Level.SEVERE, null, ex);
         }
         return idsLong;
     }

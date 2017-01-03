@@ -87,20 +87,19 @@ public class Transportband extends Element{
         json += "\"id\": " + id + ",";
         json += "\"bezeichnung\": \"" + bezeichnung + "\",";
         json += "\"user_Parameter\": \"" + user_Parameter + "\",";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
         json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",";
         json += "\"stoerung\": " + stoerung + ",";
         json += "\"laenge\": " + laenge + ",";
         json += "\"geschwindigkeit\": " + geschwindigkeit + ",";
         
-        json += "\"warentraegerIDs\": {";
+        json += "\"warentraegerIDs\": [";
         for(int i=0;i<warentraegerIDs.size();i++){
             json += warentraegerIDs.get(i);
             if(i < (warentraegerIDs.size()-1)){
                 json += ",";
             }
         }
-        json += "},";
+        json += "],";
         
         json += "\"vorSektorID\": " + vorSektorID + ",";
         json += "\"nachSektorID\": " + nachSektorID;
