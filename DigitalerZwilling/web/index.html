@@ -165,6 +165,19 @@
                     
                 WarentraegerWebSocket.onmessage = function(event) {
                 var jsonString = event.data;
+                
+                    var json = JSON.parse(jsonString);
+                    var jsonString2 = '{ "inhalt" : [';
+                    
+                    
+                    for(var i=0; i<json.length; i++){
+                        var artikelIDs = json.inhalt[i].artikelIDs;
+                        for(var j=0; j<artikelIDs.length; j++){
+                            if(artikelIDs[j]===1){
+                                console.log(JSON.stringify(json.inhalt[i]));
+                            }
+                        }
+                    }
                     
                     //TODO nur benötigte Warenträger ausgeben
                 

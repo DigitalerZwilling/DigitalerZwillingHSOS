@@ -23,7 +23,7 @@ and open the template in the editor.
         <script type="text/javascript">
     
             //Browserunterstuetzung vorhanden?
-            var browserSupport = ("WebSocket" in window) ? true : false;
+            /*var browserSupport = ("WebSocket" in window) ? true : false;
     
     
             //Zugriff auf Elemente der HTML-Seite
@@ -45,15 +45,26 @@ and open the template in the editor.
                 else {
                     alert("WebSocket is NOT supported by your Browser!");
                 }
-            }
+            }*/
             
             
             //Wird nach Start der Seite aufgerufen
             window.onload = function () {
-                init();
+                var s ='{ "inhalt" : [' +
+        '{ "bezeichnung":"Sensor_1" , "zeitstempel":"14:21:03" , "zustand":"0"},' +
+        '{ "bezeichnung":"Sensor_2" , "zeitstempel":"14:22:05" , "zustand":"1"},' +
+        '{ "bezeichnung":"Sensor_3" , "zeitstempel":"14:22:12" , "zustand":"0"},' +
+        '{ "bezeichnung":"Sensor_4" , "zeitstempel":"14:23:16" , "zustand":"0"} ]}';
+
+                var j = JSON.parse(s);
+                
+               console.log(j.inhalt[0].bezeichnung);
+                
+                
+                //init();
             };
     
-    
+    /*
             //called when a message is received
             wSocket.onmessage = function(event) {
                 var received_msg = event.data;
@@ -68,7 +79,7 @@ and open the template in the editor.
             //Send something to the WebSocket 
             function send(){
                 wSocket.send("GET");
-            }
+            }*/
       </script>
     </body>
 </html>
