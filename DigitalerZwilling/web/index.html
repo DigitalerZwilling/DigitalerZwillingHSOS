@@ -26,8 +26,8 @@
        var host = "ws://localhost:8080/DigitalerZwilling/";
     
       
-      
-      
+      var ArtikelWebSocket;
+      var WarentraegerWebSocket;
       
       
       
@@ -62,18 +62,18 @@
             table.id = listid[i];            
             lists.appendChild(table);
             lists.appendChild(document.createElement("br"));
-        }
-    }
-    
-    function removeLists(listid){
-        for(var i=0; i<listid.length; i++){
-            var parent = document.getElementById(listid[i])
-            var childs = parent.childNodes;
-            for(var j=1; j<childs.length; i++){
-                parent.removeChild(childs[j]);
-            }
+            setHeader(childheader[i], table);
         }
         
+    }
+    
+    function removeList(parent){
+            var childs = parent.childNodes;
+            console.log("Remove:"+childs.length);
+            
+            while(childs.length>1){
+                parent.removeChild(childs[1]);
+            }
     }
     
     function setHeader(headerlist, parentNode){
@@ -86,17 +86,14 @@
             parentNode.appendChild(tr);
     }
     
-    function addLines(jsonString, attributes, parentNode){
-        var json = JSON.parse(jsonString);
-        for(var j=0; j<json.inhalt.length; j++){
+    function addLine(jsonObject, attributes, parentNode){
             var zeile = document.createElement("tr");
             for(var k=0; k<attributes.length; k++){
                 var element = document.createElement("td");
-                element.innerHTML = json.inhalt[j][attributes[k]];
+                element.innerHTML = jsonObject[attributes[k]];
                 zeile.appendChild(element);
             }
             parentNode.appendChild(zeile);
-        }
     }
     
  
@@ -147,8 +144,8 @@
                 create(attribute, id, list, listid, childheader, childAttributes);
                 
                 //WebSockets
-                var ArtikelWebSocket = new WebSocket(host+"ArtikelWebSocket");
-                var WarentraegerWebSocket = new WebSocket(host+"WartentraegerWebSocket");
+                ArtikelWebSocket = new WebSocket(host+"ArtikelWebSocket");
+                WarentraegerWebSocket = new WebSocket(host+"WarentraegerWebSocket");
                 
                 ArtikelWebSocket.onopen = function() {
                         ArtikelWebSocket.send("1");
@@ -162,28 +159,30 @@
                 var jsonString = event.data;
                     updateAttributes(id,jsonString);
                 };
+                
+                ArtikelWebSocket.onclose = function() {
+                };    
+                WarentraegerWebSocket.onclose = function() {
+                };
                     
                 WarentraegerWebSocket.onmessage = function(event) {
-                var jsonString = event.data;
-                
+                //var jsonString = event.data;
+                var jsonString = '{"inhalt":[{"id": 1,"bezeichnung": "WT1","user_Parameter": "null","zeitstempel": "2016-12-22T12:43:34.712","stoerung": 0,"abstand_mm": 100,"montagezustand": 0,"artikelIDs": [4,1,2,3],"transportbandIDs": [],"sektorIDs": []},{"id": 2,"bezeichnung": "WT2","user_Parameter": "null","zeitstempel": "2016-12-22T12:43:41.275","stoerung": 1,"abstand_mm": 0,"montagezustand": 1,"artikelIDs": [1,4,5,6],"transportbandIDs": [],"sektorIDs": []}]}';
                     var json = JSON.parse(jsonString);
-                    var jsonString2 = '{ "inhalt" : [';
+                    var parent = document.getElementById(listid[0]);
+                    removeList(parent);
                     
-                    
-                    for(var i=0; i<json.length; i++){
+                    console.log(json.inhalt.length);
+                    for(var i=0; i<json.inhalt.length; i++){
                         var artikelIDs = json.inhalt[i].artikelIDs;
+                        console.log(artikelIDs.length);
                         for(var j=0; j<artikelIDs.length; j++){
-                            if(artikelIDs[j]===1){
-                                console.log(JSON.stringify(json.inhalt[i]));
+                            if(artikelIDs[j]==1){
+                                console.log(json.inhalt[i]);
+                                addLine(json.inhalt[i],childAttributes[0],parent);
                             }
                         }
                     }
-                    
-                    //TODO nur benötigte Warenträger ausgeben
-                
-                    var parent = document.getElementById(listid[0]);
-                    setHeader(childheader[0], parent);
-                    addLines("{}",childAttributes[0],parent);
                 };
                 
                 break;
@@ -221,8 +220,7 @@
     }
         
         
-        
-        
+           
 
     $(document).ready(function(){
         console.log("Start");

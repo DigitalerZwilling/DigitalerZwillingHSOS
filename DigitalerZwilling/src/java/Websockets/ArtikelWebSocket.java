@@ -55,6 +55,7 @@ public class ArtikelWebSocket extends WebSocket{
     public void onClose(Session session){
         this.setRegistriert(Boolean.FALSE);
         this.webSocketUpdater.removeWebSocket(this);
+        //HIER SYSTEM OUT zur überprüfung
     }
 
     @Override
