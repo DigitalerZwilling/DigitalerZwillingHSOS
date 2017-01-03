@@ -3,13 +3,35 @@
 			
 			<script>
 				$(document).ready(function(){
+					$caret = ' <span class="caret"></span>';
+
+					//LocalStorage abfragen: Daten für beständiges Div vorhanden?
+					if(localStorage.getItem("divOfTwoViews")!=null){
+						steadyDiv(localStorage.getItem("divOfTwoViews"));
+					}else{
+						console.log("No data for steady div in local storage!");
+					}
+
 	            	$(".dropdown-menu li a").click(function(){
-	            		$caret = ' <span class="caret"></span>';
-	            		$val = $(this).html();
-						$(".btn.dropdown-toggle").html($val+$caret)
-						$("#einzelansicht").load("tabelle_Nina.html", {$val});
+            			$val = $(this).html();
+	            		loadDiv($val);
 	            	});
+         
 	        	});
+
+	        	function steadyDiv(itemOfLocalStorage){
+					$val = itemOfLocalStorage;
+        			$(".dd-btn6").html($val+$caret);
+            		$("#einzelansicht6").load("tabelle6.html", $val);
+				}
+
+				function loadDiv(){
+					//Store information for steady div
+            		localStorage.setItem("divOfTwoViews", $val);
+
+					$(".btn.dropdown-toggle").html($val+$caret)
+					$("#einzelansicht6").load("tabelle6.html", $val);
+				}
 			</script>
 
 			<div class="row" style="background-color:lightgrey; height:100%;">
@@ -36,8 +58,8 @@
 							  	<div class="panel-body">
 							  		<div class="btn-group" role="group" aria-label="...">
 								    	<div class="btn-group" role="group">
-	  										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wähle Komponente <span class="caret"></span></button>
-											<ul class="dropdown-menu scrollable-menu">
+	  										<button type="button" class="btn btn-default dropdown-toggle dd-btn6" id="dd-btn6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wähle Komponente <span class="caret"></span></button>
+											<ul class="dropdown-menu dropdown6 scrollable-menu">
 										    	<li><a href="#">Artikel</a></li>
 										    	<!--<li><a href="#">Gelenk</a></li>-->
 										    	<li><a href="#">Hubpositionierstationen</a></li>
@@ -53,7 +75,7 @@
 										<button type="button" class="btn btn-default">Speichern</button>
 									</div>
 									<div></br></div>
-									<div id="einzelansicht">Keine Komponente gewählt.</div>
+									<div id="einzelansicht6">Keine Komponente gewählt.</div>
 							  	</div>
 							</div>
 						</div>

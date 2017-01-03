@@ -8,6 +8,13 @@
 				var idBtn = null;
 
 				$(document).ready(function(){
+					
+					//LocalStorage abfragen: Daten für beständiges Div vorhanden?
+					if(localStorage.getItem("divOfTwoViews")!=null){
+						steadyDiv(localStorage.getItem("divOfTwoViews"));
+					}else{
+						console.log("No data for steady div in local storage!");
+					}
 
 					$(".btn.btn-default.dropdown-toggle").on('click', function(){
 	            		idBtn = $(this).attr('id');
@@ -16,9 +23,14 @@
 	            	});
 	            });
 
+				function steadyDiv(itemOfLocalStorage){
+					$val = itemOfLocalStorage;
+        			$(".dd-btn6").html($val+$caret);
+            		$("#einzelansicht6").load("tabelle6.html", $val);
+				}
 
 
-	            function loadDiv(idBtn){
+	           	function loadDiv(idBtn){
 	            	console.log("loadDivOpt");
 	            	$caret = ' <span class="caret"></span>';
 	            	switch(idBtn){
@@ -59,6 +71,10 @@
             			case "dd-btn6":
 	            		$(".dropdown6 li a").click(function(){
 	            			$val = $(this).html();
+
+	            			//Store information for steady div
+            				localStorage.setItem("divOfTwoViews", $val);
+
         					$(".dd-btn6").html($val+$caret);
             				$("#einzelansicht6").load("tabelle6.html", $val);
             			});
@@ -81,7 +97,7 @@
 							  	<div class="panel-body" id="panel1">
 							  		<div class="btn-group" role="group" aria-label="...">
 								    	<div class="btn-group" role="group">
-	  										<button type="button" class="btn btn-default dropdown-toggle dd-btn1" id="dd-btn1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wähle Komponente! <span class="caret"></span></button>
+	  										<button type="button" class="btn btn-default dropdown-toggle dd-btn1" id="dd-btn1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wähle Komponente <span class="caret"></span></button>
 											<ul class="dropdown-menu dropdown1 scrollable-menu">
 										    	<li><a href="#">Artikel</a></li>
 										    	<!--<li><a href="#">Gelenk</a></li>-->
