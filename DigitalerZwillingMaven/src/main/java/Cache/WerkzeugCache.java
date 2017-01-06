@@ -3,8 +3,9 @@ package Cache;
 import Cache.Exeption.DBErrorExeption;
 import DatenKlassen.Element;
 import DatenKlassen.Werkzeug;
-import DatenbankSchnittestelle.Exeption.DBNotFoundExeption;
-import DatenbankSchnittestelle.Exeption.QueryExeption;
+import DatenbankSchnittstelle.DatenbankSchnittstelle;
+import DatenbankSchnittstelle.Exeption.DBNotFoundExeption;
+import DatenbankSchnittstelle.Exeption.QueryExeption;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 
 /**
@@ -20,11 +22,12 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class WerkzeugCache extends Cache{
+    @Inject private DatenbankSchnittstelle datenbankschnittstelle;
     
     @Override
     public void update() throws DBErrorExeption {
         try {
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_werkzeug,zeitstempel,user_parameter,zustand FROM Werkzeug");
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug,zeitstempel,user_parameter,zustand FROM Werkzeug");
             
             List<String> ids_w = rsMap.get("ID_WERKZEUG");
             List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
@@ -55,7 +58,7 @@ public class WerkzeugCache extends Cache{
             Map<Long,Element> allWerkzeug1=new HashMap<>();
             Map<Long,Element> allWerkzeug2=new HashMap<>();
             
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_werkzeug,bezeichnung,zeitstempel,user_parameter,zustand FROM Werkzeug");
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug,bezeichnung,zeitstempel,user_parameter,zustand FROM Werkzeug");
             List<String> ids = rsMap.get("ID_WERKZEUG");
             List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
             List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
@@ -86,8 +89,8 @@ public class WerkzeugCache extends Cache{
         }
     }
 
-    private Long readRoboter(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_roboter FROM Roboter_Werkzeug WHERE id_werkzeug="+id+" ");
+    Long readRoboter(Long id) throws DBNotFoundExeption, QueryExeption{
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter FROM Roboter_Werkzeug WHERE id_werkzeug="+id+" ");
         List<String> ids = rsMap.get("ID_ROBOTER");
         
         Long r_ids=null;

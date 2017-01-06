@@ -2,8 +2,9 @@ package Cache;
 
 import Cache.Exeption.DBErrorExeption;
 import DatenKlassen.HubQuerPodest;
-import DatenbankSchnittestelle.Exeption.DBNotFoundExeption;
-import DatenbankSchnittestelle.Exeption.QueryExeption;
+import DatenbankSchnittstelle.DatenbankSchnittstelle;
+import DatenbankSchnittstelle.Exeption.DBNotFoundExeption;
+import DatenbankSchnittstelle.Exeption.QueryExeption;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -19,11 +21,12 @@ import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class HubQuerPodestCache extends Cache{
+    @Inject private DatenbankSchnittstelle datenbankschnittstelle;
     
     @Override
     public void update() throws DBErrorExeption {
         try {            
-            Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_Hubquerpodest, user_parameter, motor, oben, mittig, unten, zeitstempel FROM Hubquerpodest");
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_Hubquerpodest, user_parameter, motor, oben, mittig, unten, zeitstempel FROM Hubquerpodest");
             
             List<String> id = rsMap.get("ID_HUBQUERPODEST");
             List<String> userParameter = rsMap.get("USER_PARAMETER");
@@ -60,7 +63,7 @@ public class HubQuerPodestCache extends Cache{
             elements[0] = new HashMap<>();
             elements[1] = new HashMap<>();
             
-            Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_Hubquerpodest, user_parameter, motor, oben, mittig, unten, zeitstempel, bezeichnung, id_sektor FROM Hubquerpodest");
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_Hubquerpodest, user_parameter, motor, oben, mittig, unten, zeitstempel, bezeichnung, id_sektor FROM Hubquerpodest");
             
             List<String> id = rsMap.get("ID_HUBQUERPODEST");
             List<String> userParameter = rsMap.get("USER_PARAMETER");
@@ -91,7 +94,7 @@ public class HubQuerPodestCache extends Cache{
     }
    
     private void updateGruppenIds() throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_Hubquerpodest1, id_hubquerpodest2 FROM Hubquerpodest_Hubquerpodest");
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_Hubquerpodest1, id_hubquerpodest2 FROM Hubquerpodest_Hubquerpodest");
         List<String> id1 = rsMap.get("ID_HUBQUERPODEST1");
         List<String> id2 = rsMap.get("ID_HUBQUERPODEST2");
         

@@ -7,6 +7,7 @@ package Cache;
 
 import Cache.Exeption.DBErrorExeption;
 import DatenKlassen.Element;
+import javax.validation.constraints.AssertTrue;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,26 +24,36 @@ public abstract class CacheTest {
     abstract public void testUpdateAll();
     
     @Test
-    abstract public void testGetById();
+    public void testGetById(){
+        
+    }
     
     @Test
     public void testGetAll(){
-        Cache cache = this.getCache();
-        for(Element element : cache.getAll()){
+        for(Element element : getCache().getAll()){
             
         }
     }
     
     @Test
-    public void testCacheSwitch() throws DBErrorExeption{
-        /*Cache cache = this.getCache();
-        boolean state = cache.isState();
-        cache.update();
-        Assert.assertTrue("Cache Switch", state != cache.isState());*/
+    public void testAutoUpdate() throws InterruptedException{
+        System.out.println("testAutoUpdate");
+        boolean state = getCache().isState();
+        /*while(state == getCache().isState())
+            System.out.println("wait....");*/
+        Thread.sleep(500);
+        if(state != getCache().isState())
+            Assert.assertTrue("Auto-Update", state != getCache().isState());
+        Thread.sleep(500);
+        if(state != getCache().isState())
+            Assert.assertTrue("Auto-Update", state != getCache().isState());
+        Thread.sleep(500);
+        if(state != getCache().isState())
+            Assert.assertTrue("Auto-Update", state != getCache().isState());
+        Thread.sleep(500);
+        if(state != getCache().isState())
+            Assert.assertTrue("Auto-Update", state != getCache().isState());
     }
-    
-    @Test
-    abstract public void testAutoUpdate();
     
     abstract public Cache getCache();
 }

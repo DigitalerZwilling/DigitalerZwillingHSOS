@@ -65,10 +65,6 @@ public class HubPodestCacheTest extends CacheTest{
     }
 
     @Override
-    public void testCacheSwitch() {
-    }
-
-    @Override
     public void testAutoUpdate() {
     }
 

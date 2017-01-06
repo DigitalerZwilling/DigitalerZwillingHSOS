@@ -3,8 +3,9 @@ package Cache;
 import Cache.Exeption.DBErrorExeption;
 import DatenKlassen.Element;
 import DatenKlassen.Roboter;
-import DatenbankSchnittestelle.Exeption.DBNotFoundExeption;
-import DatenbankSchnittestelle.Exeption.QueryExeption;
+import DatenbankSchnittstelle.DatenbankSchnittstelle;
+import DatenbankSchnittstelle.Exeption.DBNotFoundExeption;
+import DatenbankSchnittstelle.Exeption.QueryExeption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -20,12 +22,13 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class RoboterCache extends Cache{
+    @Inject private DatenbankSchnittstelle datenbankschnittstelle;
     
     @Override
     public void update() throws DBErrorExeption {
 
         try {
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_roboter,stoerung,position_x,position_y,position_z,position_ausrichtung,zeitstempel,user_parameter FROM Roboter");
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter,stoerung,position_x,position_y,position_z,position_ausrichtung,zeitstempel,user_parameter FROM Roboter");
             
             List<String> ids = rsMap.get("ID_ROBOTER");
             List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
@@ -70,7 +73,7 @@ public class RoboterCache extends Cache{
             Map<Long,Element> allRoboter1=new HashMap<>();
             Map<Long,Element> allRoboter2=new HashMap<>();
             
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_roboter, bezeichnung, stoerung, position_x, position_y, position_z, position_ausrichtung, zeitstempel, user_parameter FROM Roboter");
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter, bezeichnung, stoerung, position_x, position_y, position_z, position_ausrichtung, zeitstempel, user_parameter FROM Roboter");
             List<String> ids = rsMap.get("ID_ROBOTER");
             List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
             List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
@@ -115,10 +118,10 @@ public class RoboterCache extends Cache{
         }
     }
     
-    private List<Long> readSektor(Long id) throws DBNotFoundExeption{
+    List<Long> readSektor(Long id) throws DBNotFoundExeption{
         List<Long> s_ids= new ArrayList<>();
         try {
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_sektor FROM Roboter_Sektor WHERE id_roboter="+id);
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor FROM Roboter_Sektor WHERE id_roboter="+id);
             List<String> ids = rsMap.get("ID_SEKTOR");
             
             
@@ -133,11 +136,10 @@ public class RoboterCache extends Cache{
         }
         return s_ids;
     }
-    
-    private List<Long> readGelenke(Long id) throws DBNotFoundExeption{
+    List<Long> readGelenke(Long id) throws DBNotFoundExeption{
         List<Long> g_ids= new ArrayList<>();
         try {
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_gelenk FROM Gelenk WHERE id_roboter="+id);
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_gelenk FROM Gelenk WHERE id_roboter="+id);
             List<String> ids = rsMap.get("ID_GELENK");
             
             
@@ -152,11 +154,10 @@ public class RoboterCache extends Cache{
         }
         return g_ids;
     }
-    
-    private List<Long> readWerkzeug(Long id) throws DBNotFoundExeption{
+    List<Long> readWerkzeug(Long id) throws DBNotFoundExeption{
         List<Long> werk_ids= new ArrayList<>();
         try {
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_werkzeug FROM Roboter_Werkzeug WHERE id_roboter="+id);
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_werkzeug FROM Roboter_Werkzeug WHERE id_roboter="+id);
             List<String> ids = rsMap.get("ID_WERKZEUG");
             
             

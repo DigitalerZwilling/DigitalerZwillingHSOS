@@ -18,8 +18,6 @@ import javax.ejb.Timer;
 import javax.enterprise.concurrent.ManagedThreadFactory;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import org.jboss.logging.Logger;
 
 /**
@@ -27,7 +25,7 @@ import org.jboss.logging.Logger;
  * @author User
  */
 @ApplicationScoped
-public class Updater{
+public class Updater {
     private final List<Cache> caches;
     private final List<WebSocket> webSockets;
     
@@ -39,32 +37,38 @@ public class Updater{
     private CacheUpdateThread cacheUpdateThread;
     private Thread cacheThraed;
     
-    InitialContext ctx;
-    
     @Resource
     private ManagedThreadFactory managedThreadFactory;
+    
+    //@Resource
+    //private TimerService timerService;
     
     @EJB
     private SelfTimer ejbTimerService;
     
     private Timer timer;
     
-    public Updater(){        
+    public Updater(){
         caches = new ArrayList<>();
         webSockets = new ArrayList<>();
+        //timer = timerService.createTimer(500, 500, "New Updater interval Timer");
     }
     
     Updater(int ms){
         caches = new ArrayList<>();
         webSockets = new ArrayList<>();
+        //timer = timerService.createTimer(ms, ms, "New Updater interval Timer");
     }
     
     @PostConstruct
     public void init(){
+        //timer = timerService.createTimer(0, 500, "New Updater interval Timer");
+        //timer = timerService.createTimer(500, 500, "New Updater interval Timer");
         this.ejbTimerService.cancelTimer("New Updater interval Timer");
         
         this.ejbTimerService.createTimer(1000, 500, "New Updater interval Timer");
         System.out.println("erstellt!!!!!!!!!!!!!!!!!!!!!");
+        //timerService.crea
     }
     
     public void updateWebSockets(){
@@ -83,9 +87,11 @@ public class Updater{
         }
     }
     
+    //@Timeout
     public void updateAll(Timer timer){
         for(Cache cache: caches){
             cache.toggleState();
+            break;
         }
         
         if(!cacheUpdateThread.isRunning()){

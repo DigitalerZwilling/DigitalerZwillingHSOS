@@ -64,10 +64,6 @@ public class SektorCacheTest extends CacheTest{
     }
 
     @Override
-    public void testCacheSwitch() {
-    }
-
-    @Override
     public void testAutoUpdate() {
     }
 

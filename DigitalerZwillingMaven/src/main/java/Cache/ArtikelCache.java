@@ -8,8 +8,9 @@ package Cache;
 import Cache.Exeption.DBErrorExeption;
 import DatenKlassen.Artikel;
 import DatenKlassen.Element;
-import DatenbankSchnittestelle.Exeption.DBNotFoundExeption;
-import DatenbankSchnittestelle.Exeption.QueryExeption;
+import DatenbankSchnittstelle.DatenbankSchnittstelle;
+import DatenbankSchnittstelle.Exeption.DBNotFoundExeption;
+import DatenbankSchnittstelle.Exeption.QueryExeption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -25,11 +27,13 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class ArtikelCache extends Cache{
+    @Inject private DatenbankSchnittstelle datenbankschnittstelle;
+    
     
     @Override
     public void update() throws DBErrorExeption{
         try {
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_artikel,zeitstempel,user_parameter from Artikel");
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_artikel,zeitstempel,user_parameter from Artikel");
             List<String> ids = rsMap.get("ID_ARTIKEL");
             List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
             List<String> user_parameter = rsMap.get("USER_PARAMETER");
@@ -58,7 +62,7 @@ public class ArtikelCache extends Cache{
             Map<Long,Element> allArtikel1=new HashMap<>();
             Map<Long,Element> allArtikel2=new HashMap<>();
             
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_artikel,bezeichnung,zeitstempel,user_parameter from Artikel");
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_artikel,bezeichnung,zeitstempel,user_parameter from Artikel");
             
             List<String> ids = rsMap.get("ID_ARTIKEL");
             List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
@@ -97,7 +101,7 @@ public class ArtikelCache extends Cache{
     private List<Long> readWarentraeger(Long id) throws DBNotFoundExeption{
         List<Long> w_ids= new ArrayList<>();
         try {
-            Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_warentraeger from Artikel_Warentraeger where id_artikel="+id);
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger from Artikel_Warentraeger where id_artikel="+id);
             List<String> ids = rsMap.get("ID_WARENTRAEGER");
             
             

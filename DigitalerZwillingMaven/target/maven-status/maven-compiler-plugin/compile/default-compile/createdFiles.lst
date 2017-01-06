@@ -10,7 +10,6 @@ DatenKlassen\Sektor.class
 DatenKlassen\Werkzeug.class
 Websockets\WebSocket.class
 Websockets\RoboterWebSocket.class
-DatenbankSchnittestelle\Exeption\QueryExeption.class
 Cache\HubQuerPodestCache.class
 Websockets\ArtikelWebSocket.class
 Cache\SensorCache.class
@@ -20,7 +19,6 @@ DatenbankSchnittstelle\DatenbankSchnittstelle.class
 Cache\Cache.class
 Websockets\HubQuerPodestWebSocket.class
 Cache\Updater\CacheUpdateThread.class
-DatenbankSchnittestelle\Exeption\DBNotFoundExeption.class
 DatenKlassen\HubPodest.class
 Cache\RoboterCache.class
 Cache\Updater\SelfTimer.class

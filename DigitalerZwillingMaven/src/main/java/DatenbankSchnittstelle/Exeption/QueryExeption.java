@@ -3,18 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DatenbankSchnittestelle.Exeption;
+package DatenbankSchnittstelle.Exeption;
 
 /**
  *
  * @author florian
  */
-public class DBNotFoundExeption extends Exception{
-    public DBNotFoundExeption(){
-        super("DBNotFoundExeption");
+public class QueryExeption extends Exception{
+
+    public QueryExeption() {
+        super("QueryExetion");
     }
     
-    public DBNotFoundExeption(String str){
+    public QueryExeption(String str){
         super(str);
     }
 }

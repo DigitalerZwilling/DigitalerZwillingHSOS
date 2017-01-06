@@ -61,10 +61,6 @@ public class SensorCacheTest extends CacheTest{
     }
 
     @Override
-    public void testCacheSwitch() {
-    }
-
-    @Override
     public void testAutoUpdate() {
     }
 

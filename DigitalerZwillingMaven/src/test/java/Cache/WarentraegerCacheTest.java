@@ -64,10 +64,6 @@ public class WarentraegerCacheTest extends CacheTest{
     }
 
     @Override
-    public void testCacheSwitch() {
-    }
-
-    @Override
     public void testAutoUpdate() {
     }
 

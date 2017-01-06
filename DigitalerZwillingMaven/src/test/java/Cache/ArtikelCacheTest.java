@@ -70,18 +70,6 @@ public class ArtikelCacheTest extends CacheTest{
         System.out.println("getAll");
         System.out.println(cache.getAll());
     }
-    
-    @Test
-    @Override
-    public void testCacheSwitch(){
-        
-    }
-    
-    @Test
-    @Override
-    public void testAutoUpdate(){
-        
-    }
 
     @Override
     public Cache getCache() {

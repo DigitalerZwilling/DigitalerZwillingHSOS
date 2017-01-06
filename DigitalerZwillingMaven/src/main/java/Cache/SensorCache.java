@@ -3,8 +3,9 @@ package Cache;
 import static Cache.Cache.state;
 import Cache.Exeption.DBErrorExeption;
 import DatenKlassen.Sensor;
-import DatenbankSchnittestelle.Exeption.DBNotFoundExeption;
-import DatenbankSchnittestelle.Exeption.QueryExeption;
+import DatenbankSchnittstelle.DatenbankSchnittstelle;
+import DatenbankSchnittstelle.Exeption.DBNotFoundExeption;
+import DatenbankSchnittstelle.Exeption.QueryExeption;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -19,6 +21,9 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class SensorCache extends Cache{
+    
+    @Inject
+    DatenbankSchnittstelle datenbankSchnittstelle;
 
     @Override
     public void update() throws DBErrorExeption {

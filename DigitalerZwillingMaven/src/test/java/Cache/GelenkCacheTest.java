@@ -87,10 +87,6 @@ public class GelenkCacheTest extends CacheTest{
     }
 
     @Override
-    public void testCacheSwitch() {
-    }
-
-    @Override
     public void testAutoUpdate() {
     }
 

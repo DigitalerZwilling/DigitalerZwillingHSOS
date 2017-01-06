@@ -4,7 +4,6 @@ import Cache.Exeption.DBErrorExeption;
 import Cache.Exeption.ElementNotFoundExeption;
 import Cache.Updater.Updater;
 import DatenKlassen.Element;
-import DatenbankSchnittstelle.DatenbankSchnittstelle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,9 +26,6 @@ public abstract class Cache {
     
     @Inject
     private Updater updater;
-    
-    @Inject
-    protected DatenbankSchnittstelle datenbankSchnittstelle;
 
     public Map<Long, Element>[] getElements() {
         return elements;
@@ -52,8 +48,7 @@ public abstract class Cache {
     }
     
     public Element getById(Long id) throws ElementNotFoundExeption{
-        if(id < 0 || id>= (state==true?elements[1]:elements[0]).size())
-            throw new ElementNotFoundExeption();
+        if(!(state==true?elements[1]:elements[0]).containsKey(id)) throw new ElementNotFoundExeption();
         
         return state==true?elements[1].get(id):elements[0].get(id);
     }

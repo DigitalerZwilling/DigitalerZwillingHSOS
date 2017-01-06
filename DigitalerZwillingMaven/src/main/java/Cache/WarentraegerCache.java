@@ -4,8 +4,9 @@ import static Cache.Cache.state;
 import Cache.Exeption.DBErrorExeption;
 import DatenKlassen.Element;
 import DatenKlassen.Warentraeger;
-import DatenbankSchnittestelle.Exeption.DBNotFoundExeption;
-import DatenbankSchnittestelle.Exeption.QueryExeption;
+import DatenbankSchnittstelle.DatenbankSchnittstelle;
+import DatenbankSchnittstelle.Exeption.DBNotFoundExeption;
+import DatenbankSchnittstelle.Exeption.QueryExeption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -21,12 +23,13 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class WarentraegerCache extends Cache{
+    @Inject private DatenbankSchnittstelle datenbankschnittstelle;
     
     @Override
     public void update() throws DBErrorExeption {
         try {
             
-            Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_warentraeger, stoerung, zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt FROM Warentraeger");
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger, stoerung, zeitstempel, user_parameter, abstand_mm, montagezustand, RFID_inhalt FROM Warentraeger");
             
             List<String> ids = rsMap.get("ID_WARENTRAEGER");
             List<String> stoerung = rsMap.get("STOERUNG");
@@ -67,7 +70,7 @@ public class WarentraegerCache extends Cache{
             Map<Long,Element> allWarentraeger1=new HashMap<>();
             Map<Long,Element> allWarentraeger2=new HashMap<>();
             
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_warentraeger , bezeichnung , stoerung , zeitstempel, user_parameter, abstand_mm, RFID_inhalt,montagezustand FROM Warentraeger");
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger , bezeichnung , stoerung , zeitstempel, user_parameter, abstand_mm, RFID_inhalt,montagezustand FROM Warentraeger");
             List<String> ids = rsMap.get("ID_WARENTRAEGER");
             List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
             List<String> stoerung = rsMap.get("STOERUNG");
@@ -114,7 +117,7 @@ public class WarentraegerCache extends Cache{
     private List<Long> readTransportband(Long id) throws DBNotFoundExeption{
         List<Long> idsLong= new ArrayList<>();
         try {
-            Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_transportband FROM Transportband_Warentraeger WHERE id_warentraeger="+id);
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband FROM Transportband_Warentraeger WHERE id_warentraeger="+id);
             List<String> ids = rsMap.get("ID_TRANSPORTBAND");
             
             
@@ -133,7 +136,7 @@ public class WarentraegerCache extends Cache{
     private List<Long> readSektor(Long id) throws DBNotFoundExeption{
         List<Long> idsLong= new ArrayList<>();
         try {
-            Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_sektor FROM Sektor_Warentraeger WHERE id_warentraeger="+id);
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor FROM Sektor_Warentraeger WHERE id_warentraeger="+id);
             List<String> ids = rsMap.get("ID_SEKTOR");
             
             
@@ -151,7 +154,7 @@ public class WarentraegerCache extends Cache{
     private List<Long> readArtikel(Long id) throws DBNotFoundExeption{
         List<Long> w_ids= new ArrayList<>();
         try {
-            Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_artikel from Artikel_Warentraeger where id_warentraeger="+id);
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_artikel from Artikel_Warentraeger where id_warentraeger="+id);
             List<String> ids = rsMap.get("ID_ARTIKEL");
             
             

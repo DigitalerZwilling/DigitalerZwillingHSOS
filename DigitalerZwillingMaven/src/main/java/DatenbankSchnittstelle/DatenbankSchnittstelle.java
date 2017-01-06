@@ -5,8 +5,8 @@
  */
 package DatenbankSchnittstelle;
 
-import DatenbankSchnittestelle.Exeption.DBNotFoundExeption;
-import DatenbankSchnittestelle.Exeption.QueryExeption;
+import DatenbankSchnittstelle.Exeption.DBNotFoundExeption;
+import DatenbankSchnittstelle.Exeption.QueryExeption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;

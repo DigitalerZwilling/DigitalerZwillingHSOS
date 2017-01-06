@@ -3,8 +3,9 @@ package Cache;
 import Cache.Exeption.DBErrorExeption;
 import DatenKlassen.Element;
 import DatenKlassen.HubPodest;
-import DatenbankSchnittestelle.Exeption.DBNotFoundExeption;
-import DatenbankSchnittestelle.Exeption.QueryExeption;
+import DatenbankSchnittstelle.DatenbankSchnittstelle;
+import DatenbankSchnittstelle.Exeption.DBNotFoundExeption;
+import DatenbankSchnittstelle.Exeption.QueryExeption;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -19,11 +21,12 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class HubPodestCache extends Cache{
+    @Inject private DatenbankSchnittstelle datenbankschnittstelle;
     
     @Override
     public void update() throws DBErrorExeption {
         try {
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_hubpodest,oben,unten,zeitstempel,user_parameter from hubpodest");
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubpodest,oben,unten,zeitstempel,user_parameter from hubpodest");
             List<String> ids = rsMap.get("ID_HUBPODEST");
             List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
             List<String> user_parameter = rsMap.get("USER_PARAMETER");
@@ -56,7 +59,7 @@ public class HubPodestCache extends Cache{
             Map<Long,Element> allHuPo1=new HashMap<>();
             Map<Long,Element> allHuPo2=new HashMap<>();
             
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_hubpodest,bezeichnung,oben,unten,id_sektor,zeitstempel,user_parameter from hubpodest");
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubpodest,bezeichnung,oben,unten,id_sektor,zeitstempel,user_parameter from hubpodest");
             List<String> ids = rsMap.get("ID_HUBPODEST");
             List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
             List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");

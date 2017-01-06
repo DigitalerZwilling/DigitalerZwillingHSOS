@@ -3,8 +3,9 @@ package Cache;
 import Cache.Exeption.DBErrorExeption;
 import DatenKlassen.Element;
 import DatenKlassen.Sektor;
-import DatenbankSchnittestelle.Exeption.DBNotFoundExeption;
-import DatenbankSchnittestelle.Exeption.QueryExeption;
+import DatenbankSchnittstelle.DatenbankSchnittstelle;
+import DatenbankSchnittstelle.Exeption.DBNotFoundExeption;
+import DatenbankSchnittstelle.Exeption.QueryExeption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -20,13 +22,14 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class SektorCache extends Cache{
+    @Inject private DatenbankSchnittstelle datenbankschnittstelle;
     
     @Override
     public void update() throws DBErrorExeption {
         try {
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_sektor, stoerung, zeitstempel, user_parameter FROM Sektor");
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor, stoerung, zeitstempel, user_parameter FROM Sektor");
             List<String> ids = rsMap.get("ID_SEKTOR");
-            List<String> zeitstempel = rsMap.get("ZEITSTEMEPL");
+            List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
             List<String> user_parameter = rsMap.get("USER_PARAMETER");
             List<String> stoerung = rsMap.get("STOERUNG");  //int
             
@@ -57,7 +60,7 @@ public class SektorCache extends Cache{
             Map<Long,Element> allSektor1=new HashMap<>();
             Map<Long,Element> allSektor2=new HashMap<>();
             
-            Map<String,List<String>> rsMap= this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_sektor, stoerung, position_x, position_y, position_z, position_ausrichtung, bezeichnung, zeitstempel, user_parameter FROM Sektor");
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sektor, stoerung, position_x, position_y, position_z, position_ausrichtung, bezeichnung, zeitstempel, user_parameter FROM Sektor");
             List<String> ids = rsMap.get("ID_SEKTOR");
             List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
             List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
@@ -114,21 +117,26 @@ public class SektorCache extends Cache{
         }
     }
     
-    private List<Long> readWarentraeger(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT warentraeger_id FROM Sektor_Warentraeger WHERE id_sektor="+id);
-        List<String> ids = rsMap.get("ID_WARENTRAEGER");
-        
+    private List<Long> readWarentraeger(Long id) throws DBNotFoundExeption{
         List<Long> idsLong = new ArrayList<>();
-        if(ids==null) return idsLong;
-        
-        for (String s : ids){
-            idsLong.add(Long.parseLong(s));
+        try {
+            Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_warentraeger FROM Sektor_Warentraeger WHERE id_sektor="+id);
+            List<String> ids = rsMap.get("ID_WARENTRAEGER");
+            
+            
+            if(ids==null) return idsLong;
+            
+            for (String s : ids){
+                idsLong.add(Long.parseLong(s));
+            }
+        } catch (QueryExeption ex) {
+            Logger.getLogger(SektorCache.class.getName()).log(Level.SEVERE, null, ex);
         }
         return idsLong;
     }
     
     private List<Long> readVorTransportband(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_transportband FROM Transportband WHERE id_sektor_nach="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband FROM Transportband WHERE id_sektor_nach="+id);
         List<String> ids = rsMap.get("ID_TRANSPORTBAND");
         
         List<Long> idsLong= new ArrayList<>();
@@ -141,7 +149,7 @@ public class SektorCache extends Cache{
     }
     
     private List<Long> readNachTransportband(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_transportband FROM Transportband WHERE id_sektor_vor="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband FROM Transportband WHERE id_sektor_vor="+id);
         List<String> ids = rsMap.get("ID_TRANSPORTBAND");
         
         List<Long> idsLong= new ArrayList<>();
@@ -154,7 +162,7 @@ public class SektorCache extends Cache{
     }
     
     private List<Long> readSensor(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_sensor FROM Sensor WHERE id_sektor="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_sensor FROM Sensor WHERE id_sektor="+id);
         List<String> ids = rsMap.get("ID_SENSOR");
         
         List<Long> idsLong= new ArrayList<>();
@@ -167,7 +175,7 @@ public class SektorCache extends Cache{
     }
     
     private List<Long> readHubPodest(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_hubpodest FROM Hubpodest WHERE id_sektor="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubpodest FROM Hubpodest WHERE id_sektor="+id);
         List<String> ids = rsMap.get("ID_HUBPODEST");
         
         List<Long> idsLong= new ArrayList<>();
@@ -180,7 +188,7 @@ public class SektorCache extends Cache{
     }
     
     private List<Long> readQuerHubPodest(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_hubquerpodest FROM Hubquerpodest WHERE id_sektor="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubquerpodest FROM Hubquerpodest WHERE id_sektor="+id);
         List<String> ids = rsMap.get("ID_HUBQUERPODEST");
         
         List<Long> idsLong= new ArrayList<>();
@@ -193,7 +201,7 @@ public class SektorCache extends Cache{
     }
     
     private List<Long> readRoboter(Long id) throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankSchnittstelle.datenbankAnfrage("SELECT id_roboter FROM Roboter_Sektor WHERE id_sektor="+id);
+        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_roboter FROM Roboter_Sektor WHERE id_sektor="+id);
         List<String> ids = rsMap.get("ID_ROBOTER");
         
         List<Long> idsLong= new ArrayList<>();

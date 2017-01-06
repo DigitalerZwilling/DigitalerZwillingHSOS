@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: Cache.ArtikelCacheTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 27.489 sec
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 29.531 sec
