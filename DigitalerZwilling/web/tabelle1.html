@@ -27,59 +27,105 @@
 </body>
 
 <script language="javascript">
-    var endpoint;
-    var artikelTabelleErzeugt = 0;
+
+    var artikelErzeugt = 0;
+    var warentraegerErzeugt = 0;
+    var transportbaenderErzeugt = 0;
+    var browsersupport = ("WebSocket" in window) ? true : false;
     
-    
-            var browsersupport = ("WebSocket" in window) ? true : false;
-    
-    
-            //Zugriff auf Elemente der HTML-Seite
-            var messages = document.getElementById("messages");
+    //Zugriff auf Elemente der HTML-Seite
+    var messages = document.getElementById("messages");
             
-            //Deklariere WebSocket
-            var host = "ws://localhost:8080/DigitalerZwilling/";
-            var wSocket = new WebSocket(host+"ArtikelWebSocket");
+    //Deklariere WebSocket
+    var host = "ws://localhost:8080/DigitalerZwilling/";
+    var wSocket = new WebSocket(host+"ArtikelWebSocket");
+    var warentraegerWebSocket = new WebSocket(host+"WarentraegerWebSocket");
+    var transportbandWebSocket = new WebSocket(host+"TransportbandWebSocket");
+
+
 
    $(document).ready(function(){
         console.log("Start");
+        
         switch ($val) {
             case 'Artikel':
-                endpoint="ArtikelWebSocket";
-                //erzeugeTabelleArtikel();
-                break;
+                wSocket.onopen = function() {
+                    wSocket.send("LIST");
+                };
+                
+                wSocket.onmessage = function(event) {
+                    var received_msg = event.data;
+                    console.log("Message"+received_msg);
+
+                    if (artikelErzeugt == 0){
+                        erzeugeTabelle("Artikel", received_msg);
+                        artikelErzeugt = 1;
+                    }
+                    else{
+                        updateTabelle("Artikel", received_msg);
+                    }
+                }
+            break;
+            
             case "Warenträger":
-                erzeugeTabelleWarentraeger();
+                warentraegerWebSocket.onopen = function() {
+                    warentraegerWebSocket.send("LIST");
+                };
+                warentraegerWebSocket.onmessage = function(event) {
+                var received_msg = event.data;
+                console.log("Message"+received_msg);
+                            if (warentraegerErzeugt == 0){
+                                erzeugeTabelle("Warentraeger", received_msg);
+                                warentraegerErzeugt = 1;
+                            }
+                            else{
+                                updateTabelle("Warentraeger", received_msg);
+                            }
+                        }
                 break;
             case "Transportbänder":
-                erzeugeTabelleTransportbaender();
+               transportbandWebSocket.onopen = function() {
+                    transportbandWebSocket.send("LIST");
+                };
+                
+                transportbandWebSocket.onmessage = function(event) {
+                    var received_msg = event.data;
+                    console.log("Message"+received_msg);
+                        if (transportbaenderErzeugt == 0){
+                            erzeugeTabelle("Artikel", received_msg);
+                            transportbaenderErzeugt = 1;
+                        }
+                        else{
+                            updateTabelle("Transportbaender", received_msg);
+                        }
+                }
                 break;
             case "Roboter":
-                erzeugeTabelleRoboter();
+              
                 break;
             case "Sektoren":
-                erzeugeTabelleSektoren();
+              
                 break;
             case "Sensoren":
-                erzeugeTabelleSensoren();
+               
                 break;
             case "Gelenke":
-                erzeugeTabelleGelenke();
+                
                 break;
             case "Werkzeuge":
-                erzeugeTabelleWerkzeuge();
+               
                 break;
             case "Hubpositionierstationen":
-                erzeugeTabelleHubpositionierstationen();
+               
                 break;
             case "Hub-Quer-Stationen":
-                erzeugeTabelleHubQuerStationen();
+              
                 break;
             default:
                 document.getElementById("spalte1.1").innerHTML = 'Fehler beim Darstellen der Tabelle';
 
       }
-      init();
+      //init();
     });
 
     /* ------------------------------ERZEUGE TABELLE -------------------------------- */
@@ -130,6 +176,55 @@
             default:
                 document.getElementById("spalte1.1").innerHTML = 'Fehler beim Darstellen der Tabelle';
       }
+    }
+    
+    /* ------------------------------UPDATE TABELLE -------------------------------- */
+    function updateTabelle(typ, listeJSON){
+
+        console.log("updateTabelle");
+        var liste = JSON.parse(listeJSON);
+
+        var anzahlElemente = liste.inhalt.length;
+
+        //Aktualisieren der Werte:
+        for (var i = 0; i < anzahlElemente; i++){
+            document.getElementById(typ+"Bezeichnung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].bezeichnung;
+            document.getElementById(typ+"Zeitstempel_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zeitstempel;
+
+              switch (typ) {
+                case "Artikel":
+                    break;
+                case "Warentraeger":
+                    document.getElementById("WarentraegerMontagezustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].montagezustand;
+                    break;
+                case "Transportband":
+                    document.getElementById("TransportbandStoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
+                    break;
+                case "Roboter":
+                    document.getElementById("RoboterStoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
+                    break;
+                case "Sektor":
+                    document.getElementById("SektorStoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
+                    break;
+                case "Sensor":
+                    document.getElementById("SensorZustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zustand;
+                    break;
+                case "Gelenk":
+                    document.getElementById("GelenkStellung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].gelenkstellung;
+                    break;
+                case "Werkzeug":
+                    document.getElementById("WerkzeugZustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zustand;
+                    break;
+                case "Hubpositionierstation":
+                   /*TODO*/
+                   break;
+                case "Hub-Quer-Station":
+                    //TODO
+                    break;
+                default:
+                    document.getElementById("spalte1.3").innerHTML = 'Fehler im switch case';                      
+           } 
+        }
     }
     
        //-------------TABELLENERZEUGUNG-----------------------------------------------------
@@ -228,7 +323,7 @@
     //------------WEBSOCEKTS-------------------------------------------------------
             
             //Initalisierung der WebSockets
-            function init(){
+        /*    function init(){
                 if (browsersupport) {
                     //Oeffnen des WebSockets und Senden einer Nachricht
                     wSocket.onopen = function() {
@@ -285,7 +380,7 @@
                             document.getElementById("spalte1").innerHTML = 'Fehler beim Darstellen der Tabelle';
 
           }
-            };
+            };*/
     
             // websocket is closed.
             wSocket.onclose = function() {
