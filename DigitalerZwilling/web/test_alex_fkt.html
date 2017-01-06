@@ -55,11 +55,12 @@
    SektorWebsocket.onmessage = function(event) {
        //console.log(event.data);
        j_sektoren = JSON.parse(event.data);
-            //console.log("jsek"); 
+            console.log("jsek"); 
             //console.log(j_sektoren);
             //console.log(event.data);
             
        if(first1===0){ 
+           console.log(event.data);
             sektorenErstellen();
             first1=11;
         }else{
@@ -71,10 +72,11 @@
    TransportbandWebsocket.onmessage = function(event) {
        //console.log(event.data);
             j_baender = JSON.parse(event.data);
-            //console.log("trans"); 
+            console.log("trans"); 
             //console.log(j_baender);
             //console.log(event.data);
             if(first2===0){ 
+                console.log(event.data);
                 transportbaenderErstellen();
                 first2=22;
             }else{
@@ -87,10 +89,11 @@
    WarentraegerWebsocket.onmessage = function(event) {
        //console.log(event.data);
             j_warentraeger = JSON.parse(event.data);
-            //console.log("waren"); 
+            console.log("waren"); 
             //console.log(j_warentraeger);
             //console.log(event.data);
             if(first3===0){ 
+                console.log(event.data);
                 warentraegerErstellen();
                 first3=33;
             }else{
