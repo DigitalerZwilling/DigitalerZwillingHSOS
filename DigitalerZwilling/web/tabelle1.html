@@ -27,32 +27,40 @@
 <script language="javascript">
 
 
+      //Browserunterstuetzung vorhanden?
+      var browserSupport = ("WebSocket" in window) ? true : false;
+            
+      //Deklariere WebSocket
+       var host = "ws://localhost:8080/DigitalerZwilling/";     
+
+
 
    $(document).ready(function(){
         console.log("Start");
        //tabelle1.html muss über Test_Aufbau.html aufgerufen werden
        
         switch ($val) {
+            
+            var artikelTabelleErzeugt = 0;
+              
             case 'Artikel':
-                //Durch WebSockets ersetzten!
-                var artikelListeJSON = '{ "inhalt" : [' +
-                '{  "id":"1" , "bezeichnung":"Artikel_1" , "zeitstempel":"14:21:03" },' +
-                '{  "id":"2" , "bezeichnung":"Artikel_2" , "zeitstempel":"14:22:05" },' +
-                '{  "id":"3" , "bezeichnung":"Artikel_3" , "zeitstempel":"14:22:12" },' +
-                '{  "id":"4" , "bezeichnung":"Artikel_4" , "zeitstempel":"14:23:16" } ]}';
+                var ArtikelWebSocket = new WebSocket(host+"ArtikelWebSocket");
 
-                //Erzeugen der Tabelle:
-                erzeugeTabelle("Artikel", artikelListeJSON);
+                ArtikelWebSocket.onopen = function() {
+                    ArtikelWebSocket.send("LIST");
+                };
+                
+                ArtikelWebSocket.onmessage = function(event) {
+                    var jsonListe = event.data;
+                    if (artikelTabelleErzeugt == 0){
+                            createTabelle("Artikel", jsonListe);
+                            artikelTabelleErzeugt = 1;
+                        }
+                    else{
+                        updateTabelle("Artikel", jsonListe);
+                    }
 
-                //Durch WebSockets ersetzten!
-                var neueListeJSON = '{ "inhalt" : [' +
-                '{  "id":"1" , "bezeichnung":"Artikel_1" , "zeitstempel":"14:21:05" },' +
-                '{  "id":"2" , "bezeichnung":"Artikel_2" , "zeitstempel":"14:22:07" },' +
-                '{  "id":"3" , "bezeichnung":"Artikel_3" , "zeitstempel":"14:22:14" },' +
-                '{  "id":"4" , "bezeichnung":"Artikel_4" , "zeitstempel":"14:23:18" } ]}';
-
-                //Update der Tabelleninhalte:
-                updateTabelle("Artikel", neueListeJSON); 
+                };
                 break;
 
 
