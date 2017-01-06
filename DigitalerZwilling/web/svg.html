@@ -1,15 +1,8 @@
     <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta charset="utf-8">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
-    <body>
+
     <svg id="svgOne" xmlns="http://www.w3.org/2000/svg" width=100% height=100% viewBox="0 0 9000 5000"> 
     <!-- <rect id "Sektor1" x="0" y="10" width="50" height="50" fill="blue" onclick = "idAusgeben(this)"></rect>-->
     </svg>
-	</body>
     <script type="text/javascript">
 		
     var svgns = "http://www.w3.org/2000/svg";
@@ -85,6 +78,12 @@
 	
 	function idAusgeben(elmnt) {
 		console.log(elmnt.id);
+		uebersichtsinfosAusgeben(elmnt.id);
+    }
+
+    function uebersichtsinfosAusgeben(info){
+    	$elementUebersicht=info;
+    	$("#uebersichtsinfos").load("uebersichtsinfos.html", $elementUebersicht);
     }
 	
 	function getSekByID(key) {

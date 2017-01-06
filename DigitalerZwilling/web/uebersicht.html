@@ -20,10 +20,11 @@
 						localStorage.removeItem("stoerung");
 						$("#uebersichtsinfos").load("stoerungen.html");
 					}else{
-						console.log("Stoerungen nicht laden.");
+						console.log("Stoerungen nicht aus Detailansicht heraus geladen.");
 					}
 
 	            	$(".dropdown-menu li a").click(function(){
+	            		console.log("MÖP");
             			$val = $(this).html();
 	            		loadDiv($val);
 	            	});
