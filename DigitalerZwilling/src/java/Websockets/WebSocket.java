@@ -31,6 +31,7 @@ public abstract class WebSocket {
     
     public void update() {
         try{
+            if(this.registriert){
             if(id == null){
                 // Liste
                 session.getBasicRemote().sendText(this.ListToJson(this.getCache().getAll()));
@@ -39,11 +40,14 @@ public abstract class WebSocket {
                 // nur ein Element
                 session.getBasicRemote().sendText(this.getCache().getById(id).toJson());
             }
+            }
         } catch (IOException ex) {
             Logger.getLogger(WebSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ElementNotFoundExeption ex) {
             Logger.getLogger(WebSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalStateException ex){
+            this.registriert=false;
+            System.out.println(this.getCache().toString());
             Logger.getLogger(WebSocket.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
