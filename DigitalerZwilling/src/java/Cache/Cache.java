@@ -48,8 +48,7 @@ public abstract class Cache {
     }
     
     public Element getById(Long id) throws ElementNotFoundExeption{
-        if(id < 0 || id>= (state==true?elements[1]:elements[0]).size())
-            throw new ElementNotFoundExeption();
+        if(!(state==true?elements[1]:elements[0]).containsKey(id)) throw new ElementNotFoundExeption();
         
         return state==true?elements[1].get(id):elements[0].get(id);
     }

@@ -98,38 +98,37 @@ public class Warentraeger extends Element{
         json += "\"id\": " + id + ",";
         json += "\"bezeichnung\": \"" + bezeichnung + "\",";
         json += "\"user_Parameter\": \"" + user_Parameter + "\",";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
         json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",";
         json += "\"stoerung\": " + stoerung + ",";
         json += "\"abstand_mm\": " + abstand_mm + ",";
         json += "\"montagezustand\": " + montagezustand + ",";
         
-        json += "\"artikelIDs\": {";
+        json += "\"artikelIDs\": [";
         for(int i=0;i<artikelIDs.size();i++){
             json += artikelIDs.get(i);
             if(i < (artikelIDs.size()-1)){
                 json += ",";
             }
         }
-        json += "},";
+        json += "],";
         
-        json += "\"transportbandIDs\": {";
+        json += "\"transportbandIDs\": [";
         for(int i=0;i<transportbandIDs.size();i++){
             json += transportbandIDs.get(i);
             if(i < (transportbandIDs.size()-1)){
                 json += ",";
             }
         }
-        json += "},";
+        json += "],";
         
-        json += "\"sektorIDs\": {";
+        json += "\"sektorIDs\": [";
         for(int i=0;i<sektorIDs.size();i++){
             json += sektorIDs.get(i);
             if(i < (sektorIDs.size()-1)){
                 json += ",";
             }
         }
-        json += "}";
+        json += "]}";
         
         return json;
     }

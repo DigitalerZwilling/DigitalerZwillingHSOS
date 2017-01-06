@@ -33,17 +33,16 @@ public class Artikel extends Element{
         json += "\"id\": " + id + ",";
         json += "\"bezeichnung\": \"" + bezeichnung + "\",";
         json += "\"user_Parameter\": \"" + user_Parameter + "\",";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",\n";
         json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",";
         
-        json += "\"warentraegerIDs\": {";
+        json += "\"warentraegerIDs\": [";
         for(int i=0;i<warentraegerIDs.size();i++){
             json += warentraegerIDs.get(i);
             if(i < (warentraegerIDs.size()-1)){
                 json += ",";
             }
         }
-        json += "}}";
+        json += "]}";
         
         return json;
     }
