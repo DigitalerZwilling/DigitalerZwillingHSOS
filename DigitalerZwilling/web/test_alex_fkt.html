@@ -55,9 +55,9 @@
    SektorWebsocket.onmessage = function(event) {
        //console.log(event.data);
        j_sektoren = JSON.parse(event.data);
-            console.log("jsek"); 
-            console.log(j_sektoren);
-            console.log(event.data);
+            //console.log("jsek"); 
+            //console.log(j_sektoren);
+            //console.log(event.data);
             
        if(first1===0){ 
             sektorenErstellen();
@@ -71,9 +71,9 @@
    TransportbandWebsocket.onmessage = function(event) {
        //console.log(event.data);
             j_baender = JSON.parse(event.data);
-            console.log("trans"); 
-            console.log(j_baender);
-            console.log(event.data);
+            //console.log("trans"); 
+            //console.log(j_baender);
+            //console.log(event.data);
             if(first2===0){ 
                 transportbaenderErstellen();
                 first2=22;
@@ -87,9 +87,9 @@
    WarentraegerWebsocket.onmessage = function(event) {
        //console.log(event.data);
             j_warentraeger = JSON.parse(event.data);
-            console.log("waren"); 
-            console.log(j_warentraeger);
-            console.log(event.data);
+            //console.log("waren"); 
+            //console.log(j_warentraeger);
+            //console.log(event.data);
             if(first3===0){ 
                 warentraegerErstellen();
                 first3=33;
@@ -188,7 +188,7 @@
 	
 	function getSekByID(key) {
 		//finde Sektor mit uebergebener ID
-                console.log("Suche " + key + " in S");
+                //console.log("Suche " + key + " in S");
 		for (var i=0;i<j_sektoren.inhalt.length;i++) {
 			if (j_sektoren.inhalt[i].id == key) {
 				return i;
@@ -241,8 +241,8 @@
 
             var textNode = document.createTextNode("S" + j_sektoren.inhalt[i].id);
             text.appendChild(textNode);
-            document.getElementById("svgOne").getElementById("Sektor" + j_sektoren.inhalt[i].id).appendChild(text);
-            //document.getElementById("svgOne").appendChild(text);
+            //document.getElementById("svgOne").getElementById("Sektor" + j_sektoren.inhalt[i].id).appendChild(text);
+            document.getElementById("svgOne").appendChild(text);
 		}
 	}
 	
@@ -253,8 +253,8 @@
 		//for (var i =0;i < 1; i++) {
 			id_vor = j_baender.inhalt[i].vorSektorID;
 			id_nach = j_baender.inhalt[i].nachSektorID;
-                        console.log(id_vor+"------"+j_baender.inhalt[i].bezeichnung+"----------"+id_nach)
-                        console.log(document.getElementById("svgOne").getElementById("Transportband" + j_baender.inhalt[i].id));
+                        //console.log(id_vor+"------"+j_baender.inhalt[i].bezeichnung+"----------"+id_nach)
+                        //console.log(document.getElementById("svgOne").getElementById("Transportband" + j_baender.inhalt[i].id));
 			rect = document.createElementNS(svgns, 'rect');
                         //rect = document.getElementById("svgOne").getElementById("Transportband" + j_baender.inhalt[i].id);
 			rect.setAttributeNS(null, 'id', 'Transportband' + j_baender.inhalt[i].id);
@@ -340,7 +340,7 @@
 	
 	function warentraegerErstellen(){
 		for (var i = 0;i<j_warentraeger.inhalt.length;i++) {
-                        console.log(document.getElementById("svgOne").getElementById("Warentraeger" + j_warentraeger.inhalt[i].id));
+                        //console.log(document.getElementById("svgOne").getElementById("Warentraeger" + j_warentraeger.inhalt[i].id));
 			rect = document.createElementNS(svgns, 'rect');
                         //rect = document.getElementById("svgOne").getElementById("Warentraeger" + j_warentraeger.inhalt[i].id);
 			rect.setAttributeNS(null, 'id', 'Warentraeger' + j_warentraeger.inhalt[i].id);
@@ -449,14 +449,16 @@
 //			rect.setAttributeNS(null, 'stroke', 'black');
 			rect.setAttributeNS(null, 'transform', 'scale('+zoom+')');
 //			rect.setAttributeNS(null, 'onclick', 'idAusgeben(this)'); //Beim anklicken wird die Id des Elementes ausgeben
+                        var text=document.getElementById("svgOne").getElementById('Text' + j_sektoren.inhalt[i].id);
 			document.getElementById('svgOne').appendChild(rect);
+                        document.getElementById('svgOne').appendChild(text);
             
 		}
 	}
 	
 	function transportbaenderAendern(){
 		for (var i =0;i < j_baender.inhalt.length; i++) {
-                        console.log(document.getElementById("svgOne").getElementById("Transportband" + j_baender.inhalt[i].id));
+                        //console.log(document.getElementById("svgOne").getElementById("Transportband" + j_baender.inhalt[i].id));
 			//rect = document.createElementNS(svgns, 'rect');
                         rect = document.getElementById("svgOne").getElementById("Transportband" + j_baender.inhalt[i].id);
 			
@@ -474,7 +476,7 @@
 	
 	function warentraegerAendern(){
 		for (var i = 0;i<j_warentraeger.inhalt.length;i++) {
-                        console.log(document.getElementById("svgOne").getElementById("Warentraeger" + j_warentraeger.inhalt[i].id));
+                        //console.log(document.getElementById("svgOne").getElementById("Warentraeger" + j_warentraeger.inhalt[i].id));
 			//rect = document.createElementNS(svgns, 'rect');
                         rect = document.getElementById("svgOne").getElementById("Warentraeger" + j_warentraeger.inhalt[i].id);
 			

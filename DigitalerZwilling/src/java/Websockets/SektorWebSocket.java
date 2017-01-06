@@ -21,8 +21,7 @@ import javax.websocket.server.ServerEndpoint;
  */
 @ServerEndpoint("/SektorWebSocket")
 public class SektorWebSocket extends WebSocket{
-    @Inject
-    Updater webSocketUpdater;
+    //@Inject Updater webSocketUpdater;
     
     @Inject
     SektorCache sektorCache;  

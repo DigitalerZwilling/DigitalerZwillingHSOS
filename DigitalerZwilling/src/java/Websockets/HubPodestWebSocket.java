@@ -22,8 +22,7 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/HubPodestWebSocket")
 public class HubPodestWebSocket extends WebSocket{
 
-    @Inject
-    Updater webSocketUpdater;
+    //@Inject Updater webSocketUpdater;
   
     @Inject
     HubPodestCache hubPodestCache;

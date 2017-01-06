@@ -22,6 +22,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import org.jboss.logging.Logger;
 
+
 /**
  *
  * @author User
@@ -74,8 +75,17 @@ public class Updater {
     }
     
     public void updateWebSockets(){
+        List<WebSocket> toDelete=new ArrayList<WebSocket>();
         for(WebSocket webSocket: webSockets){
+            try{
             webSocket.update();
+            }catch (IllegalStateException ex){
+            toDelete.add(webSocket);
+            java.util.logging.Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        for(WebSocket webSocket: toDelete){
+            this.webSockets.remove(webSocket);
         }
     }
     
@@ -91,6 +101,7 @@ public class Updater {
     
     //@Timeout
     public void updateAll(Timer timer){
+        System.out.println(this.webSockets.size());
         for(Cache cache: caches){
             cache.toggleState();
             break;

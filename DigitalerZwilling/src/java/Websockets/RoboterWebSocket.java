@@ -22,8 +22,7 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/RoboterWebSocket")
 public class RoboterWebSocket extends WebSocket{
 
-    @Inject
-    Updater webSocketUpdater;
+    //@Inject Updater webSocketUpdater;
     
     @Inject
     RoboterCache roboterCache;
