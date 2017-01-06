@@ -9,7 +9,7 @@
   <body id="body"> 
       <table id="attributes" border="0"></table><br/>
       <div id="lists"></div>
-  </body>
+ 
   
   <script language="javascript"> 
     //Browserunterstuetzung vorhanden?
@@ -17,6 +17,7 @@
             
     //Deklariere WebSocket
     var host = "ws://localhost:8080/DigitalerZwilling/";
+    var documentName = "index.html";
        
     $(document).ready(function(){
         console.log("Start");
@@ -24,7 +25,7 @@
     });   
     
     function init(){
-        $val = 'Hub-Quer-Stationen';
+        $val = 'Transportbänder';
         switch ($val) {
             case 'Artikel':
                 var id = 1;
@@ -89,6 +90,33 @@
             attributes.appendChild(zeile);
         }
     }
+    
+    
+    function createAttributLink(attribute, id){
+        var attributes = document.getElementById("attributes");
+        
+        
+        for(var i=0; i<attribute.length; i++){
+            var zeile = document.createElement("tr");
+            var name = document.createElement("td");
+            name.innerHTML = attribute[i];
+            zeile.appendChild(name);
+
+            var value = document.createElement("td");
+            var link = document.createElement("a");
+            link.id = id[i];
+            link.href = documentName;
+            link.onClick = "a_onClick";
+            value.appendChild(link);
+            zeile.appendChild(value);
+
+            attributes.appendChild(zeile);
+        }
+        $("vorTransportband").click(function()
+        {
+            alert('a_onClick');
+        });
+    }
         
     function createLists(list_tilte, list_id, list_header){
         if(list_tilte.length !== list_id.length) return;
@@ -129,7 +157,14 @@
             var zeile = document.createElement("tr");
             for(var k=0; k<attributes.length; k++){
                 var element = document.createElement("td");
-                element.innerHTML = jsonObject[attributes[k]];
+                if(attributes[k]=="bezeichnung"){
+                    var link = document.createElement("a");
+                    link.innerHTML = jsonObject[attributes[k]];
+                    link.href=documentName;
+                    element.appendChild(link);
+                }else{
+                    element.innerHTML = jsonObject[attributes[k]];
+                }
                 zeile.appendChild(element);
             }
             parentNode.appendChild(zeile);
@@ -142,6 +177,18 @@
             var element = document.getElementById(element_id[i]);
             element.innerHTML = json[attribute_id[i]];
         }
+    }
+    
+    function updateAttributLink(jsonString,json_id,attribut_id){
+        var json = JSON.parse(jsonString);
+            
+            for(var i=0; i<json.inhalt.length; i++){
+            var myid = json.inhalt[i][json_id];
+                if(myid==id){
+                    var element = document.getElementById(attribut_id);
+                    element.innerHTML = json['bezeichnung'];
+                }
+            }
     }
     
     function updateList(id, list_id, jsonString, childAttributes, objectIDs){        
@@ -319,7 +366,7 @@
 
         //Tabelle Erstellen
         create(attribute_title, attribute_id, list_title, list_id, list_header);
-        createAttributes(['Sektor vorher','Sektor nachher'],['vorTransportband','nachTransportband']);
+        createAttributLink(['Sektor vorher','Sektor nachher'],['vorTransportband','nachTransportband']);
 
         //WebSockets
         var TransportbandWebSocket = new WebSocket(host+"TransportbandWebSocket");
@@ -387,7 +434,7 @@
 
         //Tabelle Erstellen
         create(attribute_title, attribute_id, list_title, list_id, list_header);
-        createAttributes(['Gelenk','Werkzeug'],['gelenk','werkzeug']);
+        createAttributLink(['Gelenk','Werkzeug'],['gelenk','werkzeug']);
 
         //WebSockets
         var RoboterWebSocket = new WebSocket(host+"RoboterWebSocket");
@@ -751,4 +798,5 @@
         };
     }
   </script>
+   </body>
 </html>
