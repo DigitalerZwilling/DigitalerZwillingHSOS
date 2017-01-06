@@ -97,14 +97,14 @@ public class HubQuerPodest extends Element{
         json += "\"mittig\": " + mittig + ",";
         json += "\"unten\": " + unten + ",";
         
-        json += "\"gruppenIDs\": [";
+        /*json += "\"gruppenIDs\": [";
         for(int i=0;i<gruppenIDs.size();i++){
             json += gruppenIDs.get(i);
             if(i < (gruppenIDs.size()-1)){
                 json += ",";
             }
         }
-        json += "]";
+        json += "]";*/
         
         json += "\"sektorID\": " + sektorID;
         json += '}';

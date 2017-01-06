@@ -157,9 +157,17 @@ CREATE TABLE Roboter_Sektor (
 	
 CREATE TABLE Roboter_Werkzeug (
 	id_roboter BIGINT,
-	id_sektor BIGINT,
-	PRIMARY KEY (id_roboter, id_sektor),
+	id_werkzeug BIGINT,
+	PRIMARY KEY (id_roboter, id_werkzeug),
 	FOREIGN KEY (id_roboter) REFERENCES Roboter(id_roboter),
-	FOREIGN KEY (id_sektor) REFERENCES Sektor(id_sektor)
+	FOREIGN KEY (id_werkzeug) REFERENCES Werkzeug(id_werkzeug)
+	);
+	
+CREATE TABLE Hubquerpodest_Hubquerpodest (
+	id_Hubquerpodest1 BIGINT,
+	id_hubquerpodest2 BIGINT,
+	PRIMARY KEY (id_hubquerpodest1, id_hubquerpodest2),
+	FOREIGN KEY (id_hubquerpodest1) REFERENCES Hubquerpodest(id_hubquerpodest1),
+	FOREIGN KEY (id_hubquerpodest2) REFERENCES Hubquerpodest(id_hubquerpodest2)
 	);
 	

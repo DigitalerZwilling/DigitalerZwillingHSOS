@@ -6,6 +6,7 @@ import DatenbankSchnittestelle.Datenbankschnittstelle;
 import DatenbankSchnittestelle.Exeption.DBNotFoundExeption;
 import DatenbankSchnittestelle.Exeption.QueryExeption;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,12 +78,14 @@ public class HubQuerPodestCache extends Cache{
             
             for(int i = 0; i<id.size();i++){
                 String ourTime=zeitstempel.get(i).replace(' ', 'T');
+                HubQuerPodest hubQuerPodest1 = new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(ourTime));
+                HubQuerPodest hubQuerPodest2 = new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(ourTime));
+                elements[0].put(Long.parseLong(id.get(i)),hubQuerPodest1);
+                elements[1].put(Long.parseLong(id.get(i)), hubQuerPodest2);
                 
-                elements[0].put(Long.parseLong(id.get(i)), new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(ourTime)));
-                elements[1].put(Long.parseLong(id.get(i)), new HubQuerPodest(Long.parseLong(motor.get(i))!=0, Long.parseLong(oben.get(i))!=0, Long.parseLong(mittig.get(i))!=0, Long.parseLong(unten.get(i))!=0, Long.parseLong(sektorId.get(i)), Long.parseLong(id.get(i)), bezeichnung.get(i), userParameter.get(i), LocalDateTime.parse(ourTime)));
+                hubQuerPodest1.setGruppenIDs(this.readGruppenIds(hubQuerPodest1.getId()));
+                hubQuerPodest1.setGruppenIDs(this.readGruppenIds(hubQuerPodest2.getId()));
             }
-            
-            updateGruppenIds();
             
         } catch (DBNotFoundExeption ex) {
             Logger.getLogger(HubQuerPodestCache.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,16 +95,22 @@ public class HubQuerPodestCache extends Cache{
             throw new DBErrorExeption("Query error");
         }
     }
-   
-    private void updateGruppenIds() throws DBNotFoundExeption, QueryExeption{
-        Map<String,List<String>> rsMap = this.datenbankschnittstelle.datenbankAnfrage("SELECT id_Hubquerpodest1, id_hubquerpodest2 FROM Hubquerpodest_Hubquerpodest");
-        List<String> id1 = rsMap.get("ID_HUBQUERPODEST1");
-        List<String> id2 = rsMap.get("ID_HUBQUERPODEST2");
-        
-        if(id1==null || id2==null) return;
-        for(int i=0;i<id1.size();i++){
-            HubQuerPodest podest = (HubQuerPodest) (state==true?elements[0].get(Long.parseLong(id1.get(i))):elements[0].get(Long.parseLong(id1.get(i))));
-            podest.getGruppenIDs().add(Long.parseLong(id2.get(i)));
+    
+    List<Long> readGruppenIds(Long id) throws DBNotFoundExeption{
+        List<Long> g_ids= new ArrayList<>();
+        try {
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_hubquerpodest2 FROM Hubquerpodest_Hubquerpodest WHERE id_Hubquerpodest1="+id);
+            List<String> ids = rsMap.get("ID_HUBQUERPODEST2");
+            
+            if(ids==null) return g_ids;
+            
+            for (String s : ids){
+                g_ids.add(Long.parseLong(s));
+            }
+            
+        } catch (QueryExeption ex) {
+            Logger.getLogger(RoboterCache.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return g_ids;
     }
 }
