@@ -19,7 +19,7 @@ import javax.websocket.server.ServerEndpoint;
  *
  * @author user
  */
-@ServerEndpoint("/GelenkWebsocket")
+@ServerEndpoint("/GelenkWebSocket")
 public class GelenkWebSocket extends WebSocket{
 
     @Inject

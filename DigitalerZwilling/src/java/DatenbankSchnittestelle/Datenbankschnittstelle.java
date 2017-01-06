@@ -32,12 +32,14 @@ public class Datenbankschnittstelle {
     //-----------------------------------------------------------------------------
 
     public Datenbankschnittstelle() throws DBNotFoundExeption{
-        String DbUrl = "jdbc:derby://localhost:1527/db_DigitalerZwilling";
-        String DbCd = "org.apache.derby.jdbc.ClientDriver";
-        //String DbUser = "root";
-        //String DbPw = "Didpw4df";
-        String DbUser = "db_user";
-        String DbPw = "SB0222";
+        // String DbUrl = "jdbc:derby://localhost:1527/db_DigitalerZwilling";
+        String DbUrl = "jdbc:mysql://131.173.117.48:3306/df_16115";
+        // String DbCd = "org.apache.derby.jdbc.ClientDriver";
+         String DbCd = "com.mysql.jdbc.Driver";
+        //String DbUser = "db_user";
+        //String DbPw = "SB0222";
+        String DbUser = "root";
+        String DbPw = "Didpw4df";
         
         try {
             Class.forName(DbCd).newInstance();
@@ -92,11 +94,12 @@ public class Datenbankschnittstelle {
                 ResultSetMetaData rsmd = rs.getMetaData();
                 int columnCount = rsmd.getColumnCount();
                 for (int i = 1; i <= columnCount; i++) {
-                    rsMap.put(rsmd.getColumnName(i), new ArrayList<>());
+                    rsMap.put(rsmd.getColumnName(i).toUpperCase(), new ArrayList<>());
                 }
                 while (rs.next()) {
                     for (int i = 1; i <= columnCount; i++) {
-                        rsMap.get(rsmd.getColumnName(i)).add(rs.getString(i));
+                        rsMap.get(rsmd.getColumnName(i).toUpperCase()).add(rs.getString(i));
+                        
                     }
                 }
                 //------------------------------------------------------
