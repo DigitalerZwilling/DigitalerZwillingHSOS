@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+
+
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <div>
+            <button type="button" onclick="send();" value="send" id="b1">Send</button>
+        </div>
+        <div id="messages"></div>
+        
+        <script type="text/javascript">
+    
+            
+    
+    
+            //Zugriff auf Elemente der HTML-Seite
+            var messages = document.getElementById("messages");
+            //Browserunterstuetzung vorhanden?
+            var browserSupport = ("WebSocket" in window) ? true : false;
+            //Deklariere WebSocket
+            var host = "ws://localhost:8080/DigitalerZwilling/WarentraegerWebSocket";
+            var wSocket = new WebSocket(host);
+            
+            //Initalisierung der WebSockets
+            function init(){
+                if (browserSupport) {
+                    //Oeffnen des WebSockets und Senden einer Nachricht
+                    wSocket.onopen = function() {
+                        wSocket.send("LIST");
+                    };
+                    
+                }
+                else {
+                    alert("WebSocket is NOT supported by your Browser!");
+                }
+            }
+            
+            
+            //Wird nach Start der Seite aufgerufen
+            window.onload = function () {
+                init();
+            };
+    
+    
+            //called when a message is received
+            wSocket.onmessage = function(event) {
+                var received_msg = event.data;
+                messages.innerHTML = "<br/>" + received_msg;
+            };
+    
+            // websocket is closed.
+            wSocket.onclose = function() {
+                alert("Connection is closed...");
+            };
+            
+            //Send something to the WebSocket 
+            function send(){
+                wSocket.send("GET");
+            }
+      </script>
+    </body>
+</html>
