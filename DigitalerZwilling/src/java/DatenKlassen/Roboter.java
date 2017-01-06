@@ -114,32 +114,32 @@ public class Roboter extends Element{
         json += "\"z\": " + z + ",";
         json += "\"ausrichtung\": " + ausrichtung + ",";
         
-        json += "\"sektorIDs\": {";
+        json += "\"sektorIDs\": [";
         for(int i=0;i<sektorID.size();i++){
             json += sektorID.get(i);
             if(i < (sektorID.size()-1)){
                 json += ",";
             }
         }
-        json += "},";
+        json += "],";
         
-        json += "\"gelenkeIDs\": {";
+        json += "\"gelenkeIDs\": [";
         for(int i=0;i<gelenkeIDs.size();i++){
             json += gelenkeIDs.get(i);
             if(i < (gelenkeIDs.size()-1)){
                 json += ",";
             }
         }
-        json += "},";
+        json += "],";
         
-        json += "\"werzeugIDs\": {";
+        json += "\"werzeugIDs\": [";
         for(int i=0;i<werkzeugID.size();i++){
             json += werkzeugID.get(i);
             if(i < (werkzeugID.size()-1)){
                 json += ",";
             }
         }
-        json += "}}";
+        json += "]}";
         
         return json;
     }    

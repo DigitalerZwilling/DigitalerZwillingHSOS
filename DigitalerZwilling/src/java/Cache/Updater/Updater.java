@@ -93,6 +93,7 @@ public class Updater {
     public void updateAll(Timer timer){
         for(Cache cache: caches){
             cache.toggleState();
+            break;
         }
         
         if(!cacheUpdateThread.isRunning()){
