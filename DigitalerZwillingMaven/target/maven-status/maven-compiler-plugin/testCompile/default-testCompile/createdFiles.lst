@@ -1,0 +1,11 @@
+Cache\SensorCacheTest.class
+Cache\CacheTest.class
+Cache\RoboterCacheTest.class
+Cache\GelenkCacheTest.class
+Cache\TransportbandCacheTest.class
+Cache\ArtikelCacheTest.class
+Cache\SektorCacheTest.class
+Cache\HubPodestCacheTest.class
+Cache\HubQuerPodestCacheTest.class
+Cache\WarentraegerCacheTest.class
+Cache\WerkzeugCacheTest.class

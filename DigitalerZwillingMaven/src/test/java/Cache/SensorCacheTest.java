@@ -5,6 +5,16 @@
  */
 package Cache;
 
+import Cache.Updater.CacheUpdateThread;
+import Cache.Updater.SelfTimer;
+import Cache.Updater.Updater;
+import Cache.Updater.WebSocketUpdateThread;
+import DatenbankSchnittstelle.DatenbankSchnittstelle;
+import javax.inject.Inject;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,6 +23,16 @@ import static org.junit.Assert.*;
  * @author florian
  */
 public class SensorCacheTest extends CacheTest{
+    
+    @Deployment
+    public static JavaArchive createDeployment() {
+        return ShrinkWrap.create(JavaArchive.class)
+            .addClasses(SensorCache.class,Updater.class,CacheUpdateThread.class,WebSocketUpdateThread.class,DatenbankSchnittstelle.class,SelfTimer.class)
+            .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+    }
+    
+    @Inject
+    SensorCache cache;
 
     /**
      * Test of update method, of class SensorCache.
@@ -21,8 +41,6 @@ public class SensorCacheTest extends CacheTest{
     @Override
     public void testUpdate() {
         System.out.println("update");
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -32,33 +50,27 @@ public class SensorCacheTest extends CacheTest{
     @Override
     public void testUpdateAll() {
         System.out.println("updateAll");
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     @Override
     public void testGetById() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void testGetAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void testCacheSwitch() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void testAutoUpdate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Cache getCache() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return cache;
     }
     
 }

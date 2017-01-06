@@ -35,7 +35,7 @@ public class ArtikelCacheTest extends CacheTest{
     }
     
     @Inject
-    ArtikelCache artikelCache;
+    ArtikelCache cache;
 
     /**
      * Test of update method, of class ArtikelCache.
@@ -45,9 +45,7 @@ public class ArtikelCacheTest extends CacheTest{
     @Override
     public void testUpdate(){
         System.out.println("update");
-        System.out.println(artikelCache);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println(cache);
     }
 
     /**
@@ -57,9 +55,7 @@ public class ArtikelCacheTest extends CacheTest{
     @Override
     public void testUpdateAll(){
         System.out.println("updateAll");
-        System.out.println(artikelCache);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println(cache);
     }
     
     @Test
@@ -72,7 +68,7 @@ public class ArtikelCacheTest extends CacheTest{
     @Override
     public void testGetAll(){
         System.out.println("getAll");
-        System.out.println(artikelCache.getAll());
+        System.out.println(cache.getAll());
     }
     
     @Test
@@ -89,7 +85,7 @@ public class ArtikelCacheTest extends CacheTest{
 
     @Override
     public Cache getCache() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return cache;
     }
     
 }
