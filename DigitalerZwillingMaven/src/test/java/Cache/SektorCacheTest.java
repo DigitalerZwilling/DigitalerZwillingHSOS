@@ -56,15 +56,7 @@ public class SektorCacheTest extends CacheTest{
     }
 
     @Override
-    public void testGetById() {
-    }
-
-    @Override
     public void testGetAll() {
-    }
-
-    @Override
-    public void testAutoUpdate() {
     }
 
     @Override

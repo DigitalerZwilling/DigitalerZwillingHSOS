@@ -79,14 +79,6 @@ public class HubQuerPodestCacheTest extends CacheTest{
     }
 
     @Override
-    public void testGetById() {
-    }
-
-    @Override
-    public void testAutoUpdate() {
-    }
-
-    @Override
     public Cache getCache() {
         return cache;
     }

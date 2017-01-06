@@ -60,12 +60,6 @@ public class ArtikelCacheTest extends CacheTest{
     
     @Test
     @Override
-    public void testGetById(){
-        System.out.println("getById");
-    }
-    
-    @Test
-    @Override
     public void testGetAll(){
         System.out.println("getAll");
         System.out.println(cache.getAll());

@@ -53,15 +53,7 @@ public class SensorCacheTest extends CacheTest{
     }
 
     @Override
-    public void testGetById() {
-    }
-
-    @Override
     public void testGetAll() {
-    }
-
-    @Override
-    public void testAutoUpdate() {
     }
 
     @Override

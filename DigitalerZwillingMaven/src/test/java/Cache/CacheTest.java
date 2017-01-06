@@ -6,7 +6,10 @@
 package Cache;
 
 import Cache.Exeption.DBErrorExeption;
+import Cache.Exeption.ElementNotFoundExeption;
 import DatenKlassen.Element;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.validation.constraints.AssertTrue;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,7 +28,16 @@ public abstract class CacheTest {
     
     @Test
     public void testGetById(){
-        
+        System.out.println("testGetByID");
+        for(Long i=new Long(0);i<= Long.MAX_VALUE;i++){
+            try {
+                getCache().getById(i);
+            } catch (ElementNotFoundExeption ex) {
+                Assert.assertTrue("Elmenet not Found", true);
+                return;
+            }
+        }
+        Assert.assertTrue("Elmenet not Found", false);
     }
     
     @Test
@@ -42,17 +54,35 @@ public abstract class CacheTest {
         /*while(state == getCache().isState())
             System.out.println("wait....");*/
         Thread.sleep(500);
-        if(state != getCache().isState())
-            Assert.assertTrue("Auto-Update", state != getCache().isState());
+        if(state != getCache().isState()){
+            Assert.assertTrue("Auto-Update 0.5", state != getCache().isState());
+            System.out.println("Auto-Update 0.5");
+            return;
+        }
+        
         Thread.sleep(500);
-        if(state != getCache().isState())
-            Assert.assertTrue("Auto-Update", state != getCache().isState());
+        if(state != getCache().isState()){
+            Assert.assertTrue("Auto-Update 1.0", state != getCache().isState());
+            System.out.println("Auto-Update 1.0");
+            return;
+        }
+        
         Thread.sleep(500);
-        if(state != getCache().isState())
-            Assert.assertTrue("Auto-Update", state != getCache().isState());
+        if(state != getCache().isState()){
+            Assert.assertTrue("Auto-Update 1.5", state != getCache().isState());
+            System.out.println("Auto-Update 1.5");
+            return;
+        }
+        
         Thread.sleep(500);
-        if(state != getCache().isState())
-            Assert.assertTrue("Auto-Update", state != getCache().isState());
+        if(state != getCache().isState()){
+            Assert.assertTrue("Auto-Update 2.0", state != getCache().isState());
+            System.out.println("Auto-Update 2.0");
+            return;
+        }
+        
+        Assert.assertTrue("Auto-Update", state != getCache().isState());
+        System.out.println("Auto-Update --> FAIL!!!");
     }
     
     abstract public Cache getCache();
