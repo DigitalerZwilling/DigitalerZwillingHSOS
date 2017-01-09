@@ -10,6 +10,7 @@ DROP TABLE Roboter_Sektor;
 DROP TABLE Transportband_Warentraeger;
 DROP TABLE Sektor_Warentraeger;
 DROP TABLE Artikel_Warentraeger;
+DROP TABLE Hubquerpodest_Hubquerpodest;
 DROP TABLE Hubquerpodest;
 DROP TABLE Hubpodest;
 DROP TABLE Werkzeug;

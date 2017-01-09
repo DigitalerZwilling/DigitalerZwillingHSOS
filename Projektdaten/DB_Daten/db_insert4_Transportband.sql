@@ -2,46 +2,30 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
 		id_sektor_vor,
 		id_sektor_nach
 	) VALUES (
-		12,
-		'TB Sek1 bis Sek2',
+		13,
+		'TB Sek1 bis Sek3',
 		'',
+		0,
 		0,
 		0,
 		0,
 		1,
-		2
-	);
-
-INSERT INTO Transportband (
-		id_transportband,
-		bezeichnung,
-		user_parameter,
-		stoerung,
-		laenge,
-		geschwindigkeit,
-		id_sektor_vor,
-		id_sektor_nach
-	) VALUES (
-		23,
-		'TB Sek2 bis Sek3',
-		'',
-		0,
-		0,
-		0,
-		2,
 		3
 	);
 
+
 INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -54,6 +38,7 @@ INSERT INTO Transportband (
 		0,
 		0,
 		0,
+		0,
 		3,
 		4
 	);
@@ -62,6 +47,7 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -74,6 +60,7 @@ INSERT INTO Transportband (
 		0,
 		0,
 		0,
+		0,
 		4,
 		5
 	);
@@ -82,6 +69,7 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -94,6 +82,7 @@ INSERT INTO Transportband (
 		0,
 		0,
 		0,
+		0,
 		5,
 		6
 	);
@@ -102,6 +91,7 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -114,6 +104,7 @@ INSERT INTO Transportband (
 		0,
 		0,
 		0,
+		0,
 		6,
 		7
 	);
@@ -122,6 +113,7 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -134,6 +126,7 @@ INSERT INTO Transportband (
 		0,
 		0,
 		0,
+		0,
 		7,
 		8
 	);
@@ -142,6 +135,7 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -154,6 +148,7 @@ INSERT INTO Transportband (
 		0,
 		0,
 		0,
+		0,
 		8,
 		9
 	);
@@ -162,6 +157,7 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -171,6 +167,7 @@ INSERT INTO Transportband (
 		910,
 		'TB Sek9 bis Sek10 (aussen)',
 		'',
+		1,
 		0,
 		0,
 		0,
@@ -182,6 +179,7 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -194,6 +192,7 @@ INSERT INTO Transportband (
 		0,
 		0,
 		0,
+		0,
 		10,
 		11
 	);
@@ -202,6 +201,7 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -211,17 +211,19 @@ INSERT INTO Transportband (
 		911,
 		'TB Sek9 bis Sek11 (innen)',
 		'',
+		-1,
 		0,
 		0,
 		0,
-		5,
-		6
+		9,
+		11
 	);
 
 INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -231,6 +233,7 @@ INSERT INTO Transportband (
 		1112,
 		'TB Sek11 bis Sek12 (aussen)',
 		'',
+		1,
 		0,
 		0,
 		0,
@@ -243,6 +246,7 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -255,14 +259,16 @@ INSERT INTO Transportband (
 		0,
 		0,
 		0,
-		5,
-		6
+		0,
+		12,
+		13
 	);
 
 INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -272,6 +278,7 @@ INSERT INTO Transportband (
 		1113,
 		'TB Sek11 bis Sek13 (innen)',
 		'',
+		-1,
 		0,
 		0,
 		0,
@@ -283,6 +290,7 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -292,6 +300,7 @@ INSERT INTO Transportband (
 		1314,
 		'TB Sek13 bis Sek14 (aussen)',
 		'',
+		1,
 		0,
 		0,
 		0,
@@ -303,6 +312,7 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -315,6 +325,7 @@ INSERT INTO Transportband (
 		0,
 		0,
 		0,
+		0,
 		14,
 		15
 	);
@@ -323,6 +334,7 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -332,6 +344,7 @@ INSERT INTO Transportband (
 		1315,
 		'TB Sek13 bis Sek15 (innen)',
 		'',
+		-1,
 		0,
 		0,
 		0,
@@ -343,6 +356,7 @@ INSERT INTO Transportband (
 		id_transportband,
 		bezeichnung,
 		user_parameter,
+		reihe,
 		stoerung,
 		laenge,
 		geschwindigkeit,
@@ -352,6 +366,7 @@ INSERT INTO Transportband (
 		151,
 		'TB Sek15 bis Sek1',
 		'',
+		0,
 		0,
 		0,
 		0,
