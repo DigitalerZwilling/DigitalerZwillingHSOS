@@ -12,13 +12,13 @@
  -->
 
 <body> 
-    <table class="table table-striped" width="100" border="0" cellpadding="0" cellspacing="1" id="tabelle1">
+    <table class="table table-striped" width="100" border="0" cellpadding="0" cellspacing="1" id="tabelle2">
     <!--Tabelle an der die Daten angehangen werden -->
         <thead>
             <tr>
-                <th id = "spalte1.1"></th>
-                <th id = "spalte1.2"></th>
-                <th id = "spalte1.3"></th> 
+                <th id = "spalte2.1"></th>
+                <th id = "spalte2.2"></th>
+                <th id = "spalte2.3"></th> 
             </tr>
         </thead>
     </table>
@@ -161,7 +161,7 @@
                 };
                 break;
             default:
-                document.getElementById("spalte1.1").innerHTML = 'Fehler beim Darstellen der Tabelle (ready-Function)';
+                document.getElementById("spalte2.1").innerHTML = 'Fehler beim Darstellen der Tabelle (ready-Function)';
       }
     });
 
@@ -255,7 +255,7 @@
             break;
             
         default:
-            document.getElementById("spalte1.1").innerHTML = 'Fehler beim Switch in tabelleErzeugen()';
+            document.getElementById("spalte2.1").innerHTML = 'Fehler beim Switch in tabelleErzeugen()';
         }
     }
         
@@ -295,7 +295,7 @@
                 spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Motor'];
                 return spaltennamen;
             default:
-                document.getElementById("spalte1.1").innerHTML = 'Fehler beim Darstellen der Tabelle getSpaltenname';
+                document.getElementById("spalte2.1").innerHTML = 'Fehler beim Darstellen der Tabelle getSpaltenname';
       }
     }
     
@@ -343,7 +343,7 @@
                     //TODO
                     break;
                 default:
-                    document.getElementById("spalte1.3").innerHTML = 'Fehler im switch case - updateTabelle';                      
+                    document.getElementById("spalte2.3").innerHTML = 'Fehler im switch case - updateTabelle';                      
            } 
         }
     }
@@ -361,16 +361,16 @@
         if (spaltennamen < 2){
             console.log("Fehler: spaltennamen < 2");
         }else{
-            document.getElementById("spalte1.1").innerHTML = spaltennamen[0];
-            document.getElementById("spalte1.2").innerHTML = spaltennamen[1];
+            document.getElementById("spalte2.1").innerHTML = spaltennamen[0];
+            document.getElementById("spalte2.2").innerHTML = spaltennamen[1];
         }
 
         //Falls eine dritte Spalte benötigt wird:
         if (spaltennamen.length == 3){
-            document.getElementById("spalte1.3").innerHTML = spaltennamen[2];
+            document.getElementById("spalte2.3").innerHTML = spaltennamen[2];
         }
 
-        var myTable = document.getElementById("tabelle1"); //holt sich die im Body erstellte Tabelle
+        var myTable = document.getElementById("tabelle2"); //holt sich die im Body erstellte Tabelle
             
         if (document.getElementsByTagName("tbody")[0] != null){
             zeile = document.getElementsByTagName("tbody")[0];
