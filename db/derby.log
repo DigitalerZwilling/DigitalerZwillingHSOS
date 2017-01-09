@@ -1,7 +1,7 @@
-Fri Jan 06 14:58:09 CET 2017 : Apache Derby Network Server 10.11.1.2 - (1629631) wurde gestartet und ist bereit, Verbindungen auf Port 1527 zu akzeptieren.
+Mon Jan 09 16:51:28 CET 2017 : Apache Derby Network Server 10.11.1.2 - (1629631) wurde gestartet und ist bereit, Verbindungen auf Port 1527 zu akzeptieren.
 ----------------------------------------------------------------
-Fri Jan 06 14:59:39 CET 2017:
-Booten von Derby-Version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): Instanz a816c00e-0159-7412-8a76-00004b90fecd
+Mon Jan 09 16:51:28 CET 2017:
+Booten von Derby-Version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): Instanz a816c00e-0159-83ed-5e49-00004b90fecd
 für Datenbankverzeichnis C:\Users\User\Documents\GitHub\DigitalerZwillingHSOS\db\db_DigitalerZwilling mit Class Loader sun.misc.Launcher$AppClassLoader@6f94fa3e
 Geladen aus file:/C:/Program%20Files/Java/jdk1.8.0_112/db/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -12,9 +12,3 @@ os.arch=amd64
 os.version=6.1
 derby.system.home=C:\Users\User\Documents\GitHub\DigitalerZwillingHSOS\db
 Datenbank-Class Loader wurde gestartet - derby.database.classpath=''
-----------------------------------------------------------------
-Fri Jan 06 16:58:27 CET 2017: Derby-Engine wird heruntergefahren
-----------------------------------------------------------------
-Fri Jan 06 16:58:27 CET 2017:
-Instanz a816c00e-0159-7412-8a76-00004b90fecd im Datenbankverzeichnis C:\Users\User\Documents\GitHub\DigitalerZwillingHSOS\db\db_DigitalerZwilling mit Class Loader sun.misc.Launcher$AppClassLoader@6f94fa3e wird heruntergefahren
-----------------------------------------------------------------

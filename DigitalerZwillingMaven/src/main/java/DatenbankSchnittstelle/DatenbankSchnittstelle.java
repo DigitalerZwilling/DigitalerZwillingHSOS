@@ -92,11 +92,11 @@ public class DatenbankSchnittstelle {
                 ResultSetMetaData rsmd = rs.getMetaData();
                 int columnCount = rsmd.getColumnCount();
                 for (int i = 1; i <= columnCount; i++) {
-                    rsMap.put(rsmd.getColumnName(i), new ArrayList<String>());
+                    rsMap.put(rsmd.getColumnName(i).toUpperCase(), new ArrayList<String>());
                 }
                 while (rs.next()) {
                     for (int i = 1; i <= columnCount; i++) {
-                        rsMap.get(rsmd.getColumnName(i)).add(rs.getString(i));
+                        rsMap.get(rsmd.getColumnName(i).toUpperCase()).add(rs.getString(i));
                     }
                 }
                 //------------------------------------------------------

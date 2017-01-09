@@ -42,10 +42,15 @@ public class ArtikelCache extends Cache{
             for (int i=0;i<ids.size();i++){
                 artikel=(Artikel)(state==true?elements[0].get(Long.parseLong(ids.get(i))):elements[1].get(Long.parseLong(ids.get(i))));                 //andersrum als bei getById
                 
-                String ourTime=zeitstempel.get(i).replace(' ', 'T');
-                artikel.setZeitstempel(LocalDateTime.parse(ourTime));
-                artikel.setUser_Parameter(user_parameter.get(i));
-                artikel.setId_Warentraeger(this.readWarentraeger(artikel.getId()));
+                if(artikel != null){ // Fall neue Artikel hinzukommen ignorieren
+                    if(zeitstempel.get(i)!=null){
+                        artikel.setZeitstempel(LocalDateTime.parse(zeitstempel.get(i).replace(' ', 'T')));
+                    } else {
+                        artikel.setZeitstempel(LocalDateTime.MIN);
+                    }
+                    artikel.setUser_Parameter(user_parameter.get(i));
+                    artikel.setId_Warentraeger(this.readWarentraeger(artikel.getId()));
+                }
             }
         } catch (DBNotFoundExeption ex) {
             Logger.getLogger(ArtikelCache.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,7 +76,13 @@ public class ArtikelCache extends Cache{
             
             Artikel artikel1,artikel2;            
             for (int i=0;i<ids.size();i++){
-                String ourTime=zeitstempel.get(i).replace(' ', 'T');
+                String ourTime = zeitstempel.get(i);
+                        
+                if(zeitstempel.get(i) != null){
+                    ourTime = ourTime.replace(' ', 'T');
+                }else{
+                    ourTime = LocalDateTime.MIN.toString();
+                }
                 
                 artikel1=new Artikel(Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));
                 artikel2=new Artikel(Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));

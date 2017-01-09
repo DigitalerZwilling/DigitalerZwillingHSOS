@@ -9,6 +9,7 @@ Cache\TransportbandCache.class
 DatenKlassen\Sektor.class
 DatenKlassen\Werkzeug.class
 Websockets\WebSocket.class
+DatenbankSchnittstelle\Exeption\DBNotFoundExeption.class
 Websockets\RoboterWebSocket.class
 Cache\HubQuerPodestCache.class
 Websockets\ArtikelWebSocket.class
@@ -19,6 +20,7 @@ DatenbankSchnittstelle\DatenbankSchnittstelle.class
 Cache\Cache.class
 Websockets\HubQuerPodestWebSocket.class
 Cache\Updater\CacheUpdateThread.class
+DatenbankSchnittstelle\Exeption\QueryExeption.class
 DatenKlassen\HubPodest.class
 Cache\RoboterCache.class
 Cache\Updater\SelfTimer.class

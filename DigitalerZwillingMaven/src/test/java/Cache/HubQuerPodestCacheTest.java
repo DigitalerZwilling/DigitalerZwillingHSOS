@@ -41,17 +41,6 @@ public class HubQuerPodestCacheTest extends CacheTest{
     @Inject
     HubQuerPodestCache cache;
     
-    public HubQuerPodestCacheTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
     }
@@ -60,27 +49,19 @@ public class HubQuerPodestCacheTest extends CacheTest{
     public void tearDown() {
     }
 
-    /**
-     * Test of update method, of class HubQuerPodestCache.
-     */
-    @Test
-    public void testUpdate() {
-        System.out.println("update");
-        HubQuerPodestCache instance = new HubQuerPodestCache();
-    }
-
-    /**
-     * Test of updateAll method, of class HubQuerPodestCache.
-     */
-    @Test
-    public void testUpdateAll() {
-        System.out.println("updateAll");
-        HubQuerPodestCache instance = new HubQuerPodestCache();
+    @Override
+    public Cache getCache() {
+        return cache; 
     }
 
     @Override
-    public Cache getCache() {
-        return cache;
+    public void testUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void testUpdateAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

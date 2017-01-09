@@ -16,8 +16,10 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 
 /**
@@ -37,31 +39,26 @@ public class WarentraegerCacheTest extends CacheTest{
     @Inject
     WarentraegerCache cache;
 
-    /**
-     * Test of update method, of class WarentraegerCache.
-     */
-    @Test
-    @Override
-    public void testUpdate() {
-        System.out.println("update");
+    @Before
+    public void setUp() {
     }
-
-    /**
-     * Test of updateAll method, of class WarentraegerCache.
-     */
-    @Test
-    @Override
-    public void testUpdateAll() {
-        System.out.println("updateAll");
-    }
-
-    @Override
-    public void testGetAll() {
+    
+    @After
+    public void tearDown() {
     }
 
     @Override
     public Cache getCache() {
-        return cache;
+        return cache; 
     }
-    
+
+    @Override
+    public void testUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void testUpdateAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

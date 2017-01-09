@@ -41,17 +41,6 @@ public class GelenkCacheTest extends CacheTest{
     @Inject
     GelenkCache cache;
     
-    public GelenkCacheTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
     }
@@ -60,31 +49,19 @@ public class GelenkCacheTest extends CacheTest{
     public void tearDown() {
     }
 
-    /**
-     * Test of update method, of class GelenkCache.
-     */
-    @Test
-    @Override
-    public void testUpdate(){
-        System.out.println("update");
-    }
-
-    /**
-     * Test of updateAll method, of class GelenkCache.
-     */
-    @Test
-    @Override
-    public void testUpdateAll(){
-        System.out.println("updateAll");
-    }
-
-    @Override
-    public void testGetAll() {
-    }
-
     @Override
     public Cache getCache() {
         return cache; 
+    }
+
+    @Override
+    public void testUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void testUpdateAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

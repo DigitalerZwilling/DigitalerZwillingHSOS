@@ -1,8 +1,7 @@
 #surefire
-#Fri Jan 06 16:39:17 CET 2017
+#Mon Jan 09 16:48:01 CET 2017
 enableAssertions=true
 testSuiteDefinitionTestSourceDirectory=C\:\\Users\\User\\Documents\\GitHub\\DigitalerZwillingHSOS\\DigitalerZwillingMaven\\src\\test\\java
-requestedTest=Cache.ArtikelCacheTest
 classPathUrl.33=C\:\\Users\\User\\.m2\\repository\\org\\jboss\\arquillian\\testenricher\\arquillian-testenricher-initialcontext\\1.0.0.Final\\arquillian-testenricher-initialcontext-1.0.0.Final.jar
 classPathUrl.32=C\:\\Users\\User\\.m2\\repository\\org\\jboss\\arquillian\\testenricher\\arquillian-testenricher-resource\\1.0.0.Final\\arquillian-testenricher-resource-1.0.0.Final.jar
 surefireClassPathUrl.1=C\:\\Users\\User\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-api\\2.10\\surefire-api-2.10.jar
@@ -32,9 +31,12 @@ reportsDirectory=C\:\\Users\\User\\Documents\\GitHub\\DigitalerZwillingHSOS\\Dig
 classPathUrl.23=C\:\\Users\\User\\.m2\\repository\\org\\jboss\\shrinkwrap\\shrinkwrap-spi\\1.0.0\\shrinkwrap-spi-1.0.0.jar
 classPathUrl.22=C\:\\Users\\User\\.m2\\repository\\org\\jboss\\shrinkwrap\\shrinkwrap-impl-base\\1.0.0\\shrinkwrap-impl-base-1.0.0.jar
 classPathUrl.21=C\:\\Users\\User\\.m2\\repository\\org\\jboss\\arquillian\\container\\arquillian-container-test-impl-base\\1.0.0.Final\\arquillian-container-test-impl-base-1.0.0.Final.jar
+includes2=**/*TestCase.java
 classPathUrl.20=C\:\\Users\\User\\.m2\\repository\\org\\jboss\\shrinkwrap\\descriptors\\shrinkwrap-descriptors-spi\\2.0.0-alpha-2\\shrinkwrap-descriptors-spi-2.0.0-alpha-2.jar
-includes0=**/Cache/ArtikelCacheTest.java
-failIfNoTests=true
+includes1=**/*Test.java
+includes0=**/Test*.java
+excludes0=**/*$*
+failIfNoTests=false
 useManifestOnlyJar=true
 testClassesDirectory=C\:\\Users\\User\\Documents\\GitHub\\DigitalerZwillingHSOS\\DigitalerZwillingMaven\\target\\test-classes
 classPathUrl.19=C\:\\Users\\User\\.m2\\repository\\org\\jboss\\arquillian\\config\\arquillian-config-impl-base\\1.0.0.Final\\arquillian-config-impl-base-1.0.0.Final.jar

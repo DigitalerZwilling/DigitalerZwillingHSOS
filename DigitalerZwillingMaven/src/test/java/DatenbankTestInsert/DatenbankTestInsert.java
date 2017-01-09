@@ -102,4 +102,14 @@ public class DatenbankTestInsert {
             
         }
     }
+    
+    public void close() throws QueryExeption{
+        if(data != null)
+            try {
+                data.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatenbankTestInsert.class.getName()).log(Level.SEVERE, null, ex);
+            throw new QueryExeption();
+        }
+    }
 }

@@ -8,6 +8,8 @@ package Cache;
 import Cache.Exeption.DBErrorExeption;
 import Cache.Exeption.ElementNotFoundExeption;
 import DatenKlassen.Element;
+import DatenbankSchnittstelle.Exeption.DBNotFoundExeption;
+import DatenbankSchnittstelle.Exeption.QueryExeption;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.validation.constraints.AssertTrue;
@@ -21,10 +23,10 @@ import org.junit.Test;
 public abstract class CacheTest {
     
     @Test
-    abstract public void testUpdate();
+    abstract public void testUpdate() throws DBNotFoundExeption, QueryExeption;
     
     @Test
-    abstract public void testUpdateAll();
+    abstract public void testUpdateAll() throws DBNotFoundExeption, QueryExeption;
     
     @Test
     public void testGetById(){
