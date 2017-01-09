@@ -10,14 +10,18 @@ import Cache.Updater.SelfTimer;
 import Cache.Updater.Updater;
 import Cache.Updater.WebSocketUpdateThread;
 import DatenbankSchnittstelle.DatenbankSchnittstelle;
+import DatenbankSchnittstelle.Exeption.DBNotFoundExeption;
+import DatenbankTestInsert.DatenbankTestInsert;
 import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 
 /**
@@ -36,10 +40,23 @@ public class ArtikelCacheTest extends CacheTest{
     
     @Inject
     ArtikelCache cache;
+    
+    DatenbankTestInsert datenbankTestInsert;
+    
 
     /**
      * Test of update method, of class ArtikelCache.
      */
+    
+    @Before
+    public void setUp() throws DBNotFoundExeption {
+        datenbankTestInsert = new DatenbankTestInsert("jdbc:derby://localhost:1527/db_DigitalerZwilling", "org.apache.derby.jdbc.ClientDriver", "db_user", "SB0222");
+        datenbankTestInsert.datenbankUpdate("Update ");
+    }
+    
+    @After
+    public void tearDown() {
+    }
     
     @Test
     @Override
