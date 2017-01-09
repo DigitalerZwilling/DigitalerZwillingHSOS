@@ -30,7 +30,7 @@ INSERT INTO Hubquerpodest (
 		id_sektor
 	) VALUES (
 		81,
-		'HuQu Sekt1',
+		'HuQu Sekt8',
 		'',
 		0,
 		0,
