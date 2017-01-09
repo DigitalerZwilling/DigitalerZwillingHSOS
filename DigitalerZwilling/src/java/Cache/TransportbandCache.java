@@ -62,11 +62,12 @@ public class TransportbandCache extends Cache{
             Map<Long,Element> allTransportband1=new HashMap<>();
             Map<Long,Element> allTransportband2=new HashMap<>();
             
-            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband,bezeichnung,zeitstempel,user_parameter,stoerung,laenge,geschwindigkeit,id_sektor_vor,id_sektor_nach FROM Transportband");
+            Map<String,List<String>> rsMap= this.datenbankschnittstelle.datenbankAnfrage("SELECT id_transportband,bezeichnung,zeitstempel,reihe,user_parameter,stoerung,laenge,geschwindigkeit,id_sektor_vor,id_sektor_nach FROM Transportband");
             List<String> ids = rsMap.get("ID_TRANSPORTBAND");
             List<String> bezeichnung = rsMap.get("BEZEICHNUNG");
             List<String> zeitstempel = rsMap.get("ZEITSTEMPEL");
             List<String> user_parameter = rsMap.get("USER_PARAMETER");
+            List<String> reihe = rsMap.get("REIHE");
             List<String> stoerung = rsMap.get("STOERUNG");
             List<String> laenge = rsMap.get("LAENGE");
             List<String> geschwindigkeit = rsMap.get("GESCHWINDIGKEIT");
@@ -76,8 +77,8 @@ public class TransportbandCache extends Cache{
             Transportband transportband1,transportband2;
             for (int i=0;i<ids.size();i++){
                 String ourTime = zeitstempel.get(i).replace(' ', 'T');
-                transportband1=new Transportband(Integer.parseInt(stoerung.get(i)),Integer.parseInt(laenge.get(i)),Integer.parseInt(geschwindigkeit.get(i)),Long.parseLong(ids_vor.get(i)),Long.parseLong(ids_nach.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));
-                transportband2=new Transportband(Integer.parseInt(stoerung.get(i)),Integer.parseInt(laenge.get(i)),Integer.parseInt(geschwindigkeit.get(i)),Long.parseLong(ids_vor.get(i)),Long.parseLong(ids_nach.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));
+                transportband1=new Transportband(Integer.parseInt(stoerung.get(i)),Integer.parseInt(laenge.get(i)),Integer.parseInt(geschwindigkeit.get(i)),Integer.parseInt(reihe.get(i)),Long.parseLong(ids_vor.get(i)),Long.parseLong(ids_nach.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));
+                transportband2=new Transportband(Integer.parseInt(stoerung.get(i)),Integer.parseInt(laenge.get(i)),Integer.parseInt(geschwindigkeit.get(i)),Integer.parseInt(reihe.get(i)),Long.parseLong(ids_vor.get(i)),Long.parseLong(ids_nach.get(i)),Long.parseLong(ids.get(i)),bezeichnung.get(i),user_parameter.get(i),LocalDateTime.parse(ourTime));
                 
                 transportband1.setWarentraegerIDs(this.readWarentraeger(transportband1.getId()));
                 transportband2.setWarentraegerIDs(this.readWarentraeger(transportband2.getId()));

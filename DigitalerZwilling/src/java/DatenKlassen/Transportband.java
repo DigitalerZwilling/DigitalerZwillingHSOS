@@ -19,17 +19,27 @@ public class Transportband extends Element{
     private int stoerung;
     private int laenge;
     private int geschwindigkeit;
+    private int reihe;
     private List<Long> warentraegerIDs;
     private Long vorSektorID;
     private Long nachSektorID;
 
-    public Transportband(int stoerung, int laenge, int geschwindigkeit, Long vorSektorID, Long nachSektorID, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
+    public Transportband(int stoerung, int laenge, int geschwindigkeit, int reihe, Long vorSektorID, Long nachSektorID, Long id, String bezeichnung, String user_Parameter, LocalDateTime zeitstempel) {
         super(id, bezeichnung, user_Parameter, zeitstempel);
         this.stoerung = stoerung;
         this.laenge = laenge;
         this.geschwindigkeit = geschwindigkeit;
+        this.reihe = reihe;
         this.vorSektorID = vorSektorID;
         this.nachSektorID = nachSektorID;
+    }
+
+    public int getReihe() {
+        return reihe;
+    }
+
+    public void setReihe(int reihe) {
+        this.reihe = reihe;
     }
 
     public int getStoerung() {
@@ -88,6 +98,7 @@ public class Transportband extends Element{
         json += "\"bezeichnung\": \"" + bezeichnung + "\",";
         json += "\"user_Parameter\": \"" + user_Parameter + "\",";
         json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",";
+        json += "\"reihe\": " + reihe + ",";
         json += "\"stoerung\": " + stoerung + ",";
         json += "\"laenge\": " + laenge + ",";
         json += "\"geschwindigkeit\": " + geschwindigkeit + ",";

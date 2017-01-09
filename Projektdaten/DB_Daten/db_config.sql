@@ -36,6 +36,7 @@ CREATE TABLE Transportband (
 	bezeichnung VARCHAR(100),
 	zeitstempel TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_parameter LONGTEXT,
+	reihe INT,
 	stoerung INT,
 	laenge INT,
 	geschwindigkeit INT,
