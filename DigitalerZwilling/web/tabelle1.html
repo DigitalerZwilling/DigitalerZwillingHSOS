@@ -35,7 +35,12 @@
     var warentraegerSocket = new WebSocket(host+"WarentraegerWebSocket");
     var transportbandSocket = new WebSocket(host+"TransportbandWebSocket");
     var roboterSocket = new WebSocket(host+"RoboterWebSocket");
-
+    var sektorSocket = new WebSocket(host+"SektorWebSocket");
+    var sensorSocket = new WebSocket(host+"SensorWebSocket");
+    var gelenkSocket = new WebSocket(host+"GelenkWebSocket");
+    var werkzeugSocket = new WebSocket(host+"WerzeugWebSocket");
+    var hubpoSocket = new WebSocket(host+"HubPodestWebSocket");
+    var huquSocket = new WebSocket(host+"HubQuerPodestWebSocket");
 
    $(document).ready(function(){
         console.log("Start");
@@ -49,7 +54,7 @@
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
                     erzeugeTabelle("Artikel", received_msg);
-                }
+                };
             break;
             
             case "Warenträger":
@@ -60,8 +65,9 @@
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
                     erzeugeTabelle("Warentraeger", received_msg); 
-                }
+                };
                 break;
+                
             case "Transportbänder":
                transportbandSocket.onopen = function() {
                     transportbandSocket.send("LIST");
@@ -71,8 +77,9 @@
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
                     erzeugeTabelle("Transportband", received_msg);
-                }
+                };
                 break;
+                
             case "Roboter":
                 roboterSocket.onopen = function() {
                     roboterSocket.send("LIST");
@@ -82,29 +89,78 @@
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
                     erzeugeTabelle("Roboter", received_msg);
-                }
+                };
                 break;
+                
             case "Sektoren":
-              
+                sektorSocket.onopen = function() {
+                    roboterSocket.send("LIST");
+                };
+                
+                sektorSocket.onmessage = function(event) {
+                    var received_msg = event.data;
+                    console.log("Message"+received_msg);
+                    erzeugeTabelle("Sektor", received_msg);
+                };
                 break;
             case "Sensoren":
-               
+                sensorSocket.onopen = function() {
+                    sensorSocket.send("LIST");
+                };
+                
+                sensorSocket.onmessage = function(event) {
+                    var received_msg = event.data;
+                    console.log("Message"+received_msg);
+                    erzeugeTabelle("Sensor", received_msg);
+                };
                 break;
             case "Gelenke":
+                 gelenkSocket.onopen = function() {
+                    gelenkSocket.send("LIST");
+                };
                 
+                gelenkSocket.onmessage = function(event) {
+                    var received_msg = event.data;
+                    console.log("Message"+received_msg);
+                    erzeugeTabelle("Gelenk", received_msg);
+                };
                 break;
+           
             case "Werkzeuge":
-               
+                 werkzeugSocket.onopen = function() {
+                    roboterSocket.send("LIST");
+                };
+                
+                werkzeugSocket.onmessage = function(event) {
+                    var received_msg = event.data;
+                    console.log("Message"+received_msg);
+                    erzeugeTabelle("Werkzeug", received_msg);
+                };
                 break;
             case "Hubpositionierstationen":
-               
+                huboSocket.onopen = function() {
+                    roboterSocket.send("LIST");
+                };
+                
+                huboSocket.onmessage = function(event) {
+                    var received_msg = event.data;
+                    console.log("Message"+received_msg);
+                    erzeugeTabelle("Hubpositionierstation", received_msg);
+                };
                 break;
             case "Hub-Quer-Stationen":
-              
+                huquSocket.onopen = function() {
+                    roboterSocket.send("LIST");
+                };
+                
+                huquSocket.onmessage = function(event) {
+                    var received_msg = event.data;
+                    console.log("Message"+received_msg);
+                    erzeugeTabelle("HubQuerStation", received_msg);
+                };
                 break;
             default:
                 document.getElementById("spalte1.1").innerHTML = 'Fehler beim Darstellen der Tabelle (ready-Function)';
-
       }
     });
 
@@ -126,33 +182,79 @@
             case 'Artikel':
                 artikelSocket.onmessage = function(event) {
                 var received_msg = event.data;
-                console.log("Message"+received_msg);
+                //console.log("Message"+received_msg);
                 updateTabelle("Artikel", received_msg);
             }
             break;
         case 'Warentraeger':
             warentraegerSocket.onmessage = function(event) {
                 var received_msg = event.data;
-                console.log("Message"+received_msg);
+                //console.log("Message"+received_msg);
                 updateTabelle("Warentraeger", received_msg);
             }
             break;
         case 'Transportband':
                 transportbandSocket.onmessage = function(event) {
                 var received_msg = event.data;
-                console.log("Message"+received_msg);
+                //console.log("Message"+received_msg);
                 updateTabelle("Transportband", received_msg);
             }
             break;
-         case 'Roboter':
+        case 'Roboter':
                 roboterSocket.onmessage = function(event) {
                 var received_msg = event.data;
-                console.log("Message"+received_msg);
+                //console.log("Message"+received_msg);
                 updateTabelle("Roboter", received_msg);
             }
             break;
-            default:
-                document.getElementById("spalte1.1").innerHTML = 'Fehler beim Switch in tabelleErzeugen()';
+        case "Sektor":
+            sektorSocket.onmessage = function(event) {
+                var received_msg = event.data;
+                //console.log("Message"+received_msg);
+                updateTabelle("Sektor", received_msg);
+            }
+            break;
+        case "Sensor":
+            sensorSocket.onmessage = function(event) {
+                var received_msg = event.data;
+                //console.log("Message"+received_msg);
+                updateTabelle("Sensor", received_msg);
+            }
+            break;
+        case "Gelenk":
+             gelenkSocket.onmessage = function(event) {
+                var received_msg = event.data;
+                //console.log("Message"+received_msg);
+                updateTabelle("Gelenk", received_msg);
+            }
+            break;
+
+        case "Werkzeug":
+            werkzeugSocket.onmessage = function(event) {
+                var received_msg = event.data;
+                //console.log("Message"+received_msg);
+                updateTabelle("Werkzeug", received_msg);
+            }
+            break;
+            
+        case "Hubpositionierstation":
+            hupoSocket.onmessage = function(event) {
+                var received_msg = event.data;
+                //console.log("Message"+received_msg);
+                updateTabelle("Hubpositionierstation", received_msg);
+            }
+            break;
+            
+        case "HubQuerStation":
+            huquSocket.onmessage = function(event) {
+                var received_msg = event.data;
+                //console.log("Message"+received_msg);
+                updateTabelle("HubQuerStation", received_msg);
+            }
+            break;
+            
+        default:
+            document.getElementById("spalte1.1").innerHTML = 'Fehler beim Switch in tabelleErzeugen()';
         }
     }
         
@@ -188,7 +290,7 @@
             case "Hubpositionierstation":
                 spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Position'];
                 return spaltennamen;
-            case "Hub-Quer-Station":
+            case "HubQuerStation":
                 spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Motor'];
                 return spaltennamen;
             default:
@@ -236,7 +338,7 @@
                 case "Hubpositionierstation":
                    /*TODO*/
                    break;
-                case "Hub-Quer-Station":
+                case "HubQuerStation":
                     //TODO
                     break;
                 default:
