@@ -21,8 +21,7 @@ import javax.websocket.server.ServerEndpoint;
  */
 @ServerEndpoint("/WerkzeugWebSocket")
 public class WerkzeugWebSocket extends WebSocket{
-    @Inject
-    Updater webSocketUpdater;
+    //@Inject Updater webSocketUpdater;
     
     @Inject
     WerkzeugCache werkzeugCache;

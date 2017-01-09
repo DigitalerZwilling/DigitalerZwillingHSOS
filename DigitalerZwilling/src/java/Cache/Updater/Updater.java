@@ -22,6 +22,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import org.jboss.logging.Logger;
 
+
 /**
  *
  * @author User
@@ -31,6 +32,8 @@ public class Updater {
     private final List<Cache> caches;
     private final List<WebSocket> webSockets;
     
+    
+    private List<WebSocket> toRegister;
     @Inject
     private WebSocketUpdateThread webSocketUpdateThread;
     private Thread webSocketThread;
@@ -41,6 +44,9 @@ public class Updater {
     
     @Resource
     private ManagedThreadFactory managedThreadFactory;
+    
+    Boolean websocketsGesperrt=false;
+    //Boolean test=false;
     
     //@Resource
     //private TimerService timerService;
@@ -53,6 +59,7 @@ public class Updater {
     public Updater(){
         caches = new ArrayList<>();
         webSockets = new ArrayList<>();
+        this.toRegister=new ArrayList<>();
         //timer = timerService.createTimer(500, 500, "New Updater interval Timer");
     }
     
@@ -74,12 +81,31 @@ public class Updater {
     }
     
     public void updateWebSockets(){
+        websocketsGesperrt=true;
+        System.out.println("update start");
+        List<WebSocket> toDelete=new ArrayList<WebSocket>();
         for(WebSocket webSocket: webSockets){
-            webSocket.update();
+            try{
+            if(webSocket==null) toDelete.add(webSocket);
+            else webSocket.update();
+            }catch (IllegalStateException ex){
+            toDelete.add(webSocket);
+            java.util.logging.Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        for(WebSocket webSocket: toDelete){
+            this.webSockets.remove(webSocket);
+        }
+        System.out.println("update end");
+        websocketsGesperrt=false;
+        for(WebSocket webSocket: toRegister){
+            this.webSockets.add(webSocket);
+        }
+        toRegister.clear();
     }
     
     public void updateCaches(){
+        //test=true;
         for(Cache cache: caches){
             try {
                 cache.update();
@@ -87,10 +113,12 @@ public class Updater {
                 java.util.logging.Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        //test=false;
     }
     
     //@Timeout
     public void updateAll(Timer timer){
+        System.out.println(this.webSockets.size());
         for(Cache cache: caches){
             cache.toggleState();
             break;
@@ -115,10 +143,16 @@ public class Updater {
     }
     
     public void addWebSocket(WebSocket webSocket){
-        this.webSockets.add(webSocket);
+        System.out.println("adde webSocket"+webSocket.toString());
+        
+       
+        if(!websocketsGesperrt) this.webSockets.add(webSocket);
+        else this.toRegister.add(webSocket);
     }
     
     public void removeWebSocket(WebSocket webSocket){
-      this.webSockets.remove(webSocket);
+      System.out.println("loesche webSocket");
+      //System.out.println(websocketsGesperrt);
+      if(!websocketsGesperrt) this.webSockets.remove(webSocket);
     }
 }

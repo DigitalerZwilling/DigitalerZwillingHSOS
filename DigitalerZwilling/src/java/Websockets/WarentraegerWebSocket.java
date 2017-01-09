@@ -22,8 +22,7 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/WarentraegerWebSocket")
 public class WarentraegerWebSocket extends WebSocket{
 
-  @Inject
-  Updater webSocketUpdater;
+  //@Inject Updater webSocketUpdater;
   
   @Inject
   WarentraegerCache warentraegerCache;

@@ -164,3 +164,11 @@ CREATE TABLE Roboter_Werkzeug (
 	FOREIGN KEY (id_werkzeug) REFERENCES Werkzeug(id_werkzeug)
 	);
 	
+CREATE TABLE Hubquerpodest_Hubquerpodest (
+	id_Hubquerpodest1 BIGINT,
+	id_hubquerpodest2 BIGINT,
+	PRIMARY KEY (id_hubquerpodest1, id_hubquerpodest2),
+	FOREIGN KEY (id_hubquerpodest1) REFERENCES Hubquerpodest(id_hubquerpodest1),
+	FOREIGN KEY (id_hubquerpodest2) REFERENCES Hubquerpodest(id_hubquerpodest2)
+	);
+	

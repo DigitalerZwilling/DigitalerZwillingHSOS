@@ -8,12 +8,14 @@ package Websockets;
 import Cache.Cache;
 import Cache.Exeption.DBErrorExeption;
 import Cache.Exeption.ElementNotFoundExeption;
+import Cache.Updater.Updater;
 import DatenKlassen.Element;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.inject.Inject;
 import javax.websocket.Session;
 
 /**
@@ -21,6 +23,9 @@ import javax.websocket.Session;
  * @author user
  */
 public abstract class WebSocket {
+    @Inject
+    protected Updater webSocketUpdater;
+    
     private Session session;
     private Long id;
     private Boolean registriert;
@@ -29,8 +34,9 @@ public abstract class WebSocket {
         this.registriert = Boolean.FALSE;
     }
     
-    public void update() {
+    public void update() throws IllegalStateException{
         try{
+            
             if(id == null){
                 // Liste
                 session.getBasicRemote().sendText(this.ListToJson(this.getCache().getAll()));
@@ -39,13 +45,13 @@ public abstract class WebSocket {
                 // nur ein Element
                 session.getBasicRemote().sendText(this.getCache().getById(id).toJson());
             }
+            
+            
         } catch (IOException ex) {
             Logger.getLogger(WebSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ElementNotFoundExeption ex) {
             Logger.getLogger(WebSocket.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalStateException ex){
-            Logger.getLogger(WebSocket.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
     
     protected abstract Cache getCache();

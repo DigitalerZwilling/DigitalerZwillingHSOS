@@ -22,8 +22,7 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/GelenkWebSocket")
 public class GelenkWebSocket extends WebSocket{
 
-    @Inject
-    Updater webSocketUpdater;
+    //@Inject Updater webSocketUpdater;
     
     @Inject
     GelenkCache gelenkCache;

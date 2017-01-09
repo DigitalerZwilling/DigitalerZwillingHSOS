@@ -21,8 +21,7 @@ import javax.websocket.server.ServerEndpoint;
  */
 @ServerEndpoint("/ArtikelWebSocket")
 public class ArtikelWebSocket extends WebSocket{
-    @Inject
-    Updater webSocketUpdater;
+    //@Inject Updater webSocketUpdater;
     
     @Inject
     ArtikelCache artikelCache;

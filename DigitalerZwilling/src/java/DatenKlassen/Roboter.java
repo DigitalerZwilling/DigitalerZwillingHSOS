@@ -132,7 +132,7 @@ public class Roboter extends Element{
         }
         json += "],";
         
-        json += "\"werzeugIDs\": [";
+        json += "\"werkzeugIDs\": [";
         for(int i=0;i<werkzeugID.size();i++){
             json += werkzeugID.get(i);
             if(i < (werkzeugID.size()-1)){
