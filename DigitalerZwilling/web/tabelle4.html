@@ -17,13 +17,13 @@ d.h. wir müssen der Funktion, die die Tabelle erzeugt sowohl das Array, als auc
 <!--<body> -->
 
 
-    <table class="table table-striped" width="100" border="0" cellpadding="0" cellspacing="1" id="tabelle1">
+    <table class="table table-striped" width="100" border="0" cellpadding="0" cellspacing="1" id="tabelle4">
     <!--Tabelle an der die Daten angehangen werden -->
         <thead>
             <tr>
-                <th id = "spalte1.1"></th>
-                <th id = "spalte1.2"></th>
-                <th id = "spalte1.3"></th> 
+                <th id = "spalte4.1"></th>
+                <th id = "spalte4.2"></th>
+                <th id = "spalte4.3"></th> 
             </tr>
         </thead>
 
@@ -61,7 +61,7 @@ d.h. wir müssen der Funktion, die die Tabelle erzeugt sowohl das Array, als auc
         var spaltennamen = ['Bezeichnung', 'Zeitstempel']; 
 
         //Erstellen der Tabelle
-        node = document.getElementById("tabelle1");
+        node = document.getElementById("tabelle4");
         node.parentNode.insertBefore(createTable(artikelListe, spaltennamen, artikelListe.inhalt.length, spaltennamen.length), node);
     }   
 
@@ -83,7 +83,7 @@ d.h. wir müssen der Funktion, die die Tabelle erzeugt sowohl das Array, als auc
         spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Montagezustand'];
         
         //Erstellen der Tabelle
-        node = document.getElementById("tabelle1");
+        node = document.getElementById("tabelle4");
         node.parentNode.insertBefore(createTable(warentraegerListe, spaltennamen, warentraegerListe.inhalt.length, spaltennamen.length), node);
     }   
 
@@ -105,7 +105,7 @@ d.h. wir müssen der Funktion, die die Tabelle erzeugt sowohl das Array, als auc
         var spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Stoerung'];
 
         //Erstellen der Tabelle
-        node = document.getElementById("tabelle1");
+        node = document.getElementById("tabelle4");
         node.parentNode.insertBefore(createTable(transportbaenderListe, spaltennamen, transportbaenderListe.inhalt.length, spaltennamen.length), node);
     }
 
@@ -118,16 +118,16 @@ d.h. wir müssen der Funktion, die die Tabelle erzeugt sowohl das Array, als auc
         if (spaltennamen < 2){
             console.log("Fehler: spaltennamen < 2");
         }else{
-            document.getElementById("spalte1.1").innerHTML = spaltennamen[0];
-            document.getElementById("spalte1.2").innerHTML = spaltennamen[1];
+            document.getElementById("spalte4.1").innerHTML = spaltennamen[0];
+            document.getElementById("spalte4.2").innerHTML = spaltennamen[1];
         }
 
         //Falls eine dritte Spalte benötigt wird:
         if (spaltennamen.length == 3){
-            document.getElementById("spalte1.3").innerHTML = spaltennamen[2];
+            document.getElementById("spalte4.3").innerHTML = spaltennamen[2];
         }
 
-        var myTable = document.getElementById("tabelle1"); //holt sich die im Body erstellte Tabelle
+        var myTable = document.getElementById("tabelle4"); //holt sich die im Body erstellte Tabelle
 
             var mytablebody = document.createElement("tbody");
 
@@ -168,7 +168,7 @@ d.h. wir müssen der Funktion, die die Tabelle erzeugt sowohl das Array, als auc
                                 case "Motor":
                                     break;
                                 default:
-                                 document.getElementById("spalte1.3").innerHTML = 'Fehler in switch case';
+                                 document.getElementById("spalte4.3").innerHTML = 'Fehler in switch case';
                                     
                             } 
                         }

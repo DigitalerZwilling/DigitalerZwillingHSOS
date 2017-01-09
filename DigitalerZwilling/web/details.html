@@ -1,51 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	</head>
+
 			<script>
+				var idBtn = null;
+
 				$(document).ready(function(){
-		         	$(".btn.dropdown-toggle").click(function(){
-	            		var idBtn = $(this).attr('id');
+					localStorage.setItem("mainContainer", "details");
+					
+					//LocalStorage abfragen: Daten für beständiges Div vorhanden?
+					if(localStorage.getItem("divOfTwoViews")!=null){
+						steadyDiv(localStorage.getItem("divOfTwoViews"));
+					}else{
+						console.log("No data for steady div in local storage!");
+					}
+
+					$(".btn.btn-default.dropdown-toggle").on('click', function(){
+	            		idBtn = $(this).attr('id');
 	            		console.log(idBtn);
-
-		            	$(".dropdown-menu li a").click(function(){
-		            		$caret = ' <span class="caret"></span>';
-		            		$val = $(this).html();
-		            		console.log($val);
-
-
-		            		switch(idBtn){
-		            			case "dd-btn1":
-		            			$(".btn.dropdown-toggle.dd-btn1").html($val+$caret);
-								$("#einzelansicht1").load("tabelle1.html", {$val});
-								break;
-
-								case "dd-btn2":
-		            			$(".btn.dropdown-toggle.dd-btn2").html($val+$caret);
-								$("#einzelansicht2").load("tabelle2.html", {$val});
-								break;
-
-								case "dd-btn3":
-		            			$(".btn.dropdown-toggle.dd-btn3").html($val+$caret);
-								$("#einzelansicht3").load("tabelle3.html", {$val});
-								break;
-
-								case "dd-btn4":
-		            			$(".btn.dropdown-toggle.dd-btn4").html($val+$caret);
-								$("#einzelansicht4").load("tabelle4.html", {$val});
-								break;
-
-								case "dd-btn5":
-		            			$(".btn.dropdown-toggle.dd-btn5").html($val+$caret);
-								$("#einzelansicht5").load("tabelle5.html", {$val});
-								break;
-
-								case "dd-btn6":
-		            			$(".btn.dropdown-toggle.dd-btn6").html($val+$caret);
-								$("#einzelansicht6").load("tabelle6.html", {$val});
-
-		            		}
-						});
+	            		loadDiv(idBtn);
 	            	});
-	        	});
+	            });
+
+				function steadyDiv(itemOfLocalStorage){
+					$val = itemOfLocalStorage;
+        			$(".dd-btn6").html($val+$caret);
+            		$("#einzelansicht6").load("tabelle6.html", $val);
+				}
+
+
+	           	function loadDiv(idBtn){
+	            	console.log("loadDivOpt");
+	            	$caret = ' <span class="caret"></span>';
+	            	switch(idBtn){
+	            		case "dd-btn1":
+	            		$(".dropdown1 li a").click(function(){
+	            			$val = $(this).html();
+        					$(".dd-btn1").html($val+$caret);
+            				$("#einzelansicht1").load("tabelle1.html", $val);
+            			});
+
+	            		case "dd-btn2":
+	            		$(".dropdown2 li a").click(function(){
+	            			$val = $(this).html();
+        					$(".dd-btn2").html($val+$caret);
+            				$("#einzelansicht2").load("tabelle2.html", $val);
+            			});
+
+	            		case "dd-btn3":
+	            		$(".dropdown3 li a").click(function(){
+	            			$val = $(this).html();
+        					$(".dd-btn3").html($val+$caret);
+            				$("#einzelansicht3").load("tabelle3.html", $val);
+            			});
+
+            			case "dd-btn4":
+	            		$(".dropdown4 li a").click(function(){
+	            			$val = $(this).html();
+        					$(".dd-btn4").html($val+$caret);
+            				$("#einzelansicht4").load("tabelle4.html", $val);
+            			});
+
+            			case "dd-btn5":
+	            		$(".dropdown5 li a").click(function(){
+        					$(".dd-btn5").html($val+$caret);
+            				$("#einzelansicht5").load("tabelle5.html", $val);
+            			});
+
+            			case "dd-btn6":
+	            		$(".dropdown6 li a").click(function(){
+	            			$val = $(this).html();
+
+	            			//Store information for steady div
+            				localStorage.setItem("divOfTwoViews", $val);
+
+        					$(".dd-btn6").html($val+$caret);
+            				$("#einzelansicht6").load("tabelle6.html", $val);
+            			});
+
+	            	}
+	            }      
+
+	            	
 			</script>
 
 			
@@ -57,7 +95,7 @@
 					<div class="row" style="background-color:lightgrey; height:100%;">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panelEinzelansicht">
 							<div class="panel panel-default" style="height:100%; overflow-y: auto;">
-							  	<div class="panel-body">
+							  	<div class="panel-body" id="panel1">
 							  		<div class="btn-group" role="group" aria-label="...">
 								    	<div class="btn-group" role="group">
 	  										<button type="button" class="btn btn-default dropdown-toggle dd-btn1" id="dd-btn1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wähle Komponente <span class="caret"></span></button>
@@ -114,7 +152,7 @@
 					<div class="row" style="background-color:lightgrey; height:100%;">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panelEinzelansicht">
 							<div class="panel panel-default" style="height:100%; overflow-y: auto;">
-							  	<div class="panel-body">
+							  	<div class="panel-body" id="panel3">
 							  		<div class="btn-group" role="group" aria-label="...">
 								    	<div class="btn-group" role="group">
 	  										<button type="button" class="btn btn-default dropdown-toggle dd-btn3" id="dd-btn3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wähle Komponente <span class="caret"></span></button>
