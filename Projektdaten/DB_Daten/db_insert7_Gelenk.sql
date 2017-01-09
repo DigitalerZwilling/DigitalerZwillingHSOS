@@ -31,5 +31,5 @@ INSERT INTO Gelenk (
 		'Translationsgelenk',
 		2,
 		0,
-		4
+		2
 	);

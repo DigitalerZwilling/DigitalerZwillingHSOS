@@ -2,7 +2,7 @@ DELIMITER //
 CREATE PROCEDURE `UPDATE_ARTIKEL_WARENTRAEGER`(IN `id_warentraeger` BIGINT, IN `id_artikel_1` BIGINT, IN `id_artikel_2` BIGINT, IN `id_artikel_3` BIGINT)
     MODIFIES SQL DATA
 BEGIN
-	DELETE FROM Artikel_Warentraeger WHERE id_warentraeger = `id_warentraeger`;
+	DELETE FROM Artikel_Warentraeger WHERE Artikel_Warentraeger.id_warentraeger = `id_warentraeger`;
 	
 	IF `id_artikel_1` <> NULL THEN
 		INSERT INTO Artikel_Warentraeger(id_artikel, id_warentraeger) VALUES (`id_artikel_1`, `id_warentraeger`);
@@ -22,7 +22,7 @@ DELIMITER //
 CREATE PROCEDURE `UPDATE_ROBOTER_SEKTOR`(IN `id_roboter` BIGINT, IN `id_sektor` BIGINT)
     MODIFIES SQL DATA
 BEGIN
-	DELETE FROM Roboter_Sektor WHERE id_roboter = `id_roboter`;
+	DELETE FROM Roboter_Sektor WHERE Roboter_Sektor.id_roboter = `id_roboter`;
 	INSERT INTO Roboter_Sektor(id_roboter, id_sektor) VALUES (`id_roboter`, `id_sektor`);
 END//
 DELIMITER ;
@@ -31,7 +31,7 @@ DELIMITER //
 CREATE PROCEDURE `UPDATE_ROBOTER_WERKZEUG`(IN `id_roboter` BIGINT, IN `id_werkzeug` BIGINT)
     MODIFIES SQL DATA
 BEGIN
-	DELETE FROM Roboter_Werkzeug WHERE id_roboter = `id_roboter`;
+	DELETE FROM Roboter_Werkzeug WHERE Roboter_Werkzeug.id_roboter = `id_roboter`;
 	INSERT INTO Roboter_Werkzeug(id_roboter, id_werkzeug) VALUES (`id_roboter`, `id_werkzeug`);
 END//
 DELIMITER ;

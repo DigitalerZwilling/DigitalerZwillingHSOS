@@ -6,8 +6,22 @@ INSERT INTO Werkzeug (
 		id_roboter
 	) VALUES (
 		1,
-		'Beispielwerkzeug',
+		'Beispielwerkzeug1',
 		'',
 		0,
 		3
+	);
+	
+INSERT INTO Werkzeug (
+		id_werkzeug,
+		bezeichnung,
+		user_parameter,
+		zustand,
+		id_roboter
+	) VALUES (
+		2,
+		'Beispielwerkzeug2',
+		'',
+		0,
+		2
 	);
