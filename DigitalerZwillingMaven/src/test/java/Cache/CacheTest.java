@@ -23,7 +23,7 @@ import org.junit.Test;
 public abstract class CacheTest {
     
     @Test
-    abstract public void testUpdate() throws DBNotFoundExeption, QueryExeption;
+    abstract public void testUpdate() throws DBNotFoundExeption, QueryExeption, DBErrorExeption;
     
     @Test
     abstract public void testUpdateAll() throws DBNotFoundExeption, QueryExeption;

@@ -5,6 +5,7 @@
  */
 package Cache;
 
+import Cache.Exeption.DBErrorExeption;
 import Cache.Updater.CacheUpdateThread;
 import Cache.Updater.SelfTimer;
 import Cache.Updater.Updater;
@@ -51,26 +52,50 @@ public class ArtikelCacheTest extends CacheTest{
     
     @Before
     public void setUp() throws DBNotFoundExeption, QueryExeption {
-        DatenbankTestInsert datenbankTestInsert = new DatenbankTestInsert("jdbc:derby://localhost:1527/db_DigitalerZwilling", "org.apache.derby.jdbc.ClientDriver", "db_user", "SB0222");
+        DatenbankTestInsert datenbankTestInsert = new DatenbankTestInsert();
         datenbankTestInsert.datenbankUpdate("INSERT INTO ARTIKEL (BEZEICHNUNG) VALUES ('CacheTestArtikel1')");
         datenbankTestInsert.datenbankUpdate("INSERT INTO ARTIKEL (BEZEICHNUNG) VALUES ('CacheTestArtikel2')");
         datenbankTestInsert.datenbankUpdate("INSERT INTO WARENTRAEGER (BEZEICHNUNG, STOERUNG,"
                 + "MONTAGEZUSTAND,RFID_INHALT,ABSTAND_MM) VALUES "
                 + "('CacheTestWarentraeger1',0,100,'FOOBAR',42)");
-        Map<String, List<String>> datenbankAnfrage = datenbankTestInsert.datenbankAnfrage("SELECT ID_ARTIKEL FROM ARTIKEL");
-        List<String> id = datenbankAnfrage.get("ID_Artikel");
+        Map<String, List<String>> datenbankAnfrage = datenbankTestInsert.
+                datenbankAnfrage("SELECT ID_ARTIKEL,BEZEICHNUNG FROM ARTIKEL WHERE BEZEICHNUNG LIKE 'CacheTestArtikel1'");
+        List<String> id = datenbankAnfrage.get("ID_ARTIKEL");
         List<String> bezeichnung = datenbankAnfrage.get("BEZEICHNUNG");
+        Long artikelId = new Long(0);
         for(int i=0;i<id.size();i++){
-            if(bezeichnung.get(i).equals("CacheTestArtikel1"))
+            if(bezeichnung.get(i).equals("CacheTestArtikel1")){
+                artikelId = Long.parseLong(id.get(i));
+            }
         }
-        //datenbankTestInsert.datenbankUpdate("INSERT INTO ARTIKEL_WARENTRAEGER (ID_ARTIKEL, ID_WARENTRAEGER) VALUES (4242,4242)");
+        
+        datenbankAnfrage = datenbankTestInsert.
+                datenbankAnfrage("SELECT ID_WARENTRAEGER,BEZEICHNUNG FROM WARENTRAEGER WHERE BEZEICHNUNG LIKE 'CacheTestWarentraeger1'");
+        id = datenbankAnfrage.get("ID_WARENTRAEGER");
+        bezeichnung = datenbankAnfrage.get("BEZEICHNUNG");
+        Long warentraegerId = new Long(0);
+        for(int i=0;i<id.size();i++){
+            if(bezeichnung.get(i).equals("CacheTestWarentraeger1")){
+                warentraegerId = Long.parseLong(id.get(i));
+            }
+        }
+        
+        datenbankTestInsert.datenbankUpdate("INSERT INTO ARTIKEL_WARENTRAEGER (ID_ARTIKEL, ID_WARENTRAEGER) VALUES ("+artikelId+","+warentraegerId+")");
         datenbankTestInsert.close();
     }
     
     @After
     public void tearDown() throws DBNotFoundExeption, QueryExeption {
-        DatenbankTestInsert datenbankTestInsert = new DatenbankTestInsert("jdbc:derby://localhost:1527/db_DigitalerZwilling", "org.apache.derby.jdbc.ClientDriver", "db_user", "SB0222");
-        //datenbankTestInsert.datenbankUpdate("DELETE FROM ARTIKEL_WARENTRAEGER WHERE ID_ARTIKEL = 4242 AND ID_WARENTRAEGER = 4242");
+        DatenbankTestInsert datenbankTestInsert = new DatenbankTestInsert();
+        Map<String, List<String>> datenbankAnfrage = datenbankTestInsert.
+                datenbankAnfrage("SELECT ID_ARTIKEL,BEZEICHNUNG FROM ARTIKEL WHERE BEZEICHNUNG LIKE 'CacheTestArtikel1'");
+        List<String> id = datenbankAnfrage.get("ID_ARTIKEL");
+        List<String> bezeichnung = datenbankAnfrage.get("BEZEICHNUNG");
+        for(int i=0;i<id.size();i++){
+            if(bezeichnung.get(i).equals("CacheTestArtikel1")){
+                datenbankTestInsert.datenbankUpdate("DELETE FROM ARTIKEL_WARENTRAEGER WHERE ID_ARTIKEL="+id.get(i));
+            }
+        }
         datenbankTestInsert.datenbankUpdate("DELETE FROM ARTIKEL WHERE BEZEICHNUNG LIKE 'CacheTestArtikel1'");
         datenbankTestInsert.datenbankUpdate("DELETE FROM ARTIKEL WHERE BEZEICHNUNG LIKE 'CacheTestArtikel2'");
         datenbankTestInsert.datenbankUpdate("DELETE FROM WARENTRAEGER WHERE BEZEICHNUNG LIKE 'CacheTestWarentraeger1'");
@@ -83,7 +108,7 @@ public class ArtikelCacheTest extends CacheTest{
     }
 
     @Override
-    public void testUpdate() throws DBNotFoundExeption, QueryExeption {
+    public void testUpdate() throws DBNotFoundExeption, QueryExeption, DBErrorExeption {
         Element element1;
         Element element2;
         for(Element element: cache.getAll()){
@@ -94,9 +119,25 @@ public class ArtikelCacheTest extends CacheTest{
                 element2 = element;
         }
         
-        DatenbankTestInsert datenbankTestInsert = new DatenbankTestInsert("jdbc:derby://localhost:1527/db_DigitalerZwilling", "org.apache.derby.jdbc.ClientDriver", "db_user", "SB0222");
-        datenbankTestInsert.datenbankUpdate("UPDATE ARTIKEL SET BEZEICHNUNG='CacheTestArtikel1'");
+        DatenbankTestInsert datenbankTestInsert = new DatenbankTestInsert();
+        datenbankTestInsert.datenbankUpdate("UPDATE ARTIKEL SET BEZEICHNUNG='CacheTestArtikel12' WHERE BEZEICHNUNG LIKE 'CacheTestArtikel1'");
+        datenbankTestInsert.datenbankUpdate("UPDATE ARTIKEL SET BEZEICHNUNG='CacheTestArtikel22' WHERE BEZEICHNUNG LIKE 'CacheTestArtikel2'");
         datenbankTestInsert.close();
+        
+        cache.update();
+        boolean found1 = false, found2 = false;
+        
+        for(Element element: cache.getAll()){
+            if(element.getBezeichnung().equals("CacheTestArtikel12'"))
+                found1 = true;
+            
+            if(element.getBezeichnung().equals("CacheTestArtikel22'"))
+                found2 = true;
+        }
+        
+        System.out.println("1" + found1);
+        System.out.println("2" + found2);
+        assertTrue(found1 & found2);
     }
 
     @Override
