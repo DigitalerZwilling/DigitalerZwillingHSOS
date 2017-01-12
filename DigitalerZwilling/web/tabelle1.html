@@ -42,8 +42,9 @@
     var hubpoSocket = new WebSocket(host+"HubPodestWebSocket");
     var huquSocket = new WebSocket(host+"HubQuerPodestWebSocket");
     
-    var documentNr = 1;
 
+    var documentNrT1 = 1;
+        
    $(document).ready(function(){
         console.log("Start");
         
@@ -55,7 +56,7 @@
                 artikelSocket.onmessage = function(event) {
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
-                    erzeugeTabelle("Artikel", received_msg);
+                    erzeugeTabelle("artikel", received_msg);
                 };
             break;
             
@@ -66,7 +67,7 @@
                 warentraegerSocket.onmessage = function(event) {
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
-                    erzeugeTabelle("Warentraeger", received_msg); 
+                    erzeugeTabelle("warentraeger", received_msg); 
                 };
                 break;
                 
@@ -78,7 +79,7 @@
                 transportbandSocket.onmessage = function(event) {
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
-                    erzeugeTabelle("Transportband", received_msg);
+                    erzeugeTabelle("transportband", received_msg);
                 };
                 break;
                 
@@ -90,7 +91,7 @@
                 roboterSocket.onmessage = function(event) {
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
-                    erzeugeTabelle("Roboter", received_msg);
+                    erzeugeTabelle("roboter", received_msg);
                 };
                 break;
                 
@@ -102,7 +103,7 @@
                 sektorSocket.onmessage = function(event) {
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
-                    erzeugeTabelle("Sektor", received_msg);
+                    erzeugeTabelle("sektor", received_msg);
                 };
                 break;
             case "Sensoren":
@@ -113,7 +114,7 @@
                 sensorSocket.onmessage = function(event) {
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
-                    erzeugeTabelle("Sensor", received_msg);
+                    erzeugeTabelle("sensor", received_msg);
                 };
                 break;
             case "Gelenke":
@@ -124,7 +125,7 @@
                 gelenkSocket.onmessage = function(event) {
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
-                    erzeugeTabelle("Gelenk", received_msg);
+                    erzeugeTabelle("gelenk", received_msg);
                 };
                 break;
            
@@ -136,7 +137,7 @@
                 werkzeugSocket.onmessage = function(event) {
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
-                    erzeugeTabelle("Werkzeug", received_msg);
+                    erzeugeTabelle("werkzeug", received_msg);
                 };
                 break;
             case "Hubpositionierstationen":
@@ -148,7 +149,7 @@
                 huboSocket.onmessage = function(event) {
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
-                    erzeugeTabelle("Hubpositionierstation", received_msg);
+                    erzeugeTabelle("hubpositionierstation", received_msg);
                 };
                 break;
             case "Hub-Quer-Stationen":
@@ -159,7 +160,7 @@
                 huquSocket.onmessage = function(event) {
                     var received_msg = event.data;
                     console.log("Message"+received_msg);
-                    erzeugeTabelle("HubQuerStation", received_msg);
+                    erzeugeTabelle("hubQuerStation", received_msg);
                 };
                 break;
             default:
@@ -177,82 +178,82 @@
         var spaltennamen = getSpaltenname(typ); //Ermittelt die benötigten Spaltnamen
 
         //Erstellen der Tabelle
-        node = document.getElementById("tabelle"+documentNr); //Tabelle wird an schon im Body erstellte Tabelle angehangen
+        node = document.getElementById("tabelle"+documentNrT1); //Tabelle wird an schon im Body erstellte Tabelle angehangen
         node.parentNode.insertBefore(createTable(typ, liste, spaltennamen, liste.inhalt.length, spaltennamen.length), node);
         
         //UpdateTabelle wird bei Empfang von neuen Daten aufgerufen
         switch (typ) {
-            case 'Artikel':
+            case 'artikel':
                 artikelSocket.onmessage = function(event) {
                 var received_msg = event.data;
                 //console.log("Message"+received_msg);
-                updateTabelle("Artikel", received_msg);
+               updateTabelle("artikel", received_msg);
             }
             break;
-        case 'Warentraeger':
+        case 'warentraeger':
             warentraegerSocket.onmessage = function(event) {
                 var received_msg = event.data;
                 //console.log("Message"+received_msg);
-                updateTabelle("Warentraeger", received_msg);
+                updateTabelle("warentraeger", received_msg);
             }
             break;
-        case 'Transportband':
+        case 'transportband':
                 transportbandSocket.onmessage = function(event) {
                 var received_msg = event.data;
                 //console.log("Message"+received_msg);
-                updateTabelle("Transportband", received_msg);
+                updateTabelle("transportband", received_msg);
             }
             break;
-        case 'Roboter':
+        case 'roboter':
                 roboterSocket.onmessage = function(event) {
                 var received_msg = event.data;
                 //console.log("Message"+received_msg);
-                updateTabelle("Roboter", received_msg);
+                updateTabelle("roboter", received_msg);
             }
             break;
-        case "Sektor":
+        case "sektor":
             sektorSocket.onmessage = function(event) {
                 var received_msg = event.data;
                 //console.log("Message"+received_msg);
-                updateTabelle("Sektor", received_msg);
+                updateTabelle("sektor", received_msg);
             }
             break;
-        case "Sensor":
+        case "sensor":
             sensorSocket.onmessage = function(event) {
                 var received_msg = event.data;
                 //console.log("Message"+received_msg);
-                updateTabelle("Sensor", received_msg);
+                updateTabelle("sensor", received_msg);
             }
             break;
-        case "Gelenk":
+        case "gelenk":
              gelenkSocket.onmessage = function(event) {
                 var received_msg = event.data;
                 //console.log("Message"+received_msg);
-                updateTabelle("Gelenk", received_msg);
+                updateTabelle("gelenk", received_msg);
             }
             break;
 
-        case "Werkzeug":
+        case "werkzeug":
             werkzeugSocket.onmessage = function(event) {
                 var received_msg = event.data;
                 //console.log("Message"+received_msg);
-                updateTabelle("Werkzeug", received_msg);
+                updateTabelle("werkzeug", received_msg);
             }
             break;
             
-        case "Hubpositionierstation":
+        case "hubpositionierstation":
             hupoSocket.onmessage = function(event) {
                 var received_msg = event.data;
                 //console.log("Message"+received_msg);
-                updateTabelle("Hubpositionierstation", received_msg);
+                updateTabelle("hubpositionierstation", received_msg);
             }
             break;
             
-        case "HubQuerStation":
+        case "hubQuerStation":
             huquSocket.onmessage = function(event) {
                 var received_msg = event.data;
                 //console.log("Message"+received_msg);
-                updateTabelle("HubQuerStation", received_msg);
+                updateTabelle("hubQuerStation", received_msg);
             }
             break;
             
@@ -266,34 +267,35 @@
         //gibt die passenenen Spaltennamen je nach Typ zurück
         var spaltennamen;
          switch (typ) {
-            case 'Artikel':
+            case 'artikel':
                 spaltennamen = ['Bezeichnung', 'Zeitstempel']; 
                 return spaltennamen;
-            case "Warentraeger":
+            case "warentraeger":
                spaltennamen =  ['Bezeichnung', 'Zeitstempel', 'Montagezustand'];
                 return spaltennamen;
-            case "Transportband":
+            case "transportband":
                  spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Stoerung'];
                 return spaltennamen;
-            case "Roboter":
+            case "roboter":
+                console.log("++++Roboter");
                 spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Stoerung'];
                 return spaltennamen;
-            case "Sektor":
+            case "sektor":
                  spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Stoerung'];
                 return spaltennamen;
-            case "Sensor":
+            case "sensor":
                  spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Zustand']; 
                 return spaltennamen;
-            case "Gelenk":
+            case "gelenk":
                 spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Gelenkstellung'];
                 return spaltennamen;
-            case "Werkzeug":
+            case "werkzeug":
                  spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Zustand'];
                 return spaltennamen;
-            case "Hubpositionierstation":
+            case "hubpositionierstation":
                 spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Position'];
                 return spaltennamen;
-            case "HubQuerStation":
+            case "hubQuerStation":
                 spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Motor'];
                 return spaltennamen;
             default:
@@ -309,39 +311,40 @@
         var liste = JSON.parse(listeJSON);
         var anzahlElemente = liste.inhalt.length;
         
+       
         //Aktualisieren der Werte:
         for (var i = 0; i < anzahlElemente; i++){
-            document.getElementById(documentNr + "_" + typ+"Bezeichnung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].bezeichnung;
-            document.getElementById(documentNr + "_" + typ+"Zeitstempel_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zeitstempel;
+            document.getElementById(documentNrT1 + "_" + typ+"Bezeichnung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].bezeichnung;
+            document.getElementById(documentNrT1 + "_" + typ+"Zeitstempel_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zeitstempel;
          
               switch (typ) {
-                case "Artikel":
+                case "artikel":
                     break;
-                case "Warentraeger":
-                    document.getElementById(documentNr + "_" +"WarentraegerMontagezustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].montagezustand;
+                case "warentraeger":
+                    document.getElementById(documentNrT1 + "_" + typ + "Montagezustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].montagezustand;
                     break;
-                case "Transportband":
-                    document.getElementById(documentNr + "_" +typ+"Stoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
+                case "transportband":
+                    document.getElementById(documentNrT1 + "_" +typ+"Stoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
                     break;
-                case "Roboter":
-                    document.getElementById(documentNr + "_" +"RoboterStoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
+                case "toboter":
+                    document.getElementById(documentNrT1 + "_" + typ +"Stoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
                     break;
-                case "Sektor":
-                    document.getElementById(documentNr + "_" +"SektorStoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
+                case "sektor":
+                    document.getElementById(documentNrT1 + "_" + typ + "Stoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
                     break;
-                case "Sensor":
-                    document.getElementById(documentNr + "_" +"SensorZustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zustand;
+                case "sensor":
+                    document.getElementById(documentNrT1 + "_" + typ +"Zustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zustand;
                     break;
-                case "Gelenk":
-                    document.getElementById(documentNr + "_" +"GelenkStellung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].gelenkstellung;
+                case "gelenk":
+                    document.getElementById(documentNrT1 + "_" + typ +"Stellung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].gelenkstellung;
                     break;
-                case "Werkzeug":
-                    document.getElementById(documentNr + "_" +"WerkzeugZustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zustand;
+                case "werkzeug":
+                    document.getElementById(documentNrT1 + "_" + typ +"Zustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zustand;
                     break;
-                case "Hubpositionierstation":
+                case "hubpositionierstation":
                    /*TODO*/
                    break;
-                case "HubQuerStation":
+                case "hubQuerStation":
                     //TODO
                     break;
                 default:
@@ -363,23 +366,31 @@
         if (spaltennamen < 2){
             console.log("Fehler: spaltennamen < 2");
         }else{
-            document.getElementById("spalte"+documentNr+".1").innerHTML = spaltennamen[0];
-            document.getElementById("spalte"+documentNr+".2").innerHTML = spaltennamen[1];
+            document.getElementById("spalte"+documentNrT1+".1").innerHTML = spaltennamen[0];
+            document.getElementById("spalte"+documentNrT1+".2").innerHTML = spaltennamen[1];
         }
 
         //Falls eine dritte Spalte benötigt wird:
         if (spaltennamen.length == 3){
-            document.getElementById("spalte1.3").innerHTML = spaltennamen[2];
+            document.getElementById("spalte"+documentNrT1+".3").innerHTML = spaltennamen[2];
         }
 
-        var myTable = document.getElementById("tabelle"+documentNr); //holt sich die im Body erstellte Tabelle
+        var myTable = document.getElementById("tabelle"+documentNrT1); //holt sich die im Body erstellte Tabelle
             
-        if (document.getElementsByTagName("tbody")[0] != null){
+        /*if (document.getElementsByTagName("tbody")[0] != null){
             zeile = document.getElementsByTagName("tbody")[0];
+            zeile.parentNode.removeChild(zeile);
+        }*/
+        
+        
+         if (document.getElementById(documentNrT1 + "_tbody") != null){
+             console.log("++++Test");
+            zeile = document.getElementById(documentNrT1 + "_tbody");
             zeile.parentNode.removeChild(zeile);
         }
 
         var mytablebody = document.createElement("tbody");
+           mytablebody.setAttribute('id', documentNrT1 + "_tbody");
 
         for(var j = 0; j < row; j++) {
             mycurrent_row = document.createElement("tr");     
@@ -391,27 +402,29 @@
 
                 //1.Spalte - Bezeichnung:
                 if (i == 0){
-                    mycurrent_cell.setAttribute('id', documentNr+ "_" + typ+"Bezeichnung_"+liste.inhalt[j].id);
-                    console.log("My current_cell: " + mycurrent_cell.id);
+                   //ycurrent_cell.setAttribute('id', documentNr+ "_" + typ+"Bezeichnung_"+liste.inhalt[j].id);
+                    //console.log("My current_cell: " + mycurrent_cell.id);
                     //currenttext = document.createTextNode(liste.inhalt[j].bezeichnung);
                     
                     currenttext = document.createElement("a");
+                    currenttext.setAttribute('id', documentNrT1+ "_" + typ+"Bezeichnung_"+liste.inhalt[j].id);
                     currenttext.innerHTML = liste.inhalt[j].bezeichnung;
                   //  currenttext.href="indexNiklas.html";
-                    typ="transportband";
+          
                     currenttext.setAttribute("elementId",liste.inhalt[j].id);
                     currenttext.setAttribute("elementType",typ);
                     currenttext.onclick = function() {
                         localStorage.setItem("elementId",$(this).attr("elementId"));
                         localStorage.setItem("elementType",$(this).attr("elementType"));
                       
-                       $("#einzelansicht1").load("indexNiklas.html");
+                     //  $("#einzelansicht"+documentNr).load("indexNiklas.html");
+                     $("#einzelansicht1").load("indexNiklas.html");
                     };
                 }
 
                 //2.Spalte - Zeitstempel:
                 if (i == 1){
-                    mycurrent_cell.setAttribute('id', documentNr+ "_" +typ+"Zeitstempel_"+liste.inhalt[j].id);
+                    mycurrent_cell.setAttribute('id', documentNrT1+ "_" +typ+"Zeitstempel_"+liste.inhalt[j].id);
                     console.log("My current_cell: " + mycurrent_cell.id);
                     currenttext = document.createTextNode(liste.inhalt[j].zeitstempel);
                 }
@@ -420,20 +433,20 @@
                 if (i == 2){
                     switch (spaltennamen[2]) {
                         case 'Montagezustand':
-                            mycurrent_cell.setAttribute('id', documentNr+ "_" +typ+"Montagezustand_"+liste.inhalt[j].id);
+                            mycurrent_cell.setAttribute('id', documentNrT1+ "_" +typ+"Montagezustand_"+liste.inhalt[j].id);
                             currenttext = document.createTextNode(liste.inhalt[j].montagezustand);
                             break;
                         case "Zustand":
-                            mycurrent_cell.setAttribute('id', documentNr+ "_" +typ+"Zustand_"+liste.inhalt[j].id);
+                            mycurrent_cell.setAttribute('id', documentNrT1+ "_" +typ+"Zustand_"+liste.inhalt[j].id);
                             currenttext = document.createTextNode(liste.inhalt[j].zustand);
                             break;
                         case "Stoerung":
-                            mycurrent_cell.setAttribute('id', documentNr+ "_" +typ+"Stoerung_"+liste.inhalt[j].id);
+                            mycurrent_cell.setAttribute('id', documentNrT1+ "_" +typ+"Stoerung_"+liste.inhalt[j].id);
                             console.log("My current_cell: " + mycurrent_cell.id);
                             currenttext = document.createTextNode(liste.inhalt[j].stoerung);
                             break;
                         case "Gelenkstellung":
-                           mycurrent_cell.setAttribute('id', documentNr+ "_" +typ+"Gelenkstellung_"+liste.inhalt[j].id);
+                           mycurrent_cell.setAttribute('id', documentNrT1+ "_" +typ+"Gelenkstellung_"+liste.inhalt[j].id);
                            currenttext = document.createTextNode(liste.inhalt[j].gelenkstellung);
                             break;
                         case "Position":

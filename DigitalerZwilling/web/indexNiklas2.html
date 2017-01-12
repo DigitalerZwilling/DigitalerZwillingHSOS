@@ -8,8 +8,8 @@
     
   </head>
   <body id="body"> 
-      <table id="1_attributes" border="0"></table><br/>
-      <div id="1_lists"></div>
+      <table id="2_attributes" border="0"></table><br/>
+      <div id="2_lists"></div>
  
   
   <script language="javascript"> 
@@ -19,20 +19,17 @@
     //Deklariere WebSocket
     var host = "ws://131.173.127.174:8080/DigitalerZwilling/";
     var documentName = "indexNiklas.html";
-    var documentNr = 1;
+    var documentNr2 = 2;
        
     $(document).ready(function(){        
-        console.log("Start Niklas1");
-        initHuPo(31);
-        //init();
+        console.log("Start Niklas 2");
+        init();
     });   
     
     function init(){
         var elementId = localStorage.getItem('elementId');
         var elementType = localStorage.getItem('elementType');
         
-        elementType = "hupo";
-        elementId = 31;
         switch (elementType) {
             case 'artikel':
                 initArtikel(elementId);
@@ -71,7 +68,7 @@
       
       
     function createAttributes(attribute, id){
-        var attributes = document.getElementById(documentNr+"_attributes");
+        var attributes = document.getElementById(documentNr2+"_attributes");
         
         
         for(var i=0; i<attribute.length; i++){
@@ -81,7 +78,7 @@
             zeile.appendChild(name);
 
             var value = document.createElement("td");
-            value.id = documentNr+"_"+id[i];
+            value.id = documentNr2+"_"+id[i];
             zeile.appendChild(value);
 
             attributes.appendChild(zeile);
@@ -90,7 +87,7 @@
     
     
     function createAttributLink(attribute, id){
-        var attributes = document.getElementById(documentNr+"_attributes");
+        var attributes = document.getElementById(documentNr2+"_attributes");
         
         
         for(var i=0; i<attribute.length; i++){
@@ -101,16 +98,16 @@
 
             var value = document.createElement("td");
             var link = document.createElement("a");
-            link.id = documentNr+"_"+id[i];
+            link.id = documentNr2+"_"+id[i];
             value.appendChild(link);
             zeile.appendChild(value);
 
             attributes.appendChild(zeile);
                   
-            $("#"+documentNr+"_"+id[i]).click(function() {         
+            $("#"+documentNr2+"_"+id[i]).click(function() {         
                 localStorage.setItem("elementId",$(this).attr("elementId"));
                 localStorage.setItem("elementType",$(this).attr("elementType"));
-                $("#einzelansicht"+documentNr).load(documentName);
+                $("#einzelansicht"+documentNr2).load(documentName);
             });
         }
         
@@ -122,7 +119,7 @@
     function createLists(list_tilte, list_id, list_header){
         if(list_tilte.length !== list_id.length) return;
         
-        var lists = document.getElementById(documentNr+"_lists");
+        var lists = document.getElementById(documentNr2+"_lists");
         
         for(var i=0; i<list_tilte.length; i++){
             var name = document.createTextNode(list_tilte[i]);
@@ -166,7 +163,7 @@
                     link.onclick = function() {
                         localStorage.setItem("elementId",$(this).attr("elementId"));
                         localStorage.setItem("elementType",$(this).attr("elementType"));
-                        $("#einzelansicht"+documentNr).load(documentName);
+                        $("#einzelansicht"+documentNr2).load(documentName);
                     };
                     
                     element.appendChild(link);
@@ -178,18 +175,22 @@
             parentNode.appendChild(zeile);
     }
     
+    function myalert(){
+        alert("HALLO");
+    }
+    
  
     
     function updateAttributes(attribute_id, json, element_id){
         for(var i=0; i<attribute_id.length; i++){
-            var element = document.getElementById(documentNr+"_"+element_id[i]);
+            var element = document.getElementById(documentNr2+"_"+element_id[i]);
             element.innerHTML = json[attribute_id[i]];
         }
     }
     
     function updateAttributLink(attribute_id, json, element_id, type){
         for(var i=0; i<attribute_id.length; i++){
-            var element = document.getElementById(documentNr+"_"+element_id[i]);
+            var element = document.getElementById(documentNr2+"_"+element_id[i]);
             element.innerHTML = json[attribute_id[i]];
             element.setAttribute("elementId",json['id']);
             element.setAttribute("elementType",type);
