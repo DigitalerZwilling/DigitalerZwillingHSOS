@@ -143,7 +143,6 @@ public class Sektor extends Element{
         json += "\"id\": " + id + ",";
         json += "\"bezeichnung\": \"" + bezeichnung + "\",";
         json += "\"user_Parameter\": \"" + user_Parameter + "\",";
-        json += "\"bezeichnung\": \"" + bezeichnung + "\",";
         json += "\"zeitstempel\": \"" + zeitstempel.toString() + "\",";
         json += "\"stoerung\": " + stoerung + ",";
         json += "\"x\": " + x + ",";
