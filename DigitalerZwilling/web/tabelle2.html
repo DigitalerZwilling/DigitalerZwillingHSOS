@@ -30,7 +30,7 @@
     var browsersupport = ("WebSocket" in window) ? true : false;
 
     //Deklariere WebSocket
-    var host = "ws://localhost:8080/DigitalerZwilling/";
+    var host = "ws://131.173.127.174:8080/DigitalerZwilling/";
     var artikelSocket = new WebSocket(host+"ArtikelWebSocket");
     var warentraegerSocket = new WebSocket(host+"WarentraegerWebSocket");
     var transportbandSocket = new WebSocket(host+"TransportbandWebSocket");
@@ -41,6 +41,8 @@
     var werkzeugSocket = new WebSocket(host+"WerzeugWebSocket");
     var hubpoSocket = new WebSocket(host+"HubPodestWebSocket");
     var huquSocket = new WebSocket(host+"HubQuerPodestWebSocket");
+    
+    var documentNr = 2;
 
    $(document).ready(function(){
         console.log("Start");
@@ -161,7 +163,7 @@
                 };
                 break;
             default:
-                document.getElementById("spalte2.1").innerHTML = 'Fehler beim Darstellen der Tabelle (ready-Function)';
+                document.getElementById("spalte1.1").innerHTML = 'Fehler beim Darstellen der Tabelle (ready-Function)';
       }
     });
 
@@ -169,13 +171,13 @@
 
     /* ------------------------------ERZEUGE TABELLE -------------------------------- */
     function erzeugeTabelle(typ, listeJSON){
-        
+        console.log("++++++++++++++++++++++++++++++");
         console.log("ErzeugeTabelle vom Typ: " + typ);
         var liste = JSON.parse(listeJSON);
         var spaltennamen = getSpaltenname(typ); //Ermittelt die benötigten Spaltnamen
 
         //Erstellen der Tabelle
-        node = document.getElementById("tabelle1"); //Tabelle wird an schon im Body erstellte Tabelle angehangen
+        node = document.getElementById("tabelle"+documentNr); //Tabelle wird an schon im Body erstellte Tabelle angehangen
         node.parentNode.insertBefore(createTable(typ, liste, spaltennamen, liste.inhalt.length, spaltennamen.length), node);
         
         //UpdateTabelle wird bei Empfang von neuen Daten aufgerufen
@@ -255,7 +257,7 @@
             break;
             
         default:
-            document.getElementById("spalte2.1").innerHTML = 'Fehler beim Switch in tabelleErzeugen()';
+            //document.getElementById("spalte"+documentNr+".1").innerHTML = 'Fehler beim Switch in tabelleErzeugen()';
         }
     }
         
@@ -295,7 +297,7 @@
                 spaltennamen = ['Bezeichnung', 'Zeitstempel', 'Motor'];
                 return spaltennamen;
             default:
-                document.getElementById("spalte2.1").innerHTML = 'Fehler beim Darstellen der Tabelle getSpaltenname';
+                //document.getElementById("spalte1.1").innerHTML = 'Fehler beim Darstellen der Tabelle getSpaltenname';
       }
     }
     
@@ -309,32 +311,32 @@
         
         //Aktualisieren der Werte:
         for (var i = 0; i < anzahlElemente; i++){
-            document.getElementById(typ+"Bezeichnung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].bezeichnung;
-            document.getElementById(typ+"Zeitstempel_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zeitstempel;
+            document.getElementById(documentNr + "_" + typ+"Bezeichnung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].bezeichnung;
+            document.getElementById(documentNr + "_" + typ+"Zeitstempel_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zeitstempel;
          
               switch (typ) {
                 case "Artikel":
                     break;
                 case "Warentraeger":
-                    document.getElementById("WarentraegerMontagezustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].montagezustand;
+                    document.getElementById(documentNr + "_" +"WarentraegerMontagezustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].montagezustand;
                     break;
                 case "Transportband":
-                    document.getElementById(typ+"Stoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
+                    document.getElementById(documentNr + "_" +typ+"Stoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
                     break;
                 case "Roboter":
-                    document.getElementById("RoboterStoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
+                    document.getElementById(documentNr + "_" +"RoboterStoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
                     break;
                 case "Sektor":
-                    document.getElementById("SektorStoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
+                    document.getElementById(documentNr + "_" +"SektorStoerung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].stoerung;
                     break;
                 case "Sensor":
-                    document.getElementById("SensorZustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zustand;
+                    document.getElementById(documentNr + "_" +"SensorZustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zustand;
                     break;
                 case "Gelenk":
-                    document.getElementById("GelenkStellung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].gelenkstellung;
+                    document.getElementById(documentNr + "_" +"GelenkStellung_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].gelenkstellung;
                     break;
                 case "Werkzeug":
-                    document.getElementById("WerkzeugZustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zustand;
+                    document.getElementById(documentNr + "_" +"WerkzeugZustand_"+liste.inhalt[i].id).innerHTML = liste.inhalt[i].zustand;
                     break;
                 case "Hubpositionierstation":
                    /*TODO*/
@@ -343,7 +345,7 @@
                     //TODO
                     break;
                 default:
-                    document.getElementById("spalte2.3").innerHTML = 'Fehler im switch case - updateTabelle';                      
+                 //   document.getElementById("spalte1.3").innerHTML = 'Fehler im switch case - updateTabelle';                      
            } 
         }
     }
@@ -361,23 +363,29 @@
         if (spaltennamen < 2){
             console.log("Fehler: spaltennamen < 2");
         }else{
-            document.getElementById("spalte2.1").innerHTML = spaltennamen[0];
-            document.getElementById("spalte2.2").innerHTML = spaltennamen[1];
+            document.getElementById("spalte"+documentNr+".1").innerHTML = spaltennamen[0];
+            document.getElementById("spalte"+documentNr+".2").innerHTML = spaltennamen[1];
         }
 
         //Falls eine dritte Spalte benötigt wird:
         if (spaltennamen.length == 3){
-            document.getElementById("spalte2.3").innerHTML = spaltennamen[2];
+            document.getElementById("spalte" +documentNr+".3").innerHTML = spaltennamen[2];
         }
 
-        var myTable = document.getElementById("tabelle2"); //holt sich die im Body erstellte Tabelle
+        var myTable = document.getElementById("tabelle"+documentNr); //holt sich die im Body erstellte Tabelle
             
         if (document.getElementsByTagName("tbody")[0] != null){
             zeile = document.getElementsByTagName("tbody")[0];
             zeile.parentNode.removeChild(zeile);
         }
+        
+       /* if (document.getElementById(docmuentNr + "_tbody"[0]) != null){
+            zeile = document.getElementById(docmuentNr + "_tbody"[0]);
+            zeile.parentNode.removeChild(zeile);
+        }*/
 
         var mytablebody = document.createElement("tbody");
+       // mytablebody.setAttribute('id', documentNr + "_tbody");
 
         for(var j = 0; j < row; j++) {
             mycurrent_row = document.createElement("tr");     
@@ -389,14 +397,27 @@
 
                 //1.Spalte - Bezeichnung:
                 if (i == 0){
-                    mycurrent_cell.setAttribute('id', typ+"Bezeichnung_"+liste.inhalt[j].id);
+                    mycurrent_cell.setAttribute('id', documentNr+ "_" + typ+"Bezeichnung_"+liste.inhalt[j].id);
                     console.log("My current_cell: " + mycurrent_cell.id);
-                    currenttext = document.createTextNode(liste.inhalt[j].bezeichnung);
+                    //currenttext = document.createTextNode(liste.inhalt[j].bezeichnung);
+                    
+                    currenttext = document.createElement("a");
+                    currenttext.innerHTML = liste.inhalt[j].bezeichnung;
+                  //  currenttext.href="indexNiklas.html";
+                    typ="transportband";
+                    currenttext.setAttribute("elementId",liste.inhalt[j].id);
+                    currenttext.setAttribute("elementType",typ);
+                    currenttext.onclick = function() {
+                        localStorage.setItem("elementId",$(this).attr("elementId"));
+                        localStorage.setItem("elementType",$(this).attr("elementType"));
+                      
+                       $("#einzelansicht2").load("indexNiklas.html");
+                    };
                 }
 
                 //2.Spalte - Zeitstempel:
                 if (i == 1){
-                    mycurrent_cell.setAttribute('id', typ+"Zeitstempel_"+liste.inhalt[j].id);
+                    mycurrent_cell.setAttribute('id', documentNr+ "_" +typ+"Zeitstempel_"+liste.inhalt[j].id);
                     console.log("My current_cell: " + mycurrent_cell.id);
                     currenttext = document.createTextNode(liste.inhalt[j].zeitstempel);
                 }
@@ -405,20 +426,20 @@
                 if (i == 2){
                     switch (spaltennamen[2]) {
                         case 'Montagezustand':
-                            mycurrent_cell.setAttribute('id', typ+"Montagezustand_"+liste.inhalt[j].id);
+                            mycurrent_cell.setAttribute('id', documentNr+ "_" +typ+"Montagezustand_"+liste.inhalt[j].id);
                             currenttext = document.createTextNode(liste.inhalt[j].montagezustand);
                             break;
                         case "Zustand":
-                            mycurrent_cell.setAttribute('id', typ+"Zustand_"+liste.inhalt[j].id);
+                            mycurrent_cell.setAttribute('id', documentNr+ "_" +typ+"Zustand_"+liste.inhalt[j].id);
                             currenttext = document.createTextNode(liste.inhalt[j].zustand);
                             break;
                         case "Stoerung":
-                            mycurrent_cell.setAttribute('id', typ+"Stoerung_"+liste.inhalt[j].id);
+                            mycurrent_cell.setAttribute('id', documentNr+ "_" +typ+"Stoerung_"+liste.inhalt[j].id);
                             console.log("My current_cell: " + mycurrent_cell.id);
                             currenttext = document.createTextNode(liste.inhalt[j].stoerung);
                             break;
                         case "Gelenkstellung":
-                           mycurrent_cell.setAttribute('id', typ+"Gelenkstellung_"+liste.inhalt[j].id);
+                           mycurrent_cell.setAttribute('id', documentNr+ "_" +typ+"Gelenkstellung_"+liste.inhalt[j].id);
                            currenttext = document.createTextNode(liste.inhalt[j].gelenkstellung);
                             break;
                         case "Position":

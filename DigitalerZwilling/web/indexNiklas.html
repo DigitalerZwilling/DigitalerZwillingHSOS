@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap 101 Template</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
   </head>
   <body id="body"> 
-      <table id="attributes" border="0"></table><br/>
-      <div id="lists"></div>
+      <table id="1_attributes" border="0"></table><br/>
+      <div id="1_lists"></div>
  
   
   <script language="javascript"> 
@@ -16,11 +17,11 @@
     var browserSupport = ("WebSocket" in window) ? true : false;
             
     //Deklariere WebSocket
-    var host = "ws://localhost:8080/DigitalerZwilling/";
-    var documentName = "index.html";
-    var temp;
+    var host = "ws://131.173.127.174:8080/DigitalerZwilling/";
+    var documentName = "indexNiklas.html";
+    var documentNr = 1;
        
-    $(document).ready(function(){
+    $(document).ready(function(){        
         console.log("Start");
         init();
     });   
@@ -28,7 +29,6 @@
     function init(){
         var elementId = localStorage.getItem('elementId');
         var elementType = localStorage.getItem('elementType');
-        //alert(elementType+elementId);
         
         switch (elementType) {
             case 'artikel':
@@ -68,7 +68,7 @@
       
       
     function createAttributes(attribute, id){
-        var attributes = document.getElementById("attributes");
+        var attributes = document.getElementById(documentNr+"_attributes");
         
         
         for(var i=0; i<attribute.length; i++){
@@ -78,7 +78,7 @@
             zeile.appendChild(name);
 
             var value = document.createElement("td");
-            value.id = id[i];
+            value.id = documentNr+"_"+id[i];
             zeile.appendChild(value);
 
             attributes.appendChild(zeile);
@@ -87,7 +87,7 @@
     
     
     function createAttributLink(attribute, id){
-        var attributes = document.getElementById("attributes");
+        var attributes = document.getElementById(documentNr+"_attributes");
         
         
         for(var i=0; i<attribute.length; i++){
@@ -98,17 +98,16 @@
 
             var value = document.createElement("td");
             var link = document.createElement("a");
-            link.id = id[i];
-            link.href = documentName;
+            link.id = documentNr+"_"+id[i];
             value.appendChild(link);
             zeile.appendChild(value);
 
             attributes.appendChild(zeile);
                   
-            $("#"+id[i]).click(function() {         
+            $("#"+documentNr+"_"+id[i]).click(function() {         
                 localStorage.setItem("elementId",$(this).attr("elementId"));
                 localStorage.setItem("elementType",$(this).attr("elementType"));
-                $(this).load(documentName);
+                $("#einzelansicht"+documentNr).load(documentName);
             });
         }
         
@@ -120,7 +119,7 @@
     function createLists(list_tilte, list_id, list_header){
         if(list_tilte.length !== list_id.length) return;
         
-        var lists = document.getElementById("lists");
+        var lists = document.getElementById(documentNr+"_lists");
         
         for(var i=0; i<list_tilte.length; i++){
             var name = document.createTextNode(list_tilte[i]);
@@ -159,13 +158,12 @@
                 if(attributes[k]=="bezeichnung"){
                     var link = document.createElement("a");
                     link.innerHTML = jsonObject[attributes[k]];
-                    link.href=documentName;
                     link.setAttribute("elementId",jsonObject['id']);
                     link.setAttribute("elementType",type);
                     link.onclick = function() {
                         localStorage.setItem("elementId",$(this).attr("elementId"));
                         localStorage.setItem("elementType",$(this).attr("elementType"));
-                        $(this).load(documentName);
+                        $("#einzelansicht"+documentNr).load(documentName);
                     };
                     
                     element.appendChild(link);
@@ -185,14 +183,14 @@
     
     function updateAttributes(attribute_id, json, element_id){
         for(var i=0; i<attribute_id.length; i++){
-            var element = document.getElementById(element_id[i]);
+            var element = document.getElementById(documentNr+"_"+element_id[i]);
             element.innerHTML = json[attribute_id[i]];
         }
     }
     
     function updateAttributLink(attribute_id, json, element_id, type){
         for(var i=0; i<attribute_id.length; i++){
-            var element = document.getElementById(element_id[i]);
+            var element = document.getElementById(documentNr+"_"+element_id[i]);
             element.innerHTML = json[attribute_id[i]];
             element.setAttribute("elementId",json['id']);
             element.setAttribute("elementType",type);
