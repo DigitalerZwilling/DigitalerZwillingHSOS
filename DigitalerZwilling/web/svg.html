@@ -244,6 +244,18 @@
 		return 0;
 	}
 	
+	function coutWTinSek(sID) {
+	var value = 0;
+		for (var i=0;i<j_warentraeger.inhalt.length;i++) {
+			if (j_warentraeger.inhalt[i].sektorIDs.inhalt.length>0) {
+				if (j_warentraeger.inhalt[i].sektorIDs.inhalt[0] == sID) {
+					value++;
+				}
+			}
+		}
+		return value;
+	}
+	
 	function getTBByID(key) {
 		//finde TB mit uebergebener ID
 		for (var i=0;i<j_baender.inhalt.length;i++) {
@@ -450,13 +462,29 @@
 				}
 			}
 			
-			else if ((j_warentraeger.inhalt[i].transportbandIDs.length==0) && (j_warentraeger.inhalt[i].sektorIDs.length==1)) {
+			else if ((j_warentraeger.inhalt[i].transportbandIDs.length==0) && (j_warentraeger.inhalt[i].sektorIDs.length>0)) {
 			//WT liegt in einem Sektor und auf keinem TB
 				rect = document.createElementNS(svgns, 'rect');
 				rect.setAttributeNS(null, 'id', 'Warentraeger' + j_warentraeger.inhalt[i].id);
 				rect.setAttributeNS(null, 'x', j_sektoren.inhalt[getSekByID(j_warentraeger.inhalt[i].sektorIDs[0])].x+sektor_width/2-WT_width/2);
 				rect.setAttributeNS(null, 'y', j_sektoren.inhalt[getSekByID(j_warentraeger.inhalt[i].sektorIDs[0])].y+sektor_height/2-WT_height/2);
 				
+				var count = coutWTinSek(j_warentraeger.inhalt[i].sektorIDs.inhalt[0]);
+				if (count>1) {
+					rect2 = document.createElementNS(svgns, 'rect');
+					rect2.setAttributeNS(null, 'x', j_sektoren.inhalt[getSekByID(j_warentraeger.inhalt[i].sektorIDs.inhalt[0])].x+sektor_width/2.5);
+					rect2.setAttributeNS(null, 'y', j_sektoren.inhalt[getSekByID(j_warentraeger.inhalt[i].sektorIDs.inhalt[0])].y+sektor_height/2.5);
+					rect2.setAttributeNS(null, 'height', WT_height);
+					rect2.setAttributeNS(null, 'width', WT_width);
+					//if (j_warentraeger.inhalt[i].stoerung != 0)
+						//rect2.setAttributeNS(null, 'fill', stoerung_fill);
+					//else 
+						rect2.setAttributeNS(null, 'fill', WT_fill);
+					rect2.setAttributeNS(null, 'stroke-width', '5');
+					rect2.setAttributeNS(null, 'stroke', 'black');
+					//rect2.setAttributeNS(null, 'onclick', 'idAusgeben(this)'); //Beim anklicken wird die Id des Elementes ausgeben
+					document.getElementById('svgOne').appendChild(rect2);
+				}
 			}
 			else {
 			//WT liegt auf einem TB und in einem Sektor --> Fehler
@@ -475,27 +503,27 @@
 			
 		}
 	}
-        function sektorenAendern(){
-		for (var i=0;i<j_sektoren.inhalt.length;i++) {
-			//Sektoren erstellen
-			//rect = document.createElementNS(svgns, 'rect');
-                        rect = document.getElementById("svgOne").getElementById("Sektor" + j_sektoren.inhalt[i].id);
-			//rect.setAttributeNS(null, 'id', 'Sektor' + j_sektoren.inhalt[i].id);
+	function sektorenAendern(){
+	for (var i=0;i<j_sektoren.inhalt.length;i++) {
+		//Sektoren erstellen
+		//rect = document.createElementNS(svgns, 'rect');
+					rect = document.getElementById("svgOne").getElementById("Sektor" + j_sektoren.inhalt[i].id);
+		//rect.setAttributeNS(null, 'id', 'Sektor' + j_sektoren.inhalt[i].id);
 //			rect.setAttributeNS(null, 'x', j_sektoren.inhalt[i].x);
 //			rect.setAttributeNS(null, 'y', j_sektoren.inhalt[i].y);
 //			rect.setAttributeNS(null, 'height', sektor_height);
 //			rect.setAttributeNS(null, 'width', sektor_width);
-			if (j_sektoren.inhalt[i].stoerung != 0)
-				rect.setAttributeNS(null, 'fill', stoerung_fill);
-			else 
-				rect.setAttributeNS(null, 'fill', sektor_fill);
+		if (j_sektoren.inhalt[i].stoerung != 0)
+			rect.setAttributeNS(null, 'fill', stoerung_fill);
+		else 
+			rect.setAttributeNS(null, 'fill', sektor_fill);
 //			rect.setAttributeNS(null, 'stroke-width', '5');
 //			rect.setAttributeNS(null, 'stroke', 'black');
 //			rect.setAttributeNS(null, 'onclick', 'idAusgeben(this)'); //Beim anklicken wird die Id des Elementes ausgeben
-                        var text=document.getElementById("svgOne").getElementById('Text' + j_sektoren.inhalt[i].id);
-			document.getElementById('svgOne').appendChild(rect);
-                        document.getElementById('svgOne').appendChild(text);
-            
+					var text=document.getElementById("svgOne").getElementById('Text' + j_sektoren.inhalt[i].id);
+		document.getElementById('svgOne').appendChild(rect);
+					document.getElementById('svgOne').appendChild(text);
+		
 		}
 	}
 	
