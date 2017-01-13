@@ -1,29 +1,33 @@
     <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta charset="utf-8">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
-    <body>
     
-    <svg id="svgOne" xmlns="http://www.w3.org/2000/svg" width=100% height=100%> 
+    
+    <svg id="svgOne" xmlns="http://www.w3.org/2000/svg" width=100% height=100% viewBox="0 0 9000 3000"> 
    <!-- <rect id "Sektor1" x="0" y="10" width="50" height="50" fill="blue" onclick = "idAusgeben(this)"></rect>-->
     </svg>
-</body>
+
     <script type="text/javascript">
    
    
    //websockets
-   var browsersupport = ("WebSocket" in window) ? true : false;
-   var host = "ws://localhost:8080/DigitalerZwilling/";  
    
-   var SektorWebsocket=new WebSocket(host+"SektorWebSocket");
-   var TransportbandWebsocket=new WebSocket(host+"TransportbandWebSocket");
-   var WarentraegerWebsocket=new WebSocket(host+"WarentraegerWebSocket");
-   
+                var browsersupport = ("WebSocket" in window) ? true : false;
+                var host = "ws://localhost:8080/DigitalerZwilling/";  
+                var SektorWebsocket;
+                var TransportbandWebsocket;
+                var WarentraegerWebsocket;
+                //sessionStorage.set("svgSektorWebsocket",SektorWebsocket);
+                
    $(document).ready(function(){
-       if (browsersupport) {
+  
+   if (browsersupport) {
+       console.log(sessionStorage.getItem("svgSektorWebsocket"));
+       if(sessionStorage.getItem("svgSektorWebsocket")==null){
+               
+                 SektorWebsocket=new WebSocket(host+"SektorWebSocket");
+                 TransportbandWebsocket=new WebSocket(host+"TransportbandWebSocket");
+                 WarentraegerWebsocket=new WebSocket(host+"WarentraegerWebSocket");
+                 sessionStorage.setItem("svgSektorWebsocket",SektorWebsocket);
+             }
                     //Oeffnen des WebSockets und Senden einer Nachricht
                     SektorWebsocket.onopen = function() {
                         console.log("SektorWebsocket");
@@ -44,76 +48,114 @@
                 else {
                     alert("WebSocket is NOT supported by your Browser:)");
                 }
-   });
+            });
+   
    var j_sektoren;
    var j_baender;
    var j_warentraeger;
    var first1=0;
    var first2=0;
    var first3=0;
+   //var allloaded=0;
    
    SektorWebsocket.onmessage = function(event) {
        //console.log(event.data);
+
        j_sektoren = JSON.parse(event.data);
-            console.log("jsek"); 
+
             //console.log(j_sektoren);
             //console.log(event.data);
             
        if(first1===0){ 
-           console.log(event.data);
+
             sektorenErstellen();
             first1=11;
+            
         }else{
-            sektorenAendern();
+            reload();
         }
             
             //updateAttributes(attribute_id,jsonString);
    };
    TransportbandWebsocket.onmessage = function(event) {
        //console.log(event.data);
+       //localStorage.getItem("mainContainer")=!"uebersicht"
+      
+        
             j_baender = JSON.parse(event.data);
-            console.log("trans"); 
+ 
             //console.log(j_baender);
             //console.log(event.data);
             if(first2===0){ 
-                console.log(event.data);
+ 
                 transportbaenderErstellen();
                 first2=22;
+                
             }else{
-                transportbaenderAendern();
+                reload();
             }
             //updateAttributes(attribute_id,jsonString);
             
             
    };
    WarentraegerWebsocket.onmessage = function(event) {
-       //console.log(event.data);
+         console.log("1");
+    
             j_warentraeger = JSON.parse(event.data);
-            console.log("waren"); 
+ 
             //console.log(j_warentraeger);
             //console.log(event.data);
             if(first3===0){ 
                 console.log(event.data);
                 warentraegerErstellen();
                 first3=33;
+                
             }else{
-                warentraegerAendern();
+                reload();
             }
             
             //updateAttributes(attribute_id,jsonString);
    };
-   
-   
+   function reload(){
+       
+       if(first1==11&&first2==22 && first3==33){
+           first1=1;
+           first2=1;
+           first3=1;
+           
+        sektorenAendern();
+	transportbaenderAendern();
+	warentraegerAendern();
+       }
+       
+   };
+   //function closeWebsockets(){
+   $("#uebersicht").on("load",function(e){
+   //$(".buttonDetails").on("click",function(e) {
+            TransportbandWebsocket.close();
+            WarentraegerWebsocket.close();
+            SektorWebsocket.close();
+            
+            console.log("svg websockets closed");
+        });
+  
+  
    WarentraegerWebsocket.onclose = function() {
-        alert("Connection is closed...");
+ 
    };
    TransportbandWebsocket.onclose = function() {
-        alert("Connection is closed...");
+
    };
    SektorWebsocket.onclose = function() {
-        alert("Connection is closed...");
+
    };
     
+    function uebersichtsinfosAusgeben(info){
+    	localStorage.removeItem("stoerung");
+    	localStorage.setItem("svgAnzeige", info);
+    	$elementUebersicht=info;
+    	$("#uebersichtsinfos").load("uebersichtsinfos.html", $elementUebersicht);
+    }
     
     var svgns = "http://www.w3.org/2000/svg";
     //svgns.selectAll("*").remove();
@@ -187,6 +229,7 @@
 	
 	function idAusgeben(elmnt) {
 		console.log(elmnt.id);
+                uebersichtsinfosAusgeben(elmnt.id);
     }
 	
 	function getSekByID(key) {
@@ -199,6 +242,18 @@
 		}
 		console.log(key + " nicht gefunden in S");
 		return 0;
+	}
+	
+	function coutWTinSek(sID) {
+	var value = 0;
+		for (var i=0;i<j_warentraeger.inhalt.length;i++) {
+			if (j_warentraeger.inhalt[i].sektorIDs.inhalt.length>0) {
+				if (j_warentraeger.inhalt[i].sektorIDs.inhalt[0] == sID) {
+					value++;
+				}
+			}
+		}
+		return value;
 	}
 	
 	function getTBByID(key) {
@@ -228,7 +283,6 @@
 				rect.setAttributeNS(null, 'fill', sektor_fill);
 			rect.setAttributeNS(null, 'stroke-width', '5');
 			rect.setAttributeNS(null, 'stroke', 'black');
-			rect.setAttributeNS(null, 'transform', 'scale('+zoom+')');
 			rect.setAttributeNS(null, 'onclick', 'idAusgeben(this)'); //Beim anklicken wird die Id des Elementes ausgeben
 			document.getElementById('svgOne').appendChild(rect);
 			
@@ -240,7 +294,7 @@
             text.setAttributeNS(null, 'y', j_sektoren.inhalt[i].y+f_size/1.5);
             text.setAttributeNS(null,"font-size",f_size);
             text.setAttributeNS(null,"font-family","Calibri");
-			text.setAttributeNS(null, 'transform', 'scale('+zoom+')');
+
 
             var textNode = document.createTextNode("S" + j_sektoren.inhalt[i].id);
             text.appendChild(textNode);
@@ -263,7 +317,7 @@
 			rect.setAttributeNS(null, 'id', 'Transportband' + j_baender.inhalt[i].id);
 			rect.setAttributeNS(null, 'stroke-width', '3');
 			rect.setAttributeNS(null, 'stroke', 'black');
-			rect.setAttributeNS(null, 'transform', 'scale('+zoom+')');
+
 			rect.setAttributeNS(null, 'onclick', 'idAusgeben(this)');
 			if (j_baender.inhalt[i].stoerung != 0) {
 				rect.setAttributeNS(null, 'fill', stoerung_fill);
@@ -408,13 +462,29 @@
 				}
 			}
 			
-			else if ((j_warentraeger.inhalt[i].transportbandIDs.length==0) && (j_warentraeger.inhalt[i].sektorIDs.length==1)) {
+			else if ((j_warentraeger.inhalt[i].transportbandIDs.length==0) && (j_warentraeger.inhalt[i].sektorIDs.length>0)) {
 			//WT liegt in einem Sektor und auf keinem TB
 				rect = document.createElementNS(svgns, 'rect');
 				rect.setAttributeNS(null, 'id', 'Warentraeger' + j_warentraeger.inhalt[i].id);
 				rect.setAttributeNS(null, 'x', j_sektoren.inhalt[getSekByID(j_warentraeger.inhalt[i].sektorIDs[0])].x+sektor_width/2-WT_width/2);
 				rect.setAttributeNS(null, 'y', j_sektoren.inhalt[getSekByID(j_warentraeger.inhalt[i].sektorIDs[0])].y+sektor_height/2-WT_height/2);
 				
+				var count = coutWTinSek(j_warentraeger.inhalt[i].sektorIDs.inhalt[0]);
+				if (count>1) {
+					rect2 = document.createElementNS(svgns, 'rect');
+					rect2.setAttributeNS(null, 'x', j_sektoren.inhalt[getSekByID(j_warentraeger.inhalt[i].sektorIDs.inhalt[0])].x+sektor_width/2.5);
+					rect2.setAttributeNS(null, 'y', j_sektoren.inhalt[getSekByID(j_warentraeger.inhalt[i].sektorIDs.inhalt[0])].y+sektor_height/2.5);
+					rect2.setAttributeNS(null, 'height', WT_height);
+					rect2.setAttributeNS(null, 'width', WT_width);
+					//if (j_warentraeger.inhalt[i].stoerung != 0)
+						//rect2.setAttributeNS(null, 'fill', stoerung_fill);
+					//else 
+						rect2.setAttributeNS(null, 'fill', WT_fill);
+					rect2.setAttributeNS(null, 'stroke-width', '5');
+					rect2.setAttributeNS(null, 'stroke', 'black');
+					//rect2.setAttributeNS(null, 'onclick', 'idAusgeben(this)'); //Beim anklicken wird die Id des Elementes ausgeben
+					document.getElementById('svgOne').appendChild(rect2);
+				}
 			}
 			else {
 			//WT liegt auf einem TB und in einem Sektor --> Fehler
@@ -428,34 +498,32 @@
 				rect.setAttributeNS(null, 'fill', stoerung_fill);
 			else 
 				rect.setAttributeNS(null, 'fill', WT_fill);
-			rect.setAttributeNS(null, 'transform', 'scale('+zoom+')');
 			rect.setAttributeNS(null, 'onclick', 'idAusgeben(this)'); //Beim anklicken wird die Id des Elementes ausgeben
 			document.getElementById('svgOne').appendChild(rect);
 			
 		}
 	}
-        function sektorenAendern(){
-		for (var i=0;i<j_sektoren.inhalt.length;i++) {
-			//Sektoren erstellen
-			//rect = document.createElementNS(svgns, 'rect');
-                        rect = document.getElementById("svgOne").getElementById("Sektor" + j_sektoren.inhalt[i].id);
-			//rect.setAttributeNS(null, 'id', 'Sektor' + j_sektoren.inhalt[i].id);
+	function sektorenAendern(){
+	for (var i=0;i<j_sektoren.inhalt.length;i++) {
+		//Sektoren erstellen
+		//rect = document.createElementNS(svgns, 'rect');
+					rect = document.getElementById("svgOne").getElementById("Sektor" + j_sektoren.inhalt[i].id);
+		//rect.setAttributeNS(null, 'id', 'Sektor' + j_sektoren.inhalt[i].id);
 //			rect.setAttributeNS(null, 'x', j_sektoren.inhalt[i].x);
 //			rect.setAttributeNS(null, 'y', j_sektoren.inhalt[i].y);
 //			rect.setAttributeNS(null, 'height', sektor_height);
 //			rect.setAttributeNS(null, 'width', sektor_width);
-			if (j_sektoren.inhalt[i].stoerung != 0)
-				rect.setAttributeNS(null, 'fill', stoerung_fill);
-			else 
-				rect.setAttributeNS(null, 'fill', sektor_fill);
+		if (j_sektoren.inhalt[i].stoerung != 0)
+			rect.setAttributeNS(null, 'fill', stoerung_fill);
+		else 
+			rect.setAttributeNS(null, 'fill', sektor_fill);
 //			rect.setAttributeNS(null, 'stroke-width', '5');
 //			rect.setAttributeNS(null, 'stroke', 'black');
-			rect.setAttributeNS(null, 'transform', 'scale('+zoom+')');
 //			rect.setAttributeNS(null, 'onclick', 'idAusgeben(this)'); //Beim anklicken wird die Id des Elementes ausgeben
-                        var text=document.getElementById("svgOne").getElementById('Text' + j_sektoren.inhalt[i].id);
-			document.getElementById('svgOne').appendChild(rect);
-                        document.getElementById('svgOne').appendChild(text);
-            
+					var text=document.getElementById("svgOne").getElementById('Text' + j_sektoren.inhalt[i].id);
+		document.getElementById('svgOne').appendChild(rect);
+					document.getElementById('svgOne').appendChild(text);
+		
 		}
 	}
 	
@@ -465,7 +533,6 @@
 			//rect = document.createElementNS(svgns, 'rect');
                         rect = document.getElementById("svgOne").getElementById("Transportband" + j_baender.inhalt[i].id);
 			
-			rect.setAttributeNS(null, 'transform', 'scale('+zoom+')');
 			
 			if (j_baender.inhalt[i].stoerung != 0) {
 				rect.setAttributeNS(null, 'fill', stoerung_fill);
@@ -564,7 +631,6 @@
 				rect.setAttributeNS(null, 'fill', stoerung_fill);
 			else 
 				rect.setAttributeNS(null, 'fill', WT_fill);
-			rect.setAttributeNS(null, 'transform', 'scale('+zoom+')');
 			rect.setAttributeNS(null, 'onclick', 'idAusgeben(this)'); //Beim anklicken wird die Id des Elementes ausgeben
 			document.getElementById('svgOne').appendChild(rect);
 			
